@@ -6,17 +6,11 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 22:39:29 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/02/01 06:38:19 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/02/01 08:48:20 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-void	ft_error(void)
-{
-	write(2, "Error\n", 6);
-	my_malloc(0, 0);
-}
 
 void	dataclear(t_data **hold)
 {
