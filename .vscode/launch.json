@@ -6,8 +6,8 @@
       "type": "lldb",
       "request": "launch",
       "args": [],
-      "cwd": "/Users/sel-jett/Desktop/minishell/builtins",
-      "program": "/Users/sel-jett/Desktop/minishell/builtins/build/Debug/outDebug"
+      "cwd": "/Users/sel-jett/Desktop/minishell",
+      "program": "/Users/sel-jett/Desktop/minishell/build/Debug/outDebug"
     }
   ]
 }

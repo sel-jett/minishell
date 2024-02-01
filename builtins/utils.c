@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 08:37:52 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/02/01 10:43:39 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/02/01 11:31:34 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	ft_fpintf(const char *msg)
 		write(2, &msg[i], 1);
 		i++;
 	}
-	// write(2, ": ", 2);
 }
 
 int	ft_strlen_b(const char *str)

@@ -60,6 +60,13 @@
     "*.excalidraw": "json",
     "*.excalidrawlib": "json",
     "history.h": "c",
-    "builtins.h": "c"
+    "builtins.h": "c",
+    "__node_handle": "c",
+    "array": "c",
+    "iterator": "c",
+    "string": "c",
+    "string_view": "c",
+    "vector": "c",
+    "limits.h": "c"
   }
 }
