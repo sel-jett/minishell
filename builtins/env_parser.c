@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 11:44:57 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/02/01 23:27:13 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/02/01 23:53:42 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,12 @@ void	ft_lstadd_back(t_env **lst, t_env *new)
 	node->next = new;
 }
 
-void ft_list_remove_if(t_env **begin_list, void *data_ref, int (*cmp)())
+void	ft_list_remove_if(t_env **begin_list, void *data_ref, int (*cmp)())
 {
 	t_env	*cur;
 
 	if (begin_list == NULL || *begin_list == NULL)
-		return;
+		return ;
 	cur = *begin_list;
 	if (cmp(cur->data, data_ref) == 0)
 	{
@@ -65,14 +65,13 @@ void ft_list_remove_if(t_env **begin_list, void *data_ref, int (*cmp)())
 	}
 }
 
-
 t_env	*ft_env_parser(char **env)
 {
 	int		i;
 	t_env	*lst;
 
 	i = 0;
-	while(env[i])
+	while (env[i])
 	{
 		ft_lstadd_back(&lst, env_new(env[i]));
 		i++;

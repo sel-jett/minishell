@@ -6,55 +6,11 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 23:18:52 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/02/01 23:44:36 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/02/02 00:03:08 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
-#include <limits.h>
-
-char	*find_pwd(t_env *cenv)
-{
-	int	i;
-
-	i = 0;
-	if (!cenv)
-		return (NULL);
-	while (cenv && strncmp(cenv->data, "PWD", 3))
-		cenv = cenv->next;
-	return (cenv->data);
-}
-
-char	*find_oldpwd(t_env *cenv)
-{
-	int		i;
-
-	i = 0;
-	while (cenv && strncmp(cenv->data, "OLDPWD", 6))
-		cenv = cenv->next;
-	if (cenv)
-		return (cenv->data);
-	return (NULL);
-}
-
-int	ft_strncmp_one(char *tmp, char *pwd)
-{
-	int i = -1;
-	while (++i < 3)
-		if (tmp[i] != pwd[i])
-			return (1);
-	return (0);
-}
-
-int	ft_strncmp_two(char *tmp, char *pwd)
-{
-	int i = -1;
-	while (++i < 6)
-		if (tmp[i] != pwd[i])
-			return (1);
-	return (0);
-}
-
 
 void	ft_env(t_env *tmp)
 {
@@ -98,7 +54,7 @@ void	cd(const char *path, t_env **cenv)
 		return ;
 	else if (!getcwd(b, PATH_MAX))
 		cd_second();
-	pp = cenv;
+	(pp = cenv) && (temp = NULL);
 	pwd = find_pwd(*cenv);
 	temp_old = find_oldpwd(*cenv);
 	ft_list_remove_if(cenv, "PWD", ft_strncmp_one);
@@ -109,11 +65,7 @@ void	cd(const char *path, t_env **cenv)
 	if (getcwd(b, PATH_MAX))
 		temp = ft_strjoin("PWD=", getcwd(b, PATH_MAX));
 	else
-	{
-		temp = ft_strjoin("PWD", (temp_old + 6));
-		temp = ft_strjoin(temp, "/");
-		temp = ft_strjoin(temp, (char *)path);
-	}
+		temp = pwd_joiner(temp_old, temp, (char *)path);
 	ft_lstadd_back(cenv, env_new(temp));
 }
 
