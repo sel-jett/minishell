@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 07:26:29 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/02/02 08:07:52 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/02/02 11:05:50 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,11 @@
 static int	is_alpha(int c)
 {
 	return ((c >= 65 && c <= 90) || (c >= 97 && c <= 122));
+}
+
+static int	is_upper(int c)
+{
+	return (c >= 65 && c <= 90);
 }
 
 static int	is_num(int c)
@@ -36,10 +41,12 @@ int	check_first(char *cmd)
 		return (0);
 	}
 	i++;
-	while (cmd[i] != '=')
+	while (cmd[i] && cmd[i] != '=')
 	{
 		if (cmd[i] != '_' && !is_alpha(cmd[i]) && !is_num(cmd[i]))
 			check2++;
+		else if (is_upper(cmd[i]))
+			return (0);
 		i++;
 	}
 	if (check2)
