@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 23:16:55 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/02/02 00:02:00 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/02/02 08:08:06 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ int		ft_strncmp_one(char *tmp, char *pwd);
 int		ft_strncmp_two(char *tmp, char *pwd);
 t_env	*ft_env_parser(char **env);
 char	*find_pwd(t_env *cenv);
+char	*ft_strtrim(char *cmd);
+int		check_first(char *cmd);
 char	*find_oldpwd(t_env *cenv);
 t_env	*ft_lstlast(t_env *lst);
 void	ft_list_remove_if(t_env **begin_list, void *data_ref, int (*cmp)());
@@ -42,8 +44,9 @@ char	*ft_strdup(char *s);
 void	ft_fpintf(const char *msg);
 char	*ft_strjoin(char *s1, char *s2);
 void	echo(const char *path, int mode);
+void	ft_export(char *cmd, t_env **cnev);
 void	cd(const char *path, t_env **cenv);
-void	ft_lstadd_back(t_env **lst, t_env *new);
+void	ft_lstadd_back(t_env **lst, t_env *neww);
 int		ft_strlen_b(const char *str);
 
 #endif

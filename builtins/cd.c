@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 23:18:52 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/02/02 00:03:08 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/02/02 08:08:49 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,5 +96,7 @@ int	main(int ac, char **av, char **env)
 			ft_env(tmp);
 		else if (!strncmp(cmd, "pwd", 3))
 			printf("%s\n", find_pwd(tmp));
+		else if (!strncmp(cmd, "export ", 7))
+			ft_export((cmd + 7), &tmp);
 	}
 }
