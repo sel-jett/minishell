@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 07:03:43 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/02/03 22:22:15 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/02/03 22:59:55 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	ft_export(char *cmd, t_env **cnev)
 		}
 		dptr[i] = ft_strtrim(dptr[i]);
 		if (!check_first(dptr[i]))
-			return;
+			return ;
 		if (equal_check(dptr[i]))
 			ft_list_remove_if(cnev, get_key(dptr[i]), ft_strncmp_one);
 		if (get_value(dptr[i]))

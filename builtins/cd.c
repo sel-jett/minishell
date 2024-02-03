@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 23:18:52 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/02/03 22:31:59 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/02/03 23:02:45 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_env(t_env *tmp)
 
 int	cd_error(const char *path)
 {
-	if (chdir(path) != 0 && ft_strncmp_one((char*)path, ".."))
+	if (chdir(path) != 0 && ft_strncmp_one((char *)path, ".."))
 	{
 		ft_fpintf("mminishell: cd");
 		ft_fpintf(path);
@@ -58,7 +58,7 @@ int	cd_home(const char *path)
 		else if (path[i] <= 32)
 		{
 			i++;
-			continue;
+			continue ;
 		}
 		else
 			return (1);
@@ -85,7 +85,7 @@ int	cd_old(const char *path)
 		else if (path[i] <= 32)
 		{
 			i++;
-			continue;
+			continue ;
 		}
 		else
 			return (1);
@@ -119,7 +119,7 @@ void	cd(const char *path, t_env **cenv)
 		return ;
 	else if (!getcwd(b, PATH_MAX))
 		cd_second();
-	(pp = cenv) && (temp = NULL);
+	(1) && (pp = cenv, temp = NULL);
 	pwd = find_pwd(*cenv);
 	temp_old = find_oldpwd(*cenv);
 	ft_list_remove_if(cenv, "PWD", ft_strncmp_one);

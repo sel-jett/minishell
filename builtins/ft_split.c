@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 02:20:57 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/02/03 22:51:47 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/02/03 22:55:20 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static	char	**ft_fill_str(char **str, char const *s, char c)
 			continue ;
 		}
 		calc = i;
-		while (s[i] && s[i] != c &&  s[i] != '\t')
+		while (s[i] && s[i] != c && s[i] != '\t')
 			i++;
 		str[pos] = my_malloc((i - calc + 1), 1);
 		ft_strlcpy(str[pos], (s + calc), (i - calc + 1));

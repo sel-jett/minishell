@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 11:44:57 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/02/03 03:17:26 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/02/03 23:00:32 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,6 @@ static int	check_key(char *cmd)
 	return (0);
 }
 
-
-
 t_env	*env_new(char *data, t_env *tmp)
 {
 	t_env	*node;
@@ -156,7 +154,7 @@ t_env	*ft_env_parser(char **env)
 	lst = NULL;
 	while (env[i])
 	{
-		ft_lstadd_back(&lst, env_new(env[i] ,NULL));
+		ft_lstadd_back(&lst, env_new(env[i], NULL));
 		i++;
 	}
 	ft_list_remove_if(&lst, "OLDPWD", ft_strncmp_one);
