@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 23:16:55 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/02/02 22:22:25 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/02/03 02:57:51 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,10 @@ typedef struct s_env
 
 int		ft_strlen_b(const char *str);
 char	*get_key(char *data);
+char	*get_value(char *data);
 char	*value_key(t_env *tmp, char *key);
 char	*pwd_joiner(char *temp_old, char *temp, char *path);
-t_env	*env_new(char *data);
+t_env	*env_new(char *data, t_env *tmp);
 int		ft_strncmp_one(char *tmp, char *pwd);
 int		ft_strncmp_two(char *tmp, char *pwd);
 t_env	*ft_env_parser(char **env);

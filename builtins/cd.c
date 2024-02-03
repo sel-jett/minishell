@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 23:18:52 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/02/02 22:31:18 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/02/03 03:01:55 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,12 +126,12 @@ void	cd(const char *path, t_env **cenv)
 	if (temp_old)
 		ft_list_remove_if(cenv, "OLDPWD", ft_strncmp_one);
 	temp_old = ft_strjoin("OLD", ft_strdup(pwd));
-	ft_lstadd_back(cenv, env_new(temp_old));
+	ft_lstadd_back(cenv, env_new(temp_old, NULL));
 	if (getcwd(b, PATH_MAX))
 		temp = ft_strjoin("PWD=", getcwd(b, PATH_MAX));
 	else
 		temp = pwd_joiner(temp_old, temp, (char *)path);
-	ft_lstadd_back(cenv, env_new(temp));
+	ft_lstadd_back(cenv, env_new(temp, NULL));
 }
 
 int	main(int ac, char **av, char **env)

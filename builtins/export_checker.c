@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 07:26:29 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/02/02 11:05:50 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/02/03 00:22:43 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ int	check_first(char *cmd)
 	{
 		if (cmd[i] != '_' && !is_alpha(cmd[i]) && !is_num(cmd[i]))
 			check2++;
+		if (cmd[i + 1] && cmd[i + 1] == '=' && cmd[i] == '+')
+			check2--;
 		else if (is_upper(cmd[i]))
 			return (0);
 		i++;

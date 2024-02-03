@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 11:44:57 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/02/02 22:17:51 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/02/03 03:17:26 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*get_key(char *data)
 	i = 0;
 	j = -1;
 	if (data)
-		while (data[i] && data[i] != '=')
+		while (data[i] && data[i] != '=' && data[i] != '+')
 			i++;
 	str = my_malloc(i + 1, 1);
 	while (++j < i)
@@ -54,6 +54,8 @@ char	*get_value(char *data)
 	j = ft_strlen_b(data);
 	while (data[i] && data[i] != '=')
 		i++;
+	if (!data[i])
+		return (NULL);
 	i++;
 	s = j - i;
 	str = my_malloc(s + 1, 1);
@@ -67,13 +69,37 @@ char	*get_value(char *data)
 	return (str);
 }
 
-t_env	*env_new(char *data)
+static int	check_key(char *cmd)
+{
+	int	i;
+
+	i = 0;
+	if (!cmd)
+		return (0);
+	while (cmd[i] && cmd[i] != '=')
+		i++;
+	if (i > 0 && cmd[i] == '=' && cmd[i - 1] == '+')
+		return (1);
+	return (0);
+}
+
+
+
+t_env	*env_new(char *data, t_env *tmp)
 {
 	t_env	*node;
+	char	*str;
 
 	node = my_malloc(sizeof(t_env), 1);
-	node->key = get_key(data);
-	node->value = get_value(data);
+	str = get_key(data);
+	if (check_key(data))
+	{
+		node->value = ft_strjoin(get_value(data), value_key(tmp, str));
+		ft_list_remove_if(&tmp, str, ft_strncmp_one);
+	}
+	else
+		node->value = get_value(data);
+	node->key = str;
 	node->next = NULL;
 	return (node);
 }
@@ -130,7 +156,7 @@ t_env	*ft_env_parser(char **env)
 	lst = NULL;
 	while (env[i])
 	{
-		ft_lstadd_back(&lst, env_new(env[i]));
+		ft_lstadd_back(&lst, env_new(env[i] ,NULL));
 		i++;
 	}
 	ft_list_remove_if(&lst, "OLDPWD", ft_strncmp_one);
