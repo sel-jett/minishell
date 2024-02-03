@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 23:18:52 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/02/03 03:01:55 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/02/03 22:31:59 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,16 +143,14 @@ int	main(int ac, char **av, char **env)
 	t_env	*cenv;
 
 	cenv = ft_env_parser(env);
-	// ft_env(cenv);
 	tmp = cenv;
 	while (1)
 	{
 		cmd = readline("\033[0;32mminishell > \033[0m");
-		// exit(1);
 		if (!strncmp(cmd, "cd", 2))
 			cd(cmd + 3, &tmp);
 		else if (!ft_strncmp_one(cmd, "echo -n"))
-			echo(cmd + 8, 1);
+			echo(cmd + 6, 1);
 		else if (!ft_strncmp_one(cmd, "echo"))
 			echo(cmd + 5, 0);
 		else if (!ft_strncmp_one(cmd, "exit"))
@@ -162,8 +160,8 @@ int	main(int ac, char **av, char **env)
 		else if (!ft_strncmp_one(cmd, "pwd"))
 			printf("%s\n", value_key(tmp, "PWD"));
 		else if (!ft_strncmp_one(cmd, "export"))
-			ft_export((cmd + 7), &tmp);
+			ft_export(cmd + 7, &tmp);
 		else if (!ft_strncmp_one(cmd, "unset"))
-			ft_list_remove_if(&tmp, get_key(cmd + 6), ft_strncmp_one);;
+			ft_unset(cmd + 6, &tmp);
 	}
 }

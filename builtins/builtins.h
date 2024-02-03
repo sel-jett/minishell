@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 23:16:55 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/02/03 02:57:51 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/02/03 22:30:18 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ typedef struct s_env
 }	t_env;
 
 int		ft_strlen_b(const char *str);
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
+char	**ft_split(char const *s, char c);
 char	*get_key(char *data);
 char	*get_value(char *data);
 char	*value_key(t_env *tmp, char *key);
@@ -48,6 +50,7 @@ char	*ft_strdup(char *s);
 void	ft_fpintf(const char *msg);
 char	*ft_strjoin(char *s1, char *s2);
 void	echo(const char *path, int mode);
+void	ft_unset(char *cmd, t_env **cnev);
 void	ft_export(char *cmd, t_env **cnev);
 void	cd(const char *path, t_env **cenv);
 void	ft_lstadd_back(t_env **lst, t_env *neww);

@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 07:03:43 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/02/03 03:10:54 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/02/03 22:22:15 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,16 +68,25 @@ void	ft_env_export(t_env *tmp)
 
 void	ft_export(char *cmd, t_env **cnev)
 {
-	if (!ft_strlen_b(cmd))
+	char	**dptr;
+	int		i;
+
+	i = 0;
+	dptr = ft_split(cmd, ' ');
+	while (dptr[i])
 	{
-		ft_env_export(*cnev);
-		return ;
+		if (!ft_strlen_b(dptr[i]))
+		{
+			ft_env_export(*cnev);
+			return ;
+		}
+		dptr[i] = ft_strtrim(dptr[i]);
+		if (!check_first(dptr[i]))
+			return;
+		if (equal_check(dptr[i]))
+			ft_list_remove_if(cnev, get_key(dptr[i]), ft_strncmp_one);
+		if (get_value(dptr[i]))
+			ft_lstadd_back(cnev, env_new(dptr[i], *cnev));
+		i++;
 	}
-	cmd = ft_strtrim(cmd);
-	if (!check_first(cmd))
-		return;
-	if (equal_check(cmd))
-		ft_list_remove_if(cnev, get_key(cmd), ft_strncmp_one);
-	if (get_value(cmd))
-		ft_lstadd_back(cnev, env_new(cmd, *cnev));
 }

@@ -1,52 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/01 07:39:43 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/02/03 04:09:39 by sel-jett         ###   ########.fr       */
+/*   Created: 2023/10/31 10:26:34 by sel-jett          #+#    #+#             */
+/*   Updated: 2024/02/03 22:23:46 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-static	int	echo_check(const char *path)
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
-	while (path[i] && path[i] > 32)
+	if (dstsize)
 	{
-		if (path[i] != 'n')
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-void	echo(const char *path, int mode)
-{
-	int	check;
-
-	check = 0;
-	if (mode)
-	{
-		check = echo_check(path);
-		if (!check)
-			printf("-n%s\n", path);
-		else
+		while ((i + 1) < dstsize && src[i])
 		{
-			check = 0;
-			while (*path == 'n')
-				path++;
-			if (path)
-				while (*path <= 32)
-					path++;
-			printf("%s", path);
+			dst[i] = src[i];
+			i++;
 		}
+		dst[i] = '\0';
 	}
-	else
-		printf("%s\n", path);
+	return (ft_strlen_b(src));
 }
