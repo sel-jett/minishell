@@ -16,7 +16,7 @@ int		plant_3(char *str, t_list   *list, int *i);
 int		plant_1(char *str,t_list *list,int *i);
 int		    plant_2(char *str, t_list   *list, int *i);
 int         spaces(char *str, t_list   *list, int *i);
-bool		plant_4(t_list *list);
+int		plant_4(t_list *list);
 int			check(int c);
 t_node_arg	*c_node_arg(char *str);
 t_list_arg	*c_list_arg();

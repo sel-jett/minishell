@@ -36,14 +36,19 @@ int	main(void)
 {
 	t_list  *list;
 	int     i;
-	int		count_prth;
 	char    *str;
+	int		index;
 
-	(1== 1) && (str = NULL,count_prth = 0);
+	(1== 1) && (str = NULL);
 	while (1)
 	{
 		list = c_list();
-		i = 0;
+		if (!list)
+		{
+			printf("ERROR1\n");
+			break;
+		}
+		i = 0;index = 0;
 		str = readline("minishell > ");
 		add_history(str);
 		while (str && str[i])
@@ -52,7 +57,7 @@ int	main(void)
 			if (str[i] == '(' || str[i] == ')')
 			{
 				if (!add_one(&str[i], list, &i, TOKEN_PARENTHESE)){
-					printf("ERROR\n");
+					printf("ERROR2\n");
 					break;
 				}
 			}
@@ -60,7 +65,7 @@ int	main(void)
 			{
 				if (!spaces(&str[i], list, &i))
 				{
-					printf("ERROR\n");
+					printf("ERROR3\n");
 					break;
 				}
 			}
@@ -68,7 +73,7 @@ int	main(void)
 			{
 				if (!plant_1(&str[i], list, &i))
 				{
-					printf("ERROR\n");
+					printf("ERROR4\n");
 					break;
 				}
 			}
@@ -76,7 +81,7 @@ int	main(void)
 			{
 				if (!plant_2(&str[i], list, &i))
 				{
-					printf("ERROR\n");
+					printf("ERROR5\n");
 					break;
 				}
 			}
@@ -84,15 +89,15 @@ int	main(void)
 			{
 				if (!plant_3(&str[i], list, &i))
 				{
-					printf("ERROR\n");
+					printf("ERROR6\n");
 					break;
 				}
 			}
 		}
 		if (!plant_4(list))
 		{
-			printf("ERROR\n");
-			break;
+			printf("ERROR7\n");
+			index = 1;
 		};
 		t_node *tmp = list->top;
 		while(tmp)
@@ -108,8 +113,7 @@ int	main(void)
 			}
 			tmp = tmp->next;
 		}
-
-		my_malloc(0,0);
+		my_malloc(0, 0);
 	}
 	return (0);
 }
