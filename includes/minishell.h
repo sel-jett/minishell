@@ -3,14 +3,18 @@
 
 # include <stdlib.h>
 # include <stdio.h>
-
-
-typedef struct s_data
-{
-	void			*data;
-	struct s_data	*next;
-}	t_data;
-
+# include "structs.h"
+# include <unistd.h>
+# include <readline/readline.h>
+# include <stdbool.h>
+t_node	*c_node(char *str, t_node *tail, int mode);
+t_list	*c_list();
 void	*my_malloc(size_t size, int mode);
-
+void	add_back(t_list *list,t_node *node);
+void	plant_3(char *str, t_list   *list, int *i);
+void    plant_1(char *str,t_list *list,int *i);
+void    plant_2(char *str, t_list   *list, int *i);
+void    spaces(char *str, t_list   *list, int *i);
+bool    plant_4(t_list *list);
+int     check(int c);
 #endif
