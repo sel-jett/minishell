@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 22:39:29 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/02/16 19:03:30 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/02/17 00:06:44 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	dataclear(t_data **hold)
 		free(ptr->data);
 		free(ptr);
 	}
-	*hold = NULL;
+	*hold = 0;
 }
 
 void	*my_malloc(size_t size, int mode)
@@ -40,17 +40,17 @@ void	*my_malloc(size_t size, int mode)
 	{
 		data = malloc(size);
 		if (!data)
-			return (dataclear(&head), NULL);
+			return (dataclear(&head), (void *)0);
 		node = malloc(sizeof(t_data));
 		if (!node)
-			return (dataclear(&head), NULL);
+			return (dataclear(&head), (void *)0);
 		node->data = data;
-		node->next = NULL;
+		node->next = 0;
 		(head) && (node->next = head);
 		head = node;
 		return (data);
 	}
 	if (!mode)
-		return (dataclear(&head), NULL);
-	return (dataclear(&head), NULL);
+		return (dataclear(&head), (void *)0);
+	return (dataclear(&head), (void *)0);
 }

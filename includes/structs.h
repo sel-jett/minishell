@@ -51,6 +51,7 @@ enum{
 	TOKEN_Double_Q,//11
 	TOKEN_Single_Q,//12
 	TOKEN_DOLLAR,//13
+	TOKEN_PARENTHESE,
 } ;
 
 // TOKEN_EXPR: Represents an expression in the context of a programming language or similar domain.

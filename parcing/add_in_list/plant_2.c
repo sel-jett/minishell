@@ -8,7 +8,7 @@ int	check(int c)
 	return (0);
 }
 
-void    plant_2(char *str, t_list   *list, int *i)
+int		plant_2(char *str, t_list   *list, int *i)
 {
 	int     len;
 	char    *s;
@@ -19,10 +19,11 @@ void    plant_2(char *str, t_list   *list, int *i)
 		len++;
 	s = my_malloc(sizeof(char) * (len + 1), 1);
 	if (!s)
-		exit(0);
+		return(0);
 	(1 == 1) && (*i += len, len = -1);
 	while (check(str[++len]))
 		s[len] = str[len];
 	s[len] = '\0';
 	add_back(list,c_node(s, list->tail, TOKEN_EXPR));
+	return (1);
 }

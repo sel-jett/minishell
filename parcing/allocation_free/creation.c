@@ -8,11 +8,11 @@ t_node    *c_node(char *str, t_node *tail, int mode)
     if (!new_node)
         return (0);
     new_node->value = str;
-    new_node->next = NULL;
+    new_node->next = 0;
     new_node->prev = tail;
     new_node->mode = mode;
     new_node->val_vide = 0;
-    new_node->list_arg = NULL;
+    new_node->list_arg = 0;
     return (new_node);
 }
 
@@ -46,7 +46,7 @@ void    add_back(t_list *list, t_node *node)
         tmp = tmp->next;
     tmp->next = node;
     list->tail = node;
-    list->tail->next = NULL;
+    list->tail->next = 0;
     list->len++;
 }
 
@@ -54,7 +54,6 @@ void    add_back_arg(t_list_arg *list, t_node_arg *node)
 {
     t_node_arg *tmp;
 
-printf("ha na hna\n");
     if (!list)
         return ;
     if (!list->top)
@@ -69,7 +68,7 @@ printf("ha na hna\n");
         tmp = tmp->next;
     tmp->next = node;
     list->tail = node;
-    list->tail->next = NULL;
+    list->tail->next = 0;
     list->len++;
 }
 
@@ -81,7 +80,7 @@ t_node_arg *c_node_arg(char *str)
     if (!new_node_arg)
         return (0);
     new_node_arg->value = str;
-    new_node_arg->next = NULL;
+    new_node_arg->next = 0;
     return (new_node_arg);
 }
 
@@ -92,8 +91,8 @@ t_list_arg  *c_list_arg()
     new_arg = my_malloc(sizeof(t_list_arg), 1);
     if (!new_arg)
         return (0);
-    new_arg->top = NULL;
-    new_arg->tail = NULL;
+    new_arg->top = 0;
+    new_arg->tail = 0;
     new_arg->len = 0;
     return new_arg;
 }

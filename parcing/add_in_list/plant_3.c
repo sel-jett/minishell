@@ -1,6 +1,6 @@
 #include "../../includes/minishell.h"
 
-static  void	add_two(char *str, t_list   *list, int *i ,int mode)
+static  int	add_two(char *str, t_list   *list, int *i ,int mode)
 {
 	char	*s;
 	int		j;
@@ -8,61 +8,78 @@ static  void	add_two(char *str, t_list   *list, int *i ,int mode)
 	(1 == 1) && (j = -1, s = NULL);
 	s = my_malloc(sizeof(char) * 3, 1);
 	if (!s)
-		exit(0);
+		return (0);
 	while (++j < 2)
 		s[j] = str[0];
 	s[j] = '\0';
 	add_back(list, c_node(s, list->tail, mode));
 	*i +=  2;
+	return (1);
 }
 
-static void		add_one(char *str, t_list   *list, int *i ,int mode)
+int		add_one(char *str, t_list   *list, int *i ,int mode)
 {
 	char	*s;
 
 	s = NULL;
 	s = my_malloc(sizeof(char) * 2, 1);
 	if (!s)
-		exit(0);
+		return(0);
 	(1 == 1) && (s[0] = str[0], s[1] = '\0');
 	add_back(list,c_node(s, list->tail, mode));
 	(*i)++;
+	return (1);
 }
 
-void	plant_3(char *str, t_list   *list, int *i)
+int	plant_3(char *str, t_list   *list, int *i)
 {
 	int index = 0;
 	if (!str)
-		return ;
+		return (0);
 	if (str[0] == '<')
 	{
 		if (str[1] && str[1] == '<')
-			add_two(str, list, i, TOKEN_REDIR_IN);
+		{
+			if (!add_two(str, list, i, TOKEN_REDIR_IN))
+				return (0);
+		}
 		else
-			add_one(str, list, i, TOKEN_HEREDOC);
+			if (!add_one(str, list, i, TOKEN_HEREDOC))
+				return (0);
 	}
 	else if (str[0] == '|')
 	{
 		if (str[1])
-			if (str[1]  == '|'){
-				add_two(str, list, i, TOKEN_OR);
-				index = 1;}
-
-		if(index == 0)
-			add_one(str, list, i, TOKEN_PIPE);
+			if (str[1]  == '|')
+			{
+				if (!add_two(str, list, i, TOKEN_OR))
+					return (0);
+				index = 1;
+			}
+			if (index == 0)
+				if (!add_one(str, list, i, TOKEN_PIPE))
+					return (0);
 	}
 	else if (str[0] == '>')
 	{
 		if (str[1] && str[1] == '>')
-			add_two(str, list, i, TOKEN_REDIR_APPEND);
+		{
+			if (!add_two(str, list, i, TOKEN_REDIR_APPEND))
+				return (0);
+		}
 		else
-			add_one(str, list, i, TOKEN_REDIR_OUT);
+			if (!add_one(str, list, i, TOKEN_REDIR_OUT))
+				return (0);
 	}
 	else if(str[0] == '&')
 	{
 		if (str[1] && str[1] == '&')
-			add_two(str, list, i, TOKEN_AND);
+		{
+			if (!add_two(str, list, i, TOKEN_AND))
+				return (0);
+		}
 		else
-			exit(write(2, "ERROR!\n", 7));
+			return (0);
 	}
+	return (1);
 }
