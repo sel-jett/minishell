@@ -104,23 +104,23 @@ int	main(void)
 				index = 1;
 			};
 		}
-		// 	if (index == 0)
-		// 	{
-		// 		t_node *tmp = list->top;
-		// 		while(tmp)
-		// 		{
-		// 		printf("[prev : %p] |[me :%p | val : %s] [next : %p]\n",tmp->prev,tmp,tmp->value,tmp->next);
-		// 		if (tmp->mode == 11){
-		// 			t_node_arg *tmp1 = tmp->list_arg->top;
-		// 			while(tmp1)
-		// 			{
-		// 				printf("\nthis is ---------- >[%s]\n",tmp1->value);
-		// 				tmp1 = tmp1->next;
-		// 			}
-		// 		}
-		// 		tmp = tmp->next;
-		// 	}
-		// }
+		if (index == 0)
+		{
+			t_node *tmp = list->top;
+			while(tmp)
+			{
+			printf("[prev : %p] |[me :%p | val : %s] [next : %p]\n",tmp->prev,tmp,tmp->value,tmp->next);
+			if (tmp->mode == 11){
+				t_node_arg *tmp1 = tmp->list_arg->top;
+				while(tmp1)
+				{
+					printf("\nthis is ---------- >[%s]\n",tmp1->value);
+					tmp1 = tmp1->next;
+				}
+			}
+				tmp = tmp->next;
+			}
+		}
 		my_malloc(0, 0);
 	}
 	return (0);

@@ -86,28 +86,29 @@ int    plant_4(t_list *list)
 {
     t_node  *tmp;
 
-    if (!list || !list->top)
-        return (printf("syntax error 1!\n"), 0);
-    list->top->prev = NULL;
-    tmp = list->top;
-    while (tmp)
-    {
-        if (tmp->mode == TOKEN_OR || tmp->mode == TOKEN_AND || tmp->mode == TOKEN_PIPE)
+    if (list && list->top)
+    {    
+        list->top->prev = NULL;
+        tmp = list->top;
+        while (tmp)
         {
-            if (!check_syntax_2(tmp) || !check_syntax_1(tmp))
-                return (printf("syntax error 2!\n"), 0);
+            if (tmp->mode == TOKEN_OR || tmp->mode == TOKEN_AND || tmp->mode == TOKEN_PIPE)
+            {
+                if (!check_syntax_2(tmp) || !check_syntax_1(tmp))
+                    return (printf("syntax error 2!\n"), 0);
+            }
+            else    if (tmp->mode == TOKEN_REDIR_APPEND || tmp->mode == TOKEN_REDIR_IN || tmp->mode == TOKEN_REDIR_OUT || tmp->mode == TOKEN_HEREDOC)
+            {
+                if (!check_syntax_1(tmp))
+                    return (printf("syntax error 3!\n"), 0);
+            }
+            else if (tmp->mode == TOKEN_Single_Q || tmp->mode == TOKEN_Double_Q)
+            {
+                if (!check_syntax_3(tmp))
+                    return (printf("syntax error 3!\n"), 0);
+            }
+            tmp = tmp->next;
         }
-        if (tmp->mode == TOKEN_REDIR_APPEND || tmp->mode == TOKEN_REDIR_IN || tmp->mode == TOKEN_REDIR_OUT || tmp->mode == TOKEN_HEREDOC)
-        {
-            if (!check_syntax_1(tmp))
-                return (printf("syntax error 3!\n"), 0);
-        }
-        else if (tmp->mode == TOKEN_Single_Q || tmp->mode == TOKEN_Double_Q)
-        {
-            if (!check_syntax_3(tmp))
-                return (printf("syntax error 3!\n"), 0);
-        }
-        tmp = tmp->next;
     }
     return (1);
 }
