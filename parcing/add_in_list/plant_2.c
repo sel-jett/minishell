@@ -12,9 +12,10 @@ int		plant_2(char *str, t_list   *list, int *i)
 {
 	int     len;
 	char    *s;
+	t_node	*node;
 
 	len  = 0;
-	s = NULL;
+	s = NULL;node = NULL;
 	while (check(str[len]))
 		len++;
 	s = my_malloc(sizeof(char) * (len + 1), 1);
@@ -24,6 +25,9 @@ int		plant_2(char *str, t_list   *list, int *i)
 	while (check(str[++len]))
 		s[len] = str[len];
 	s[len] = '\0';
-	add_back(list,c_node(s, list->tail, TOKEN_EXPR));
+	node = c_node(s, list->tail, TOKEN_EXPR);
+	if (!node)
+		return (0);
+	add_back(list, node);
 	return (1);
 }

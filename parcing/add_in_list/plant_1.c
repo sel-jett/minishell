@@ -56,7 +56,7 @@ int    plant_1(char *str,t_list *list,int *i)
 {
 	if (*str == '"')
 	{
-		if(!fun_1(str, list, i))
+		if (!fun_1(str, list, i))
 			return (0);
 	}
 	else if (*str == '\'')
