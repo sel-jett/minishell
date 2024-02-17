@@ -6,13 +6,13 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:07:15 by amel-has          #+#    #+#             */
-/*   Updated: 2024/02/17 03:12:30 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/02/17 17:21:26 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	spaces(char *str, t_list *list, int *i)
+int	spaces(t_list *list, int *i)
 {
 	char	*s;
 	int		len;
@@ -27,7 +27,7 @@ int	spaces(char *str, t_list *list, int *i)
 	if (!node)
 		return (0);
 	add_back(list, node);
-	while (str[len] && str[len] == ' ')
+	while (list->str[*i + len] && list->str[*i + len] == ' ')
 		len++;
 	(*i) += len;
 	return (1);

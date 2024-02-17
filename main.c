@@ -17,7 +17,7 @@ void affiche(t_list *list)
 		t_node *tmp = list->top;
 		while(tmp)
 		{
-		printf("[prev : %p] |[me :%p | val : %s] [next : %p]\n",tmp->prev,tmp,tmp->value,tmp->next);
+		printf("        [me :%p | val : %s ]            [next : %p]\n",tmp,tmp->value,tmp->next);
 		if (tmp->mode == 11)
 		{
 			t_node_arg *tmp1 = tmp->list_arg->top;
@@ -35,26 +35,26 @@ int	main(void)
 {
 	t_list  *list;
 	int     i;
-	char    *str;
+
 	int		index;
 
-	(1== 1) && (str = NULL);
+	(1== 1) && (list = NULL);
 	while (1)
 	{
-		(1 == 1) && (index = 0, i = 0, list = c_list());
+		(1 == 1) && (index = 0, i = 0, list = c_list(),list->str = NULL);
 		if (!list)
 		{
 			printf("ERROR1\n");index = 1;
 			break;
 		}
-		str = readline("minishell > ");
-		if (!str)
+		list->str = readline("minishell > ");
+		if (!list->str)
 			index = 1;
-		add_history(str);
+		add_history(list->str);
 		if (index == 0)
 		{
-			while (str[i])
-				if (!plants(list, &i ,&str[i]))
+			while (list->str[i])
+				if (!plants(list, &i))
 					break;
 			if (!plant_4(list))
 			{

@@ -1,6 +1,8 @@
 {
     "files.associations": {
         "sstream": "c",
-        "chrono": "c"
+        "chrono": "c",
+        "minishell.h": "c",
+        "__node_handle": "c"
     }
 }

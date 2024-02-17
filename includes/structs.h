@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:49:09 by amel-has          #+#    #+#             */
-/*   Updated: 2024/02/17 04:16:45 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/02/17 15:49:31 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct s_list
 	t_node	*top;
 	t_node	*tail;
 	int		len;
+	char    *str;
 }	t_list;
 
 enum
