@@ -1,18 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   plant_1.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/17 03:00:33 by amel-has          #+#    #+#             */
+/*   Updated: 2024/02/17 03:03:53 by amel-has         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 
-static int    fun_1(char *str, t_list *list, int *i)
+static int	fun_1(char *str, t_list *list, int *i)
 {
-	int     len;
-	char    *s;
-	int     j;
+	int		len;
+	char	*s;
+	int		j;
 	t_node	*node;
 
-	(1 == 1) && (len  = 1, *i += 1,j = -1,node = 0);
+	(1 == 1) && (len = 1, *i += 1, j = -1, node = 0);
 	while (str[len] && str[len] != '"')
 		len++;
 	if (str[len] != '"')
 		return (0);
-	s = my_malloc (len * sizeof(char),1);
+	s = my_malloc (len * sizeof(char), 1);
 	if (!s)
 		return (0);
 	while (++j < (len - 1))
@@ -26,19 +38,19 @@ static int    fun_1(char *str, t_list *list, int *i)
 	return (1);
 }
 
-static int    fun_2(char *str, t_list *list,int *i)
+static int	fun_2(char *str, t_list *list, int *i)
 {
-	int     len;
-	char    *s;
-	int     j;
-	t_node  *node;
+	int		len;
+	char	*s;
+	int		j;
+	t_node	*node;
 
-	(1 == 1) && (len  = 1, *i += 1, j = -1,node = 0);
+	(1 == 1) && (len = 1, *i += 1, j = -1, node = 0);
 	while (str[len] && str[len] != '\'')
 		len++;
 	if (str[len] != '\'')
 		return (0);
-	s = my_malloc (len * sizeof(char),1);
+	s = my_malloc(len * sizeof(char), 1);
 	if (!s)
 		return (0);
 	while (++j < (len - 1))
@@ -52,7 +64,7 @@ static int    fun_2(char *str, t_list *list,int *i)
 	return (1);
 }
 
-int    plant_1(char *str,t_list *list,int *i)
+int	plant_1(char *str, t_list *list, int *i)
 {
 	if (*str == '"')
 	{
