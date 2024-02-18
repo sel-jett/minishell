@@ -6,19 +6,19 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:00:33 by amel-has          #+#    #+#             */
-/*   Updated: 2024/02/17 18:12:45 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/02/17 21:07:32 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static int	fun_(t_list *list, int *i,char c)
+static int	fun_(t_list *list, int *i,char c,int mode)
 {
 	int		len;
 	char	*s;
 	t_node	*node;
 
-	(1 == 1) && (len = 1, *i += 1,node = 0);
+	(1 == 1) && (len = 0, *i += 1,node = 0);
 	while (list->str[*i + len] && list->str[*i + len] != c)
 		len++;
 	if (list->str[*i + len] != c)
@@ -33,7 +33,7 @@ static int	fun_(t_list *list, int *i,char c)
 		len++;
 	}
 	s[len] = '\0';
-	node = c_node(s, list->tail, TOKEN_Double_Q);
+	node = c_node(s, list->tail, mode);
 	if (!node)
 		return (0);
 	add_back(list, node);
@@ -43,14 +43,13 @@ static int	fun_(t_list *list, int *i,char c)
 
 int	plant_1(t_list *list, int *i)
 {
-	
 	if (list->str[*i] == '"')
 	{
-		if (!fun_(list, i, '"'))
+		if (!fun_(list, i, '"',TOKEN_Double_Q))
 			return (0);
 	}
 	else if (list->str[*i] == '\'')
-		if (!fun_(list, i, '\''))
+		if (!fun_(list, i, '\'',TOKEN_Single_Q))
 			return (0);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:19:17 by amel-has          #+#    #+#             */
-/*   Updated: 2024/02/17 15:30:24 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/02/18 21:48:12 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ static int	check_syntax_2(t_node *tmp)
 {
 	if (tmp && tmp->prev)
 		if (tmp->prev->mode == TOKEN_EXPR || tmp->prev->mode
-			== TOKEN_Double_Q || tmp->prev->mode == TOKEN_Single_Q)
+			== TOKEN_Double_Q || tmp->prev->mode == TOKEN_Single_Q || tmp->prev->value[0] == ')')
 			return (1);
 	if (tmp && tmp->prev && tmp->prev->prev)
 		if (tmp->prev->prev->mode == TOKEN_EXPR
 			|| tmp->prev->prev->mode == TOKEN_Double_Q || tmp->prev->prev->mode
-			== TOKEN_Single_Q)
+			== TOKEN_Single_Q || tmp->prev->prev->value[0] == ')')
 			return (1);
 	return (0);
 }
@@ -30,11 +30,11 @@ static int	check_syntax_1(t_node *tmp)
 {
 	if (tmp && tmp->next)
 		if (tmp->next->mode == TOKEN_EXPR || tmp->next->mode
-			== TOKEN_Double_Q || tmp->next->mode == TOKEN_Single_Q)
+			== TOKEN_Double_Q || tmp->next->mode == TOKEN_Single_Q || tmp->next->value[0] == '(')
 			return (1);
 	if (tmp && tmp->next && tmp->next->next)
 		if (tmp->next->next->mode == TOKEN_EXPR || tmp->next->next->mode
-			== TOKEN_Double_Q || tmp->next->next->mode == TOKEN_Single_Q)
+			== TOKEN_Double_Q || tmp->next->next->mode == TOKEN_Single_Q || tmp->next->next->value[0] == '(')
 			return (1);
 	return (0);
 }
@@ -83,16 +83,72 @@ static int	check_syntax_3(t_node *tmp)
 	return (1);
 }
 
+int	check_enter_parentheses(t_node *node)
+{
+	int i;
+	
+	i = 0;
+	if (node && node->prev  && node->prev->mode == TOKEN_SPACE)
+	{
+		if (node && node->prev && node->prev->prev && (node->prev->prev->mode 
+		== TOKEN_EXPR || node->prev->prev->mode == TOKEN_Double_Q || node->prev->prev->mode 
+		== TOKEN_Single_Q || node->prev->prev->mode == TOKEN_PARENTHESE))
+			return (0);
+	}
+	else if ((node && node->prev)  && (node->prev->mode == TOKEN_EXPR || node->prev->mode 
+	== TOKEN_PARENTHESE || node->prev->mode == TOKEN_Single_Q || node->prev->mode == TOKEN_Double_Q))
+		return (0);
+	if (node && node->next)
+		node = node->next;
+	while (node && node->value[0] != ')')
+	{
+		i++;
+		node = node->next;
+	}
+	if (i)
+		return (1);
+	return (0);
+}
+
+int	check_apres_parentheses(t_node *node)
+{
+	if (node && node->next  && node->next->mode == TOKEN_SPACE)
+	{
+		if (node && node->next && node->next->next && (node->next->next->mode 
+		== TOKEN_EXPR || node->next->next->mode == TOKEN_Double_Q || node->next->next->mode 
+		== TOKEN_Single_Q || node->next->next->mode == TOKEN_PARENTHESE))
+			return (printf("1"),0);
+	}
+	else if ((node && node->next)  && (node->next->mode == TOKEN_EXPR || node->next->mode 
+	== TOKEN_PARENTHESE || node->next->mode == TOKEN_Single_Q ||  node->next->mode == TOKEN_Double_Q))
+		return (printf("1"),0);
+	return (1);
+}
+
 int	plant_4(t_list *list)
 {
 	t_node	*tmp;
-
+	int		count_parentheses = 0;
 	if (list && list->top)
 	{
 		(1 == 1) && (tmp = list->top, list->top->prev = NULL);
 		while (tmp)
 		{
-			if (tmp->mode == TOKEN_OR || tmp->mode
+			if (tmp->mode == TOKEN_PARENTHESE && tmp->value[0] == '(')
+			{
+				count_parentheses++;
+				if (!check_enter_parentheses(tmp))
+					return (printf("syntax error 0!\n"), 0);
+			}
+			else if (tmp->mode == TOKEN_PARENTHESE && tmp->value[0] == ')' && count_parentheses == 0)
+				return (printf("syntax error 1!\n"), 0);
+			else if (tmp->mode == TOKEN_PARENTHESE && tmp->value[0] == ')' && count_parentheses == 1)
+			{
+				count_parentheses--;
+				if (!check_apres_parentheses(tmp))
+					return (0);
+			}
+			else if (tmp->mode == TOKEN_OR || tmp->mode
 				== TOKEN_AND || tmp->mode == TOKEN_PIPE)
 			{
 				if (!check_syntax_2(tmp) || !check_syntax_1(tmp))
@@ -105,11 +161,13 @@ int	plant_4(t_list *list)
 				if (!check_syntax_1(tmp))
 					return (printf("syntax error 3!\n"), 0);
 			}
-			else if (tmp->mode == TOKEN_Single_Q || tmp->mode == TOKEN_Double_Q)
+			else if (tmp->mode == TOKEN_Double_Q)
 				if (!check_syntax_3(tmp))
-					return (printf("syntax error 3!\n"), 0);
+					return (printf("syntax error 4!\n"), 0);
 			tmp = tmp->next;
 		}
 	}
+	if (count_parentheses != 0)
+		return (printf("syntax error 5!\n"), 0);
 	return (1);
 }

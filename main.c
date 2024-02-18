@@ -1,23 +1,23 @@
 #include "includes/minishell.h"
 
-bool	check_entre_parentheses(char *str)
-{
-	int i = 0;
-	while(str[i] && str[i] != ')')
-	{
-		if (str[i] != ' ')
-			return (1);
-		i++;
-	}
-	return (0);
-}
+// bool	check_entre_parentheses(char *str)
+// {
+// 	int i = 0;
+// 	while(str[i] && str[i] != ')')
+// 	{
+// 		if (str[i] != ' ')
+// 			return (1);
+// 		i++;
+// 	}
+// 	return (0);
+// }
 
 void affiche(t_list *list)
 {
 		t_node *tmp = list->top;
 		while(tmp)
 		{
-		printf("        [me :%p | val : %s ]            [next : %p]\n",tmp,tmp->value,tmp->next);
+		printf("        [me :%p | val : %s mode : %d ]            [next : %p]\n",tmp,tmp->value,tmp->mode,tmp->next);
 		if (tmp->mode == 11)
 		{
 			t_node_arg *tmp1 = tmp->list_arg->top;
@@ -56,8 +56,10 @@ int	main(void)
 			if (!plant_4(list))
 				(1 == 1) && (printf("ERROR7\n"), index = 1);
 			if (!index)
+			{
 				affiche(list);
-			my_malloc(0, 0);
+				my_malloc(0, 0);
+			}
 		}
 	}
 	return (0);
