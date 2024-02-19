@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:19:17 by amel-has          #+#    #+#             */
-/*   Updated: 2024/02/19 01:33:15 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/02/19 06:41:54 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,51 @@
 static int	check_syntax_2(t_node *tmp)
 {
 	if (tmp && tmp->prev)
-		if (tmp->prev->mode == TOKEN_EXPR || tmp->prev->mode
-			== TOKEN_Double_Q || tmp->prev->mode == TOKEN_Single_Q || tmp->prev->value[0] 
-			== ')' || tmp->prev->mode == TOKEN_REDIR_APPEND || tmp->prev->mode 
-			== TOKEN_REDIR_IN || tmp->prev->mode == TOKEN_REDIR_OUT || tmp->prev->mode == TOKEN_HEREDOC)
+		if (!is_empty(tmp->prev->value) && (tmp->prev->mode == TOKEN_EXPR || tmp->prev->mode
+			== TOKEN_Double_Q || tmp->prev->mode == TOKEN_Single_Q || tmp->prev->value[0] == ')'))
 			return (1);
 	if (tmp && tmp->prev && tmp->prev->prev)
-		if (tmp->prev->prev->mode == TOKEN_EXPR
+		if (!is_empty(tmp->prev->prev->value) && (tmp->prev->prev->mode == TOKEN_EXPR
 			|| tmp->prev->prev->mode == TOKEN_Double_Q || tmp->prev->prev->mode
-			== TOKEN_Single_Q || tmp->prev->prev->value[0] == ')'||  tmp->prev->prev->mode 
-			== TOKEN_REDIR_IN ||  tmp->prev->prev->mode == TOKEN_REDIR_OUT ||  tmp->prev->prev->mode 
-			== TOKEN_REDIR_APPEND ||  tmp->prev->prev->mode == TOKEN_HEREDOC)
+			== TOKEN_Single_Q || tmp->prev->prev->value[0] == ')'))
 			return (1);
 	return (0);
+}
+// static int	check_syntax_2(t_node *tmp)
+// {
+// 	if (tmp && tmp->prev)
+// 		if (!is_empty(tmp->prev->value) && (tmp->prev->mode == TOKEN_EXPR || tmp->prev->mode
+// 			== TOKEN_Double_Q || tmp->prev->mode == TOKEN_Single_Q || tmp->prev->value[0] 
+// 			== ')' || tmp->prev->mode == TOKEN_REDIR_APPEND || tmp->prev->mode 
+// 			== TOKEN_REDIR_IN || tmp->prev->mode == TOKEN_REDIR_OUT || tmp->prev->mode == TOKEN_HEREDOC))
+// 			return (1);
+// 	if (tmp && tmp->prev && tmp->prev->prev)
+// 		if (!is_empty(tmp->prev->prev->value) && (tmp->prev->prev->mode == TOKEN_EXPR
+// 			|| tmp->prev->prev->mode == TOKEN_Double_Q || tmp->prev->prev->mode
+// 			== TOKEN_Single_Q || tmp->prev->prev->value[0] == ')'||  tmp->prev->prev->mode 
+// 			== TOKEN_REDIR_IN ||  tmp->prev->prev->mode == TOKEN_REDIR_OUT ||  tmp->prev->prev->mode 
+// 			== TOKEN_REDIR_APPEND ||  tmp->prev->prev->mode == TOKEN_HEREDOC))
+// 			return (1);
+// 	return (0);
+// }
+
+static int	check_syntax_4(t_node *tmp)
+{
+	if (!add_list_redir(tmp))
+		return (0);
+	if (tmp && tmp->next)
+		if (!is_empty(tmp->next->value) && (tmp->next->mode == TOKEN_EXPR || tmp->next->mode
+			== TOKEN_Double_Q || tmp->next->mode == TOKEN_Single_Q || tmp->next->value[0] 
+			== '(' || tmp->next->mode == TOKEN_REDIR_APPEND || tmp->next->mode
+			== TOKEN_REDIR_IN || tmp->next->mode == TOKEN_REDIR_OUT || tmp->next->mode == TOKEN_HEREDOC))
+			return (1);
+	if (tmp && tmp->next && tmp->next->next)
+		if (!is_empty(tmp->next->next->value) && (tmp->next->next->mode == TOKEN_EXPR || tmp->next->next->mode
+			== TOKEN_Double_Q || tmp->next->next->mode == TOKEN_Single_Q || tmp->next->next->value[0] == '(' || tmp->next->next->mode 
+			== TOKEN_REDIR_IN ||  tmp->next->next->mode == TOKEN_REDIR_OUT ||  tmp->next->next->mode 
+			== TOKEN_REDIR_APPEND ||  tmp->next->next->mode == TOKEN_HEREDOC))
+			return (1);
+	return (printf("ha ana"),0);
 }
 
 static int	check_syntax_1(t_node *tmp)
@@ -35,15 +67,12 @@ static int	check_syntax_1(t_node *tmp)
 	if (!add_list_redir(tmp))
 		return (0);
 	if (tmp && tmp->next)
-		if (tmp->next->mode == TOKEN_EXPR || tmp->next->mode
-			== TOKEN_Double_Q || tmp->next->mode == TOKEN_Single_Q || tmp->next->value[0] == '(' || tmp->next->mode == TOKEN_REDIR_APPEND || tmp->next->mode 
-			== TOKEN_REDIR_IN || tmp->next->mode == TOKEN_REDIR_OUT || tmp->next->mode == TOKEN_HEREDOC)
+		if (!is_empty(tmp->next->value) && (tmp->next->mode == TOKEN_EXPR || tmp->next->mode
+			== TOKEN_Double_Q || tmp->next->mode == TOKEN_Single_Q || tmp->next->value[0] == '(' ))
 			return (1);
 	if (tmp && tmp->next && tmp->next->next)
-		if (tmp->next->next->mode == TOKEN_EXPR || tmp->next->next->mode
-			== TOKEN_Double_Q || tmp->next->next->mode == TOKEN_Single_Q || tmp->next->next->value[0] == '(' || tmp->next->next->mode 
-			== TOKEN_REDIR_IN ||  tmp->next->next->mode == TOKEN_REDIR_OUT ||  tmp->next->next->mode 
-			== TOKEN_REDIR_APPEND ||  tmp->next->next->mode == TOKEN_HEREDOC)
+		if (!is_empty(tmp->next->next->value) && (tmp->next->next->mode == TOKEN_EXPR || tmp->next->next->mode
+			== TOKEN_Double_Q || tmp->next->next->mode == TOKEN_Single_Q || tmp->next->next->value[0] == '('))
 			return (1);
 	return (0);
 }
@@ -92,11 +121,27 @@ static int	check_syntax_3(t_node *tmp)
 	return (1);
 }
 
+int	is_empty(char *str)
+{
+	int i = 0;
+	if (str && !str[0])
+		return (0);
+	while(str[i])
+	{
+		if (str[i] != ' ')
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 int	check_enter_parentheses(t_node *node)
 {
 	int i;
-	
+	int	j;
+
 	i = 0;
+	j = 0;
 	if (node && node->prev  && node->prev->mode == TOKEN_SPACE)
 	{
 		if (node && node->prev && node->prev->prev && (node->prev->prev->mode 
@@ -115,6 +160,8 @@ int	check_enter_parentheses(t_node *node)
 		node = node->next;
 	while (node && node->value[0] != ')')
 	{
+		if (is_empty(node->value))
+			return (0);
 		i++;
 		node = node->next;
 	}
@@ -145,8 +192,7 @@ void	checkSinglQ(t_node *tmp)
 		tmp->val_vide = 1;
 }
 
-//spaces in string
-//
+
 int	plant_4(t_list *list)
 {
 	t_node	*tmp;
@@ -173,17 +219,17 @@ int	plant_4(t_list *list)
 			else if (tmp->mode == TOKEN_OR || tmp->mode
 				== TOKEN_AND || tmp->mode == TOKEN_PIPE)
 			{
-				if (!check_syntax_2(tmp) || !check_syntax_1(tmp))
+				if (!check_syntax_2(tmp) || !check_syntax_4(tmp))
 					return (printf("syntax error 2!\n"), 0);
 			}
-			else if (tmp->mode == TOKEN_REDIR_APPEND || tmp->mode
+			if (tmp->mode == TOKEN_REDIR_APPEND || tmp->mode
 				== TOKEN_REDIR_IN || tmp->mode == TOKEN_REDIR_OUT
 				|| tmp->mode == TOKEN_HEREDOC)
 			{
 				if (!check_syntax_1(tmp))
 					return (printf("syntax error 3!\n"), 0);
 			}
-			else if (tmp->mode == TOKEN_Double_Q)
+			if (tmp->mode == TOKEN_Double_Q)
 			{
 				if (!check_syntax_3(tmp))
 					return (printf("syntax error 4!\n"), 0);

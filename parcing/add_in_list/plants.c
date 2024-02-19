@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:34:19 by amel-has          #+#    #+#             */
-/*   Updated: 2024/02/17 23:10:49 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/02/19 05:39:10 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	plants(t_list *list, int *i)
 {
+	if (list->str[*i] == '\t' || list->str[*i] == '\v' || list->str[*i] == '\f' || list->str[*i] == '\n' || list->str[*i] == '\r')
+		(*i)++;
 	if ((list->str[*i] == '"' || list->str[*i] == '\''))
 	{		
 		if (!plant_1(list, i))

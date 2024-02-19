@@ -46,7 +46,7 @@ int	main(void)
 		if (!index)
 		{
 			list->str = readline("minishell > ");
-			if (!list->str)
+			if (!list->str || is_empty(list->str))
 				index = 1;
 			if (!index)
 			{
