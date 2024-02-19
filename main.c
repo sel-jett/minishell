@@ -1,30 +1,30 @@
 #include "includes/minishell.h"
 
-// bool	check_entre_parentheses(char *str)
-// {
-// 	int i = 0;
-// 	while(str[i] && str[i] != ')')
-// 	{
-// 		if (str[i] != ' ')
-// 			return (1);
-// 		i++;
-// 	}
-// 	return (0);
-// }
-
 void affiche(t_list *list)
 {
 		t_node *tmp = list->top;
 		while(tmp)
 		{
-		printf("        [me :%p | val : %s mode : %d ]            [next : %p]\n",tmp,tmp->value,tmp->mode,tmp->next);
-		if (tmp->mode == 11)
+		printf("[prev : %p]            [me :[%p] | val : [%s] | mode : [%d]]             [next : %p]\n",tmp->prev, tmp, tmp->value, tmp->mode, tmp->next);
+		if (tmp->value[0] && tmp->mode == 11)
 		{
 			t_node_arg *tmp1 = tmp->list_arg->top;
 			while(tmp1)
 			{
 				printf("\nthis is ---------- >[%s]\n",tmp1->value);
 				tmp1 = tmp1->next;
+			}
+		}
+		if (tmp->mode == TOKEN_REDIR_APPEND || tmp->mode == TOKEN_REDIR_IN || tmp->mode == TOKEN_REDIR_OUT || tmp->mode == TOKEN_HEREDOC)
+		{
+			t_node_redir *tmp2;
+
+			tmp2 = tmp->list_redir->top;
+			printf("-------------------------------------\n");
+			while (tmp2)
+			{
+				printf("-------->%s\n",tmp2->value);
+				tmp2 = tmp2->next;
 			}
 		}
 		tmp = tmp->next;
@@ -49,16 +49,18 @@ int	main(void)
 			if (!list->str)
 				index = 1;
 			if (!index)
-				add_history(list->str);
-			while (list->str && list->str[i])
-				if (!plants(list, &i))
-					break;
-			if (!plant_4(list))
-				(1 == 1) && (printf("ERROR7\n"), index = 1);
-			if (!index)
 			{
-				affiche(list);
-				my_malloc(0, 0);
+					add_history(list->str);
+				while (list->str[i])
+					if (!plants(list, &i))
+						break;
+				if (!plant_4(list))
+					(1 == 1) && (printf("ERROR7\n"), index = 1);
+				if (!index)
+				{
+					affiche(list);
+					my_malloc(0, 0);
+				}
 			}
 		}
 	}

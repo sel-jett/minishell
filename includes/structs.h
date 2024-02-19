@@ -6,12 +6,25 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:49:09 by amel-has          #+#    #+#             */
-/*   Updated: 2024/02/17 15:49:31 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/02/18 23:58:45 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
+
+typedef struct s_node_redir
+{
+	char				*value;
+	struct s_node_redir	*next;
+}	t_node_redir;
+
+typedef struct s_list_redir
+{
+	struct s_node_redir *top;
+	struct s_node_redir *tail;
+	int					len;
+}t_list_redir;
 
 typedef struct s_node_arg
 {
@@ -40,6 +53,7 @@ typedef struct s_node
 	int				mode;
 	int				val_vide;
 	t_list_arg		*list_arg;
+	t_list_redir	*list_redir;
 }	t_node;
 
 typedef struct s_list
@@ -49,6 +63,7 @@ typedef struct s_list
 	int		len;
 	char    *str;
 }	t_list;
+
 
 enum
 {
@@ -67,7 +82,7 @@ enum
 	TOKEN_Single_Q,
 	TOKEN_DOLLAR,
 	TOKEN_PARENTHESE,
-} ;
+};
 /*
 // TOKEN_EXPR: Represents an expression in the context of a programming language or similar domain.
 // TOKEN_REDIR_IN: Indicates a redirection operation for input (e.g., < in some shell scripting languages).

@@ -2,8 +2,8 @@ NAME = minishell
 SRCS = ./parcing/allocation_free/creation1.c ./parcing/allocation_free/my_malloc.c main.c \
        ./parcing/add_in_list/plant_3.c ./parcing/add_in_list/plant_1.c ./parcing/add_in_list/plant_2.c \
 	   ./parcing/add_in_list/spaces.c ./parcing/syntax_error/utile_1.c ./parcing/allocation_free/creation2.c \
-	   ./parcing/add_in_list/plants.c
-OBJS    = $(SRCS:.c=.o)
+	   ./parcing/add_in_list/plants.c ./parcing/allocation_free/creation3.c ./parcing/syntax_error/utile_2.c
+  OBJS    = $(SRCS:.c=.o)
 CFLAGS 	=   -Wall -Wextra -Werror
 RM 		= @rm -f
 all : $(NAME) clean
