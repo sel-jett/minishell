@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:19:17 by amel-has          #+#    #+#             */
-/*   Updated: 2024/02/19 21:39:54 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/02/19 23:26:42 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,23 +25,6 @@ static int	check_syntax_2(t_node *tmp)//or and
 			return (1);
 	return (0);
 }
-// static int	check_syntax_2(t_node *tmp)
-// {
-// 	if (tmp && tmp->prev)
-// 		if (!is_empty(tmp->prev->value) && (tmp->prev->mode == TOKEN_EXPR || tmp->prev->mode
-// 			== TOKEN_Double_Q || tmp->prev->mode == TOKEN_Single_Q || tmp->prev->value[0] 
-// 			== ')' || tmp->prev->mode == TOKEN_REDIR_APPEND || tmp->prev->mode 
-// 			== TOKEN_REDIR_IN || tmp->prev->mode == TOKEN_REDIR_OUT || tmp->prev->mode == TOKEN_HEREDOC))
-// 			return (1);
-// 	if (tmp && tmp->prev && tmp->prev->prev)
-// 		if (!is_empty(tmp->prev->prev->value) && (tmp->prev->prev->mode == TOKEN_EXPR
-// 			|| tmp->prev->prev->mode == TOKEN_Double_Q || tmp->prev->prev->mode
-// 			== TOKEN_Single_Q || tmp->prev->prev->value[0] == ')'||  tmp->prev->prev->mode 
-// 			== TOKEN_REDIR_IN ||  tmp->prev->prev->mode == TOKEN_REDIR_OUT ||  tmp->prev->prev->mode 
-// 			== TOKEN_REDIR_APPEND ||  tmp->prev->prev->mode == TOKEN_HEREDOC))
-// 			return (1);
-// 	return (0);
-// }
 
 static int	check_syntax_4(t_node *tmp)
 {
