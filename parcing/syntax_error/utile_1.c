@@ -6,19 +6,19 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:19:17 by amel-has          #+#    #+#             */
-/*   Updated: 2024/02/19 06:41:54 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/02/19 21:39:54 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static int	check_syntax_2(t_node *tmp)
+static int	check_syntax_2(t_node *tmp)//or and
 {
 	if (tmp && tmp->prev)
 		if (!is_empty(tmp->prev->value) && (tmp->prev->mode == TOKEN_EXPR || tmp->prev->mode
 			== TOKEN_Double_Q || tmp->prev->mode == TOKEN_Single_Q || tmp->prev->value[0] == ')'))
 			return (1);
-	if (tmp && tmp->prev && tmp->prev->prev)
+	if (tmp && tmp->prev && is_empty(tmp->prev->value) && tmp->prev->prev)
 		if (!is_empty(tmp->prev->prev->value) && (tmp->prev->prev->mode == TOKEN_EXPR
 			|| tmp->prev->prev->mode == TOKEN_Double_Q || tmp->prev->prev->mode
 			== TOKEN_Single_Q || tmp->prev->prev->value[0] == ')'))
@@ -53,7 +53,7 @@ static int	check_syntax_4(t_node *tmp)
 			== '(' || tmp->next->mode == TOKEN_REDIR_APPEND || tmp->next->mode
 			== TOKEN_REDIR_IN || tmp->next->mode == TOKEN_REDIR_OUT || tmp->next->mode == TOKEN_HEREDOC))
 			return (1);
-	if (tmp && tmp->next && tmp->next->next)
+	if (tmp && tmp->next && is_empty(tmp->next->value) && tmp->next->next)
 		if (!is_empty(tmp->next->next->value) && (tmp->next->next->mode == TOKEN_EXPR || tmp->next->next->mode
 			== TOKEN_Double_Q || tmp->next->next->mode == TOKEN_Single_Q || tmp->next->next->value[0] == '(' || tmp->next->next->mode 
 			== TOKEN_REDIR_IN ||  tmp->next->next->mode == TOKEN_REDIR_OUT ||  tmp->next->next->mode 
@@ -62,7 +62,7 @@ static int	check_syntax_4(t_node *tmp)
 	return (printf("ha ana"),0);
 }
 
-static int	check_syntax_1(t_node *tmp)
+static int	check_syntax_1(t_node *tmp)//redir
 {
 	if (!add_list_redir(tmp))
 		return (0);
@@ -70,7 +70,7 @@ static int	check_syntax_1(t_node *tmp)
 		if (!is_empty(tmp->next->value) && (tmp->next->mode == TOKEN_EXPR || tmp->next->mode
 			== TOKEN_Double_Q || tmp->next->mode == TOKEN_Single_Q || tmp->next->value[0] == '(' ))
 			return (1);
-	if (tmp && tmp->next && tmp->next->next)
+	if (tmp && tmp->next && is_empty(tmp->next->value) && tmp->next->next)
 		if (!is_empty(tmp->next->next->value) && (tmp->next->next->mode == TOKEN_EXPR || tmp->next->next->mode
 			== TOKEN_Double_Q || tmp->next->next->mode == TOKEN_Single_Q || tmp->next->next->value[0] == '('))
 			return (1);
@@ -124,8 +124,6 @@ static int	check_syntax_3(t_node *tmp)
 int	is_empty(char *str)
 {
 	int i = 0;
-	if (str && !str[0])
-		return (0);
 	while(str[i])
 	{
 		if (str[i] != ' ')
@@ -134,6 +132,7 @@ int	is_empty(char *str)
 	}
 	return (1);
 }
+
 
 int	check_enter_parentheses(t_node *node)
 {
@@ -161,10 +160,12 @@ int	check_enter_parentheses(t_node *node)
 	while (node && node->value[0] != ')')
 	{
 		if (is_empty(node->value))
-			return (0);
+			j++;
 		i++;
 		node = node->next;
 	}
+	if (i == j)
+		return (0);
 	if (i)
 		return (1);
 	return (0);
