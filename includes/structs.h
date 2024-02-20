@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:49:09 by amel-has          #+#    #+#             */
-/*   Updated: 2024/02/18 23:58:45 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/02/19 23:55:40 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,20 @@ enum
 	TOKEN_DOLLAR,
 	TOKEN_PARENTHESE,
 };
+
+typedef struct s_node_arbre
+{
+	int					mode;
+	char				*value;
+	struct s_node_arbre *left;
+	struct s_node_arbre *right;
+}t_node_arbre;
+
+typedef struct s_arbre
+{
+	t_node_arbre	*racine;
+} t_arbre;
+
 /*
 // TOKEN_EXPR: Represents an expression in the context of a programming language or similar domain.
 // TOKEN_REDIR_IN: Indicates a redirection operation for input (e.g., < in some shell scripting languages).
