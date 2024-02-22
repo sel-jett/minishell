@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:13:42 by amel-has          #+#    #+#             */
-/*   Updated: 2024/02/18 23:46:01 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/02/22 05:55:14 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_node	*c_node(char *str, t_node *tail, int mode)
 	new_node->val_vide = 0;
 	new_node->list_arg = 0;
 	new_node->list_arg = 0;
+	new_node->is_visited = 0;
 	return (new_node);
 }
 

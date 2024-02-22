@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:49:09 by amel-has          #+#    #+#             */
-/*   Updated: 2024/02/19 23:55:40 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/02/22 05:57:00 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ typedef struct s_node
 	int				val_vide;
 	t_list_arg		*list_arg;
 	t_list_redir	*list_redir;
+	int				is_visited;
 }	t_node;
 
 typedef struct s_list

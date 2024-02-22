@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 23:52:00 by amel-has          #+#    #+#             */
-/*   Updated: 2024/02/20 00:01:16 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/02/22 05:55:20 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,21 @@ t_node_arbre    *c_node_arbre(t_node *node)
     new_node_arbre = my_malloc(sizeof(t_node_arbre), 1);
     if (!new_node_arbre)
         return (0);
+    new_node_arbre->value = node->value;
     new_node_arbre->left = NULL;
     new_node_arbre->right = NULL;
     return (new_node_arbre);
 }
 
+// void    add_arbre(t_arbre *arbre, t_node_arbre *node ,char c)
+// {
+//     if (!arbre->racine)
+//     {
+//         arbre->racine = node;
+//         return ;
+//     }
+//     if (c = 'l')
+//     {
+//         while ()
+//     }
+// }

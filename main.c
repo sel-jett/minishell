@@ -56,9 +56,11 @@ int	main(void)
 						break;
 				if (!plant_4(list))
 					(1 == 1) && (printf("ERROR7\n"), index = 1);
+				if (!plant_5(list))
+					(1 == 1) && (printf("ERROR7\n"), index = 1);
 				if (!index)
 				{
-					affiche(list);
+					// affiche(list);
 					my_malloc(0, 0);
 				}
 			}
