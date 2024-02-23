@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:49:09 by amel-has          #+#    #+#             */
-/*   Updated: 2024/02/22 05:57:00 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/02/23 21:35:07 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct s_data
 	struct s_data	*next;
 }	t_data;
 
+typedef struct s_list t_list;
 typedef struct s_node
 {
 	char			*value;
@@ -55,15 +56,16 @@ typedef struct s_node
 	t_list_arg		*list_arg;
 	t_list_redir	*list_redir;
 	int				is_visited;
+	t_list 			*list;
 }	t_node;
 
-typedef struct s_list
+struct s_list
 {
 	t_node	*top;
 	t_node	*tail;
 	int		len;
 	char    *str;
-}	t_list;
+};
 
 
 enum

@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:00:33 by amel-has          #+#    #+#             */
-/*   Updated: 2024/02/17 21:07:32 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/02/23 21:37:35 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	fun_(t_list *list, int *i,char c,int mode)
 		len++;
 	}
 	s[len] = '\0';
-	node = c_node(s, list->tail, mode);
+	node = c_node(s, list->tail, mode,list);
 	if (!node)
 		return (0);
 	add_back(list, node);

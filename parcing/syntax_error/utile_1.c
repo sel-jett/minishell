@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:19:17 by amel-has          #+#    #+#             */
-/*   Updated: 2024/02/19 23:35:17 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/02/23 03:51:15 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ static int	add_args(t_list_arg *list, char *str, int *i)
 	while (str[len] && str[len] != ' ')
 		len++;
 	s = my_malloc(sizeof(char) * (len + 1), 1);
+	if (!s)
+		return (0);
 	len = 0;
 	while (str && str[len] && str[len] != ' ')
 	{
@@ -131,13 +133,12 @@ int	check_enter_parentheses(t_node *node)
 		== TOKEN_Single_Q || node->prev->prev->mode == TOKEN_PARENTHESE || node->prev->prev->mode ==
 		TOKEN_REDIR_APPEND || node->prev->prev->mode == TOKEN_REDIR_IN ||  node->prev->prev->mode ==
 		TOKEN_REDIR_OUT || node->prev->prev->mode == TOKEN_HEREDOC))
-			return (0);
+			return (printf("haa ana 1\n"),0);
 	}
-	else if ((node && node->prev)  && (node->prev->mode == TOKEN_EXPR || node->prev->mode 
-	== TOKEN_PARENTHESE || node->prev->mode == TOKEN_Single_Q || node->prev->mode ==
+	else if ((node && node->prev)  && (node->prev->mode == TOKEN_EXPR || node->prev->mode == TOKEN_Single_Q || node->prev->mode ==
 	TOKEN_Double_Q || node->prev->mode == TOKEN_REDIR_APPEND || node->prev->mode ==
 	TOKEN_REDIR_OUT|| node->prev->mode == TOKEN_REDIR_IN || node->prev->mode == TOKEN_HEREDOC))
-		return (0);
+		return (printf("haa ana 2\n"),0);
 	if (node && node->next)
 		node = node->next;
 	while (node && node->value[0] != ')')
@@ -148,10 +149,10 @@ int	check_enter_parentheses(t_node *node)
 		node = node->next;
 	}
 	if (i == j)
-		return (0);
+		return (printf("haa ana 3\n"),0);
 	if (i)
 		return (1);
-	return (0);
+	return (printf("ha ana 4"),0);
 }
 
 int	check_apres_parentheses(t_node *node)
@@ -160,11 +161,10 @@ int	check_apres_parentheses(t_node *node)
 	{
 		if (node && node->next && node->next->next && (node->next->next->mode 
 		== TOKEN_EXPR || node->next->next->mode == TOKEN_Double_Q || node->next->next->mode 
-		== TOKEN_Single_Q || node->next->next->mode == TOKEN_PARENTHESE ))
+		== TOKEN_Single_Q))
 			return (0);
 	}
-	else if ((node && node->next)  && (node->next->mode == TOKEN_EXPR || node->next->mode 
-	== TOKEN_PARENTHESE || node->next->mode == TOKEN_Single_Q ||  node->next->mode ==
+	else if ((node && node->next)  && (node->next->mode == TOKEN_EXPR || node->next->mode == TOKEN_Single_Q ||  node->next->mode ==
 	TOKEN_Double_Q))
 		return (0);
 	return (1);
@@ -179,7 +179,7 @@ void	checkSinglQ(t_node *tmp)
 
 int	plant_4(t_list *list)
 {
-	t_node	*tmp;
+	t_node	*tmp; 
 	int		count_parentheses = 0;
 	if (list && list->top)
 	{
@@ -194,7 +194,7 @@ int	plant_4(t_list *list)
 			}
 			else if (tmp->mode == TOKEN_PARENTHESE  && tmp->value[0] == ')' && count_parentheses == 0)
 				return (printf("syntax error 1!\n"), 0);
-			else if (tmp->mode == TOKEN_PARENTHESE  && tmp->value[0] == ')' && count_parentheses == 1)
+			else if (tmp->mode == TOKEN_PARENTHESE  && tmp->value[0] == ')' && count_parentheses >= 1)
 			{
 				count_parentheses--;
 				if (!check_apres_parentheses(tmp))
@@ -224,6 +224,6 @@ int	plant_4(t_list *list)
 		}
 	}
 	if (count_parentheses != 0)
-		return (printf("syntax error 5!\n"), 0);
+		return (printf("syntax error 5 [%d]\n",count_parentheses), 0);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:07:15 by amel-has          #+#    #+#             */
-/*   Updated: 2024/02/17 17:21:26 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/02/23 21:37:50 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	spaces(t_list *list, int *i)
 	if (!s)
 		return (0);
 	(1 == 1) && (s[0] = ' ', s[1] = '\0');
-	node = c_node(s, list->tail, TOKEN_SPACE);
+	node = c_node(s, list->tail, TOKEN_SPACE,list);
 	if (!node)
 		return (0);
 	add_back(list, node);

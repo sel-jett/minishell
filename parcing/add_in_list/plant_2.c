@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:04:14 by amel-has          #+#    #+#             */
-/*   Updated: 2024/02/17 23:58:21 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/02/23 21:37:44 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	plant_2(t_list *list, int *i)
 	while (check(list->str[++len + *i]))
 		s[len] = list->str[*i + len];
 	s[len] = '\0';
-	node = c_node(s, list->tail, TOKEN_EXPR);
+	node = c_node(s, list->tail, TOKEN_EXPR,list);
 	if (!node)
 		return (0);
 	add_back(list, node);

@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:48:58 by amel-has          #+#    #+#             */
-/*   Updated: 2024/02/22 01:36:07 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/02/23 23:06:05 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,13 @@
 # include <readline/readline.h>
 # include <stdbool.h>
 
+void    print_tree(t_node_arbre    *tree, int c);
 t_arbre         *c_arbre();
 t_node_arbre    *c_node_arbre(t_node *node);
 t_list		    *c_list(void);
 t_list_arg	    *c_list_arg(void);
 t_list_redir    *c_list_redir(void);
-t_node		    *c_node(char *str, t_node *tail, int mode);
+t_node          *c_node(char *str, t_node *tail, int mode,t_list *list);
 t_node_arg	    *c_node_arg(char *str);
 t_node_redir    *c_node_redir(char *str);
 void            add_back_redir(t_list_redir *list, t_node_redir *node);
@@ -42,5 +43,5 @@ int				is_empty(char *str);
 void		    add_back_arg(t_list_arg *list, t_node_arg *node);
 int			    add_one(t_list	*list, int *i, int mode);
 int				add_list_redir(t_node *tmp);
-int             plant_5(t_list *list);
+int	plant_5(t_node *tail, t_node_arbre **racine,t_node *node);
 #endif

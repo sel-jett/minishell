@@ -36,6 +36,8 @@ int	main(void)
 	t_list  *list;
 	int     i;
 	int		index;
+	t_arbre			*arbre;
+	t_node *node = NULL;
 
 	(1== 1) && (list = NULL);
 	while (1)
@@ -56,8 +58,12 @@ int	main(void)
 						break;
 				if (!plant_4(list))
 					(1 == 1) && (printf("ERROR7\n"), index = 1);
-				if (!plant_5(list))
+				arbre = c_arbre();
+				if (!arbre)
+					return (0);
+				if (!plant_5(list->tail, &arbre->racine,node))
 					(1 == 1) && (printf("ERROR7\n"), index = 1);
+				print_tree(arbre->racine,0);
 				if (!index)
 				{
 					// affiche(list);
