@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:13:42 by amel-has          #+#    #+#             */
-/*   Updated: 2024/02/24 23:05:46 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/02/25 00:19:09 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,29 @@ t_node	*c_node(char *str, t_node *tail, int mode,t_list *list)
 	new_node->mode = mode;
 	new_node->val_vide = 0;
 	new_node->list_arg = 0;
-	new_node->list_arg = 0;
-	new_node->is_visited = 0;
+	new_node->list_redir = 0;
+	new_node->flag_expend = 0;
+	new_node->flag_expend = 0;
 	new_node->list = list;
+	return (new_node);
+}
+
+t_node	*c_cpynode(t_node *node, t_node *tail)
+{
+	t_node	*new_node;
+
+	new_node = my_malloc(sizeof(t_node), 1);
+	if (!new_node)
+		return (0);
+	new_node->value = node->value;
+	new_node->next = 0;
+	new_node->prev = tail;
+	new_node->mode = node->mode;
+	new_node->val_vide = node->val_vide;
+	new_node->list_arg = node->list_arg;
+	new_node->list_redir = node->list_redir;
+	new_node->flag_expend = 0;
+	new_node->flag_expend = 0;
 	return (new_node);
 }
 

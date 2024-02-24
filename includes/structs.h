@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:49:09 by amel-has          #+#    #+#             */
-/*   Updated: 2024/02/24 23:06:45 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/02/24 23:32:31 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_data
 }	t_data;
 
 typedef struct s_list t_list;
+
 typedef struct s_node
 {
 	char			*value;
@@ -42,8 +43,9 @@ typedef struct s_node
 	int				val_vide;
 	t_nlist			*list_arg;
 	t_nlist			*list_redir;
-	int				is_visited;
 	t_list 			*list;
+	int				flag_expend;
+	int				flag_space;
 }	t_node;
 
 struct s_list
@@ -78,8 +80,11 @@ typedef struct s_node_arbre
 {
 	int					mode;
 	char				*value;
+	int					flag_expend;
+	int					flag_space;
 	t_list				*list;
 	t_nlist				*list_redir;
+	
 	struct s_node_arbre *left;
 	struct s_node_arbre *right;
 } t_node_arbre;

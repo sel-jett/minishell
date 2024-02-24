@@ -5,7 +5,7 @@ void affiche(t_list *list)
 		t_node *tmp = list->top;
 		while(tmp)
 		{
-		printf("[prev : %p]            [me :[%p] | val : [%s] | mode : [%d]]             [next : %p]\n",tmp->prev, tmp, tmp->value, tmp->mode, tmp->next);
+		printf("[prev : %p]            [me :[%p] | val : [%s] | mode : [%d] | is_expend : [%d] | is_space :[%d]]             [next : %p]\n",tmp->prev, tmp, tmp->value, tmp->mode,tmp->flag_expend, tmp->flag_space,tmp->next);
 		if (tmp->value[0] && tmp->mode == 11)
 		{
 			t_nnode *tmp1 = tmp->list_arg->top;

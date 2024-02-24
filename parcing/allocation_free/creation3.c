@@ -1,13 +1,12 @@
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   creation4.c                                        :+:      :+:    :+:   */
+/*   creation3.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/19 23:52:00 by amel-has          #+#    #+#             */
-/*   Updated: 2024/02/24 21:18:47 by amel-has         ###   ########.fr       */
+/*   Created: 2024/02/24 23:28:22 by amel-has          #+#    #+#             */
+/*   Updated: 2024/02/24 23:32:51 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +37,7 @@ t_node_arbre    *c_node_arbre(t_node    *node)
     new_node_arbre->mode = node->mode;
     new_node_arbre->left = NULL;
     new_node_arbre->right = NULL;
+    new_node_arbre->flag_expend = 0;
+	new_node_arbre->flag_expend = 0;
     return (new_node_arbre);
 }
