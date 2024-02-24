@@ -6,15 +6,15 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:14:17 by amel-has          #+#    #+#             */
-/*   Updated: 2024/02/18 23:45:47 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/02/24 22:53:53 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	add_back_arg(t_list_arg *list, t_node_arg *node)
+void	add_nback(t_nlist *list, t_nnode *node)
 {
-	t_node_arg	*tmp;
+	t_nnode	*tmp;
 
 	if (!list)
 		return ;
@@ -34,27 +34,27 @@ void	add_back_arg(t_list_arg *list, t_node_arg *node)
 	list->len++;
 }
 
-t_node_arg	*c_node_arg(char *str)
+t_nnode	*c_nnode(char *str)
 {
-	t_node_arg	*new_node_arg;
+	t_nnode	*new_nnode;
 
-	new_node_arg = my_malloc(sizeof(t_node_arg), 1);
-	if (!new_node_arg)
+	new_nnode = my_malloc(sizeof(t_nnode), 1);
+	if (!new_nnode)
 		return (0);
-	new_node_arg->value = str;
-	new_node_arg->next = 0;
-	return (new_node_arg);
+	new_nnode->value = str;
+	new_nnode->next = 0;
+	return (new_nnode);
 }
 
-t_list_arg	*c_list_arg(void)
+t_nlist	*c_nlist(void)
 {
-	t_list_arg	*new_arg;
+	t_nlist	*new;
 
-	new_arg = my_malloc(sizeof(t_list_arg), 1);
-	if (!new_arg)
+	new = my_malloc(sizeof(t_nlist), 1);
+	if (!new)
 		return (0);
-	new_arg->top = 0;
-	new_arg->tail = 0;
-	new_arg->len = 0;
-	return (new_arg);
+	new->top = 0;
+	new->tail = 0;
+	new->len = 0;
+	return (new);
 }

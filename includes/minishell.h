@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:48:58 by amel-has          #+#    #+#             */
-/*   Updated: 2024/02/24 01:16:51 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/02/24 23:08:00 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,28 +20,33 @@
 # include <readline/readline.h>
 # include <stdbool.h>
 
-void    print_tree(t_node_arbre    *tree, int c);
-t_arbre         *c_arbre();
-t_node_arbre    *c_node_arbre(t_node *node);
-t_list		    *c_list(void);
-t_list_arg	    *c_list_arg(void);
-t_list_redir    *c_list_redir(void);
-t_node          *c_node(char *str, t_node *tail, int mode,t_list *list);
-t_node_arg	    *c_node_arg(char *str);
-t_node_redir    *c_node_redir(char *str);
-void            add_back_redir(t_list_redir *list, t_node_redir *node);
+t_nlist         *c_nlist(void);
+t_nnode         *c_nnode(char *str);
+void            add_nback(t_nlist *list, t_nnode *node);
+void            affiche(t_list *list);
+int				add_args(t_nlist *list, char *str, int *i);
+int				check_syntax_1(t_node *tmp);
+int				check_syntax_2(t_node *tmp);
+int				check_syntax_3(t_node *tmp);
+int				check_syntax_4(t_node *tmp);
+t_node_arbre	*add_commade(t_node	*tmp);
+int				add_list_redir(t_node *node);
+void			print_tree(t_node_arbre    *tree, int c);
+t_arbre			*c_arbre(void);
+t_node_arbre	*c_node_arbre(t_node *node);
+t_list			*c_list(void);
+t_node			*c_node(char *str, t_node *tail, int mode, t_list *list);
 int			    plants(t_list *list, int *i);
-void		    *my_malloc(size_t size, int mode);
-void		    add_back(t_list *list, t_node *node);
-int			    plant_3(t_list *list, int *i);
-int			    plant_1(t_list *list, int *i);
-int			    plant_2(t_list *list, int *i);
-int			    spaces(t_list *list, int *i);
-int			    plant_4(t_list *list);
-int			    check(int c);
+void			*my_malloc(size_t size, int mode);
+void			add_back(t_list *list, t_node *node);
+int				plant_3(t_list *list, int *i);
+int				plant_1(t_list *list, int *i);
+int				plant_2(t_list *list, int *i);
+int				spaces(t_list *list, int *i);
+int				plant_4(t_list *list);
+int				check(int c);
 int				is_empty(char *str);
-void		    add_back_arg(t_list_arg *list, t_node_arg *node);
-int			    add_one(t_list	*list, int *i, int mode);
+int				add_one(t_list	*list, int *i, int mode);
 int				add_list_redir(t_node *tmp);
-int             plant_5(t_node *top, t_node_arbre **racine);
+int				plant_6(t_node *top, t_node_arbre **racine);
 #endif

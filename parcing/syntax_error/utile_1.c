@@ -6,118 +6,23 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:19:17 by amel-has          #+#    #+#             */
-/*   Updated: 2024/02/23 03:51:15 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/02/24 23:04:52 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-static int	check_syntax_2(t_node *tmp)//or and
-{
-	if (tmp && tmp->prev)
-		if (!is_empty(tmp->prev->value) && (tmp->prev->mode == TOKEN_EXPR || tmp->prev->mode
-			== TOKEN_Double_Q || tmp->prev->mode == TOKEN_Single_Q || tmp->prev->value[0] == ')'))
-			return (1);
-	if (tmp && tmp->prev && is_empty(tmp->prev->value) && tmp->prev->prev)
-		if (!is_empty(tmp->prev->prev->value) && (tmp->prev->prev->mode == TOKEN_EXPR
-			|| tmp->prev->prev->mode == TOKEN_Double_Q || tmp->prev->prev->mode
-			== TOKEN_Single_Q || tmp->prev->prev->value[0] == ')'))
-			return (1);
-	return (0);
-}
-
-static int	check_syntax_4(t_node *tmp)
-{
-	if (!add_list_redir(tmp))
-		return (0);
-	if (tmp && tmp->next)
-		if (!is_empty(tmp->next->value) && (tmp->next->mode == TOKEN_EXPR || tmp->next->mode
-			== TOKEN_Double_Q || tmp->next->mode == TOKEN_Single_Q || tmp->next->value[0] 
-			== '(' || tmp->next->mode == TOKEN_REDIR_APPEND || tmp->next->mode
-			== TOKEN_REDIR_IN || tmp->next->mode == TOKEN_REDIR_OUT || tmp->next->mode == TOKEN_HEREDOC))
-			return (1);
-	if (tmp && tmp->next && is_empty(tmp->next->value) && tmp->next->next)
-		if (!is_empty(tmp->next->next->value) && (tmp->next->next->mode == TOKEN_EXPR || tmp->next->next->mode
-			== TOKEN_Double_Q || tmp->next->next->mode == TOKEN_Single_Q || tmp->next->next->value[0] == '(' || tmp->next->next->mode 
-			== TOKEN_REDIR_IN ||  tmp->next->next->mode == TOKEN_REDIR_OUT ||  tmp->next->next->mode 
-			== TOKEN_REDIR_APPEND ||  tmp->next->next->mode == TOKEN_HEREDOC))
-			return (1);
-	return (printf("ha ana"),0);
-}
-
-static int	check_syntax_1(t_node *tmp)//redir
-{
-	if (!add_list_redir(tmp))
-		return (0);
-	if (tmp && tmp->next)
-		if (!is_empty(tmp->next->value) && (tmp->next->mode == TOKEN_EXPR || tmp->next->mode
-			== TOKEN_Double_Q || tmp->next->mode == TOKEN_Single_Q || tmp->next->value[0] == '(' ))
-			return (1);
-	if (tmp && tmp->next && is_empty(tmp->next->value) && tmp->next->next)
-		if (!is_empty(tmp->next->next->value) && (tmp->next->next->mode == TOKEN_EXPR || tmp->next->next->mode
-			== TOKEN_Double_Q || tmp->next->next->mode == TOKEN_Single_Q || tmp->next->next->value[0] == '('))
-			return (1);
-	return (0);
-}
-
-static int	add_args(t_list_arg *list, char *str, int *i)
-{
-	int			len;
-	char		*s;
-	t_node_arg	*node;
-
-	len = 0;
-	while (str[len] && str[len] != ' ')
-		len++;
-	s = my_malloc(sizeof(char) * (len + 1), 1);
-	if (!s)
-		return (0);
-	len = 0;
-	while (str && str[len] && str[len] != ' ')
-	{
-		s[len] = str[len];
-		len++;
-	}
-	s[len] = '\0';
-	*i += len;
-	node = c_node_arg(s);
-	if (!node)
-		return (0);
-	add_back_arg(list, node);
-	return (1);
-}
-
-static int	check_syntax_3(t_node *tmp)
-{
-	char	*str;
-	int		i;
-
-	(1 == 1) && (str = NULL, i = -1);
-	if (!tmp->value[0])
-		return (tmp->val_vide = 1, 1);
-	tmp->list_arg = c_list_arg();
-	if (!tmp->list_arg)
-		return (0);
-	str = tmp->value;
-	while (str[++i])
-		if (str[i] == '$')
-			if (!add_args(tmp->list_arg, &str[++i], &i))
-				return (0);
-	return (1);
-}
 
 int	is_empty(char *str)
 {
 	int i = 0;
 	while(str[i])
 	{
-		if (str[i] != ' ')
+		if (str[i] != ' ' && str[i] != '\t' && str[i] != '\n' && str[i] != '\v' && str[i] != '\f' && str[i] != '\v')
 			return (0);
 		i++;
 	}
 	return (1);
 }
-
 
 int	check_enter_parentheses(t_node *node)
 {
@@ -175,7 +80,6 @@ void	checkSinglQ(t_node *tmp)
 	if (!tmp-> value[0])
 		tmp->val_vide = 1;
 }
-
 
 int	plant_4(t_list *list)
 {
