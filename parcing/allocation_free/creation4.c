@@ -6,13 +6,13 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 23:52:00 by amel-has          #+#    #+#             */
-/*   Updated: 2024/02/23 20:26:29 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/02/24 02:55:25 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-t_arbre *c_arbre()
+t_arbre    *c_arbre()
 {
     t_arbre *new_arbre;
 
@@ -23,7 +23,7 @@ t_arbre *c_arbre()
     return (new_arbre);
 }
 
-t_node_arbre    *c_node_arbre(t_node *node)
+t_node_arbre    *c_node_arbre(t_node    *node)
 {
     if(!node)
         return (NULL);
@@ -31,6 +31,8 @@ t_node_arbre    *c_node_arbre(t_node *node)
     new_node_arbre = my_malloc(sizeof(t_node_arbre), 1);
     if (!new_node_arbre)
         return (0);
+    new_node_arbre->list = c_list();
+    new_node_arbre->list_redir = c_list_redir();
     new_node_arbre->value = node->value;
     new_node_arbre->mode = node->mode;
     new_node_arbre->left = NULL;

@@ -2,6 +2,40 @@
 
 t_ast ---> 
 tok ----- >
+void	addb_list(t_ast *ast, t_token **tok)
+{
+	t_token	*find;
+
+	find = lasttok(((t_command *)ast)->list);
+	find->next = ft_newtoken(0, NULL, 0, 0);
+	find = find->next;
+	find->type = (*tok)->type;
+	find->hdoc = (*tok)->hdoc;
+	find->expand = (*tok)->expand;
+	find->token = (*tok)->token;
+	find->down = (*tok)->down;
+	find->prev = (*tok)->prev;
+	find->next = NULL;
+	*tok = (*tok)->next;
+}
+
+t_ast	*new_cmd(t_token *list)
+{
+	t_token		*tmp;
+	t_command	*command;
+
+	command = gc(sizeof(t_command), 1, 0);
+	if (!command)
+		return (NULL);
+	command->type = WORD;
+	command->list = list;
+	tmp = list;
+	while (tmp->type == WORD && tmp->type != END)
+		tmp = tmp->next;
+	tmp = tmp->prev;
+	tmp->next = NULL;
+	return ((t_ast *)command);
+}
 
 t_ast	*new_oper(int type, t_ast *left, t_ast *right)
 {
@@ -29,6 +63,35 @@ t_ast	*parse_cmd(t_token **tok)
 		return (ast = new_cmd(tmp), ast); // Créer un nouvel AST de commande avec les mots collectés
 	}
 	return (NULL); // Retourner NULL si le type de jeton n'est ni OPAR ni WORD
+}
+
+t_ast	*redire_info(t_token **tok)
+{
+	int		type;
+	t_ast	*redir;
+	t_token	*hold;
+
+	// if ((*tok)->type != RIN && (*tok)->type != ROUT && (*tok)->type != HEREDOC
+	// 	&& (*tok)->type != APPEND)
+	// 	return (NULL);
+	type = (*tok)->type;
+	redir = new_reder();
+	((t_redir *)redir)->typeredir = type;
+	((t_redir *)redir)->flags = O_RDONLY;
+	if (type == ROUT || type == APPEND)
+		((t_redir *)redir)->flags = O_CREAT | O_WRONLY | ((type == ROUT)
+				* O_TRUNC + !(type == RIN) * O_APPEND);
+	*tok = (*tok)->next;
+	if ((*tok)->type != WORD)
+		return (NULL);
+	hold = newtoken(*tok);
+	((t_redir *)redir)->tok = hold;
+	((t_redir *)redir)->arg = join_tokens(hold);
+	(type == HEREDOC)
+		&& (((t_redir *)redir)->fd_in = heredoc(join_tokens(*tok)));
+	if (type == HEREDOC && !((t_redir *)redir)->fd_in)
+		return ((*tok)->type = SIGHER, NULL);
+	return (*tok = (*tok)->next, redir);
 }
 
 t_ast	*parse_redir(t_token **tok)

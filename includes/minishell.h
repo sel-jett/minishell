@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:48:58 by amel-has          #+#    #+#             */
-/*   Updated: 2024/02/23 23:06:05 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/02/24 01:16:51 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,5 @@ int				is_empty(char *str);
 void		    add_back_arg(t_list_arg *list, t_node_arg *node);
 int			    add_one(t_list	*list, int *i, int mode);
 int				add_list_redir(t_node *tmp);
-int	plant_5(t_node *tail, t_node_arbre **racine,t_node *node);
+int             plant_5(t_node *top, t_node_arbre **racine);
 #endif

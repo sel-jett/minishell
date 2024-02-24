@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:17:58 by amel-has          #+#    #+#             */
-/*   Updated: 2024/02/24 00:32:09 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/02/24 06:12:27 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,22 @@ int    add_list_redir(t_node *node)
 	}
 	return (1);
 }
+
 void    print_tree(t_node_arbre    *tree, int c)
 {
     int i = 0;
     if (!tree)
         return;
+	// printf("mode ---> is : %d\n",tree->mode);
+	// t_node *node = tree->list->top;
+	// printf("--------------------->\n");
+	// while (node)
+	// {
+	// 	printf("[%s] -> ",node->value);
+	// 	node =node->next;
+	// }
+	// printf("\n");
+	// (void)c;
     print_tree(tree->right, c + 5);
     while (i < c)
     {
@@ -60,7 +71,7 @@ void    print_tree(t_node_arbre    *tree, int c)
     else if (tree->mode == TOKEN_REDIR_IN)
         printf("%c ->\n", '<');
     else
-        printf("%d ->\n", tree->mode);
+        	printf("%d ->\n", tree->mode);
     // if (tree->mode == 0)
     // {
     //     t_list *tmp ;
@@ -74,136 +85,121 @@ void    print_tree(t_node_arbre    *tree, int c)
     print_tree(tree->left, c + 5);
 }
 
-t_arbre *parse_cmd(t_node **tmp)
+t_node_arbre *add_commade(t_node	*tmp)
 {
-	t_node	*node;
+	t_node_arbre	*new_node;
+	t_node			*node;
 
+	new_node = c_node_arbre(tmp);
+	if (!new_node)
+		return (0);
+	new_node->list->top = tmp;
+	node = tmp;
+	while (node && (node->mode == TOKEN_EXPR || node->mode == TOKEN_SPACE))
+			node = node->next;
+	if (node)
+	{
+		node = node->prev;
+		node->next  = NULL;
+	}
+	return (new_node);
+}
+
+t_node_arbre	*parse_cmd(t_node **tmp)
+{
+	t_node			*node;
+	t_node_arbre	*arbre_node=NULL;
+	
 	if ((*tmp)->mode == TOKEN_PARENTHESE)
 		//
 	;
 	if ((*tmp)->mode == TOKEN_EXPR)
 	{
 		node = *tmp;
+		while ((*tmp) && (*tmp)->mode == TOKEN_EXPR)
+			*tmp = (*tmp)->next;
+		arbre_node = add_commade(node);
+		if (!arbre_node)
+			return (NULL);
+		// printf("[%s]------->\n",(*tmp)->prev);
+		return (arbre_node);
 	}
+	return	(NULL);
+}
+ 
+t_node_arbre	*parse_redir(t_node **tmp)
+{
+	t_node_arbre	*node_left;
+	t_node_arbre	*node;
+
+	node_left = parse_cmd(tmp);
+	if (!node_left)
+		return (NULL);
+	if (*tmp && ((*tmp)->mode == TOKEN_REDIR_APPEND || (*tmp)->mode ==
+	 TOKEN_REDIR_IN || (*tmp)->mode == TOKEN_REDIR_OUT || (*tmp)->mode == TOKEN_HEREDOC))
+	{
+		
+	// while(*tmp && ((*tmp)->mode == TOKEN_REDIR_APPEND || (*tmp)->mode ==
+	// TOKEN_REDIR_IN || (*tmp)->mode == TOKEN_REDIR_OUT || (*tmp)->mode == TOKEN_HEREDOC))
+	// {
+		node = c_node_arbre(*tmp);
+		node->list_redir = (*tmp)->list_redir;
+		node->left = node_left;
+		*tmp = (*tmp)->next;
+		while ((*tmp) && (*tmp)->mode == TOKEN_EXPR)
+			*tmp = (*tmp)->next;	
+	// }
+		return (node);
+	}
+	return (node_left);	
 }
 
+t_node_arbre	*new_node(int mode, t_node_arbre *left, t_node_arbre *right)
+{
+	t_node_arbre *node;
 
+	node = my_malloc(sizeof(t_node_arbre), 1);
+	node->mode = mode;
+	node->left = left;
+	node->right = right;
+	return (node);
+}
 
+t_node_arbre *parse_pipe(t_node **tmp)
+{
+	t_node_arbre *node;
+	
+	node = parse_redir(tmp);
+	if (!node)
+		return (0);
+	while (*tmp && (*tmp)->mode == TOKEN_PIPE)
+	{
+		*tmp = (*tmp)->next;
+		node = new_node(TOKEN_PIPE, node,parse_redir(tmp));
+	}
+	return (node);
+}
 
+t_node_arbre	*parse_and_or(t_node **tmp)
+{
+	t_node_arbre *node;
+	int 		mode;
+	
+	node = parse_pipe(tmp);
+	while (*tmp && (((*tmp)->mode == TOKEN_OR) || ((*tmp)->mode == TOKEN_AND)))
+	{
+		mode = (*tmp)->mode;
+		*tmp = (*tmp)->next;
+		node = new_node(mode, node, parse_pipe(tmp));
+	}
+	return (node);
+}
 
-
-// void	search_redir_left(t_node *tmp, t_node_arbre **node,int *n)
-// {
-// 	if (!tmp)
-// 		return ;
-// 	if ((tmp->mode == TOKEN_REDIR_APPEND ||  tmp->mode == TOKEN_HEREDOC || tmp->mode == TOKEN_REDIR_APPEND ||tmp->mode == TOKEN_REDIR_IN) && !(tmp->is_visited))
-// 	{
-// 		printf("ha ana \n");
-// 		(*n)++;
-// 		tmp->is_visited = 1;
-// 		*node = c_node_arbre(tmp);
-// 		(*node)->left = c_node_arbre(tmp->prev);
-// 		(*node)->right = c_node_arbre(tmp->next);
-// 		search_redir_left(tmp->prev, &(*node)->left,n);
-// 	}
-// 	else
-// 		search_redir_left(tmp->prev, node,n);
-// }
-
-// void	search_redir_right(t_node *tmp, t_node_arbre **node,int *n)
-// {
-// 	if (!tmp)
-// 		return ;
-// 	if ((tmp->mode == TOKEN_REDIR_APPEND ||  tmp->mode == TOKEN_HEREDOC || tmp->mode == TOKEN_REDIR_APPEND || tmp->mode == TOKEN_REDIR_IN )&& !(tmp->is_visited))
-// 	{
-// 		tmp->is_visited = 1;
-// 		*node = c_node_arbre(tmp);
-// 		(*node)->left = c_node_arbre(tmp->prev);
-// 		(*node)->right = c_node_arbre(tmp->next);
-// 		search_redir_right(tmp->next, &(*node)->right,n);
-// 	}
-// 	else
-// 		search_redir_right(tmp->next, node,n);
-// }
-
-// void	search_pipe_left(t_node	*tmp, t_node_arbre **node, int *n)
-// {
-// 	if (!tmp)
-// 		return ;
-// 	if (tmp->mode == TOKEN_PIPE && !(tmp->is_visited))
-// 	{
-// 		(*n)++;
-// 		tmp->is_visited = 1;
-// 		*node = c_node_arbre(tmp);
-// 		(*node)->left = c_node_arbre(tmp->prev);
-// 		(*node)->right = c_node_arbre(tmp->next);
-// 		search_redir_left(tmp, &(*node)->left, n);
-// 		search_pipe_left(tmp->prev, &(*node)->left, n);
-// 	}
-// 	else
-// 		search_pipe_left(tmp->prev, node,n);
-// }
-
-// void	search_pipe_right(t_node	*tmp, t_node_arbre **node,int *n)
-// {
-// 	if (!tmp)
-// 		return ;
-// 	if (tmp->mode == TOKEN_PIPE && !(tmp->is_visited))
-// 	{
-// 		(*n)++;
-// 		*node = c_node_arbre(tmp);
-// 		(*node)->left = c_node_arbre(tmp->prev);
-// 		(*node)->right = c_node_arbre(tmp->next);
-// 		search_pipe_right(tmp->next, &(*node)->right,n);
-// 		tmp->is_visited = 1;
-// 	}
-// 	else
-// 		search_pipe_right(tmp->next, node,n);
-// }
-
-// void	search_or_and(t_node	*tmp, t_node_arbre **node, int *n ,t_node **node_l)
-// {
-// 	if (!tmp)
-// 		return ;
-// 	if ((tmp->mode == TOKEN_AND || tmp->mode == TOKEN_OR) && !(tmp->is_visited))
-// 	{
-// 		tmp->is_visited = 1;
-// 		*node = c_node_arbre(tmp);
-// 		(*node)->left = c_node_arbre(tmp->prev);
-// 		(*node)->right = c_node_arbre(tmp->next);
-// 		(*n)++;
-// 		*node_l = tmp;
-// 		search_pipe_right(tmp->next, &(*node)->right, n);
-// 		search_pipe_left(tmp->prev, &(*node)->left, n);
-// 		search_or_and(tmp->prev, &(*node)->left, n, node_l);
-// 	}
-// 	else
-// 		search_or_and(tmp->prev, node, n,node_l);
-// }
-
-// int	plant_5(t_node *tail, t_node_arbre **racine,t_node *node)
-// {
-// 	int n;
-
-// 	n = 0;
-// 	search_or_and(tail, racine, &n, &node);
-// 	// if (n == 0)
-// 	// {
-// 	// 	search_pipe_left(tail, racine, &n);// search_pipe_right(tail->list->top, racine);
-// 	// 	if (n == 0)
-// 	// 		search_redir_left(tail, racine, &n);
-// 	// }
-// 	// else
-// 	// {
-// 	// 	if (n == 1)
-// 	// 	{
-// 	// 		search_redir_right(node, &(*racine)->right,&n);
-// 	// 		search_redir_left(node, &(*racine)->left, &n);
-// 	// 	}
-// 	// }
-// 	// if (n == 0){
-// 	// 	search_redir_left(list->tail,&arbre->racine, &n);}
-// 	// if (n == 0)
-// 	// 	arbre->racine = c_node_arbre(list->top);
-// 	return (1);
-// }
+int	plant_5(t_node *top, t_node_arbre **racine)
+{
+	
+	*racine = parse_and_or(&top);
+	// printf("[%s]\n",top->next->value);
+	print_tree(*racine,0);
+	return (1);
+}
