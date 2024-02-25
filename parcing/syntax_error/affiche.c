@@ -62,7 +62,8 @@ void    print_tree(t_node_arbre    *tree, int c)
         printf("%c ->\n", 'C');
     else if (tree->mode == 0)
 	{
-        printf("%s ->\n", tree->value);
+        if (tree->flag_expend)
+			printf("[%s]->[%s]\n", tree->list_arg->top->value, tree->list_arg->top->next->value);
 		t_node *node = tree->list->top;
 		while (node)
 		{

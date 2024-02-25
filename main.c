@@ -18,6 +18,8 @@ int	plant_5(t_node	*tmp, t_list *list)
 				node->flag_space = 1;
 		if (!tmp->next)
 			node->flag_space = 1;
+		if (tmp->list_arg && tmp->list_arg->top)
+					node->flag_expend = 1;
 		tmp = tmp->next;
 	}
 	tmp = list->top;

@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:19:17 by amel-has          #+#    #+#             */
-/*   Updated: 2024/02/24 23:04:52 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/02/25 05:15:52 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ int	plant_4(t_list *list)
 				if (!check_syntax_1(tmp))
 					return (printf("syntax error 3!\n"), 0);
 			}
-			if (tmp->mode == TOKEN_Double_Q)
+			if (tmp->mode == TOKEN_Double_Q || tmp->mode == TOKEN_EXPR)
 			{
 				if (!check_syntax_3(tmp))
 					return (printf("syntax error 4!\n"), 0);

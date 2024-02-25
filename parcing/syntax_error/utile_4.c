@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 21:32:37 by amel-has          #+#    #+#             */
-/*   Updated: 2024/02/24 22:59:14 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/02/25 05:31:42 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,16 +65,16 @@ int	add_args(t_nlist *list, char *str, int *i)
 {
 	int			len;
 	char		*s;
-	t_nnode	*node;
+	t_nnode		*node;
 
 	len = 0;
-	while (str[len] && str[len] != ' ')
+	while (str[len] && str[len] != ' ' && str[len] != '$')
 		len++;
 	s = my_malloc(sizeof(char) * (len + 1), 1);
 	if (!s)
 		return (0);
 	len = 0;
-	while (str && str[len] && str[len] != ' ')
+	while (str && str[len] && str[len] != ' ' && str[len] != '$')
 	{
 		s[len] = str[len];
 		len++;
@@ -101,7 +101,7 @@ int	check_syntax_3(t_node *tmp)
 		return (0);
 	str = tmp->value;
 	while (str[++i])
-		if (str[i] == '$')
+		while (str[i] == '$')
 			if (!add_args(tmp->list_arg, &str[++i], &i))
 				return (0);
 	return (1);
