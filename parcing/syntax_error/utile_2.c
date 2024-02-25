@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:17:58 by amel-has          #+#    #+#             */
-/*   Updated: 2024/02/24 22:42:49 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/02/25 03:48:00 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ t_node_arbre	*parse_cmd(t_node **tmp)
 		arbre_node = add_commade(node);
 		if (!arbre_node)
 			return (NULL);
-		// printf("[%s]------->\n",(*tmp)->prev);
 		return (arbre_node);
 	}
 	return	(NULL);
@@ -40,12 +39,15 @@ t_node_arbre	*parse_redir(t_node **tmp)
 	t_node_arbre	*node;
 
 	node_left = parse_cmd(tmp);
-	if (!node_left)
-		return (NULL);
 	if (*tmp && ((*tmp)->mode == TOKEN_REDIR_APPEND || (*tmp)->mode ==
 	 TOKEN_REDIR_IN || (*tmp)->mode == TOKEN_REDIR_OUT || (*tmp)->mode == TOKEN_HEREDOC))
 	{
 		node = c_node_arbre(*tmp);
+		if (!node)
+			return (0);
+		node->list_redir = c_nlist();
+		if (!node->list_redir)
+			return (0);
 		node->list_redir = (*tmp)->list_redir;
 		node->left = node_left;
 		*tmp = (*tmp)->next;
@@ -60,6 +62,8 @@ t_node_arbre	*new_node(int mode, t_node_arbre *left, t_node_arbre *right)
 {
 	t_node_arbre *node;
 
+	if (!right)
+		return (0);
 	node = my_malloc(sizeof(t_node_arbre), 1);
 	if (!node)
 		return (NULL);
@@ -79,7 +83,9 @@ t_node_arbre	*parse_pipe(t_node **tmp)
 	while (*tmp && (*tmp)->mode == TOKEN_PIPE)
 	{
 		*tmp = (*tmp)->next;
-		node = new_node(TOKEN_PIPE, node,parse_redir(tmp));
+		node = new_node(TOKEN_PIPE, node, parse_redir(tmp));
+		if (!node)
+			return (NULL);
 	}
 	return (node);
 }
@@ -97,6 +103,8 @@ t_node_arbre	*parse_and_or(t_node **tmp)
 		mode = (*tmp)->mode;
 		*tmp = (*tmp)->next;
 		node = new_node(mode, node, parse_pipe(tmp));
+		if (!node)
+			return (NULL);
 	}
 	return (node);
 }
@@ -104,7 +112,7 @@ t_node_arbre	*parse_and_or(t_node **tmp)
 int	plant_6(t_node *top, t_node_arbre **racine)
 {
 	*racine = parse_and_or(&top);
-	// if (!(*racine))
-	// 	return (0);
+	if (!(*racine))
+		return (0);
 	return (1);
 }

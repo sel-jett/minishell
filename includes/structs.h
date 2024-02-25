@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:49:09 by amel-has          #+#    #+#             */
-/*   Updated: 2024/02/24 23:32:31 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/02/25 02:58:48 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,8 @@ typedef struct s_node_arbre
 	int					flag_expend;
 	int					flag_space;
 	t_list				*list;
+	t_nlist				*list_arg;
 	t_nlist				*list_redir;
-	
 	struct s_node_arbre *left;
 	struct s_node_arbre *right;
 } t_node_arbre;

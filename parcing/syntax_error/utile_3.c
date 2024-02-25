@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 21:22:32 by amel-has          #+#    #+#             */
-/*   Updated: 2024/02/24 22:57:53 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/02/25 03:48:53 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,24 @@ t_node_arbre	*add_commade(t_node	*tmp)
 	new_node = c_node_arbre(tmp);
 	if (!new_node)
 		return (0);
+	new_node->list = c_list();
+	if (!new_node->list)
+		return (0);
 	new_node->list->top = tmp;
 	node = tmp;
-	while (node && (node->mode == TOKEN_EXPR || node->mode == TOKEN_SPACE))
+	while (node && (node->mode == TOKEN_EXPR))
 			node = node->next;
 	if (node)
 	{
 		node = node->prev;
 		node->next  = NULL;
+	}
+	if (tmp->flag_expend == 1)
+	{
+		new_node->list_arg = c_nlist();
+		if (!new_node->list_arg)
+			return (NULL);
+		new_node->list_arg->top = tmp->list_arg->top;
 	}
 	return (new_node);
 }

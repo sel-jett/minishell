@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:48:58 by amel-has          #+#    #+#             */
-/*   Updated: 2024/02/25 00:17:11 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/02/25 02:14:48 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <readline/readline.h>
 # include <stdbool.h>
 
-t_node			*c_cpynode(t_node *node,t_node *tail);
+t_node			*c_cpynode(t_node *node,t_node *tail,t_list *list);
 t_nlist         *c_nlist(void);
 t_nnode         *c_nnode(char *str);
 void            add_nback(t_nlist *list, t_nnode *node);

@@ -9,7 +9,7 @@ int	plant_5(t_node	*tmp, t_list *list)
 	{
 		if (tmp->mode != TOKEN_SPACE)
 		{
-			node = c_cpynode(tmp,list->tail);
+			node = c_cpynode(tmp,list->tail,list);
 			if (!node)
 				return (0);
 			add_back(list, node);

@@ -53,7 +53,7 @@ void    print_tree(t_node_arbre    *tree, int c)
         i++;
     }
     if (tree->mode == 5)
-        printf("%c ->\n", '|');
+        printf("%c \n", '|');
     else if (tree->mode == 7)
         printf("%s ->\n", "||");
     else if (tree->mode == 6)
@@ -61,20 +61,19 @@ void    print_tree(t_node_arbre    *tree, int c)
     else if (tree->mode == 100)
         printf("%c ->\n", 'C');
     else if (tree->mode == 0)
+	{
         printf("%s ->\n", tree->value);
-    else if (tree->mode == TOKEN_REDIR_IN)
-        printf("%c ->\n", '<');
+		t_node *node = tree->list->top;
+		while (node)
+		{
+			printf("[%s]",node->value);
+			if(node->next)
+				printf("-");
+			node = node->next;
+		}
+		printf("\n");
+	}
     else
-        	printf("%d ->\n", tree->mode);
-    // if (tree->mode == 0)
-    // {
-    //     t_list *tmp ;
-    //     tmp = tree->value->redir_in;
-    //     while (tmp)
-    //     {
-    //         printf("redir_in: %s\n", tmp->token);
-    //         tmp = tmp->next;
-    //     }
-    // }
+        	printf("%s ->\n [%s]", tree->value,tree->list_redir->top->value);
     print_tree(tree->left, c + 5);
 }

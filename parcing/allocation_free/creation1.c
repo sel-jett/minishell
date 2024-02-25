@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:13:42 by amel-has          #+#    #+#             */
-/*   Updated: 2024/02/25 00:19:09 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/02/25 02:14:33 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_node	*c_node(char *str, t_node *tail, int mode,t_list *list)
 	return (new_node);
 }
 
-t_node	*c_cpynode(t_node *node, t_node *tail)
+t_node	*c_cpynode(t_node *node, t_node *tail,t_list *list)
 {
 	t_node	*new_node;
 
@@ -48,6 +48,7 @@ t_node	*c_cpynode(t_node *node, t_node *tail)
 	new_node->list_redir = node->list_redir;
 	new_node->flag_expend = 0;
 	new_node->flag_expend = 0;
+	new_node->list = list;
 	return (new_node);
 }
 
