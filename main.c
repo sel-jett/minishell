@@ -38,6 +38,19 @@ int	plant_5(t_node	*tmp, t_list *list)
 	return	(1);
 }
 
+void	handler_signel(int signal, siginfo_t *siginfo, void *vd)
+{
+	(void)vd;
+	(void)siginfo;
+	if (signal == SIGINT)
+	{
+		printf("\n");
+		rl_on_new_line();
+		rl_replace_line("",1);
+		rl_redisplay();
+	}
+}
+
 int	main(void)
 {
 	t_list  *list;
@@ -47,6 +60,11 @@ int	main(void)
 	t_list	*nlist;
 
 	(1== 1) && (list = NULL);
+	struct sigaction	sa;
+	sa.sa_flags = SA_SIGINFO;
+	sa.sa_sigaction = handler_signel;
+	sigaction(SIGINT,&sa,NULL);
+	rl_catch_signals = 0;
 	while (1)
 	{
 		(1 == 1) && (index = 0, i = 0, list = c_list(), list->str = 0);
