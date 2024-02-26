@@ -5,14 +5,17 @@ SRCS = ./parcing/allocation_free/creation1.c ./parcing/allocation_free/my_malloc
 	   ./parcing/add_in_list/plants.c ./parcing/allocation_free/creation3.c ./parcing/syntax_error/utile_2.c \
 	   ./parcing/syntax_error/utile_3.c  ./parcing/syntax_error/affiche.c ./parcing/syntax_error/utile_4.c
   OBJS    = $(SRCS:.c=.o)
+READLINE_LIB = $(shell brew --prefix readline)/lib
+READLINE_INC = $(shell brew --prefix readline)/include
 CFLAGS 	=   -Wall -Wextra -Werror -g
 RM 		= @rm -f
 all : $(NAME) clean
 
 $(NAME):$(OBJS)
-	$(CC)  -o $(NAME) $(OBJS) -lreadline
+	$(CC) -o $(NAME) $(OBJS) -L $(READLINE_LIB) -lreadline
+
 %.o : %.c 
-	$(CC)  $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -I $(READLINE_INC) -c $< -o $@
 
 clean:
 	$(RM) $(OBJS)

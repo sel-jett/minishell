@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:48:58 by amel-has          #+#    #+#             */
-/*   Updated: 2024/02/25 06:14:07 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/02/26 01:53:17 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
 # include "structs.h"
 # include <unistd.h>
 #include <signal.h>
-# include <readline/readline.h>
+# include "/Users/amel-has/.brew/opt/readline/include/readline/readline.h"
+# include "/Users/amel-has/.brew/opt/readline/include/readline/history.h"
 # include <stdbool.h>
 
 t_node			*c_cpynode(t_node *node,t_node *tail,t_list *list);

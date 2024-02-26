@@ -4,6 +4,8 @@
         "chrono": "c",
         "minishell.h": "c",
         "__node_handle": "c",
-        "ios": "c"
+        "ios": "c",
+        "signal.h": "c",
+        "readline.h": "c"
     }
 }
