@@ -6,7 +6,7 @@
 /*   By: salah <salah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:48:58 by amel-has          #+#    #+#             */
-/*   Updated: 2024/02/27 22:10:54 by salah            ###   ########.fr       */
+/*   Updated: 2024/02/27 22:26:56 by salah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,15 @@
 # include <limits.h>
 # include "structs.h"
 # include <unistd.h>
-#include <fcntl.h>
+# include <fcntl.h>
 #include <signal.h>
 #include <readline/readline.h>
 #include <readline/history.h>
+// # include "/Users/amel-has/.brew/opt/readline/include/readline/readline.h"
+// # include "/Users/amel-has/.brew/opt/readline/include/readline/history.h"
 # include <stdbool.h>
 
+t_node_arbre	*parse_and_or(t_node **tmp);
 t_node			*c_cpynode(t_node *node,t_node *tail,t_list *list);
 t_nlist         *c_nlist(void);
 t_nnode         *c_nnode(char *str);

@@ -5,6 +5,8 @@ int	plant_5(t_node	*tmp, t_list *list)
 	t_node	*node;
 
 	node = NULL;
+	if (!list)
+		return (0);
 	while (tmp)
 	{
 		if (tmp->mode != TOKEN_SPACE)
@@ -95,6 +97,11 @@ int	main(int ac, char **av, char **envp)
 	t_list	*nlist;
 
 	list = NULL;
+	// struct sigaction	sa;
+	// sa.sa_flags = SA_SIGINFO;
+	// sa.sa_sigaction = handler_signel;
+	// sigaction(SIGINT,&sa,NULL);
+	// rl_catch_signals = 0;
 	(void)ac;
 	(void)av;
 	(void)envp;
@@ -106,7 +113,9 @@ int	main(int ac, char **av, char **envp)
 		if (!index)
 		{
 			list->str = readline("minishell > ");
-			if (!list->str || is_empty(list->str))
+			if (!list->str)
+				exit(0);
+			if (is_empty(list->str))
 				index = 1;
 			if (!index)
 			{
@@ -124,22 +133,23 @@ int	main(int ac, char **av, char **envp)
 				{
 					nlist = c_list();
 					if (!nlist)
-						return (0);
+						index = 1;
 					if (!plant_5(list->top, nlist))
 						index = 1;
-					// affiche(nlist);
 				}
 				if (!index)
+				{
 					arbre = c_arbre();
 						if (!arbre)
-							return (0);
-				if (!index)
-					if (!plant_6(nlist->top, &arbre->racine))
-						(1) && (printf("ERROR7\n") && (index = 1));
+							index = 1;
+				}
 				if (!index)
 				{
-					print_tree(arbre->racine);
-					// execute(arbre->racine, envp);
+					if (!plant_6(nlist->top, &arbre->racine))
+						(1 == 1) && (printf("ERROR7\n"), index = 1);
+				if (!index)
+				{
+					// print_tree(arbre->racine, 0);
 					my_malloc(0, 0);
 				}
 			}

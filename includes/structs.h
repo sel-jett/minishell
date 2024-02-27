@@ -6,7 +6,7 @@
 /*   By: salah <salah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:49:09 by amel-has          #+#    #+#             */
-/*   Updated: 2024/02/27 22:01:39 by salah            ###   ########.fr       */
+/*   Updated: 2024/02/27 22:27:06 by salah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ enum
 	TOKEN_DOLLAR,
 	TOKEN_PARENTHESE,
 };
-
+typedef struct s_arbre t_arbre;
 typedef struct s_node_arbre
 {
 	int					mode;
@@ -93,6 +93,7 @@ typedef struct s_node_arbre
 	t_nlist				*list_redir;
 	struct s_node_arbre *left;
 	struct s_node_arbre *right;
+	t_arbre				*arbre;
 } t_node_arbre;
 
 typedef struct s_arbre
