@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:19:17 by amel-has          #+#    #+#             */
-/*   Updated: 2024/02/27 08:31:48 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/02/27 10:17:43 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,11 @@ int	check_apres_parentheses(t_node *node)
 	{
 		if (node && node->next && node->next->next && (node->next->next->mode 
 		== TOKEN_EXPR || node->next->next->mode == TOKEN_Double_Q || node->next->next->mode 
-		== TOKEN_Single_Q))
+		== TOKEN_Single_Q || ( node->next->next->mode == TOKEN_PARENTHESE && node->next->next->value[0] == '(')))
 			return (0);
 	}
-	else if ((node && node->next)  && (node->next->mode == TOKEN_EXPR || node->next->mode == TOKEN_Single_Q ||  node->next->mode ==
-	TOKEN_Double_Q))
+	else if ( (node && node->next)  && (node->next->mode == TOKEN_EXPR || node->next->mode == TOKEN_Single_Q ||  node->next->mode ==
+	TOKEN_Double_Q || (node->next->mode == TOKEN_PARENTHESE && node->next->value[0] == '(')))
 		return (0);
 	return (1);
 }
@@ -84,12 +84,14 @@ void	checkSinglQ(t_node *tmp)
 int check_exp(t_node *tmp)
 {
 	int i = 0;
-	while (tmp->value[i])
+	while (tmp->value && tmp->value[i])
 	{
 		if (tmp->value[i] != '!')
 			return (1);
 		i++;
 	}
+	if (tmp->prev && tmp->prev->value && tmp->prev->value[0] == '(')
+		return (1);
 	return (0);
 }
 int	plant_4(t_list *list)
@@ -113,28 +115,28 @@ int	plant_4(t_list *list)
 			{
 				count_parentheses--;
 				if (!check_apres_parentheses(tmp))
-					return (0);
+					return (printf("syntax error 2!\n"), 0);
 			}
 			else if (tmp->mode == TOKEN_OR || tmp->mode
 				== TOKEN_AND || tmp->mode == TOKEN_PIPE)
 			{
 				if (!check_syntax_2(tmp) || !check_syntax_4(tmp))
-					return (printf("syntax error 2!\n"), 0);
+					return (printf("syntax error 3!\n"), 0);
 			}
 			if (tmp->mode == TOKEN_REDIR_APPEND || tmp->mode
 				== TOKEN_REDIR_IN || tmp->mode == TOKEN_REDIR_OUT
 				|| tmp->mode == TOKEN_HEREDOC)
 			{
 				if (!check_syntax_1(tmp))
-					return (printf("syntax error 3!\n"), 0);
+					return (printf("syntax error 4!\n"), 0);
 			}
 			if (tmp->mode == TOKEN_Double_Q || tmp->mode == TOKEN_EXPR)
 			{
 				if (!check_syntax_3(tmp))
-					return (printf("syntax error 4!\n"), 0);
+					return (printf("syntax error 5!\n"), 0);
 				if (tmp->mode == TOKEN_EXPR)
 					if (!check_exp(tmp))
-						return (printf("syntax error 5!\n"), 0);
+						return (printf("syntax error 6!\n"), 0);
 			}
 			else if(tmp->mode == TOKEN_Single_Q)
 				checkSinglQ(tmp);

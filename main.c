@@ -5,6 +5,8 @@ int	plant_5(t_node	*tmp, t_list *list)
 	t_node	*node;
 
 	node = NULL;
+	if (!list)
+		return (0);
 	while (tmp)
 	{
 		if (tmp->mode != TOKEN_SPACE)
@@ -48,11 +50,6 @@ void	handler_signel(int signal, siginfo_t *siginfo, void *vd)
 		rl_on_new_line();
 		rl_replace_line("",0);
 		rl_redisplay();
-	}
-	if (signal == SIGQUIT)
-	{
-		printf("je suis la ");
-		exit(0);
 	}
 }
 
@@ -99,21 +96,24 @@ int	main(void)
 				{
 					nlist = c_list();
 					if (!nlist)
-						return (0);
+						index = 1;
 					if (!plant_5(list->top, nlist))
 						index = 1;
-					// affiche(nlist);
 				}
 				if (!index)
+				{
 					arbre = c_arbre();
 						if (!arbre)
-							return (0);
-				if (!index)
-					if (!plant_6(nlist->top, &arbre->racine))
-						(1 == 1) && (printf("ERROR7\n"), index = 1);
+							index = 1;
+				}
 				if (!index)
 				{
-					print_tree(arbre->racine, 0);
+					if (!plant_6(nlist->top, &arbre->racine))
+						(1 == 1) && (printf("ERROR8\n"), index = 1);
+				}
+				if (!index)
+				{
+					// print_tree(arbre->racine, 0);
 					my_malloc(0, 0);
 				}
 			}

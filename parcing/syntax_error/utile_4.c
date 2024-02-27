@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 21:32:37 by amel-has          #+#    #+#             */
-/*   Updated: 2024/02/25 05:31:42 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/02/27 09:11:13 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	check_syntax_4(t_node *tmp)
 			== TOKEN_REDIR_IN ||  tmp->next->next->mode == TOKEN_REDIR_OUT ||  tmp->next->next->mode 
 			== TOKEN_REDIR_APPEND ||  tmp->next->next->mode == TOKEN_HEREDOC))
 			return (1);
-	return (printf("ha ana"),0);
+	return (printf("ha ana"), 0);
 }
 
 int	check_syntax_1(t_node *tmp)//redir
