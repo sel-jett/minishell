@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   spaces.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
+/*   By: salah <salah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:07:15 by amel-has          #+#    #+#             */
-/*   Updated: 2024/02/24 23:09:18 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/02/27 03:17:48 by salah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	spaces(t_list *list, int *i)
 	s = my_malloc(sizeof(char) * 2, 1);
 	if (!s)
 		return (0);
-	(1 == 1) && (s[0] = ' ', s[1] = '\0');
+	(1) && ((s[0] = ' ') && (s[1] = '\0'));
 	node = c_node(s, list->tail, TOKEN_SPACE,list);
 	if (!node)
 		return (0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utile_4.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
+/*   By: salah <salah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 21:32:37 by amel-has          #+#    #+#             */
-/*   Updated: 2024/02/25 05:31:42 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/02/27 03:18:54 by salah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,15 @@ int	check_syntax_4(t_node *tmp)
 		return (0);
 	if (tmp && tmp->next)
 		if (!is_empty(tmp->next->value) && (tmp->next->mode == TOKEN_EXPR || tmp->next->mode
-			== TOKEN_Double_Q || tmp->next->mode == TOKEN_Single_Q || tmp->next->value[0] 
+			== TOKEN_Double_Q || tmp->next->mode == TOKEN_Single_Q || tmp->next->value[0]
 			== '(' || tmp->next->mode == TOKEN_REDIR_APPEND || tmp->next->mode
 			== TOKEN_REDIR_IN || tmp->next->mode == TOKEN_REDIR_OUT || tmp->next->mode == TOKEN_HEREDOC))
 			return (1);
 	if (tmp && tmp->next && is_empty(tmp->next->value) && tmp->next->next)
 		if (!is_empty(tmp->next->next->value) && (tmp->next->next->mode ==
-			TOKEN_EXPR || tmp->next->next->mode == TOKEN_Double_Q || tmp->next->next->mode 
-			== TOKEN_Single_Q || tmp->next->next->value[0] == '(' || tmp->next->next->mode 
-			== TOKEN_REDIR_IN ||  tmp->next->next->mode == TOKEN_REDIR_OUT ||  tmp->next->next->mode 
+			TOKEN_EXPR || tmp->next->next->mode == TOKEN_Double_Q || tmp->next->next->mode
+			== TOKEN_Single_Q || tmp->next->next->value[0] == '(' || tmp->next->next->mode
+			== TOKEN_REDIR_IN ||  tmp->next->next->mode == TOKEN_REDIR_OUT ||  tmp->next->next->mode
 			== TOKEN_REDIR_APPEND ||  tmp->next->next->mode == TOKEN_HEREDOC))
 			return (1);
 	return (printf("ha ana"),0);
@@ -93,7 +93,7 @@ int	check_syntax_3(t_node *tmp)
 	char	*str;
 	int		i;
 
-	(1 == 1) && (str = NULL, i = -1);
+	(1) && ((str = NULL) && (i = -1));
 	if (!tmp->value[0])
 		return (tmp->val_vide = 1, 1);
 	tmp->list_arg = c_nlist();

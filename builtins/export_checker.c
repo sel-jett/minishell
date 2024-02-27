@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   export_checker.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: salah <salah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 07:26:29 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/02/03 22:59:44 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/02/27 18:40:06 by salah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtins.h"
+#include "../includes/minishell.h"
 
 static int	is_alpha(int c)
 {
@@ -42,7 +42,8 @@ int	check_first(char *cmd)
 	i++;
 	while (cmd[i] && cmd[i] != '=')
 	{
-		(cmd[i] != '_' && !is_alpha(cmd[i]) && !is_num(cmd[i])) && (check2++);
+		if (cmd[i] != '_' && !is_alpha(cmd[i]) && !is_num(cmd[i]))
+			check2++;
 		if (cmd[i + 1] && cmd[i + 1] == '=' && cmd[i] == '+')
 			check2--;
 		else if (is_upper(cmd[i]))
@@ -65,7 +66,7 @@ char	*ft_strtrim(char *cmd)
 	int		size;
 	char	*str;
 
-	(1) && (i = 0, j = -1);
+	(1) && (i = 0) && (j = -1);
 	size = 0;
 	while (cmd[i] <= 32)
 		i++;

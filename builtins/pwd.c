@@ -3,21 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: salah <salah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 23:55:37 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/02/02 10:33:54 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/02/27 18:34:58 by salah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtins.h"
+// #include "builtins.h"
+#include "../includes/minishell.h"
 
 char	*find_pwd(t_env *cenv)
 {
-	int		i;
 	char	*str;
 
-	i = 0;
 	if (!cenv)
 		return (NULL);
 	while (cenv && strncmp(cenv->key, "PWD", 3))
@@ -29,10 +28,8 @@ char	*find_pwd(t_env *cenv)
 
 char	*find_oldpwd(t_env *cenv)
 {
-	int		i;
 	char	*str;
 
-	i = 0;
 	while (cenv && strncmp(cenv->key, "OLDPWD", 6))
 		cenv = cenv->next;
 	if (cenv)

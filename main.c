@@ -34,24 +34,59 @@ int	plant_5(t_node	*tmp, t_list *list)
 		}
 		tmp = tmp->next;
 	}
-	
+
 	return	(1);
 }
 
-void	handler_signel(int signal, siginfo_t *siginfo, void *vd)
+// void	handler_signel(int signal, siginfo_t *siginfo, void *vd)
+// {
+// 	(void)vd;
+// 	(void)siginfo;
+// 	if (signal == SIGINT)
+// 	{
+// 		printf("\n");
+// 		rl_on_new_line();
+// 		rl_replace_line("",1);
+// 		rl_redisplay();
+// 	}
+// }
+
+void print_in_dot(t_node_arbre *node,int i, int *count, FILE *fp)
 {
-	(void)vd;
-	(void)siginfo;
-	if (signal == SIGINT)
-	{
-		printf("\n");
-		rl_on_new_line();
-		rl_replace_line("",1);
-		rl_redisplay();
-	}
+    if (node == NULL)
+        return;
+    int node_id = ++(*count);
+	if (node->mode == 5)
+    	fprintf(fp, "  node%d [label=\"%s \"];\n", node_id, "|");
+	else if (node->mode == 1)
+		fprintf(fp, "  node%d [label=\"%s \"];\n", node_id, ">");
+	else if (node->mode == 6)
+		fprintf(fp, "  node%d [label=\"%s \"];\n", node_id, "&&");
+	else if (node->mode == 7)
+		fprintf(fp, "  node%d [label=\"%s \"];\n", node_id, "||");
+	else
+		fprintf(fp, "  node%d [label=\"%s \"];\n", node_id, (char *)node->value);
+    if (i != -1){
+        fprintf(fp, "  node%d -> node%d;\n",i,node_id);
+    }
+    print_in_dot(node->left,node_id,count, fp);
+    print_in_dot(node->right,node_id,count, fp);
 }
 
-int	main(void)
+void print_tree(t_node_arbre *root)
+ {
+	FILE *fp;
+	int count;
+
+	count = 0;
+	fp = stdout;
+    fprintf(fp, "digraph {\n");
+	print_in_dot(root, -1, &count, fp);
+    fprintf(fp, "}\n");
+	// fclose(fp);
+}
+
+int	main(int ac, char **av, char **envp)
 {
 	t_list  *list;
 	int     i;
@@ -59,17 +94,15 @@ int	main(void)
 	t_arbre			*arbre;
 	t_list	*nlist;
 
-	(1== 1) && (list = NULL);
-	struct sigaction	sa;
-	sa.sa_flags = SA_SIGINFO;
-	sa.sa_sigaction = handler_signel;
-	sigaction(SIGINT,&sa,NULL);
-	rl_catch_signals = 0;
+	list = NULL;
+	(void)ac;
+	(void)av;
+	(void)envp;
 	while (1)
 	{
-		(1 == 1) && (index = 0, i = 0, list = c_list(), list->str = 0);
+		(1) && (index = 0, i = 0, list = c_list(), list->str = 0);
 		if (!list)
-			(1 == 1) && (printf("ERROR1\n"), index = 1);
+			(1) && (printf("ERROR1\n") && (index = 1));
 		if (!index)
 		{
 			list->str = readline("minishell > ");
@@ -86,7 +119,7 @@ int	main(void)
 					}
 				if (!index)
 					if (!plant_4(list))
-						(1 == 1) && (printf("ERROR7\n"), index = 1);
+						(1) && (printf("ERROR7\n") && (index = 1));
 				if (!index)
 				{
 					nlist = c_list();
@@ -102,10 +135,11 @@ int	main(void)
 							return (0);
 				if (!index)
 					if (!plant_6(nlist->top, &arbre->racine))
-						(1 == 1) && (printf("ERROR7\n"), index = 1);
+						(1) && (printf("ERROR7\n") && (index = 1));
 				if (!index)
 				{
-					print_tree(arbre->racine, 0);
+					print_tree(arbre->racine);
+					// execute(arbre->racine, envp);
 					my_malloc(0, 0);
 				}
 			}

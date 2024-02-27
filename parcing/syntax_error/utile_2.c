@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utile_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
+/*   By: salah <salah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:17:58 by amel-has          #+#    #+#             */
-/*   Updated: 2024/02/25 05:10:26 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/02/27 03:18:33 by salah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,8 @@ t_node_arbre	*parse_cmd(t_node **tmp)
 {
 	t_node			*node;
 	t_node_arbre	*arbre_node=NULL;
-	
-	if ((*tmp)->mode == TOKEN_PARENTHESE)
-		//
-	;
+
+	if ((*tmp)->mode == TOKEN_PARENTHESE){};
 	if ((*tmp)->mode == TOKEN_EXPR)
 	{
 		node = *tmp;
@@ -34,7 +32,7 @@ t_node_arbre	*parse_cmd(t_node **tmp)
 	}
 	return	(NULL);
 }
- 
+
 t_node_arbre	*parse_redir(t_node **tmp)
 {
 	t_node_arbre	*node_left;
@@ -57,7 +55,7 @@ t_node_arbre	*parse_redir(t_node **tmp)
 			*tmp = (*tmp)->next;
 		return (node);
 	}
-	return (node_left);	
+	return (node_left);
 }
 
 t_node_arbre	*new_node(int mode, t_node_arbre *left, t_node_arbre *right)

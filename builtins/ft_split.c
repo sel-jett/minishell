@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: salah <salah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 02:20:57 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/02/03 22:55:20 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/02/27 18:25:48 by salah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtins.h"
+// #include "builtins.h"
+#include "../includes/minishell.h"
 
 static int	count_words(char const *str, char c)
 {

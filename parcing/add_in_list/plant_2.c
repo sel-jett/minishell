@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   plant_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
+/*   By: salah <salah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:04:14 by amel-has          #+#    #+#             */
-/*   Updated: 2024/02/23 21:37:44 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/02/27 03:17:18 by salah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	plant_2(t_list *list, int *i)
 	s = my_malloc(sizeof(char) * (len + 1), 1);
 	if (!s)
 		return (0);
-	(1 == 1) && (len = -1);
+	len = -1;
 	while (check(list->str[++len + *i]))
 		s[len] = list->str[*i + len];
 	s[len] = '\0';

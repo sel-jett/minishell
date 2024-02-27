@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   env_parser.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: salah <salah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 11:44:57 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/02/03 23:00:32 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/02/27 18:24:34 by salah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtins.h"
+// #include "builtins.h"
+#include "../includes/minishell.h"
 
 char	*value_key(t_env *tmp, char *key)
 {

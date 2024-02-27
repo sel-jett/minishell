@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
+/*   By: salah <salah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:48:58 by amel-has          #+#    #+#             */
-/*   Updated: 2024/02/26 01:53:17 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/02/27 22:10:54 by salah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,13 @@
 
 # include <stdlib.h>
 # include <stdio.h>
+# include <limits.h>
 # include "structs.h"
 # include <unistd.h>
+#include <fcntl.h>
 #include <signal.h>
-# include "/Users/amel-has/.brew/opt/readline/include/readline/readline.h"
-# include "/Users/amel-has/.brew/opt/readline/include/readline/history.h"
+#include <readline/readline.h>
+#include <readline/history.h>
 # include <stdbool.h>
 
 t_node			*c_cpynode(t_node *node,t_node *tail,t_list *list);
@@ -34,7 +36,8 @@ int				check_syntax_3(t_node *tmp);
 int				check_syntax_4(t_node *tmp);
 t_node_arbre	*add_commade(t_node	*tmp);
 int				add_list_redir(t_node *node);
-void			print_tree(t_node_arbre    *tree, int c);
+// void			print_tree(t_node_arbre    *tree, int c);
+void 			print_tree(t_node_arbre *root);
 t_arbre			*c_arbre(void);
 t_node_arbre	*c_node_arbre(t_node *node);
 t_list			*c_list(void);
@@ -52,4 +55,38 @@ int				is_empty(char *str);
 int				add_one(t_list	*list, int *i, int mode);
 int				add_list_redir(t_node *tmp);
 int				plant_6(t_node *top, t_node_arbre **racine);
+///////////////////////// EXECUTION //////////////////////////
+
+void	execute(t_node_arbre	*tree, char **e);
+void	ft_execute_cmd(t_node_arbre *tree, t_env **env);
+
+
+///////////////////////// BUILTINS //////////////////////////
+int		ft_strlen_b(const char *str);
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
+char	**ft_split(char const *s, char c);
+char	*get_key(char *data);
+char	*get_value(char *data);
+char	*value_key(t_env *tmp, char *key);
+char	*pwd_joiner(char *temp_old, char *temp, char *path);
+t_env	*env_new(char *data, t_env *tmp);
+int		ft_strncmp_one(char *tmp, char *pwd);
+int		ft_strncmp_two(char *tmp, char *pwd);
+t_env	*ft_env_parser(char **env);
+char	*find_pwd(t_env *cenv);
+char	*ft_strtrim(char *cmd);
+int		check_first(char *cmd);
+char	*find_oldpwd(t_env *cenv);
+t_env	*ft_lstlast(t_env *lst);
+void	ft_list_remove_if(t_env **begin_list, void *data_ref, int (*cmp)());
+char	*ft_strdup(char *s);
+void	ft_fpintf(const char *msg);
+char	*ft_strjoin(char *s1, char *s2);
+void	echo(const char *path, int mode);
+void	ft_unset(char *cmd, t_env **cnev);
+void	ft_export(char *cmd, t_env **cnev);
+void	cd(const char *path, t_env **cenv);
+void	ft_lstadd_back(t_env **lst, t_env *neww);
+int		ft_strlen_b(const char *str);
+
 #endif

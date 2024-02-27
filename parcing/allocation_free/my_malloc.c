@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   my_malloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
+/*   By: salah <salah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 22:39:29 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/02/17 00:06:44 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/02/27 03:07:24 by salah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ void	*my_malloc(size_t size, int mode)
 			return (dataclear(&head), (void *)0);
 		node->data = data;
 		node->next = 0;
-		(head) && (node->next = head);
+		if (head)
+			node->next = head;
 		head = node;
 		return (data);
 	}
