@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:48:58 by amel-has          #+#    #+#             */
-/*   Updated: 2024/02/26 01:53:17 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/02/26 04:26:19 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdio.h>
 # include "structs.h"
 # include <unistd.h>
-#include <signal.h>
+# include <signal.h>
 # include "/Users/amel-has/.brew/opt/readline/include/readline/readline.h"
 # include "/Users/amel-has/.brew/opt/readline/include/readline/history.h"
 # include <stdbool.h>

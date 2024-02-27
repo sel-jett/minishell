@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:19:17 by amel-has          #+#    #+#             */
-/*   Updated: 2024/02/25 05:15:52 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/02/27 08:31:48 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,17 @@ void	checkSinglQ(t_node *tmp)
 		tmp->val_vide = 1;
 }
 
+int check_exp(t_node *tmp)
+{
+	int i = 0;
+	while (tmp->value[i])
+	{
+		if (tmp->value[i] != '!')
+			return (1);
+		i++;
+	}
+	return (0);
+}
 int	plant_4(t_list *list)
 {
 	t_node	*tmp; 
@@ -121,6 +132,9 @@ int	plant_4(t_list *list)
 			{
 				if (!check_syntax_3(tmp))
 					return (printf("syntax error 4!\n"), 0);
+				if (tmp->mode == TOKEN_EXPR)
+					if (!check_exp(tmp))
+						return (printf("syntax error 5!\n"), 0);
 			}
 			else if(tmp->mode == TOKEN_Single_Q)
 				checkSinglQ(tmp);
@@ -128,6 +142,6 @@ int	plant_4(t_list *list)
 		}
 	}
 	if (count_parentheses != 0)
-		return (printf("syntax error 5 [%d]\n",count_parentheses), 0);
+		return (printf("syntax error 6 [%d]\n",count_parentheses), 0);
 	return (1);
 }

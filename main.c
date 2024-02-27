@@ -46,8 +46,13 @@ void	handler_signel(int signal, siginfo_t *siginfo, void *vd)
 	{
 		printf("\n");
 		rl_on_new_line();
-		rl_replace_line("",1);
+		rl_replace_line("",0);
 		rl_redisplay();
+	}
+	if (signal == SIGQUIT)
+	{
+		printf("je suis la ");
+		exit(0);
 	}
 }
 
@@ -63,7 +68,8 @@ int	main(void)
 	struct sigaction	sa;
 	sa.sa_flags = SA_SIGINFO;
 	sa.sa_sigaction = handler_signel;
-	sigaction(SIGINT,&sa,NULL);
+	sigaction(SIGINT, &sa, NULL);
+	sigaction(SIGQUIT, &sa, NULL);
 	rl_catch_signals = 0;
 	while (1)
 	{
@@ -73,7 +79,9 @@ int	main(void)
 		if (!index)
 		{
 			list->str = readline("minishell > ");
-			if (!list->str || is_empty(list->str))
+			if (!list->str)
+				exit(0);
+			if (is_empty(list->str))
 				index = 1;
 			if (!index)
 			{
