@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: salah <salah@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:48:58 by amel-has          #+#    #+#             */
-/*   Updated: 2024/02/27 22:26:56 by salah            ###   ########.fr       */
+/*   Updated: 2024/02/28 16:58:30 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ int				add_list_redir(t_node *tmp);
 int				plant_6(t_node *top, t_node_arbre **racine);
 ///////////////////////// EXECUTION //////////////////////////
 
-void	execute(t_node_arbre	*tree, char **e);
-void	ft_execute_cmd(t_node_arbre *tree, t_env **env);
-
+void	execute(t_node_arbre	*tree, t_env *e);
+void	ft_execute_cmd(t_node_arbre *tree, t_env *env);
+void	ft_execute_pipe(t_node_arbre *tree, t_env *e);
 
 ///////////////////////// BUILTINS //////////////////////////
 int		ft_strlen_b(const char *str);
@@ -91,5 +91,7 @@ void	ft_export(char *cmd, t_env **cnev);
 void	cd(const char *path, t_env **cenv);
 void	ft_lstadd_back(t_env **lst, t_env *neww);
 int		ft_strlen_b(const char *str);
+void	ft_env(t_env *tmp);
+void	ft_print_arr(char **arr);
 
 #endif

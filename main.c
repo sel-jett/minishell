@@ -95,6 +95,7 @@ int	main(int ac, char **av, char **envp)
 	int		index;
 	t_arbre			*arbre;
 	t_list	*nlist;
+	t_env	*env;
 
 	list = NULL;
 	// struct sigaction	sa;
@@ -102,9 +103,9 @@ int	main(int ac, char **av, char **envp)
 	// sa.sa_sigaction = handler_signel;
 	// sigaction(SIGINT,&sa,NULL);
 	// rl_catch_signals = 0;
+	env = ft_env_parser(envp);
 	(void)ac;
 	(void)av;
-	(void)envp;
 	while (1)
 	{
 		(1) && (index = 0, i = 0, list = c_list(), list->str = 0);
@@ -147,9 +148,19 @@ int	main(int ac, char **av, char **envp)
 				{
 					if (!plant_6(nlist->top, &arbre->racine))
 						(1 == 1) && (printf("ERROR7\n"), index = 1);
+				}
 				if (!index)
 				{
-					// print_tree(arbre->racine, 0);
+					// env = ft_env_parser(envp);
+					// ft_print_arr(envp);
+					// ft_env(env);
+					// print_tree(arbre->racine);
+					// while (arbre->racine->list->top)
+					// {
+					// 	puts(arbre->racine->list->top->value);
+					// 	arbre->racine->list->top = arbre->racine->list->top->next;
+					// }
+					execute(arbre->racine, env);
 					my_malloc(0, 0);
 				}
 			}

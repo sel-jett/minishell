@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: salah <salah@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 23:55:37 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/02/27 18:34:58 by salah            ###   ########.fr       */
+/*   Updated: 2024/02/28 14:57:58 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*find_pwd(t_env *cenv)
 
 	if (!cenv)
 		return (NULL);
-	while (cenv && strncmp(cenv->key, "PWD", 3))
+	while (cenv && ft_strncmp_one(cenv->key, "PWD"))
 		cenv = cenv->next;
 	str = ft_strjoin(cenv->key, "=");
 	str = ft_strjoin(str, cenv->value);
@@ -30,7 +30,7 @@ char	*find_oldpwd(t_env *cenv)
 {
 	char	*str;
 
-	while (cenv && strncmp(cenv->key, "OLDPWD", 6))
+	while (cenv && ft_strncmp_one(cenv->key, "OLDPWD"))
 		cenv = cenv->next;
 	if (cenv)
 	{

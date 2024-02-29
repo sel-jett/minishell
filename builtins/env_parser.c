@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_parser.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: salah <salah@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 11:44:57 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/02/27 18:24:34 by salah            ###   ########.fr       */
+/*   Updated: 2024/02/28 17:15:04 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*value_key(t_env *tmp, char *key)
 {
 	while (tmp)
 	{
-		if (!strcmp(tmp->key, key))
+		if (!ft_strncmp_one(tmp->key, key))
 			return (tmp->value);
 		tmp = tmp->next;
 	}
@@ -147,7 +147,7 @@ void	ft_list_remove_if(t_env **begin_list, void *data_ref, int (*cmp)())
 }
 
 t_env	*ft_env_parser(char **env)
-{
+{     
 	int		i;
 	t_env	*lst;
 

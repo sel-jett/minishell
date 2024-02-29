@@ -16,8 +16,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/home/salah/Desktop/minishell",
-      "program": "/home/salah/Desktop/minishell/build/Debug/outDebug",
+      "cwd": "/Users/sel-jett/Desktop/minishell",
+      "program": "/Users/sel-jett/Desktop/minishell/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

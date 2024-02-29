@@ -1,16 +1,15 @@
 #include "../includes/minishell.h"
 
-void	execute(t_node_arbre	*tree, char **e)
+void	execute(t_node_arbre	*tree, t_env	*env)
 {
-	t_env	*env;
 
-	env = ft_env_parser(e);
+	// ft_env(env);
 	if (!tree)
 		return ;
 	if (tree->mode == 0)
-		ft_execute_cmd(tree, &env);
-	// else if (tree->mode == 5)
-	// 	ft_execute_pipe(tree);
+		ft_execute_cmd(tree, env);
+	else if (tree->mode == 5)
+		ft_execute_pipe(tree, env);
 	// else if (tree->mode == 6)
 	// 	ft_execute_and(tree);
 	// else if (tree->mode == 7)
