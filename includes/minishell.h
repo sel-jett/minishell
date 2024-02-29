@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:48:58 by amel-has          #+#    #+#             */
-/*   Updated: 2024/02/28 16:58:30 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/02/29 18:38:14 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,15 @@ int				add_list_redir(t_node *tmp);
 int				plant_6(t_node *top, t_node_arbre **racine);
 ///////////////////////// EXECUTION //////////////////////////
 
+int		ft_status(int status, bool mode);
 void	execute(t_node_arbre	*tree, t_env *e);
-void	ft_execute_cmd(t_node_arbre *tree, t_env *env);
+void	ft_execute_cmd(t_node_arbre *tree, t_env **env);
 void	ft_execute_pipe(t_node_arbre *tree, t_env *e);
+void	ft_execute_and(t_node_arbre *tree, t_env *e);
+void	ft_execute_or(t_node_arbre *tree, t_env *e);
+void	ft_execute_subshell(t_node_arbre *tree, t_env *e);
+void	ft_execute_redir_out(t_node_arbre *tree, t_env	*env);
+void	ft_execute_redir_in(t_node_arbre *tree, t_env *env);
 
 ///////////////////////// BUILTINS //////////////////////////
 int		ft_strlen_b(const char *str);
@@ -85,13 +91,14 @@ void	ft_list_remove_if(t_env **begin_list, void *data_ref, int (*cmp)());
 char	*ft_strdup(char *s);
 void	ft_fpintf(const char *msg);
 char	*ft_strjoin(char *s1, char *s2);
-void	echo(const char *path, int mode);
-void	ft_unset(char *cmd, t_env **cnev);
-void	ft_export(char *cmd, t_env **cnev);
-void	cd(const char *path, t_env **cenv);
+void	echo(const char **path, int mode);
+void	ft_unset(char **cmd, t_env **cnev);
+void	ft_export(char **cmd, t_env **cnev);
+void	cd(const char **path, t_env **cenv);
 void	ft_lstadd_back(t_env **lst, t_env *neww);
 int		ft_strlen_b(const char *str);
 void	ft_env(t_env *tmp);
 void	ft_print_arr(char **arr);
+void	ft_builtin(char **cmd, t_env **cenv);
 
 #endif

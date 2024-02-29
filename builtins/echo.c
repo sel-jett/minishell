@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: salah <salah@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 07:39:43 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/02/27 18:24:09 by salah            ###   ########.fr       */
+/*   Updated: 2024/02/29 23:00:09 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,37 +17,46 @@ static	int	echo_check(const char *path)
 {
 	int	i;
 
-	i = 0;
-	while (path[i] && path[i] > 32)
+	i = 1;
+	if (path[0] == '-')
 	{
-		if (path[i] != 'n')
-			return (0);
-		i++;
+		while (path[i] && path[i] > 32)
+		{
+			if (path[i] != 'n')
+				return (0);
+			i++;
+		}
 	}
 	return (1);
 }
 
-void	echo(const char *path, int mode)
+void	echo(const char **path, int mode)
 {
 	int	check;
 
-	check = 0;
-	if (mode)
+	(void)mode;
+	check = echo_check(path[0]);
+	if (!check)
 	{
-		check = echo_check(path);
-		if (!check)
-			printf("-n%s\n", path);
-		else
+		check = 0;
+		while (path[check])
 		{
-			check = 0;
-			while (*path == 'n')
-				path++;
-			if (path)
-				while (*path <= 32)
-					path++;
-			printf("%s", path);
+			printf("%s", path[check]);
+			check++;
+			if (path[check])
+				printf(" ");
 		}
+		printf("\n");
 	}
 	else
-		printf("%s\n", path);
+	{
+		path++;
+		while(*path)
+		{
+			printf("%s", *path);
+			path++;
+			if (*path)
+				printf(" ");
+		}
+	}
 }

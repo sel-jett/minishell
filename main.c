@@ -1,5 +1,14 @@
 #include "includes/minishell.h"
 
+int	ft_status(int status, bool mode)
+{
+	static int	stat = 0;
+
+	if (mode)
+		stat = status;
+	return (stat);
+}
+
 int	plant_5(t_node	*tmp, t_list *list)
 {
 	t_node	*node;
@@ -66,7 +75,19 @@ void print_in_dot(t_node_arbre *node,int i, int *count, FILE *fp)
 		fprintf(fp, "  node%d [label=\"%s \"];\n", node_id, "&&");
 	else if (node->mode == 7)
 		fprintf(fp, "  node%d [label=\"%s \"];\n", node_id, "||");
-	else
+	else if (node->mode == TOKEN_PARENTHESE)
+	{
+		fprintf(fp, "  node%d [label=\"%s \"];\n", node_id, "()");
+		print_in_dot(node->arbre->racine, node_id, count, fp);
+		// print_tree(node->arbre->racine);
+	}
+	else if (node->mode == TOKEN_REDIR_APPEND)
+		fprintf(fp, "  node%d [label=\"%s \"];\n", node_id, ">>");
+	else if (node->mode == TOKEN_REDIR_OUT)
+		fprintf(fp, "  node%d [label=\"%s %s\"];\n", node_id, ">", node->list_redir->tail->value);
+	else if (node->mode == TOKEN_REDIR_IN)
+		fprintf(fp, "  node%d [label=\"%s %s\"];\n", node_id, "<", node->value);
+	else if (node->mode == TOKEN_EXPR)
 		fprintf(fp, "  node%d [label=\"%s \"];\n", node_id, (char *)node->value);
     if (i != -1){
         fprintf(fp, "  node%d -> node%d;\n",i,node_id);
@@ -152,14 +173,16 @@ int	main(int ac, char **av, char **envp)
 				if (!index)
 				{
 					// env = ft_env_parser(envp);
+					env = ft_env_parser(envp);
 					// ft_print_arr(envp);
 					// ft_env(env);
 					// print_tree(arbre->racine);
 					// while (arbre->racine->list->top)
 					// {
-					// 	puts(arbre->racine->list->top->value);
+						// puts(arbre->racine->right->list->top->next->value);
 					// 	arbre->racine->list->top = arbre->racine->list->top->next;
 					// }
+					// puts(arbre->racine->list->top->value);
 					execute(arbre->racine, env);
 					my_malloc(0, 0);
 				}

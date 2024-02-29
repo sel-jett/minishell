@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: salah <salah@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 07:03:43 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/02/27 18:25:22 by salah            ###   ########.fr       */
+/*   Updated: 2024/02/29 18:28:47 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,20 +67,20 @@ void	ft_env_export(t_env *tmp)
 	}
 }
 
-void	ft_export(char *cmd, t_env **cnev)
+void	ft_export(char **cmd, t_env **cnev)
 {
 	char	**dptr;
 	int		i;
 
 	i = 0;
-	dptr = ft_split(cmd, ' ');
+	dptr = ft_split(cmd[0], ' ');
+	if (!ft_strlen_b(dptr[i]))
+	{
+		ft_env_export(*cnev);
+		return ;
+	}
 	while (dptr[i])
 	{
-		if (!ft_strlen_b(dptr[i]))
-		{
-			ft_env_export(*cnev);
-			return ;
-		}
 		dptr[i] = ft_strtrim(dptr[i]);
 		if (!check_first(dptr[i]))
 			return ;

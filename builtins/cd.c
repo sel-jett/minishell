@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: salah <salah@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 23:18:52 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/02/27 18:35:23 by salah            ###   ########.fr       */
+/*   Updated: 2024/02/29 22:58:56 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int	cd_old(const char *path)
 	return (1);
 }
 
-void	cd(const char *path, t_env **cenv)
+void	cd(const char **path, t_env **cenv)
 {
 	char	*b;
 	char	*pwd;
@@ -115,18 +115,18 @@ void	cd(const char *path, t_env **cenv)
 	(void)pp;
 	pp = cenv;
 	b = my_malloc(PATH_MAX + 1, 1);
-	if (!cd_home(path))
-		path = getenv("HOME");
-	if (!cd_old(path))
+	if (!cd_home(path[0]))
+		path[0] = getenv("HOME");
+	if (!cd_old(path[0]))
 	{
-		path = value_key(*cenv, "OLDPWD");
-		if (!path)
+		path[0] = value_key(*cenv, "OLDPWD");
+		if (!path[0])
 		{
 			printf("minishell: cd: OLDPWD not set\n");
 			return ;
 		}
 	}
-	if (cd_error(path))
+	if (cd_error(path[0]))
 		return ;
 	else if (!getcwd(b, PATH_MAX))
 		cd_second();
@@ -141,38 +141,27 @@ void	cd(const char *path, t_env **cenv)
 	if (getcwd(b, PATH_MAX))
 		temp = ft_strjoin("PWD=", getcwd(b, PATH_MAX));
 	else
-		temp = pwd_joiner(temp_old, temp, (char *)path);
+		temp = pwd_joiner(temp_old, temp, (char *)path[0]);
 	ft_lstadd_back(cenv, env_new(temp, NULL));
 }
 
-// int	main(int ac, char **av, char **env)
-// {
-// 	(void)ac;
-// 	(void)av;
-// 	char	*cmd;
-// 	t_env	*tmp;
-// 	t_env	*cenv;
+void	ft_builtin(char **cmd, t_env **cenv)
+{
+	t_env	*tmp;
 
-// 	cenv = ft_env_parser(env);
-// 	tmp = cenv;
-// 	while (1)
-// 	{
-// 		cmd = readline("\033[0;32mminishell > \033[0m");
-// 		if (!strncmp(cmd, "cd", 2))
-// 			cd(cmd + 3, &tmp);
-// 		else if (!ft_strncmp_one(cmd, "echo -n"))
-// 			echo(cmd + 6, 1);
-// 		else if (!ft_strncmp_one(cmd, "echo"))
-// 			echo(cmd + 5, 0);
-// 		else if (!ft_strncmp_one(cmd, "exit"))
-// 			exit(0);
-// 		else if (!ft_strncmp_one(cmd, "env"))
-// 			ft_env(tmp);
-// 		else if (!ft_strncmp_one(cmd, "pwd"))
-// 			printf("%s\n", value_key(tmp, "PWD"));
-// 		else if (!ft_strncmp_one(cmd, "export"))
-// 			ft_export(cmd + 7, &tmp);
-// 		else if (!ft_strncmp_one(cmd, "unset"))
-// 			ft_unset(cmd + 6, &tmp);
-// 	}
-// }
+	tmp = *cenv;
+	if (!ft_strncmp_one(cmd[0], "cd"))
+		cd((const char **)(cmd + 1), &tmp);
+	else if (!ft_strncmp_one(cmd[0], "echo"))
+		echo((const char **)(cmd + 1), 0);
+	else if (!ft_strncmp_one(cmd[0], "exit"))
+		exit(0);
+	else if (!ft_strncmp_one(cmd[0], "env"))
+		ft_env(tmp);
+	else if (!ft_strncmp_one(cmd[0], "pwd"))
+		printf("%s\n", value_key(tmp, "PWD"));
+	else if (!ft_strncmp_one(cmd[0], "export"))
+		ft_export((cmd + 1), &tmp);
+	else if (!ft_strncmp_one(cmd[0], "unset"))
+		ft_unset((cmd + 1), &tmp);
+}

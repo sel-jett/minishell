@@ -1,12 +1,13 @@
 #include "../includes/minishell.h"
 
-void	ft_execute_redir_in(t_node_arbre *tree)
+void	ft_execute_redir_in(t_node_arbre *tree, t_env *env)
 {
 	int		fd;
 	int		status;
 	pid_t	pid;
 
-	fd = open(tree->left->value, O_RDONLY);
+	tree->mode = TOKEN_EXPR;
+	fd = open(tree->list_redir->tail->value, O_RDONLY);
 	if (fd == -1)
 	{
 		perror("open error");
@@ -22,9 +23,9 @@ void	ft_execute_redir_in(t_node_arbre *tree)
 	{
 		dup2(fd, 0);
 		close(fd);
-		execute(tree->right);
+		execute(tree, env);
 		exit(0);
 	}
-	else
-		waitpid(pid, &status, 0);
+	waitpid(pid, &status, 0);
+	ft_status(status, 1);
 }
