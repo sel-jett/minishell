@@ -117,6 +117,7 @@ int	main(int ac, char **av, char **envp)
 	t_arbre			*arbre;
 	t_list	*nlist;
 	t_env	*env;
+	t_env	*exp;
 
 	list = NULL;
 	// struct sigaction	sa;
@@ -125,6 +126,9 @@ int	main(int ac, char **av, char **envp)
 	// sigaction(SIGINT,&sa,NULL);
 	// rl_catch_signals = 0;
 	env = ft_env_parser(envp);
+	exp = ft_env_parser(envp);
+	ft_lstadd_back(&exp, env_new("OLDPWD", exp));
+	ft_sort_list(&exp);
 	(void)ac;
 	(void)av;
 	while (1)
@@ -173,7 +177,7 @@ int	main(int ac, char **av, char **envp)
 				if (!index)
 				{
 					// env = ft_env_parser(envp);
-					env = ft_env_parser(envp);
+					// env = ft_env_parser(envp);
 					// ft_print_arr(envp);
 					// ft_env(env);
 					// print_tree(arbre->racine);
@@ -183,8 +187,8 @@ int	main(int ac, char **av, char **envp)
 					// 	arbre->racine->list->top = arbre->racine->list->top->next;
 					// }
 					// puts(arbre->racine->list->top->value);
-					execute(arbre->racine, env);
-					my_malloc(0, 0);
+					execute(arbre->racine, env, exp);
+					// my_malloc(0, 0);
 				}
 			}
 		}

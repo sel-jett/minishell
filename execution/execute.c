@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 12:09:39 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/02/29 18:40:04 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/05 03:05:04 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,6 @@ char	**linkedlist_to_arr(t_node *tree)
 	while (tmp)
 	{
 		arr[i] = ft_strdup(tmp->value);
-		// puts(tmp->value);
 		i++;
 		tmp = tmp->next;
 	}
@@ -127,7 +126,7 @@ static bool	is_builtin(char *cmd)
 
 }
 
-void	ft_execute_cmd(t_node_arbre *tree, t_env **env)
+void	ft_execute_cmd(t_node_arbre *tree, t_env **env, t_env **exp)
 {
 	int				i;
 	char			*env_var;
@@ -143,9 +142,15 @@ void	ft_execute_cmd(t_node_arbre *tree, t_env **env)
 	envp = env_to_arr(*env);
 	path = ft_split(get_path(*env), ':');
 	cmmd = linkedlist_to_arr(tmp);
+	while (cmmd[i])
+	{
+		cmmd[i] = ft_expand(cmmd[i]);
+		// printf("cmmd[%d] = %s\n", i, cmmd[i]);
+		i++;
+	}
 	if (is_builtin(cmmd[0]))
 	{
-		ft_builtin(cmmd, env);
+		ft_builtin(cmmd, env, exp);
 		return ;
 	}
 	env_var = cmmd[0];

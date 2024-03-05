@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 11:44:57 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/02/28 17:15:04 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/04 18:05:07 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,12 +93,14 @@ t_env	*env_new(char *data, t_env *tmp)
 	str = get_key(data);
 	if (check_key(data))
 	{
+		node->key = get_key(data);
 		node->value = ft_strjoin(get_value(data), value_key(tmp, str));
 		ft_list_remove_if(&tmp, str, ft_strncmp_one);
 	}
 	else
 		node->value = get_value(data);
 	node->key = str;
+		// dprintf(2, "node->value = %s\n", node->value);
 	node->next = NULL;
 	return (node);
 }
@@ -147,7 +149,7 @@ void	ft_list_remove_if(t_env **begin_list, void *data_ref, int (*cmp)())
 }
 
 t_env	*ft_env_parser(char **env)
-{     
+{
 	int		i;
 	t_env	*lst;
 

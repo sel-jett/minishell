@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:48:58 by amel-has          #+#    #+#             */
-/*   Updated: 2024/02/29 18:38:14 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/05 03:04:04 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,14 @@ int				plant_6(t_node *top, t_node_arbre **racine);
 ///////////////////////// EXECUTION //////////////////////////
 
 int		ft_status(int status, bool mode);
-void	execute(t_node_arbre	*tree, t_env *e);
-void	ft_execute_cmd(t_node_arbre *tree, t_env **env);
-void	ft_execute_pipe(t_node_arbre *tree, t_env *e);
-void	ft_execute_and(t_node_arbre *tree, t_env *e);
-void	ft_execute_or(t_node_arbre *tree, t_env *e);
-void	ft_execute_subshell(t_node_arbre *tree, t_env *e);
-void	ft_execute_redir_out(t_node_arbre *tree, t_env	*env);
-void	ft_execute_redir_in(t_node_arbre *tree, t_env *env);
+void	execute(t_node_arbre	*tree, t_env *e, t_env *exp);
+void	ft_execute_cmd(t_node_arbre *tree, t_env **env, t_env **exp);
+void	ft_execute_pipe(t_node_arbre *tree, t_env *e, t_env *exp);
+void	ft_execute_and(t_node_arbre *tree, t_env *e, t_env *exp);
+void	ft_execute_or(t_node_arbre *tree, t_env *e, t_env *exp);
+void	ft_execute_subshell(t_node_arbre *tree, t_env *e, t_env *exp);
+void	ft_execute_redir_out(t_node_arbre *tree, t_env	*env, t_env *exp);
+void	ft_execute_redir_in(t_node_arbre *tree, t_env *env, t_env *exp);
 
 ///////////////////////// BUILTINS //////////////////////////
 int		ft_strlen_b(const char *str);
@@ -92,13 +92,17 @@ char	*ft_strdup(char *s);
 void	ft_fpintf(const char *msg);
 char	*ft_strjoin(char *s1, char *s2);
 void	echo(const char **path, int mode);
-void	ft_unset(char **cmd, t_env **cnev);
-void	ft_export(char **cmd, t_env **cnev);
+void	ft_unset(char **cmd, t_env **cnev, t_env **exp);
+void	ft_export(char **cmd, t_env **cnev, t_env **exp);
 void	cd(const char **path, t_env **cenv);
 void	ft_lstadd_back(t_env **lst, t_env *neww);
 int		ft_strlen_b(const char *str);
 void	ft_env(t_env *tmp);
 void	ft_print_arr(char **arr);
-void	ft_builtin(char **cmd, t_env **cenv);
+void	ft_builtin(char **cmd, t_env **cenv, t_env **exp);
+void	ft_sort_list(t_env **env);
+////////////////////////////////////// EXPAND //////////////////
+int		count_expand(char *cmd);
+char	*ft_expand(char *cmd);
 
 #endif

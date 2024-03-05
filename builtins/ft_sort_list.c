@@ -1,34 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   subshell.c                                         :+:      :+:    :+:   */
+/*   ft_sort_list.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/29 14:29:50 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/03 18:22:18 by sel-jett         ###   ########.fr       */
+/*   Created: 2024/03/04 01:19:23 by sel-jett          #+#    #+#             */
+/*   Updated: 2024/03/04 01:28:27 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	ft_execute_subshell(t_node_arbre *tree, t_env *e, t_env *exp)
+void	ft_sort_list(t_env **env)
 {
-	int	pid;
-	int	status;
+	t_env	*tmp;
+	t_env	*tmp2;
+	char	*key;
+	char	*value;
 
-	pid = fork();
-	if (pid == -1)
+	tmp = *env;
+	while (tmp)
 	{
-		perror("fork error");
-		return ;
+		tmp2 = tmp->next;
+		while (tmp2)
+		{
+			if (ft_strncmp_one(tmp->key, tmp2->key) < 0)
+			{
+				key = ft_strdup(tmp->key);
+				value = ft_strdup(tmp->value);
+				tmp->key = ft_strdup(tmp2->key);
+				tmp->value = ft_strdup(tmp2->value);
+				tmp2->key = key;
+				tmp2->value = value;
+			}
+			tmp2 = tmp2->next;
+		}
+		tmp = tmp->next;
 	}
-	if (pid == 0)
-	{
-		execute(tree->arbre->racine, e, exp);
-		exit(0);
-	}
-	waitpid(pid, &status, 0);
-	ft_status(status, 1);
-	// execute(tree->left, e);
 }

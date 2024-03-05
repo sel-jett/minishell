@@ -1,26 +1,3 @@
 2: SHELL value should be incremented
 3: echo with tabs rather than spaces
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// printf("\n"); : Imprime une nouvelle ligne dans le terminal, assurant que le curseur est positionné sur la ligne suivante.
-// rl_on_new_line(); : Appelle la fonction rl_on_new_line() de la bibliothèque Readline. Cette fonction notifie Readline que le curseur est maintenant sur une nouvelle ligne. Cela est important pour maintenir une gestion cohérente de la position du curseur dans l'interface de la ligne de commande.
-// rl_replace_line("", 0); : Utilise rl_replace_line pour remplacer la ligne actuelle par une chaîne vide (""), et le deuxième paramètre (0) indique que toute la ligne doit être remplacée. Cela a pour effet de vider la ligne d'entrée.
-// rl_redisplay(); : Appelle rl_redisplay() pour redisplay la ligne modifiée, mettant à jour l'affichage à l'écran.
-//ioctl(0, TIOCSTI, "\4");

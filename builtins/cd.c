@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 23:18:52 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/02/29 22:58:56 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/04 20:36:10 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	ft_env(t_env *tmp)
 
 int	cd_error(const char *path)
 {
+	printf("path: %s\n", path);
 	if (chdir(path) != 0 && ft_strncmp_one((char *)path, ".."))
 	{
 		ft_fpintf("mminishell: cd");
@@ -68,11 +69,11 @@ int	cd_home(const char *path)
 			i++;
 			continue ;
 		}
-		else
+		else if (path[i] != '-')
 			return (1);
 		i++;
 	}
-	if (check == 1)
+	if (check == 1 || (path[i - 1] && path[i - 2] && path[i - 1] == '-' && path[i - 2] == '-'))
 		return (0);
 	return (1);
 }
@@ -116,8 +117,11 @@ void	cd(const char **path, t_env **cenv)
 	pp = cenv;
 	b = my_malloc(PATH_MAX + 1, 1);
 	if (!cd_home(path[0]))
-		path[0] = getenv("HOME");
-	if (!cd_old(path[0]))
+	{
+		printf("checkkkk\n");
+		path[0] = value_key(*cenv, "HOME");
+	}
+	else if (!cd_old(path[0]))
 	{
 		path[0] = value_key(*cenv, "OLDPWD");
 		if (!path[0])
@@ -145,7 +149,7 @@ void	cd(const char **path, t_env **cenv)
 	ft_lstadd_back(cenv, env_new(temp, NULL));
 }
 
-void	ft_builtin(char **cmd, t_env **cenv)
+void	ft_builtin(char **cmd, t_env **cenv, t_env **exp)
 {
 	t_env	*tmp;
 
@@ -161,7 +165,7 @@ void	ft_builtin(char **cmd, t_env **cenv)
 	else if (!ft_strncmp_one(cmd[0], "pwd"))
 		printf("%s\n", value_key(tmp, "PWD"));
 	else if (!ft_strncmp_one(cmd[0], "export"))
-		ft_export((cmd + 1), &tmp);
+		ft_export((cmd + 1), cenv, exp);
 	else if (!ft_strncmp_one(cmd[0], "unset"))
-		ft_unset((cmd + 1), &tmp);
+		ft_unset((cmd + 1), &tmp, exp);
 }

@@ -1,6 +1,6 @@
 #include "../includes/minishell.h"
 
-void	ft_execute_redir_out(t_node_arbre *tree, t_env	*env)
+void	ft_execute_redir_out(t_node_arbre *tree, t_env	*env, t_env *exp)
 {
 	int		fd;
 	int		status;
@@ -22,7 +22,7 @@ void	ft_execute_redir_out(t_node_arbre *tree, t_env	*env)
 	{
 		dup2(fd, 1);
 		close(fd);
-		execute(tree, env);
+		execute(tree, env, exp);
 		exit(0);
 	}
 	waitpid(pid, &status, 0);

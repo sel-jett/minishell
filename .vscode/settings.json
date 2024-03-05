@@ -1,29 +1,4 @@
 {
-  "files.associations": {
-    "sstream": "c",
-    "chrono": "c",
-    "minishell.h": "c",
-    "__node_handle": "c",
-    "ios": "c",
-    "signal.h": "c",
-    "readline.h": "c",
-    "stdbool.h": "c",
-    "__bit_reference": "c",
-    "__functional_base": "c",
-    "algorithm": "c",
-    "bitset": "c",
-    "__memory": "c",
-    "functional": "c",
-    "iterator": "c",
-    "limits": "c",
-    "memory": "c",
-    "optional": "c",
-    "ratio": "c",
-    "system_error": "c",
-    "tuple": "c",
-    "type_traits": "c",
-    "vector": "c"
-  },
   "C_Cpp_Runner.cCompilerPath": "gcc",
   "C_Cpp_Runner.cppCompilerPath": "g++",
   "C_Cpp_Runner.debuggerPath": "gdb",
@@ -80,5 +55,14 @@
   "C_Cpp_Runner.useLeakSanitizer": false,
   "C_Cpp_Runner.showCompilationTime": false,
   "C_Cpp_Runner.useLinkTimeOptimization": false,
-  "C_Cpp_Runner.msvcSecureNoWarnings": false
+  "C_Cpp_Runner.msvcSecureNoWarnings": false,
+  "files.associations": {
+    "minishell.h": "c",
+    "array": "c",
+    "iterator": "c",
+    "string": "c",
+    "string_view": "c",
+    "vector": "c",
+    "stdio.h": "c"
+  }
 }

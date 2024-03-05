@@ -1,6 +1,6 @@
 #include "../includes/minishell.h"
 
-void	execute(t_node_arbre	*tree, t_env	*env)
+void	execute(t_node_arbre	*tree, t_env	*env, t_env	*exp)
 {
 
 	// // ft_env(env);
@@ -11,17 +11,17 @@ void	execute(t_node_arbre	*tree, t_env	*env)
 	if (!tree)
 		return ;
 	if (tree->mode == 0)
-		ft_execute_cmd(tree, &env);
+		ft_execute_cmd(tree, &env, &exp);
 	else if (tree->mode == TOKEN_PIPE)
-		ft_execute_pipe(tree, env);
+		ft_execute_pipe(tree, env, exp);
 	else if (tree->mode == TOKEN_AND)
-		ft_execute_and(tree, env);
+		ft_execute_and(tree, env, exp);
 	else if (tree->mode == TOKEN_OR)
-		ft_execute_or(tree, env);
+		ft_execute_or(tree, env, exp);
 	else if (tree->mode == TOKEN_PARENTHESE)
-		ft_execute_subshell(tree, env);
+		ft_execute_subshell(tree, env, exp);
 	else if (tree->mode == TOKEN_REDIR_OUT)
-		ft_execute_redir_out(tree, env);
+		ft_execute_redir_out(tree, env, exp);
 	else if (tree->mode == TOKEN_REDIR_IN)
-		ft_execute_redir_in(tree, env);
+		ft_execute_redir_in(tree, env, exp);
 }

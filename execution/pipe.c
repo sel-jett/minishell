@@ -1,6 +1,6 @@
 #include "../includes/minishell.h"
 
-void	ft_execute_pipe(t_node_arbre *tree, t_env *e)
+void	ft_execute_pipe(t_node_arbre *tree, t_env *e, t_env *exp)
 {
 	int		fd[2];
 	pid_t	pid[2];
@@ -27,7 +27,7 @@ void	ft_execute_pipe(t_node_arbre *tree, t_env *e)
 		}
 		close(fd[0]);
 		close(fd[1]);
-		execute(tree->left, e);
+		execute(tree->left, e, exp);
 		exit(0);
 	}
 	pid[1] = fork();
@@ -45,7 +45,7 @@ void	ft_execute_pipe(t_node_arbre *tree, t_env *e)
 		}
 		close(fd[0]);
 		close(fd[1]);
-		execute(tree->right, e);
+		execute(tree->right, e, exp);
 		exit(0);
 	}
 	close(fd[0]);
