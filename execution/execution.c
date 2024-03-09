@@ -1,13 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   execution.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/08 15:12:36 by sel-jett          #+#    #+#             */
+/*   Updated: 2024/03/08 15:12:37 by sel-jett         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minishell.h"
 
 void	execute(t_node_arbre	*tree, t_env	*env, t_env	*exp)
 {
-
-	// // ft_env(env);
-	// puts("//////////////////////////");
-	// // puts(tree->value);
-	// fprintf(stderr, "value: %s\n", tree->value);
-	// puts("//////////////////////////");
 	if (!tree)
 		return ;
 	if (tree->mode == 0)

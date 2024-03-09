@@ -6,16 +6,9 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 23:18:52 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/04 20:36:10 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/08 15:38:09 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-// #include <unistd.h>
-// #include <stdio.h>
-// #include <stdlib.h>
-// #include <string.h>
-// #include <readline/readline.h>
-// #include <readline/history.h>
 
 #include "../includes/minishell.h"
 
@@ -105,35 +98,12 @@ int	cd_old(const char *path)
 	return (1);
 }
 
-void	cd(const char **path, t_env **cenv)
+void	ft_second_cd(t_env **cenv, char *b, const char ** path)
 {
-	char	*b;
 	char	*pwd;
 	char	*temp;
 	char	*temp_old;
-	t_env	**pp;
 
-	(void)pp;
-	pp = cenv;
-	b = my_malloc(PATH_MAX + 1, 1);
-	if (!cd_home(path[0]))
-	{
-		printf("checkkkk\n");
-		path[0] = value_key(*cenv, "HOME");
-	}
-	else if (!cd_old(path[0]))
-	{
-		path[0] = value_key(*cenv, "OLDPWD");
-		if (!path[0])
-		{
-			printf("minishell: cd: OLDPWD not set\n");
-			return ;
-		}
-	}
-	if (cd_error(path[0]))
-		return ;
-	else if (!getcwd(b, PATH_MAX))
-		cd_second();
 	temp = NULL;
 	pwd = find_pwd(*cenv);
 	temp_old = find_oldpwd(*cenv);
@@ -149,23 +119,72 @@ void	cd(const char **path, t_env **cenv)
 	ft_lstadd_back(cenv, env_new(temp, NULL));
 }
 
+void	cd(const char **path, t_env **cenv)
+{
+	char	*b;
+
+	b = my_malloc(PATH_MAX + 1, 1);
+	if (!cd_home(path[0]))
+		path[0] = value_key(*cenv, "HOME");
+	else if (!cd_old(path[0]))
+	{
+		path[0] = value_key(*cenv, "OLDPWD");
+		if (!path[0])
+		{
+			printf("minishell: cd: OLDPWD not set\n");
+			return ;
+		}
+	}
+	if (cd_error(path[0]))
+		return ;
+	else if (!getcwd(b, PATH_MAX))
+		cd_second();
+	ft_second_cd(cenv, b, path);
+}
+
+void	ft_printf(const char *str, const char *str2)
+{
+	if (str)
+	{
+		while (*str)
+		{
+			write(2, str, 1);
+			str++;
+		}
+	}
+	if (str2)
+	{
+		while (*str2)
+		{
+			write(2, str2, 1);
+			str2++;
+		}
+	}
+}
+
 void	ft_builtin(char **cmd, t_env **cenv, t_env **exp)
 {
 	t_env	*tmp;
 
 	tmp = *cenv;
-	if (!ft_strncmp_one(cmd[0], "cd"))
+	if (!ft_strncmp(cmd[0], "cd"))
 		cd((const char **)(cmd + 1), &tmp);
-	else if (!ft_strncmp_one(cmd[0], "echo"))
+	else if (!ft_strncmp(cmd[0], "echo"))
 		echo((const char **)(cmd + 1), 0);
-	else if (!ft_strncmp_one(cmd[0], "exit"))
+	else if (!ft_strncmp(cmd[0], "exit"))
 		exit(0);
-	else if (!ft_strncmp_one(cmd[0], "env"))
+	else if (!ft_strncmp(cmd[0], "env"))
 		ft_env(tmp);
-	else if (!ft_strncmp_one(cmd[0], "pwd"))
+	else if (!ft_strncmp(cmd[0], "pwd"))
 		printf("%s\n", value_key(tmp, "PWD"));
-	else if (!ft_strncmp_one(cmd[0], "export"))
+	else if (!ft_strncmp(cmd[0], "export"))
 		ft_export((cmd + 1), cenv, exp);
-	else if (!ft_strncmp_one(cmd[0], "unset"))
+	else if (!ft_strncmp(cmd[0], "unset"))
 		ft_unset((cmd + 1), &tmp, exp);
+	else
+	{
+		ft_printf("minishell: ", cmd[0]);
+		ft_printf(":", " command not found");
+		ft_printf("\n", NULL);
+	}
 }

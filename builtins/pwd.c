@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 23:55:37 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/02/28 14:57:58 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/08 14:13:53 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,19 @@ char	*find_oldpwd(t_env *cenv)
 	}
 	return (NULL);
 }
+
+int	ft_strncmp(char *s1, char *s2)
+{
+	int	i;
+
+	i = 0;
+	while (s1[i] && s2[i] && s1[i] == s2[i])
+		i++;
+	if (s1[i] == s2[i])
+		return (0);
+	return (1);
+}
+
 
 int	ft_strncmp_one(char *tmp, char *pwd)
 {

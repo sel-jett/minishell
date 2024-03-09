@@ -57,12 +57,6 @@
   "C_Cpp_Runner.useLinkTimeOptimization": false,
   "C_Cpp_Runner.msvcSecureNoWarnings": false,
   "files.associations": {
-    "minishell.h": "c",
-    "array": "c",
-    "iterator": "c",
-    "string": "c",
-    "string_view": "c",
-    "vector": "c",
-    "stdio.h": "c"
+    "ios": "c"
   }
 }

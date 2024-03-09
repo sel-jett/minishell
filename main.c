@@ -130,6 +130,7 @@ int	main(int ac, char **av, char **envp)
 	ft_lstadd_back(&exp, env_new("OLDPWD", exp));
 	ft_sort_list(&exp);
 	(void)ac;
+	(void)envp;
 	(void)av;
 	while (1)
 	{

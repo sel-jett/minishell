@@ -1,10 +1,55 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipe.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/08 15:12:44 by sel-jett          #+#    #+#             */
+/*   Updated: 2024/03/08 15:32:38 by sel-jett         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minishell.h"
+
+static void	ft_execute_left(t_node_arbre *t, int f[2], t_env *e, t_env *d)
+{
+	if (dup2(f[1], 1) == -1)
+	{
+		perror("dup2 error");
+		exit(1);
+	}
+	close(f[0]);
+	close(f[1]);
+	execute(t->left, e, d);
+	exit(0);
+}
+
+static void	ft_execute_right(t_node_arbre *t, int f[2], t_env *e, t_env *d)
+{
+	if (dup2(f[0], 0) == -1)
+	{
+		perror("dup2 error");
+		exit(1);
+	}
+	close(f[0]);
+	close(f[1]);
+	execute(t->right, e, d);
+	exit(0);
+}
+
+static void	finish_him(pid_t pid[2], int fd[2])
+{
+	close(fd[0]);
+	close(fd[1]);
+	waitpid(pid[0], NULL, 0);
+	waitpid(pid[1], NULL, 0);
+}
 
 void	ft_execute_pipe(t_node_arbre *tree, t_env *e, t_env *exp)
 {
 	int		fd[2];
 	pid_t	pid[2];
-	// int		status;
 
 	if (pipe(fd) == -1)
 	{
@@ -18,18 +63,7 @@ void	ft_execute_pipe(t_node_arbre *tree, t_env *e, t_env *exp)
 		return ;
 	}
 	if (pid[0] == 0)
-	{
-		// close(fd[0]);
-		if (dup2(fd[1], 1) == -1)
-		{
-			perror("dup2 error");
-			exit(1);
-		}
-		close(fd[0]);
-		close(fd[1]);
-		execute(tree->left, e, exp);
-		exit(0);
-	}
+		ft_execute_left(tree, fd, e, exp);
 	pid[1] = fork();
 	if (pid[1] == -1)
 	{
@@ -37,20 +71,6 @@ void	ft_execute_pipe(t_node_arbre *tree, t_env *e, t_env *exp)
 		return ;
 	}
 	if (pid[1] == 0)
-	{
-		if (dup2(fd[0], 0) == -1)
-		{
-			perror("dup2 error");
-			exit(1);
-		}
-		close(fd[0]);
-		close(fd[1]);
-		execute(tree->right, e, exp);
-		exit(0);
-	}
-	close(fd[0]);
-	close(fd[1]);
-	waitpid(pid[0], NULL, 0);
-	waitpid(pid[1], NULL, 0);
-	// while (waitpid(-1, NULL, 0) > 0);
+		ft_execute_right(tree, fd, e, exp);
+	finish_him(pid, fd);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utile_4.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: salah <salah@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 21:32:37 by amel-has          #+#    #+#             */
-/*   Updated: 2024/02/27 22:29:47 by salah            ###   ########.fr       */
+/*   Updated: 2024/03/06 01:40:25 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ int	add_args(t_nlist *list, char *str, int *i)
 	t_nnode		*node;
 
 	len = 0;
+	if(!str)
+		return (0);
 	while (str[len] && str[len] != ' ' && str[len] != '$')
 		len++;
 	s = my_malloc(sizeof(char) * (len + 1), 1);
@@ -93,16 +95,20 @@ int	check_syntax_3(t_node *tmp)
 	char	*str;
 	int		i;
 
+
+	str = tmp->value;
 	(1) && ((str = NULL) && (i = -1));
 	if (!tmp->value[0])
 		return (tmp->val_vide = 1, 1);
 	tmp->list_arg = c_nlist();
 	if (!tmp->list_arg)
 		return (0);
-	str = tmp->value;
-	while (str[++i])
-		while (str[i] == '$')
-			if (!add_args(tmp->list_arg, &str[++i], &i))
+	while (str && str[++i])
+		while (str  && str[i] && str[i] == '$')
+		{
+			i++;
+			if (str && str[i] && !add_args(tmp->list_arg, &str[i], &i))
 				return (0);
+		}
 	return (1);
 }

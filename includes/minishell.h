@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:48:58 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/05 03:04:04 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/08 15:10:03 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,12 @@ void	ft_execute_or(t_node_arbre *tree, t_env *e, t_env *exp);
 void	ft_execute_subshell(t_node_arbre *tree, t_env *e, t_env *exp);
 void	ft_execute_redir_out(t_node_arbre *tree, t_env	*env, t_env *exp);
 void	ft_execute_redir_in(t_node_arbre *tree, t_env *env, t_env *exp);
+void	ft_printf(const char *str, const char *str2);
+void	ft_execve(char *env_var, char **env, char **cmmd);
+char	**env_to_arr(t_env *env);
+void	ft_print_arr(char **arr);
+int		liked_size(t_node *tree);
+char	**linkedlist_to_arr(t_node *tree);
 
 ///////////////////////// BUILTINS //////////////////////////
 int		ft_strlen_b(const char *str);
@@ -101,6 +107,7 @@ void	ft_env(t_env *tmp);
 void	ft_print_arr(char **arr);
 void	ft_builtin(char **cmd, t_env **cenv, t_env **exp);
 void	ft_sort_list(t_env **env);
+int	ft_strncmp(char *s1, char *s2);
 ////////////////////////////////////// EXPAND //////////////////
 int		count_expand(char *cmd);
 char	*ft_expand(char *cmd);

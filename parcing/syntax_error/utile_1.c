@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utile_1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:19:17 by amel-has          #+#    #+#             */
-/*   Updated: 2024/02/27 10:17:43 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/06 01:36:52 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ int	check_enter_parentheses(t_node *node)
 	j = 0;
 	if (node && node->prev  && node->prev->mode == TOKEN_SPACE)
 	{
-		if (node && node->prev && node->prev->prev && (node->prev->prev->mode 
-		== TOKEN_EXPR || node->prev->prev->mode == TOKEN_Double_Q || node->prev->prev->mode 
+		if (node && node->prev && node->prev->prev && (node->prev->prev->mode
+		== TOKEN_EXPR || node->prev->prev->mode == TOKEN_Double_Q || node->prev->prev->mode
 		== TOKEN_Single_Q || node->prev->prev->mode == TOKEN_PARENTHESE || node->prev->prev->mode ==
 		TOKEN_REDIR_APPEND || node->prev->prev->mode == TOKEN_REDIR_IN ||  node->prev->prev->mode ==
 		TOKEN_REDIR_OUT || node->prev->prev->mode == TOKEN_HEREDOC))
@@ -64,8 +64,8 @@ int	check_apres_parentheses(t_node *node)
 {
 	if (node && node->next  && node->next->mode == TOKEN_SPACE)
 	{
-		if (node && node->next && node->next->next && (node->next->next->mode 
-		== TOKEN_EXPR || node->next->next->mode == TOKEN_Double_Q || node->next->next->mode 
+		if (node && node->next && node->next->next && (node->next->next->mode
+		== TOKEN_EXPR || node->next->next->mode == TOKEN_Double_Q || node->next->next->mode
 		== TOKEN_Single_Q || ( node->next->next->mode == TOKEN_PARENTHESE && node->next->next->value[0] == '(')))
 			return (0);
 	}
@@ -96,7 +96,7 @@ int check_exp(t_node *tmp)
 }
 int	plant_4(t_list *list)
 {
-	t_node	*tmp; 
+	t_node	*tmp;
 	int		count_parentheses = 0;
 	if (list && list->top)
 	{
