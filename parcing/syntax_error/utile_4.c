@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 21:32:37 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/13 00:56:49 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/13 15:53:42 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,9 @@ int	add_args(t_nlist *list, char *str, int *i)
 {
 	int			len;
 	char		*s;
-	t_nnode		*node;
+	// t_nnode		*node;
 
+(void)(list);
 	len = 0;
 	if(!str)
 		return (0);
@@ -83,10 +84,10 @@ int	add_args(t_nlist *list, char *str, int *i)
 	}
 	s[len] = '\0';
 	*i += len;
-	node = c_nnode(s);
-	if (!node)
-		return (0);
-	add_nback(list, node);
+	// node = c_nnode(c_node(s));
+	// if (!node)
+	// 	return (0);
+	// add_nback(list, node);
 	return (1);
 }
 

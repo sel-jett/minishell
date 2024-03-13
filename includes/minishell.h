@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:48:58 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/08 15:10:03 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/13 15:49:33 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 t_node_arbre	*parse_and_or(t_node **tmp);
 t_node			*c_cpynode(t_node *node,t_node *tail,t_list *list);
 t_nlist         *c_nlist(void);
-t_nnode         *c_nnode(char *str);
+t_nnode         *c_nnode(t_node *node);
 void            add_nback(t_nlist *list, t_nnode *node);
 void            affiche(t_list *list);
 int				add_args(t_nlist *list, char *str, int *i);

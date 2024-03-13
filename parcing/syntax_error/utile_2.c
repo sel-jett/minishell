@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:17:58 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/13 03:48:57 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/13 16:02:39 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,11 @@ t_node_arbre	*parse_redir(t_node **tmp)
 		if (!node->list_redir)
 			return (printf("6\n"),NULL);
 		node->list_redir = (*tmp)->list_redir;
-		while(node->list_redir->top){
-			printf("%s\n",node->list_redir->top->value);
-			node->list_redir->top = node->list_redir->top->next;
-			}
-			exit(0);
-		
+		// while(node->list_redir->top){
+		// 	printf("[%s][%d]\n",node->list_redir->top->value,node->list_redir->top->avant_);
+		// 	node->list_redir->top = node->list_redir->top->next;
+		// 	}
+		// exit(0);
 		node->left = node_left;
 		*tmp = (*tmp)->next;
 		while ((*tmp) && (*tmp)->mode == TOKEN_EXPR)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utile_1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:19:17 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/06 01:36:52 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/13 15:30:18 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	check_apres_parentheses(t_node *node)
 	{
 		if (node && node->next && node->next->next && (node->next->next->mode
 		== TOKEN_EXPR || node->next->next->mode == TOKEN_Double_Q || node->next->next->mode
-		== TOKEN_Single_Q || ( node->next->next->mode == TOKEN_PARENTHESE && node->next->next->value[0] == '(')))
+		== TOKEN_Single_Q || (node->next->next->mode == TOKEN_PARENTHESE && node->next->next->value[0] == '(')))
 			return (0);
 	}
 	else if ( (node && node->next)  && (node->next->mode == TOKEN_EXPR || node->next->mode == TOKEN_Single_Q ||  node->next->mode ==

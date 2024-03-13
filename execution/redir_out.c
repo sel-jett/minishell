@@ -3,16 +3,35 @@
 void	ft_execute_redir(t_node_arbre *tree, t_env **env, t_env **exp)
 {
 	int				i;
+	int				j;
 	char			**cmmd;
 	char			**path;
 	char			**envp;
+	struct s_nnode	*tmp;
 
 	i = 0;
-	cmmd = my_malloc(sizeof(char *) * 2, 1);
-	cmmd[0] = ft_strdup(tree->list_redir->top->value);
-	cmmd[1] = NULL;
+	j = -1;
+	tmp = tree->list_redir->top;
+	while (tree->list_redir->top)
+	{
+		if (tree->list_redir->top->avant_ == 1)
+			i++;
+		else
+			break ;
+		tree->list_redir->top = tree->list_redir->top->next;
+	}
+	cmmd = my_malloc(sizeof(char *) * (i + 1), 1);
+	tree->list_redir->top = tmp;
+	while (++j < i)
+	{
+		cmmd[j] = ft_strdup(tree->list_redir->top->value);
+		tree->list_redir->top = tree->list_redir->top->next;
+	
+	}
+	cmmd[j] = NULL;
 	envp = env_to_arr(*env);
 	path = ft_split(get_path(*env), ':');
+	i = 0;
 	while (cmmd[i])
 	{
 		cmmd[i] = ft_expand(cmmd[i]);
