@@ -12,13 +12,22 @@
 
 #include "../includes/minishell.h"
 
-static void	ft_handler(char **envp, char **cmmd, char **path)
+void	ft_handler(char **envp, char **cmmd, char **path)
 {
 	int				i;
 	int				check;
 	char			*env_var;
 
+	if (!cmmd[0])
+		return ;
 	(1) && (check = 0, i = 0, env_var = cmmd[0]);
+	// ft_print_arr(cmmd);
+	// exit(0);
+	// puts("///////////////////////////////path///////////////////////////////\n\n\n");
+	// ft_print_arr(path);
+	// puts("///////////////////////////////envp///////////////////////////////\n\n\n");
+	// ft_print_arr(envp);
+	// exit(0);
 	while (path[i])
 	{
 		if (cmmd[0][0] == '/')
@@ -40,7 +49,7 @@ static void	ft_handler(char **envp, char **cmmd, char **path)
 	}
 }
 
-static char	*get_path(t_env *env)
+char	*get_path(t_env *env)
 {
 	while (env)
 	{
@@ -51,7 +60,7 @@ static char	*get_path(t_env *env)
 	return (NULL);
 }
 
-static bool	is_builtin(char *cmd)
+bool	is_builtin(char *cmd)
 {
 	if (!ft_strncmp_one(cmd, "echo") || !ft_strncmp_one(cmd, "cd") || \
 		!ft_strncmp_one(cmd, "pwd") || !ft_strncmp_one(cmd, "export") || \
@@ -60,7 +69,7 @@ static bool	is_builtin(char *cmd)
 	return (0);
 }
 
-static void	ft_execute_child(char **envp, char **cmmd, char **path)
+void	ft_execute_child(char **envp, char **cmmd, char **path)
 {
 	pid_t	pid;
 	int		status;

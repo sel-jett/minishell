@@ -189,7 +189,7 @@ int	main(int ac, char **av, char **envp)
 					// 	arbre->racine->list->top = arbre->racine->list->top->next;
 					// }
 					// puts(arbre->racine->list->top->value);
-					// execute(arbre->racine, env, exp);
+					execute(arbre->racine, env, exp);
 					// my_malloc(0, 0);
 				}
 			}
