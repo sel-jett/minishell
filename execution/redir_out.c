@@ -1,36 +1,61 @@
 #include "../includes/minishell.h"
 
+int	ft_count_cmd(t_node_arbre *tree)
+{
+	int	i;
+
+	i = 0;
+	while (tree->list_redir->top)
+	{
+		if (tree->list_redir->top->avant_ == 1 || \
+			(tree->list_redir->top->avant_ == 0 && \
+		 		ft_strncmp(tree->list_redir->top->value, ">") && \
+				 	ft_strncmp(tree->list_redir->top->value, ">>") && \
+				 		ft_strncmp(tree->list_redir->top->value, "<")))
+			i++;
+		tree->list_redir->top = tree->list_redir->top->next;
+	}
+	return (i);
+}
+
+char	**ft_tree_to_cmd(t_node_arbre *tree)
+{
+	int				i;
+	char			**cmmd;
+	struct s_nnode	*tmp;
+
+	tmp = tree->list_redir->top;
+	i = ft_count_cmd(tree);
+	cmmd = my_malloc(sizeof(char *) * (i + 1), 1);
+	i = 0;
+	tree->list_redir->top = tmp;
+	while (tree->list_redir->top)
+	{
+		if (tree->list_redir->top->avant_ == 1 || (tree->list_redir->top->avant_ == 0 && \
+			ft_strncmp(tree->list_redir->top->value, ">") && \
+			ft_strncmp(tree->list_redir->top->value, ">>") && \
+			ft_strncmp(tree->list_redir->top->value, "<")))
+			{
+				cmmd[i] = ft_strdup(tree->list_redir->top->value);
+				i++;
+			}
+		tree->list_redir->top = tree->list_redir->top->next;
+	}
+	cmmd[i] = NULL;
+	return (cmmd);
+}
+
 void	ft_execute_redir(t_node_arbre *tree, t_env **env, t_env **exp)
 {
 	int				i;
-	int				j;
 	char			**cmmd;
 	char			**path;
 	char			**envp;
-	struct s_nnode	*tmp;
 
-	i = 0;
-	j = -1;
-	tmp = tree->list_redir->top;
-	while (tree->list_redir->top)
-	{
-		if (tree->list_redir->top->avant_ == 1)
-			i++;
-		else
-			break ;
-		tree->list_redir->top = tree->list_redir->top->next;
-	}
-	cmmd = my_malloc(sizeof(char *) * (i + 1), 1);
-	tree->list_redir->top = tmp;
-	while (++j < i)
-	{
-		cmmd[j] = ft_strdup(tree->list_redir->top->value);
-		tree->list_redir->top = tree->list_redir->top->next;
-	
-	}
-	cmmd[j] = NULL;
+	// exit(0);
 	envp = env_to_arr(*env);
 	path = ft_split(get_path(*env), ':');
+	cmmd = ft_tree_to_cmd(tree);
 	i = 0;
 	while (cmmd[i])
 	{
@@ -46,18 +71,66 @@ void	ft_execute_redir(t_node_arbre *tree, t_env **env, t_env **exp)
 }
 
 
+int	*get_files(struct s_nnode *list)
+{
+	int				*fd;
+	struct s_nnode	*tmp;
+	int				i;
+
+	i = 0;
+	tmp = list;
+	while (tmp)
+	{
+		if (tmp->avant_ == 2)
+			i++;
+		tmp = tmp->next;
+	}
+	tmp = list;
+	fd = my_malloc(sizeof(int) * (i + 1), 1);
+	i = 0;
+	while (tmp)
+	{
+		if (tmp->avant_ == 2)
+		{
+			fd[i] = open(tmp->value, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+			if (fd[i] == -1)
+			{
+				perror("open error");
+				return (0);
+			}
+			i++;
+		}
+		tmp = tmp->next;
+	}
+	fd[i] = -100;
+	return (fd);
+}
+
+void	ft_close_fd(int *fd)
+{
+	int	i;
+
+	i = 0;
+	while (fd[i] != -100)
+	{
+		close(fd[i]);
+		i++;
+	}
+}
+
 void	ft_execute_redir_out(t_node_arbre *tree, t_env	*env, t_env *exp)
 {
-	int		fd;
-	int		status;
-	pid_t	pid;
+	int				*fd;
+	int				status;
+	pid_t			pid;
+	struct s_nnode	*tmp;
+	int				i;
 
-	fd = open(tree->list_redir->tail->value, O_CREAT | O_WRONLY | O_TRUNC, 0644);
-	if (fd == -1)
-	{
-		perror("open error");
-		return ;
-	}
+	tmp = tree->list_redir->top;
+	fd = get_files(tmp);
+	i = 0;
+	while (fd[i] != -100)
+		i++;
 	pid = fork();
 	if (pid == -1)
 	{
@@ -66,8 +139,8 @@ void	ft_execute_redir_out(t_node_arbre *tree, t_env	*env, t_env *exp)
 	}
 	if (pid == 0)
 	{
-		dup2(fd, 1);
-		close(fd);
+		dup2(fd[i - 1], 1);
+		ft_close_fd(fd);
 		ft_execute_redir(tree, &env, &exp);
 		exit(0);
 	}

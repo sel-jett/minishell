@@ -18,7 +18,16 @@ void	ft_handler(char **envp, char **cmmd, char **path)
 	int				check;
 	char			*env_var;
 
+	if (!cmmd[0])
+		return ;
 	(1) && (check = 0, i = 0, env_var = cmmd[0]);
+	// ft_print_arr(cmmd);
+	// exit(0);
+	// puts("///////////////////////////////path///////////////////////////////\n\n\n");
+	// ft_print_arr(path);
+	// puts("///////////////////////////////envp///////////////////////////////\n\n\n");
+	// ft_print_arr(envp);
+	// exit(0);
 	while (path[i])
 	{
 		if (cmmd[0][0] == '/')

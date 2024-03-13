@@ -40,12 +40,6 @@ int	plant_5(t_node	*tmp, t_list *list)
 			node = c_cpynode(tmp,list->tail,list);
 			if (!node)
 				return (0);
-			if (tmp->prev && tmp->prev->mode == TOKEN_SPACE){
-				if (tmp->prev->prev && is_redir(tmp->prev->prev))
-					node->avant_ = 2;
-			}
-			else if(tmp->prev && is_redir(tmp->prev))
-				node->avant_ = 2;
 			add_back(list, node);
 		}
 		if (tmp->next && tmp->next->mode == TOKEN_SPACE)
@@ -211,7 +205,7 @@ int	main(int ac, char **av, char **envp)
 					// 	arbre->racine->list->top = arbre->racine->list->top->next;
 					// }
 					// puts(arbre->racine->list->top->value);
-					// execute(arbre->racine, env, exp);
+					execute(arbre->racine, env, exp);
 					// my_malloc(0, 0);
 				}
 			}
