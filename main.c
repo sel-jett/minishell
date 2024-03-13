@@ -63,6 +63,7 @@ int	plant_5(t_node	*tmp, t_list *list)
 		tmp = tmp->next;
 	}
 
+		// exit(0);
 	return	(1);
 }
 

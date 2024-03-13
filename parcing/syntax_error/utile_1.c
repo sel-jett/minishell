@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:19:17 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/13 15:30:18 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/13 17:41:59 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,10 @@ int	check_enter_parentheses(t_node *node)
 	j = 0;
 	if (node && node->prev  && node->prev->mode == TOKEN_SPACE)
 	{
-		if (node && node->prev && node->prev->prev && (node->prev->prev->mode
-		== TOKEN_EXPR || node->prev->prev->mode == TOKEN_Double_Q || node->prev->prev->mode
-		== TOKEN_Single_Q || node->prev->prev->mode == TOKEN_PARENTHESE || node->prev->prev->mode ==
-		TOKEN_REDIR_APPEND || node->prev->prev->mode == TOKEN_REDIR_IN ||  node->prev->prev->mode ==
-		TOKEN_REDIR_OUT || node->prev->prev->mode == TOKEN_HEREDOC))
+		if (node && node->prev && node->prev->prev && (is_text(node->prev->prev) || is_redir(node->prev->prev)))
 			return (printf("haa ana 1\n"),0);
 	}
-	else if ((node && node->prev)  && (node->prev->mode == TOKEN_EXPR || node->prev->mode == TOKEN_Single_Q || node->prev->mode ==
-	TOKEN_Double_Q || node->prev->mode == TOKEN_REDIR_APPEND || node->prev->mode ==
-	TOKEN_REDIR_OUT|| node->prev->mode == TOKEN_REDIR_IN || node->prev->mode == TOKEN_HEREDOC))
+	else if ((node && node->prev)  && (is_text(node->prev) || is_redir(node->prev)))
 		return (printf("haa ana 2\n"),0);
 	if (node && node->next)
 		node = node->next;
@@ -64,13 +58,13 @@ int	check_apres_parentheses(t_node *node)
 {
 	if (node && node->next  && node->next->mode == TOKEN_SPACE)
 	{
-		if (node && node->next && node->next->next && (node->next->next->mode
-		== TOKEN_EXPR || node->next->next->mode == TOKEN_Double_Q || node->next->next->mode
-		== TOKEN_Single_Q || (node->next->next->mode == TOKEN_PARENTHESE && node->next->next->value[0] == '(')))
+		if (node && node->next && node->next->next && 
+		(is_text(node->next->next) || (node->next->next->mode ==
+		TOKEN_PARENTHESE && node->next->next->value[0] == '(')))
 			return (0);
 	}
-	else if ( (node && node->next)  && (node->next->mode == TOKEN_EXPR || node->next->mode == TOKEN_Single_Q ||  node->next->mode ==
-	TOKEN_Double_Q || (node->next->mode == TOKEN_PARENTHESE && node->next->value[0] == '(')))
+	else if ((node && node->next)  && (is_text(node->next) || (node->next->mode 
+	== TOKEN_PARENTHESE && node->next->value[0] == '(')))
 		return (0);
 	return (1);
 }
@@ -123,9 +117,7 @@ int	plant_4(t_list *list)
 				if (!check_syntax_2(tmp) || !check_syntax_4(tmp))
 					return (printf("syntax error 3!\n"), 0);
 			}
-			if (tmp->mode == TOKEN_REDIR_APPEND || tmp->mode
-				== TOKEN_REDIR_IN || tmp->mode == TOKEN_REDIR_OUT
-				|| tmp->mode == TOKEN_HEREDOC)
+			if (is_redir(tmp))
 			{
 				if (!check_syntax_1(tmp))
 					return (printf("syntax error 4!\n"), 0);

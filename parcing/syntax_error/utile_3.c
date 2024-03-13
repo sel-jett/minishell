@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 21:22:32 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/13 17:23:00 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/13 17:42:37 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@ int	add_list_redir(t_node *node)
 	if (node && node->prev)
 	{
 		tmp1 = node->prev;
-		while (tmp1->prev && (tmp1->prev->mode != TOKEN_AND && tmp1->prev->mode != TOKEN_OR && tmp1->prev->mode != TOKEN_PIPE))
+		while (tmp1->prev && (tmp1->prev->mode !=
+		TOKEN_AND && tmp1->prev->mode !=
+		TOKEN_OR && tmp1->prev->mode != TOKEN_PIPE))
 			tmp1 = tmp1->prev;
 		while (tmp1 && !is_redir(tmp1))
 		{
