@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:49:09 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/13 16:00:30 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/13 16:15:44 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ typedef	struct s_nnode
 	char			*value;
 	int				flag_wilc;
 	int				avant_;
+	// int				val_vide;
+	// int				flag_space;
 	struct s_nnode	*next;
 }t_nnode;
 
