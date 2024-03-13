@@ -42,12 +42,10 @@ int	plant_5(t_node	*tmp, t_list *list)
 				return (0);
 			if (tmp->prev && tmp->prev->mode == TOKEN_SPACE){
 				if (tmp->prev->prev && is_redir(tmp->prev->prev))
-					node->flag_apresred = 2;
+					node->avant_ = 2;
 			}
 			else if(tmp->prev && is_redir(tmp->prev))
-			{
-				node->flag_apresred = 2;
-			}
+				node->avant_ = 2;
 			add_back(list, node);
 		}
 		if (tmp->next && tmp->next->mode == TOKEN_SPACE)
@@ -55,7 +53,7 @@ int	plant_5(t_node	*tmp, t_list *list)
 		if (!tmp->next)
 			node->flag_space = 1;
 		if (tmp->list_arg && tmp->list_arg->top)
-					node->flag_expend = 1;
+			node->flag_expend = 1;
 		tmp = tmp->next;
 	}
 	tmp = list->top;
