@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 21:22:32 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/13 15:50:00 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/13 17:23:00 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,8 @@ int	add_list_redir(t_node *node)
 	{
 		tmp1 = node->prev;
 		while (tmp1->prev && (tmp1->prev->mode != TOKEN_AND && tmp1->prev->mode != TOKEN_OR && tmp1->prev->mode != TOKEN_PIPE))
-		{
 			tmp1 = tmp1->prev;
-		}
-		while (tmp1 && !(tmp1->mode== TOKEN_HEREDOC || tmp1->mode== TOKEN_REDIR_APPEND || tmp1->mode == TOKEN_REDIR_IN || tmp1->mode == TOKEN_REDIR_OUT))
+		while (tmp1 && !is_redir(tmp1))
 		{
 			if (tmp1->mode != TOKEN_SPACE)
 			{
@@ -45,12 +43,16 @@ int	add_list_redir(t_node *node)
 	tmp = tmp->next;
 	if (tmp && tmp->mode == TOKEN_SPACE)
 		tmp = tmp->next;
-	while (tmp && (tmp->mode == TOKEN_EXPR || tmp->mode 
-	== TOKEN_PARENTHESE || tmp->mode == TOKEN_Double_Q || tmp->mode 
-	== TOKEN_Single_Q || tmp->mode == TOKEN_SPACE || tmp->mode== TOKEN_HEREDOC || tmp->mode== TOKEN_REDIR_APPEND || tmp->mode == TOKEN_REDIR_IN || tmp->mode == TOKEN_REDIR_OUT))
+	while (tmp && (tmp->mode == TOKEN_PARENTHESE  || is_text(tmp) || tmp->mode 
+	== TOKEN_SPACE || is_redir(tmp)))
 	{
 	 	if (tmp->mode != TOKEN_SPACE)
 		{
+			if (tmp->prev && tmp->prev->prev && is_redir(tmp->prev->prev) && is_text(tmp))
+				tmp->avant_ = 2;
+			else if(tmp->prev && is_redir(tmp->prev) && is_text(tmp)){
+				tmp->avant_ = 2;
+			}
 			redir_node =  c_nnode(tmp);
 			if (!redir_node)
 				return (0);

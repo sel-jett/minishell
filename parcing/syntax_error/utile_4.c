@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 21:32:37 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/13 16:49:28 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/13 16:50:07 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,16 @@ bool is_text(t_node *tmp)
 	return (0);
 }
 
-int	check_syntax_2(t_node *tmp)//or and
+int	check_syntax_2(t_node *tmp)
 {
 	if (tmp && tmp->prev)
-		if (!is_empty(tmp->prev->value) && (is_text(tmp->prev) || tmp->prev->value[0] == ')'))
-			return (1);
+		if (!is_empty(tmp->prev->value) && (is_text(tmp->prev)
+			|| tmp->prev->value[0] == ')'))
+				return (1);
 	if (tmp && tmp->prev && is_empty(tmp->prev->value) && tmp->prev->prev)
-		if (!is_empty(tmp->prev->prev->value) && (is_text(tmp->prev->prev) ||  tmp->prev->prev->value[0] == ')'))
-			return (1);
+		if (!is_empty(tmp->prev->prev->value) &&
+			(is_text(tmp->prev->prev) ||  tmp->prev->prev->value[0] == ')'))
+				return (1);
 	return (0);
 }
 

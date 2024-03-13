@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:48:58 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/13 16:34:53 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/13 16:52:55 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 // # include "/Users/amel-has/.brew/opt/readline/include/readline/history.h"
 # include <stdbool.h>
 
+bool            is_text(t_node *tmp);
 bool            is_redir(t_node *tmp);
 t_node_arbre	*parse_and_or(t_node **tmp);
 t_node			*c_cpynode(t_node *node,t_node *tail,t_list *list);
