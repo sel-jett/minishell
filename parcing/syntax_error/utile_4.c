@@ -6,22 +6,26 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 21:32:37 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/13 16:18:35 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/13 16:49:28 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+bool is_text(t_node *tmp)
+{
+	if (tmp->mode == TOKEN_EXPR || tmp->mode == TOKEN_Double_Q || tmp->mode == TOKEN_Single_Q)
+		return (1);
+	return (0);
+}
+
 int	check_syntax_2(t_node *tmp)//or and
 {
 	if (tmp && tmp->prev)
-		if (!is_empty(tmp->prev->value) && (tmp->prev->mode == TOKEN_EXPR || tmp->prev->mode
-			== TOKEN_Double_Q || tmp->prev->mode == TOKEN_Single_Q || tmp->prev->value[0] == ')'))
+		if (!is_empty(tmp->prev->value) && (is_text(tmp->prev) || tmp->prev->value[0] == ')'))
 			return (1);
 	if (tmp && tmp->prev && is_empty(tmp->prev->value) && tmp->prev->prev)
-		if (!is_empty(tmp->prev->prev->value) && (tmp->prev->prev->mode == TOKEN_EXPR
-			|| tmp->prev->prev->mode == TOKEN_Double_Q || tmp->prev->prev->mode
-			== TOKEN_Single_Q || tmp->prev->prev->value[0] == ')'))
+		if (!is_empty(tmp->prev->prev->value) && (is_text(tmp->prev->prev) ||  tmp->prev->prev->value[0] == ')'))
 			return (1);
 	return (0);
 }
@@ -33,15 +37,12 @@ int	check_syntax_4(t_node *tmp)
 	if (tmp && tmp->next)
 		if (!is_empty(tmp->next->value) && (tmp->next->mode == TOKEN_EXPR || tmp->next->mode
 			== TOKEN_Double_Q || tmp->next->mode == TOKEN_Single_Q || tmp->next->value[0]
-			== '(' || tmp->next->mode == TOKEN_REDIR_APPEND || tmp->next->mode
-			== TOKEN_REDIR_IN || tmp->next->mode == TOKEN_REDIR_OUT || tmp->next->mode == TOKEN_HEREDOC))
+			== '(' || is_redir(tmp->next)))
 			return (1);
 	if (tmp && tmp->next && is_empty(tmp->next->value) && tmp->next->next)
 		if (!is_empty(tmp->next->next->value) && (tmp->next->next->mode ==
 			TOKEN_EXPR || tmp->next->next->mode == TOKEN_Double_Q || tmp->next->next->mode
-			== TOKEN_Single_Q || tmp->next->next->value[0] == '(' || tmp->next->next->mode
-			== TOKEN_REDIR_IN ||  tmp->next->next->mode == TOKEN_REDIR_OUT ||  tmp->next->next->mode
-			== TOKEN_REDIR_APPEND ||  tmp->next->next->mode == TOKEN_HEREDOC))
+			== TOKEN_Single_Q || tmp->next->next->value[0] == '(' || is_redir(tmp->next->next)))
 			return (1);
 	return (printf("ha ana"), 0);
 }
