@@ -60,6 +60,8 @@ int				add_list_redir(t_node *tmp);
 int				plant_6(t_node *top, t_node_arbre **racine);
 ///////////////////////// EXECUTION //////////////////////////
 
+void	ft_handler(char **envp, char **cmmd, char **path);
+void	ft_execute_child(char **envp, char **cmmd, char **path);
 int		ft_status(int status, bool mode);
 void	execute(t_node_arbre	*tree, t_env *e, t_env *exp);
 void	ft_execute_cmd(t_node_arbre *tree, t_env **env, t_env **exp);
@@ -75,8 +77,11 @@ char	**env_to_arr(t_env *env);
 void	ft_print_arr(char **arr);
 int		liked_size(t_node *tree);
 char	**linkedlist_to_arr(t_node *tree);
+char	*get_path(t_env *env);
 
 ///////////////////////// BUILTINS //////////////////////////
+
+bool	is_builtin(char *cmd);
 int		ft_strlen_b(const char *str);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 char	**ft_split(char const *s, char c);
