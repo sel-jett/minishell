@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 21:32:37 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/13 16:50:07 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/13 17:51:27 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,29 +37,25 @@ int	check_syntax_4(t_node *tmp)
 	if (!add_list_redir(tmp))
 		return (0);
 	if (tmp && tmp->next)
-		if (!is_empty(tmp->next->value) && (tmp->next->mode == TOKEN_EXPR || tmp->next->mode
-			== TOKEN_Double_Q || tmp->next->mode == TOKEN_Single_Q || tmp->next->value[0]
+		if (!is_empty(tmp->next->value) && (is_text(tmp->next) || tmp->next->value[0]
 			== '(' || is_redir(tmp->next)))
 			return (1);
 	if (tmp && tmp->next && is_empty(tmp->next->value) && tmp->next->next)
-		if (!is_empty(tmp->next->next->value) && (tmp->next->next->mode ==
-			TOKEN_EXPR || tmp->next->next->mode == TOKEN_Double_Q || tmp->next->next->mode
-			== TOKEN_Single_Q || tmp->next->next->value[0] == '(' || is_redir(tmp->next->next)))
-			return (1);
-	return (printf("ha ana"), 0);
+		if (!is_empty(tmp->next->next->value) && (is_text(tmp->next->next) ||
+			tmp->next->next->value[0] == '(' || is_redir(tmp->next->next)))
+				return (1);
+	return (printf("ha ana x"), 0);
 }
 
-int	check_syntax_1(t_node *tmp)//redir
+int	check_syntax_1(t_node *tmp)
 {
 	if (!add_list_redir(tmp))
 		return (0);
 	if (tmp && tmp->next)
-		if (!is_empty(tmp->next->value) && (tmp->next->mode == TOKEN_EXPR || tmp->next->mode
-			== TOKEN_Double_Q || tmp->next->mode == TOKEN_Single_Q || tmp->next->value[0] == '(' ))
+		if (!is_empty(tmp->next->value) && (is_text(tmp->next) || tmp->next->value[0] == '(' ))
 			return (1);
 	if (tmp && tmp->next && is_empty(tmp->next->value) && tmp->next->next)
-		if (!is_empty(tmp->next->next->value) && (tmp->next->next->mode == TOKEN_EXPR || tmp->next->next->mode
-			== TOKEN_Double_Q || tmp->next->next->mode == TOKEN_Single_Q || tmp->next->next->value[0] == '('))
+		if (!is_empty(tmp->next->next->value) && (is_text(tmp->next->next) || tmp->next->next->value[0] == '('))
 			return (1);
 	return (0);
 }
