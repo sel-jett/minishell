@@ -9,6 +9,16 @@ int	ft_status(int status, bool mode)
 	return (stat);
 }
 
+void check_wilc(t_node *node)
+{
+	int i = 0;
+	while(node->value[i]){
+		if (node->value[i] == '*')
+			node->flag_wilc = 1;
+		i++;
+	}
+	printf("flag is [%d]\n",node->flag_wilc);
+}
 int	plant_5(t_node	*tmp, t_list *list)
 {
 	t_node	*node;
@@ -20,6 +30,7 @@ int	plant_5(t_node	*tmp, t_list *list)
 	{
 		if (tmp->mode != TOKEN_SPACE)
 		{
+			check_wilc(tmp);
 			node = c_cpynode(tmp,list->tail,list);
 			if (!node)
 				return (0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:49:09 by amel-has          #+#    #+#             */
-/*   Updated: 2024/02/29 13:07:28 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/13 03:54:57 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct s_node
 	struct s_node	*prev;
 	int				mode;
 	int				val_vide;
+	int				flag_wilc;
 	t_nlist			*list_arg;
 	t_nlist			*list_redir;
 	t_list 			*list;

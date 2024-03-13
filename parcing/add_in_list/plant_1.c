@@ -6,13 +6,13 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:00:33 by amel-has          #+#    #+#             */
-/*   Updated: 2024/02/23 21:37:35 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/13 01:18:35 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static int	fun_(t_list *list, int *i,char c,int mode)
+static int	fun_(t_list *list, int *i, char c, int mode)
 {
 	int		len;
 	char	*s;
@@ -23,7 +23,7 @@ static int	fun_(t_list *list, int *i,char c,int mode)
 		len++;
 	if (list->str[*i + len] != c)
 		return (0);
-	s = my_malloc (len * sizeof(char), 1);
+	s = my_malloc (len * sizeof(char) + 1, 1);
 	if (!s)
 		return (0);
 	len = 0;
@@ -33,6 +33,7 @@ static int	fun_(t_list *list, int *i,char c,int mode)
 		len++;
 	}
 	s[len] = '\0';
+	// exit(0);
 	node = c_node(s, list->tail, mode,list);
 	if (!node)
 		return (0);

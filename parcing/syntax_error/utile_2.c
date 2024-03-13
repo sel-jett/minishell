@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utile_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: salah <salah@student.42.fr>                +#+  +:+       +#+        */
+/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:17:58 by amel-has          #+#    #+#             */
-/*   Updated: 2024/02/27 22:29:13 by salah            ###   ########.fr       */
+/*   Updated: 2024/03/13 03:48:57 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_node_arbre *new_sub(t_node_arbre *racine)
 {
 	t_node_arbre *node;
 
-	node = my_malloc(sizeof(t_node_arbre),1);
+	node = my_malloc(sizeof(t_node_arbre), 1);
 	if (!node)
 		return (printf("facccck"),NULL);
 	node->arbre = c_arbre();
@@ -30,7 +30,6 @@ t_node_arbre *new_sub(t_node_arbre *racine)
 t_node_arbre	*parse_parenthese(t_node **tmp)
 {
 	t_node_arbre *node;
-
 	*tmp = (*tmp)->next;
 
 	while ((*tmp)->value[0] != ')')
@@ -78,6 +77,12 @@ t_node_arbre	*parse_redir(t_node **tmp)
 		if (!node->list_redir)
 			return (printf("6\n"),NULL);
 		node->list_redir = (*tmp)->list_redir;
+		while(node->list_redir->top){
+			printf("%s\n",node->list_redir->top->value);
+			node->list_redir->top = node->list_redir->top->next;
+			}
+			exit(0);
+		
 		node->left = node_left;
 		*tmp = (*tmp)->next;
 		while ((*tmp) && (*tmp)->mode == TOKEN_EXPR)
