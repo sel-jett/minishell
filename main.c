@@ -1,30 +1,13 @@
 #include "includes/minishell.h"
 
-int	ft_status(int status, bool mode)
+bool	is_redir(t_node *tmp)
 {
-	static int	stat = 0;
-
-	if (mode)
-		stat = status;
-	return (stat);
-}
-
-void check_wilc(t_node *node)
-{
-	int i = 0;
-	while(node->value[i]){
-		if (node->value[i] == '*')
-			node->flag_wilc = 1;
-		i++;
-	}
-}
-
-bool is_redir(t_node *tmp)
-{
-	if (tmp->mode == TOKEN_HEREDOC || tmp->mode == TOKEN_REDIR_IN || tmp->mode == TOKEN_REDIR_OUT || tmp->mode == TOKEN_REDIR_APPEND)
+	if (tmp->mode == TOKEN_HEREDOC || tmp->mode == TOKEN_REDIR_IN ||
+		tmp->mode == TOKEN_REDIR_OUT || tmp->mode == TOKEN_REDIR_APPEND)
 		return (1);
 	return (0);
-}	
+}
+
 int	plant_5(t_node	*tmp, t_list *list)
 {
 	t_node	*node;
@@ -132,7 +115,7 @@ int	main(int ac, char **av, char **envp)
 	t_list  *list;
 	int     i;
 	int		index;
-	t_arbre			*arbre;
+	t_arbre	*arbre;
 	t_list	*nlist;
 	t_env	*env;
 	t_env	*exp;

@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 21:32:37 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/13 17:51:27 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/13 21:59:40 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,6 @@ int	check_syntax_3(t_node *tmp)
 	char	*str;
 	int		i;
 
-
 	str = tmp->value;
 	(1) && ((str = NULL) && (i = -1));
 	if (!tmp->value[0])
@@ -110,4 +109,26 @@ int	check_syntax_3(t_node *tmp)
 				return (0);
 		}
 	return (1);
+}
+
+int	ft_status(int status, bool mode)
+{
+	static int	stat = 0;
+
+	if (mode)
+		stat = status;
+	return (stat);
+}
+
+void	check_wilc(t_node *node)
+{
+	int i;
+
+	i = 0;
+	while(node->value[i])
+	{
+		if (node->value[i] == '*')
+			node->flag_wilc = 1;
+		i++;
+	}
 }

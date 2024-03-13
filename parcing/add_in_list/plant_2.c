@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   plant_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:04:14 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/06 01:32:25 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/13 22:03:51 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	check(int c)
 {
-	if (c && c != '|' && c != '&' && c != '<'
-		&& c != '>'  && c != ' ' && c != '"' && c != ')' && c != '\'' && c != '(')
+	if (c && c != '|' && c != '&' && c != '<' && c != '>'
+		&& c != '"' && c != ')' && c != '\'' && c != '(' && !is_spaces(c))
 		return (1);
 	return (0);
 }
@@ -36,7 +36,7 @@ int	plant_2(t_list *list, int *i)
 	while (check(list->str[++len + *i]))
 		s[len] = list->str[*i + len];
 	s[len] = '\0';
-	node = c_node(s, list->tail, TOKEN_EXPR,list);
+	node = c_node(s, list->tail, TOKEN_EXPR, list);
 	if (!node)
 		return (0);
 	add_back(list, node);

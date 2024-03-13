@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   plant_3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: salah <salah@student.42.fr>                +#+  +:+       +#+        */
+/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:06:53 by amel-has          #+#    #+#             */
-/*   Updated: 2024/02/27 03:16:59 by salah            ###   ########.fr       */
+/*   Updated: 2024/03/13 22:04:34 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	add_two( t_list *list, int *i, int mode)
 	while (++j < 2)
 		s[j] = list ->str[*i + j];
 	s[j] = '\0';
-	node = c_node(s, list->tail, mode,list);
+	node = c_node(s, list->tail, mode, list);
 	if (!node)
 		return (0);
 	add_back(list, node);
@@ -43,7 +43,7 @@ int	add_one(t_list *list, int *i, int mode)
 	if (!s)
 		return (0);
 	(1) && ((s[0] = list->str[*i]) && (s[1] = '\0'));
-	node = c_node(s, list->tail, mode,list);
+	node = c_node(s, list->tail, mode, list);
 	if (!node)
 		return (0);
 	add_back(list, node);
@@ -54,6 +54,7 @@ int	add_one(t_list *list, int *i, int mode)
 int	plant_3( t_list *list, int *i)
 {
 	int	index;
+
 	index = 0;
 	if (!list->str)
 		return (0);

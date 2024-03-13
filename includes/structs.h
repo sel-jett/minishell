@@ -6,13 +6,15 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:49:09 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/13 16:26:52 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/13 22:24:23 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
+typedef struct s_arbre	t_arbre;
+typedef struct s_list	t_list;
 typedef struct s_env
 {
 	char			*key;
@@ -20,29 +22,27 @@ typedef struct s_env
 	struct s_env	*next;
 }	t_env;
 
-typedef	struct s_nnode
+typedef struct s_nnode
 {
 	char			*value;
 	int				flag_wilc;
 	int				avant_;
 	int				flag_apresred;
 	struct s_nnode	*next;
-}t_nnode;
+}	t_nnode;
 
 typedef struct s_nlist
 {
 	struct s_nnode	*top;
 	struct s_nnode	*tail;
 	int				len;
-}t_nlist;
+}	t_nlist;
 
 typedef struct s_data
 {
 	void			*data;
 	struct s_data	*next;
 }	t_data;
-
-typedef struct s_list t_list;
 
 typedef struct s_node
 {
@@ -54,7 +54,7 @@ typedef struct s_node
 	int				flag_wilc;
 	t_nlist			*list_arg;
 	t_nlist			*list_redir;
-	t_list 			*list;
+	t_list			*list;
 	int				flag_expend;
 	int				flag_space;
 	int				avant_;
@@ -66,7 +66,7 @@ struct s_list
 	t_node	*top;
 	t_node	*tail;
 	int		len;
-	char    *str;
+	char	*str;
 };
 
 enum
@@ -87,7 +87,7 @@ enum
 	TOKEN_DOLLAR,
 	TOKEN_PARENTHESE,
 };
-typedef struct s_arbre t_arbre;
+
 typedef struct s_node_arbre
 {
 	int					mode;
@@ -97,13 +97,13 @@ typedef struct s_node_arbre
 	t_list				*list;
 	t_nlist				*list_arg;
 	t_nlist				*list_redir;
-	struct s_node_arbre *left;
-	struct s_node_arbre *right;
+	struct s_node_arbre	*left;
+	struct s_node_arbre	*right;
 	t_arbre				*arbre;
-} t_node_arbre;
+}	t_node_arbre;
 
 typedef struct s_arbre
 {
 	t_node_arbre	*racine;
-} t_arbre;
+}	t_arbre;
 #endif

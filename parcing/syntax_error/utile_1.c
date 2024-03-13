@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:19:17 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/13 17:41:59 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/13 21:47:10 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,13 +114,15 @@ int	plant_4(t_list *list)
 			else if (tmp->mode == TOKEN_OR || tmp->mode
 				== TOKEN_AND || tmp->mode == TOKEN_PIPE)
 			{
-				if (!check_syntax_2(tmp) || !check_syntax_4(tmp))
-					return (printf("syntax error 3!\n"), 0);
+				if (!check_syntax_2(tmp) )
+					return (printf("minishell: syntax error near unexpected token \n"), 0);
+				if (!check_syntax_4(tmp))
+					return (printf("syntax error 3x!\n"), 0);
 			}
 			if (is_redir(tmp))
 			{
 				if (!check_syntax_1(tmp))
-					return (printf("syntax error 4!\n"), 0);
+					return (printf("minishell: syntax error near unexpected token `newline'\n"), 0);
 			}
 			if (tmp->mode == TOKEN_Double_Q || tmp->mode == TOKEN_EXPR)
 			{
@@ -128,7 +130,7 @@ int	plant_4(t_list *list)
 					return (printf("syntax error 5!\n"), 0);
 				if (tmp->mode == TOKEN_EXPR)
 					if (!check_exp(tmp))
-						return (printf("syntax error 6!\n"), 0);
+						return (printf("minishell: syntax error near unexpected token `newline'\n"), 0);
 			}
 			else if(tmp->mode == TOKEN_Single_Q)
 				checkSinglQ(tmp);
