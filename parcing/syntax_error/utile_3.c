@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 21:22:32 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/13 03:52:55 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/13 15:50:00 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,33 @@
 int	add_list_redir(t_node *node)
 {
 	t_node          *tmp;
+	t_node          *tmp1;
 	t_nnode    		*redir_node;
 
-	(1 == 1) && (tmp = node, redir_node = NULL);
+	(1 == 1) && (tmp = node, redir_node = NULL ,tmp1 = NULL);
 	node->list_redir = c_nlist();
 	if (!node->list_redir)
 		return (0);
+	if (node && node->prev)
+	{
+		tmp1 = node->prev;
+		while (tmp1->prev && (tmp1->prev->mode != TOKEN_AND && tmp1->prev->mode != TOKEN_OR && tmp1->prev->mode != TOKEN_PIPE))
+		{
+			tmp1 = tmp1->prev;
+		}
+		while (tmp1 && !(tmp1->mode== TOKEN_HEREDOC || tmp1->mode== TOKEN_REDIR_APPEND || tmp1->mode == TOKEN_REDIR_IN || tmp1->mode == TOKEN_REDIR_OUT))
+		{
+			if (tmp1->mode != TOKEN_SPACE)
+			{
+				tmp1->avant_ = 1;
+				redir_node =  c_nnode(tmp1);
+				if (!redir_node)
+					return (0);
+				add_nback(node->list_redir, redir_node);
+			}
+			tmp1 = tmp1->next;
+		}
+	}
 	tmp = tmp->next;
 	if (tmp && tmp->mode == TOKEN_SPACE)
 		tmp = tmp->next;
@@ -30,7 +51,7 @@ int	add_list_redir(t_node *node)
 	{
 	 	if (tmp->mode != TOKEN_SPACE)
 		{
-			redir_node =  c_nnode(tmp->value);
+			redir_node =  c_nnode(tmp);
 			if (!redir_node)
 				return (0);
 			add_nback(node->list_redir, redir_node);

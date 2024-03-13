@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:14:17 by amel-has          #+#    #+#             */
-/*   Updated: 2024/02/25 02:13:59 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/13 16:00:14 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,17 @@ void	add_nback(t_nlist *list, t_nnode *node)
 	list->len++;
 }
 
-t_nnode	*c_nnode(char *str)
+t_nnode	*c_nnode(t_node *node)
 {
 	t_nnode	*new_nnode;
 
 	new_nnode = my_malloc(sizeof(t_nnode), 1);
 	if (!new_nnode)
 		return (0);
-	new_nnode->value = str;
+	new_nnode->value = node->value;
 	new_nnode->next = 0;
+	new_nnode->flag_wilc = node->flag_wilc;
+	new_nnode->avant_ = node->avant_;
 	return (new_nnode);
 }
 

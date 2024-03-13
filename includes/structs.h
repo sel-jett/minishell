@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:49:09 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/13 03:54:57 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/13 16:00:30 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ typedef struct s_env
 typedef	struct s_nnode
 {
 	char			*value;
+	int				flag_wilc;
+	int				avant_;
 	struct s_nnode	*next;
 }t_nnode;
 
@@ -54,6 +56,7 @@ typedef struct s_node
 	t_list 			*list;
 	int				flag_expend;
 	int				flag_space;
+	int				avant_;
 }	t_node;
 
 struct s_list
