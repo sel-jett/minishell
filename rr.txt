@@ -1,0 +1,5 @@
+total 24
+drwxr-xr-x   4 sel-jett  candidate   128 Mar 13 16:03 .
+drwxr-xr-x  25 sel-jett  candidate   800 Mar 13 16:21 ..
+-rw-r--r--   1 sel-jett  candidate  5064 Mar 13 16:03 minishell.h
+-rw-r--r--   1 sel-jett  candidate  2276 Mar 13 16:03 structs.h

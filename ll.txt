@@ -1,0 +1,26 @@
+total 496
+drwxr-xr-x  25 sel-jett  candidate     800 Mar 13 16:36 .
+drwx------   5 sel-jett  candidate     160 Mar 13 15:22 ..
+drwxr-xr-x  18 sel-jett  candidate     576 Mar 13 16:35 .git
+drwxr-xr-x   5 sel-jett  candidate     160 Mar 13 15:22 .vscode
+-rw-r--r--   1 sel-jett  candidate    1461 Mar 13 15:22 Makefile
+-rw-r--r--   1 sel-jett  candidate      83 Mar 13 15:22 TODO
+-rw-r--r--   1 sel-jett  candidate      89 Mar 13 16:05 amine.txt
+drwxr-xr-x  13 sel-jett  candidate     416 Mar 13 16:36 builtins
+drwxr-xr-x  11 sel-jett  candidate     352 Mar 13 16:36 execution
+drwxr-xr-x   5 sel-jett  candidate     160 Mar 13 16:36 expanding
+-rw-r--r--   1 sel-jett  candidate       0 Mar 13 16:21 hh.txt
+drwxr-xr-x   4 sel-jett  candidate     128 Mar 13 16:35 includes
+-rw-r--r--   1 sel-jett  candidate       0 Mar 13 16:14 jett.txt
+-rw-r--r--   1 sel-jett  candidate       0 Mar 13 16:15 jk
+-rw-r--r--   1 sel-jett  candidate       0 Mar 13 16:19 jk.txt
+-rw-r--r--   1 sel-jett  candidate    1202 Mar 13 16:14 kk
+-rw-r--r--   1 sel-jett  candidate       0 Mar 13 16:36 ll.txt
+-rw-r--r--   1 sel-jett  candidate    5070 Mar 13 16:35 main.c
+-rwxr-xr-x   1 sel-jett  candidate  210216 Mar 13 16:36 minishell
+drwxr-xr-x   5 sel-jett  candidate     160 Mar 13 15:22 parcing
+-rw-r--r--   1 sel-jett  candidate     252 Mar 13 16:21 rr.txt
+-rw-r--r--   1 sel-jett  candidate      95 Mar 13 16:06 salah
+-rw-r--r--   1 sel-jett  candidate     252 Mar 13 16:19 sh.txt
+-rw-r--r--   1 sel-jett  candidate    1084 Mar 13 16:14 sk
+-rw-r--r--   1 sel-jett  candidate       0 Mar 13 16:19 ss.txt
