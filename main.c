@@ -19,6 +19,12 @@ void check_wilc(t_node *node)
 	}
 }
 
+bool is_redir(t_node *tmp)
+{
+	if (tmp->mode == TOKEN_HEREDOC || tmp->mode == TOKEN_REDIR_IN || tmp->mode == TOKEN_REDIR_OUT || tmp->mode == TOKEN_REDIR_APPEND)
+		return (1);
+	return (0);
+}	
 int	plant_5(t_node	*tmp, t_list *list)
 {
 	t_node	*node;
@@ -34,6 +40,14 @@ int	plant_5(t_node	*tmp, t_list *list)
 			node = c_cpynode(tmp,list->tail,list);
 			if (!node)
 				return (0);
+			if (tmp->prev && tmp->prev->mode == TOKEN_SPACE){
+				if (tmp->prev->prev && is_redir(tmp->prev->prev))
+					node->flag_apresred = 2;
+			}
+			else if(tmp->prev && is_redir(tmp->prev))
+			{
+				node->flag_apresred = 2;
+			}
 			add_back(list, node);
 		}
 		if (tmp->next && tmp->next->mode == TOKEN_SPACE)
