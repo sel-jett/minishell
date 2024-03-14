@@ -1,5 +1,36 @@
 #include "includes/minishell.h"
 
+int ft_strlen(char *str)
+{
+    int i = 0;
+    while(str[i])
+        i++;
+    return i;
+}
+
+char *ft_strjoin2(char *s1,char *s2)
+{
+    if (!s1)
+        return (s2);
+    if (!s2)
+        return (s1);
+    char *str = my_malloc(ft_strlen(s1) + ft_strlen(s2) + 1,1);
+    int i = 0;
+    int j = 0;
+    while (s1[i])
+    {
+        str[j] = s1[i];
+        i++;j++;
+    }
+    i  = 0;
+    while (s1[i])
+    {
+        str[j] = s1[i];
+        i++;j++;
+    }
+    return (str);
+}
+
 bool	is_redir(t_node *tmp)
 {
 	if (tmp->mode == TOKEN_HEREDOC || tmp->mode == TOKEN_REDIR_IN ||
@@ -11,12 +42,14 @@ bool	is_redir(t_node *tmp)
 int	plant_5(t_node	*tmp, t_list *list)
 {
 	t_node	*node;
+	int index;
 
 	node = NULL;
 	if (!list)
 		return (0);
 	while (tmp)
 	{
+		index = 0;
 		if (tmp->mode != TOKEN_SPACE)
 		{
 			check_wilc(tmp);
@@ -137,7 +170,7 @@ int	main(int ac, char **av, char **envp)
 	{
 		(1) && (index = 0, i = 0, list = c_list(), list->str = 0);
 		if (!list)
-			(1) && (printf("ERROR1\n") && (index = 1));
+			(1) && (printf("ERROR CREAT LISTE\n") && (index = 1));
 		if (!index)
 		{
 			list->str = readline("minishell > ");

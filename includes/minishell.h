@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:48:58 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/13 22:37:52 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/14 21:12:40 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,20 @@
 // # include "/Users/amel-has/.brew/opt/readline/include/readline/history.h"
 // void			print_tree(t_node_arbre    *tree, int c);
 // void            affiche(t_list *list);
-
+int             add_args(t_nlist *list, char *str, int *i);
+void            affichage(void);
 int				ft_status(int status, bool mode);
 void			check_wilc(t_node *node);
 bool			is_spaces(char c);
 bool			is_text(t_node *tmp);
 bool			is_redir(t_node *tmp);
 t_node_arbre	*parse_and_or(t_node **tmp);
+t_node_arbre	*parse_pipe(t_node **tmp);
+t_node_arbre	*parse_redir(t_node **tmp);
+t_node_arbre	*parse_cmd(t_node **tmp);
+t_node_arbre	*parse_parenthese(t_node **tmp);
+t_node_arbre	*new_sub(t_node_arbre *racine);
+t_node_arbre	*new_node(int mode, t_node_arbre *left, t_node_arbre *right);
 t_node			*c_cpynode(t_node *node, t_node *tail, t_list *list);
 t_nlist			*c_nlist(void);
 t_nnode			*c_nnode(t_node *node);

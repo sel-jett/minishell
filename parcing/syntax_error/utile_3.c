@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 21:22:32 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/13 22:28:55 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/14 20:43:59 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,27 @@
 
 int	add_list_redir(t_node *node)
 {
-	t_node          *tmp;
-	t_node          *tmp1;
-	t_nnode    		*redir_node;
+	t_node	*tmp;
+	t_node	*tmp1;
+	t_nnode	*redir_node;
 
-	(1 == 1) && (tmp = node, redir_node = NULL ,tmp1 = NULL);
+	(1) && (tmp = node, redir_node = NULL, tmp1 = NULL);
 	node->list_redir = c_nlist();
 	if (!node->list_redir)
 		return (0);
 	if (node && node->prev)
 	{
 		tmp1 = node->prev;
-		while (tmp1->prev && (tmp1->prev->mode !=
-		TOKEN_AND && tmp1->prev->mode !=
-		TOKEN_OR && tmp1->prev->mode != TOKEN_PIPE))
+		while (tmp1->prev && (tmp1->prev->mode != TOKEN_AND
+				&& tmp1->prev->mode != TOKEN_OR
+				&& tmp1->prev->mode != TOKEN_PIPE))
 			tmp1 = tmp1->prev;
 		while (tmp1 && !is_redir(tmp1))
 		{
 			if (tmp1->mode != TOKEN_SPACE)
 			{
 				tmp1->avant_ = 1;
-				redir_node =  c_nnode(tmp1);
+				redir_node = c_nnode(tmp1);
 				if (!redir_node)
 					return (0);
 				add_nback(node->list_redir, redir_node);
@@ -45,23 +45,25 @@ int	add_list_redir(t_node *node)
 	tmp = tmp->next;
 	if (tmp && tmp->mode == TOKEN_SPACE)
 		tmp = tmp->next;
-	while (tmp && (tmp->mode == TOKEN_PARENTHESE  || is_text(tmp) || tmp->mode 
-	== TOKEN_SPACE || is_redir(tmp)))
+	while (tmp && (tmp->mode == TOKEN_PARENTHESE || is_text(tmp) || tmp->mode
+			== TOKEN_SPACE || is_redir(tmp)))
 	{
-	 	if (tmp->mode != TOKEN_SPACE)
+		if (tmp->mode != TOKEN_SPACE)
 		{
-			if (tmp->prev && tmp->prev->prev && is_redir(tmp->prev->prev) && is_text(tmp))
+			if (tmp->prev && tmp->prev->prev
+				&& is_redir(tmp->prev->prev) && is_text(tmp))
 			{
 				tmp->avant_ = 2;
 				if (tmp->prev->prev->mode == TOKEN_REDIR_IN)
 					tmp->avant_ = 3;
 			}
-			else if(tmp->prev && is_redir(tmp->prev) && is_text(tmp)){
+			else if (tmp->prev && is_redir(tmp->prev) && is_text(tmp))
+			{
 				tmp->avant_ = 2;
 				if (tmp->prev->mode == TOKEN_REDIR_IN)
 					tmp->avant_ = 3;
 			}
-			redir_node =  c_nnode(tmp);
+			redir_node = c_nnode(tmp);
 			if (!redir_node)
 				return (0);
 			add_nback(node->list_redir, redir_node);
@@ -85,11 +87,11 @@ t_node_arbre	*add_commade(t_node	*tmp)
 	new_node->list->top = tmp;
 	node = tmp;
 	while (node && (node->mode == TOKEN_EXPR))
-			node = node->next;
+		node = node->next;
 	if (node)
 	{
 		node = node->prev;
-		node->next  = NULL;
+		node->next = NULL;
 	}
 	if (tmp->list_arg && tmp->list_arg->top)
 	{
@@ -99,4 +101,48 @@ t_node_arbre	*add_commade(t_node	*tmp)
 		new_node->list_arg = tmp->list_arg;
 	}
 	return (new_node);
+}
+
+t_node_arbre	*parse_pipe(t_node **tmp)
+{
+	t_node_arbre	*node;
+
+	node = parse_redir(tmp);
+	if (!node)
+		return (NULL);
+	while (*tmp && (*tmp)->mode == TOKEN_PIPE)
+	{
+		*tmp = (*tmp)->next;
+		node = new_node(TOKEN_PIPE, node, parse_redir(tmp));
+		if (!node)
+			return (NULL);
+	}
+	return (node);
+}
+
+t_node_arbre	*parse_and_or(t_node **tmp)
+{
+	t_node_arbre	*node;
+	int				mode;
+
+	node = parse_pipe(tmp);
+	if (!node)
+		return (NULL);
+	while (*tmp && (((*tmp)->mode == TOKEN_OR) || ((*tmp)->mode == TOKEN_AND)))
+	{
+		mode = (*tmp)->mode;
+		*tmp = (*tmp)->next;
+		node = new_node(mode, node, parse_pipe(tmp));
+		if (!node)
+			return (NULL);
+	}
+	return (node);
+}
+
+int	plant_6(t_node *top, t_node_arbre **racine)
+{
+	*racine = parse_and_or(&top);
+	if (!(*racine))
+		return (0);
+	return (1);
 }
