@@ -118,15 +118,54 @@ void	ft_close_fd(int *fd)
 	}
 }
 
+// void	ft_redir_in_files(struct s_nnode *list)
+// {
+// 	int				*fd;
+// 	struct s_nnode	*tmp;
+// 	int				i;
+
+// 	i = 0;
+// 	tmp = list;
+// 	while (tmp)
+// 	{
+// 		if (tmp->avant_ == 3)
+// 			i++;
+// 		tmp = tmp->next;
+// 	}
+// 	tmp = list;
+// 	fd = my_malloc(sizeof(int) * (i + 1), 1);
+// 	i = 0;
+// 	while (tmp)
+// 	{
+// 		if (tmp->avant_ == 2)
+// 		{
+// 			fd[i] = open(tmp->value, O_RDONLY);
+// 			if (fd[i] == -1)
+// 			{
+// 				perror("open error");
+// 				return (0);
+// 			}
+// 			i++;
+// 		}
+// 		tmp = tmp->next;
+// 	}
+// 	fd[i] = -100;
+// 	return (fd);	
+// }
+
 void	ft_execute_redir_out(t_node_arbre *tree, t_env	*env, t_env *exp)
 {
 	int				*fd;
+	// int				*sd;
 	int				status;
 	pid_t			pid;
 	struct s_nnode	*tmp;
+	struct s_nnode	*smp;
 	int				i;
 
 	tmp = tree->list_redir->top;
+	smp = tree->list_redir->top;
+	// sd = redir_in_files(smp);
 	fd = get_files(tmp);
 	i = 0;
 	while (fd[i] != -100)

@@ -62,11 +62,11 @@ int	plant_3( t_list *list, int *i)
 	{
 		if (list->str[*i + 1] && list->str[*i + 1] == '<')
 		{
-			if (!add_two(list, i, TOKEN_REDIR_IN))
+			if (!add_two(list, i, TOKEN_HEREDOC))
 				return (0);
 		}
 		else
-			if (!add_one(list, i, TOKEN_HEREDOC))
+			if (!add_one(list, i, TOKEN_REDIR_IN))
 				return (0);
 	}
 	else if (list->str[*i] == '|')
