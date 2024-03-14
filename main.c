@@ -156,7 +156,7 @@ int	main(int ac, char **av, char **envp)
 					}
 				if (!index)
 					if (!plant_4(list))
-						(1) && (printf("ERROR7\n") && (index = 1));
+						index = 1;
 				if (!index)
 				{
 					nlist = c_list();
