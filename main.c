@@ -142,7 +142,7 @@ int	main(int ac, char **av, char **envp)
 		{
 			list->str = readline("minishell > ");
 			if (!list->str)
-				exit(0);
+				exit(write(1,"exit\n",5));
 			if (is_empty(list->str))
 				index = 1;
 			if (!index)

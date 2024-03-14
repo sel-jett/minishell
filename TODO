@@ -6,3 +6,201 @@
 //
 ''
 .  || ls ls -l
+-------------->
+bash-3.2$ export x=1
+bash-3.2$ echo $x
+1
+bash-3.2$ 
+-------------->
+
+bash-3.2$ export
+declare -x COLORTERM="truecolor"
+declare -x GIT_ASKPASS="/Applications/Visual Studio Code.app/Contents/Resources/app/extensions/git/dist/askpass.sh"
+declare -x HOME="/Users/amel-has"
+declare -x HOMEBREW_CACHE="/tmp/amel-has/Homebrew/Caches"
+declare -x HOMEBREW_TEMP="/tmp/amel-has/Homebrew/Temp"
+declare -x LANG="en_US.UTF-8"
+declare -x LESS="-R"
+declare -x LOGNAME="amel-has"
+declare -x LSCOLORS="Gxfxcxdxbxegedabagacad"
+declare -x LS_COLORS="di=1;36:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43"
+declare -x MallocNanoZone="0"
+declare -x OLDPWD
+declare -x ORIGINAL_XDG_CURRENT_DESKTOP="undefined"
+declare -x PAGER="less"
+declare -x PATH="/Users/amel-has/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Library/Apple/usr/bin:/Users/amel-has/.brew/bin"
+declare -x PWD="/Users/amel-has/Desktop/minimini"
+declare -x SHELL="/bin/zsh"
+declare -x SHLVL="2"
+declare -x SSH_AUTH_SOCK="/private/tmp/com.apple.launchd.SLx3AW6ivd/Listeners"
+declare -x TERM="xterm-256color"
+declare -x TERM_PROGRAM="vscode"
+declare -x TERM_PROGRAM_VERSION="1.83.1"
+declare -x TMPDIR="/var/folders/zz/zyxvpxvq6csfxvn_n000cmvh00356w/T/"
+declare -x USER="amel-has"
+declare -x USER_ZDOTDIR="/Users/amel-has"
+declare -x VSCODE_GIT_ASKPASS_EXTRA_ARGS="--ms-enable-electron-run-as-node"
+declare -x VSCODE_GIT_ASKPASS_MAIN="/Applications/Visual Studio Code.app/Contents/Resources/app/extensions/git/dist/askpass-main.js"
+declare -x VSCODE_GIT_ASKPASS_NODE="/Applications/Visual Studio Code.app/Contents/Frameworks/Code Helper (Plugin).app/Contents/MacOS/Code Helper (Plugin)"
+declare -x VSCODE_GIT_IPC_HANDLE="/var/folders/zz/zyxvpxvq6csfxvn_n000cmvh00356w/T/vscode-git-19501f3398.sock"
+declare -x VSCODE_INJECTION="1"
+declare -x XPC_FLAGS="0x0"
+declare -x XPC_SERVICE_NAME="0"
+declare -x ZDOTDIR="/Users/amel-has"
+declare -x ZSH="/Users/amel-has/.oh-my-zsh"
+declare -x __CF_USER_TEXT_ENCODING="0x194DC:0x0:0x0"
+declare -x x="1"
+bash-3.2$ unset  TERM_PROGRAM TERM HOMEBREW_TEMP SHELL TMPDIR TERM_PROGRAM_VERSION ZDOTDIR ORIGINAL_XDG_CURRENT_DESKTOP MallocNanoZone ZSH USER LS_COLORS SSH_AUTH_SOCK __CF_USER_TEXT_ENCODING PAGER HOMEBREW_CACHE LSCOLORS PATH USER_ZDOTDIR PWD LANG VSCODE_GIT_ASKPASS_EXTRA_ARGS XPC_FLAGS XPC_SERVICE_NAME VSCODE_INJECTION SHLVL HOME VSCODE_GIT_ASKPASS_MAIN LESS LOGNAME VSCODE_GIT_IPC_HANDLE x VSCODE_GIT_ASKPASS_NODE GIT_ASKPASS COLORTERM _
+<----------------------_>
+exit status 
+
+
+<------>
+exit
+<------>
+➜  minimini git:(master) ✗ env -i ./minishell 
+minishell > ls
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==44750==ERROR: AddressSanitizer: SEGV on unknown address 0x000000000000 (pc 0x000102d82809 bp 0x7ffeece8f930 sp 0x7ffeece8f890 T0)
+==44750==The signal is caused by a READ memory access.
+==44750==Hint: address points to the zero page.
+    #0 0x102d82809 in ft_handler+0xe9 (/Users/amel-has/Desktop/minimini/./minishell:x86_64+0x100012809)
+    #1 0x102d82e13 in ft_execute_child+0x123 (/Users/amel-has/Desktop/minimini/./minishell:x86_64+0x100012e13)
+    #2 0x102d831ac in ft_execute_cmd+0x29c (/Users/amel-has/Desktop/minimini/./minishell:x86_64+0x1000131ac)
+    #3 0x102d82047 in execute+0x237 (/Users/amel-has/Desktop/minimini/./minishell:x86_64+0x100012047)
+    #4 0x102d75c54 in main+0x764 (/Users/amel-has/Desktop/minimini/./minishell:x86_64+0x100005c54)
+    #5 0x7fff6e446cc8 in start+0x0 (/usr/lib/system/libdyld.dylib:x86_64+0x1acc8)
+
+==44750==Register values:
+rax = 0x0000000000000000  rbx = 0x00007ffeece8f980  rcx = 0x0000100000000000  rdx = 0x0000100000000000  
+rdi = 0x00006020000002d0  rsi = 0x0000602000000310  rbp = 0x00007ffeece8f930  rsp = 0x00007ffeece8f890  
+ r8 = 0x0000000000000403   r9 = 0x0000000000000000  r10 = 0x000000000000002c  r11 = 0x0000000000000206  
+r12 = 0x0000000000000000  r13 = 0x0000000000000000  r14 = 0x0000000000000000  r15 = 0x0000000000000000  
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV (/Users/amel-has/Desktop/minimini/./minishell:x86_64+0x100012809) in ft_handler+0xe9
+==44750==ABORTING
+<---------------------->
+minishell > cd -
+=================================================================
+==45131==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x60200000942f at pc 0x0001001ce345 bp 0x7ffeefa47080 sp 0x7ffeefa47078
+READ of size 1 at 0x60200000942f thread T0
+    #0 0x1001ce344 in cd_home+0x2e4 (minishell:x86_64+0x100016344)
+    #1 0x1001ce89e in cd+0x5e (minishell:x86_64+0x10001689e)
+    #2 0x1001cedfe in ft_builtin+0x1be (minishell:x86_64+0x100016dfe)
+    #3 0x1001cb18f in ft_execute_cmd+0x27f (minishell:x86_64+0x10001318f)
+    #4 0x1001ca047 in execute+0x237 (minishell:x86_64+0x100012047)
+    #5 0x1001bdc54 in main+0x764 (minishell:x86_64+0x100005c54)
+    #6 0x7fff6e446cc8 in start+0x0 (libdyld.dylib:x86_64+0x1acc8)
+
+0x60200000942f is located 1 bytes to the left of 2-byte region [0x602000009430,0x602000009432)
+allocated by thread T0 here:
+    #0 0x10023b17d in wrap_malloc+0x9d (libclang_rt.asan_osx_dynamic.dylib:x86_64h+0x4917d)
+    #1 0x1001d429f in ft_strjoin_char+0x2f (minishell:x86_64+0x10001c29f)
+    #2 0x1001d4b55 in ft_expand+0x685 (minishell:x86_64+0x10001cb55)
+    #3 0x1001cb0cb in ft_execute_cmd+0x1bb (minishell:x86_64+0x1000130cb)
+    #4 0x1001ca047 in execute+0x237 (minishell:x86_64+0x100012047)
+    #5 0x1001bdc54 in main+0x764 (minishell:x86_64+0x100005c54)
+    #6 0x7fff6e446cc8 in start+0x0 (libdyld.dylib:x86_64+0x1acc8)
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (minishell:x86_64+0x100016344) in cd_home+0x2e4
+Shadow bytes around the buggy address:
+  0x1c0400001230: fa fa 00 00 fa fa 00 01 fa fa 00 00 fa fa 05 fa
+  0x1c0400001240: fa fa 00 00 fa fa 00 02 fa fa 00 00 fa fa 06 fa
+  0x1c0400001250: fa fa 00 00 fa fa 00 00 fa fa 00 00 fa fa 00 00
+  0x1c0400001260: fa fa 00 00 fa fa 03 fa fa fa 00 00 fa fa 02 fa
+  0x1c0400001270: fa fa 00 00 fa fa 01 fa fa fa 02 fa fa fa 03 fa
+=>0x1c0400001280: fa fa 01 fa fa[fa]02 fa fa fa 00 00 fa fa fa fa
+  0x1c0400001290: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x1c04000012a0: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x1c04000012b0: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x1c04000012c0: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x1c04000012d0: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+  Shadow gap:              cc
+==45131==ABORTING
+[1]    45131 abort      ./minishell
+<-------------------------------------->
+minishell > $path
+error execve
+=================================================================
+==46453==ERROR: AddressSanitizer: global-buffer-overflow on address 0x00010e584dae at pc 0x00010e5b8b97 bp 0x7ffee169a110 sp 0x7ffee16998e0
+READ of size 16 at 0x00010e584dae thread T0
+    #0 0x10e5b8b96 in wrap_write+0x176 (libclang_rt.asan_osx_dynamic.dylib:x86_64h+0x1fb96)
+    #1 0x10e5824f3 in ft_execve+0x43 (minishell:x86_64+0x10001d4f3)
+    #2 0x10e577a86 in ft_handler+0x366 (minishell:x86_64+0x100012a86)
+    #3 0x10e577e13 in ft_execute_child+0x123 (minishell:x86_64+0x100012e13)
+    #4 0x10e5781ac in ft_execute_cmd+0x29c (minishell:x86_64+0x1000131ac)
+    #5 0x10e577047 in execute+0x237 (minishell:x86_64+0x100012047)
+    #6 0x10e56ac54 in main+0x764 (minishell:x86_64+0x100005c54)
+    #7 0x7fff6e446cc8 in start+0x0 (libdyld.dylib:x86_64+0x1acc8)
+
+0x00010e584dae is located 50 bytes to the left of global variable '<string literal>' defined in 'execution/utils.c:39:33' (0x10e584de0) of size 2
+  '<string literal>' is ascii string '='
+0x00010e584dae is located 0 bytes to the right of global variable '<string literal>' defined in 'execution/utils.c:18:12' (0x10e584da0) of size 14
+  '<string literal>' is ascii string 'error execve
+'
+SUMMARY: AddressSanitizer: global-buffer-overflow (libclang_rt.asan_osx_dynamic.dylib:x86_64h+0x1fb96) in wrap_write+0x176
+Shadow bytes around the buggy address:
+  0x100021cb0960: f9 f9 f9 f9 00 04 f9 f9 f9 f9 f9 f9 03 f9 f9 f9
+  0x100021cb0970: f9 f9 f9 f9 07 f9 f9 f9 f9 f9 f9 f9 02 f9 f9 f9
+  0x100021cb0980: f9 f9 f9 f9 04 f9 f9 f9 f9 f9 f9 f9 02 f9 f9 f9
+  0x100021cb0990: f9 f9 f9 f9 07 f9 f9 f9 f9 f9 f9 f9 02 f9 f9 f9
+  0x100021cb09a0: f9 f9 f9 f9 00 00 05 f9 f9 f9 f9 f9 00 00 00 03
+=>0x100021cb09b0: f9 f9 f9 f9 00[06]f9 f9 f9 f9 f9 f9 02 f9 f9 f9
+  0x100021cb09c0: f9 f9 f9 f9 04 f9 f9 f9 f9 f9 f9 f9 00 00 00 00
+  0x100021cb09d0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x100021cb09e0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x100021cb09f0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x100021cb0a00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+  Shadow gap:              cc
+==46453==ABORTING
+<-------------------------------------------------------------->
+➜  minimini git:(master) ✗ bash
+
+The default interactive shell is now zsh.
+To update your account to use zsh, please run `chsh -s /bin/zsh`.
+For more details, please visit https://support.apple.com/kb/HT208050.
+bash-3.2$ ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|wc
+       9       9      77
+bash-3.2$ 
+
+<------------------------------------------------------------->
+

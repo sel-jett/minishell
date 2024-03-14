@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:19:17 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/14 00:55:04 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/14 01:04:45 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	check_enter_parentheses(t_node *node)
 		node = node->next;
 	}
 	if (i == j)
-		return (printf("haa ana 3\n"),0);
+		return (affichage(),0);
 	if (i)
 		return (1);
 	return (printf("ha ana 4"),0);
