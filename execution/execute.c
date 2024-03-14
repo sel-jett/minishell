@@ -18,7 +18,7 @@ void	ft_handler(char **envp, char **cmmd, char **path)
 	int				check;
 	char			*env_var;
 
-	if (!cmmd[0])
+	if (!cmmd || !cmmd[0] || !cmmd[0][0])
 		return ;
 	(1) && (check = 0, i = 0, env_var = cmmd[0]);
 	// ft_print_arr(cmmd);

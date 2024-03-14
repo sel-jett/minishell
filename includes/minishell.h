@@ -75,7 +75,7 @@ void			ft_execute_and(t_node_arbre *tree, t_env *e, t_env *exp);
 void			ft_execute_or(t_node_arbre *tree, t_env *e, t_env *exp);
 void			ft_execute_subshell(t_node_arbre *tree, t_env *e, t_env *exp);
 void			ft_execute_redir_out(t_node_arbre *tree, t_env	*env, t_env *exp);
-void			ft_execute_redir_in(t_node_arbre *tree, t_env *env, t_env *exp);
+// void			ft_execute_redir_in(t_node_arbre *tree, t_env *env, t_env *exp);
 void			ft_printf(const char *str, const char *str2);
 void			ft_execve(char *env_var, char **env, char **cmmd);
 char			**env_to_arr(t_env *env);
@@ -121,5 +121,6 @@ int				ft_strncmp(char *s1, char *s2);
 ////////////////////////////////////// EXPAND //////////////////
 int				count_expand(char *cmd);
 char			*ft_expand(char *cmd);
+char            *ft_itoa(int n);
 
 #endif

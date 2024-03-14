@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:34:19 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/13 22:06:59 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/14 00:51:28 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	plants(t_list *list, int *i)
 	else if ((list->str[*i] == '"' || list->str[*i] == '\''))
 	{
 		if (!plant_1(list, i))
-			return (printf("ERROR2\n"), 0);
+			return (printf("minishell: syntax error near unexpected token\n"), 0);
 	}
 	else if (list->str[*i] == '(' || list->str[*i] == ')')
 	{

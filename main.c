@@ -89,7 +89,15 @@ void print_in_dot(t_node_arbre *node,int i, int *count, FILE *fp)
 	else if (node->mode == TOKEN_REDIR_IN)
 		fprintf(fp, "  node%d [label=\"%s %s\"];\n", node_id, "<", node->value);
 	else if (node->mode == TOKEN_EXPR)
+	{
 		fprintf(fp, "  node%d [label=\"%s \"];\n", node_id, (char *)node->value);
+		while (node->list->top)
+		{
+			fprintf(fp, "  node%d [label=\"%s \"];\n", *count, node->list->top->value);
+			node->list->top = node->list->top->next;
+		}
+		// node->list->top->value;
+	}
     if (i != -1){
         fprintf(fp, "  node%d -> node%d;\n",i,node_id);
     }
@@ -142,7 +150,7 @@ int	main(int ac, char **av, char **envp)
 		{
 			list->str = readline("minishell > ");
 			if (!list->str)
-				exit(0);
+				exit(write(1,"exit\n",5));
 			if (is_empty(list->str))
 				index = 1;
 			if (!index)
@@ -156,7 +164,7 @@ int	main(int ac, char **av, char **envp)
 					}
 				if (!index)
 					if (!plant_4(list))
-						(1) && (printf("ERROR7\n") && (index = 1));
+						index = 1;
 				if (!index)
 				{
 					nlist = c_list();

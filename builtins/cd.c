@@ -186,5 +186,6 @@ void	ft_builtin(char **cmd, t_env **cenv, t_env **exp)
 		ft_printf("minishell: ", cmd[0]);
 		ft_printf(":", " command not found");
 		ft_printf("\n", NULL);
+		ft_status(127, 1);
 	}
 }

@@ -5,11 +5,11 @@ SRCS = ./parcing/allocation_free/creation1.c ./parcing/allocation_free/my_malloc
 	   ./parcing/add_in_list/plants.c ./parcing/allocation_free/creation3.c ./parcing/syntax_error/utile_2.c \
 	   ./parcing/syntax_error/utile_3.c  ./parcing/syntax_error/affiche.c ./parcing/syntax_error/utile_4.c \
 	   ./execution/execution.c ./execution/execute.c ./execution/pipe.c ./execution/or.c ./execution/subshell.c \
-	   ./execution/and.c ./execution/redir_in.c ./execution/redir_out.c \
+	   ./execution/and.c ./execution/redir_out.c \
 	   ./builtins/cd.c ./builtins/echo.c ./builtins/export_checker.c ./builtins/env_parser.c \
 	   ./builtins/export.c ./builtins/ft_split.c ./builtins/ft_strlcpy.c \
 	   ./builtins/pwd.c ./builtins/unset.c ./builtins/utils.c ./builtins/ft_sort_list.c \
-	   ./expanding/expand.c ./execution/utils.c
+	   ./expanding/expand.c ./execution/utils.c ./expanding/ft_itoa.c
 
 OBJS    = $(SRCS:.c=.o)
 # READLINE_LIB = $(shell brew --prefix readline)/lib
