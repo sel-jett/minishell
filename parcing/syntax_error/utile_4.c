@@ -6,15 +6,16 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 21:32:37 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/14 01:03:03 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/14 21:13:33 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-bool is_text(t_node *tmp)
+bool	is_text(t_node *tmp)
 {
-	if (tmp->mode == TOKEN_EXPR || tmp->mode == TOKEN_Double_Q || tmp->mode == TOKEN_Single_Q)
+	if (tmp->mode == TOKEN_EXPR || tmp->mode == TOKEN_Double_Q
+		|| tmp->mode == TOKEN_Single_Q)
 		return (1);
 	return (0);
 }
@@ -23,12 +24,12 @@ int	check_syntax_2(t_node *tmp)
 {
 	if (tmp && tmp->prev)
 		if (!is_empty(tmp->prev->value) && (is_text(tmp->prev)
-			|| tmp->prev->value[0] == ')'))
-				return (1);
+				|| tmp->prev->value[0] == ')'))
+			return (1);
 	if (tmp && tmp->prev && is_empty(tmp->prev->value) && tmp->prev->prev)
-		if (!is_empty(tmp->prev->prev->value) &&
-			(is_text(tmp->prev->prev) ||  tmp->prev->prev->value[0] == ')'))
-				return (1);
+		if (!is_empty(tmp->prev->prev->value)
+			&& (is_text(tmp->prev->prev) || tmp->prev->prev->value[0] == ')'))
+			return (1);
 	return (0);
 }
 
@@ -37,13 +38,14 @@ int	check_syntax_4(t_node *tmp)
 	if (!add_list_redir(tmp))
 		return (0);
 	if (tmp && tmp->next)
-		if (!is_empty(tmp->next->value) && (is_text(tmp->next) || tmp->next->value[0]
-			== '(' || is_redir(tmp->next)))
+		if (!is_empty(tmp->next->value) && (is_text(tmp->next)
+				|| tmp->next->value[0] == '(' || is_redir(tmp->next)))
 			return (1);
 	if (tmp && tmp->next && is_empty(tmp->next->value) && tmp->next->next)
-		if (!is_empty(tmp->next->next->value) && (is_text(tmp->next->next) ||
-			tmp->next->next->value[0] == '(' || is_redir(tmp->next->next)))
-				return (1);
+		if (!is_empty(tmp->next->next->value) && (is_text(tmp->next->next)
+				|| tmp->next->next->value[0] == '('
+				|| is_redir(tmp->next->next)))
+			return (1);
 	return (printf("ha ana x"), 0);
 }
 
@@ -52,41 +54,14 @@ int	check_syntax_1(t_node *tmp)
 	if (!add_list_redir(tmp))
 		return (0);
 	if (tmp && tmp->next)
-		if (!is_empty(tmp->next->value) && (is_text(tmp->next) || tmp->next->value[0] == '(' ))
+		if (!is_empty(tmp->next->value) && (is_text(tmp->next)
+				|| tmp->next->value[0] == '(' ))
 			return (1);
 	if (tmp && tmp->next && is_empty(tmp->next->value) && tmp->next->next)
-		if (!is_empty(tmp->next->next->value) && (is_text(tmp->next->next) || tmp->next->next->value[0] == '('))
+		if (!is_empty(tmp->next->next->value) && (is_text(tmp->next->next)
+				|| tmp->next->next->value[0] == '('))
 			return (1);
 	return (0);
-}
-
-int	add_args(t_nlist *list, char *str, int *i)
-{
-	int			len;
-	char		*s;
-	t_nnode		*node;
-
-	len = 0;
-	if(!str)
-		return (0);
-	while (str[len] && str[len] != ' ' && str[len] != '$')
-		len++;
-	s = my_malloc(sizeof(char) * (len + 1), 1);
-	if (!s)
-		return (0);
-	len = 0;
-	while (str && str[len] && str[len] != ' ' && str[len] != '$')
-	{
-		s[len] = str[len];
-		len++;
-	}
-	s[len] = '\0';
-	*i += len;
-	node = c_nnode(c_node(s,NULL,-1,NULL));
-	if (!node)
-		return (0);
-	add_nback(list, node);
-	return (1);
 }
 
 int	check_syntax_3(t_node *tmp)
@@ -102,33 +77,13 @@ int	check_syntax_3(t_node *tmp)
 	if (!tmp->list_arg)
 		return (0);
 	while (str && str[++i])
-		while (str  && str[i] && str[i] == '$')
+	{
+		while (str && str[i] && str[i] == '$')
 		{
 			i++;
 			if (str && str[i] && !add_args(tmp->list_arg, &str[i], &i))
 				return (0);
 		}
-	return (1);
-}
-
-int	ft_status(int status, bool mode)
-{
-	static int	stat = 0;
-
-	if (mode)
-		stat = status;
-	return (stat);
-}
-
-void	check_wilc(t_node *node)
-{
-	int i;
-
-	i = 0;
-	while(node->value[i])
-	{
-		if (node->value[i] == '*')
-			node->flag_wilc = 1;
-		i++;
 	}
+	return (1);
 }
