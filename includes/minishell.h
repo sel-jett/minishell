@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:48:58 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/14 21:12:40 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/15 01:19:23 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include "structs.h"
 # include <unistd.h>
 # include <fcntl.h>
+# include <string.h>
+# include <errno.h>
 # include <signal.h>
 # include <readline/readline.h>
 # include <readline/history.h>
@@ -27,6 +29,7 @@
 // # include "/Users/amel-has/.brew/opt/readline/include/readline/history.h"
 // void			print_tree(t_node_arbre    *tree, int c);
 // void            affiche(t_list *list);
+int             plant_5(t_node	*tmp, t_list *list);
 int             add_args(t_nlist *list, char *str, int *i);
 void            affichage(void);
 int				ft_status(int status, bool mode);
@@ -82,7 +85,7 @@ void			ft_execute_and(t_node_arbre *tree, t_env *e, t_env *exp);
 void			ft_execute_or(t_node_arbre *tree, t_env *e, t_env *exp);
 void			ft_execute_subshell(t_node_arbre *tree, t_env *e, t_env *exp);
 void			ft_execute_redir_out(t_node_arbre *tree, t_env	*env, t_env *exp);
-void			ft_execute_redir_in(t_node_arbre *tree, t_env *env, t_env *exp);
+// void			ft_execute_redir_in(t_node_arbre *tree, t_env *env, t_env *exp);
 void			ft_printf(const char *str, const char *str2);
 void			ft_execve(char *env_var, char **env, char **cmmd);
 char			**env_to_arr(t_env *env);
@@ -128,5 +131,6 @@ int				ft_strncmp(char *s1, char *s2);
 ////////////////////////////////////// EXPAND //////////////////
 int				count_expand(char *cmd);
 char			*ft_expand(char *cmd);
+char            *ft_itoa(int n);
 
 #endif

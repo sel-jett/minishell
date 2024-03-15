@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 21:32:37 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/14 21:13:33 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/15 03:07:53 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	check_syntax_4(t_node *tmp)
 				|| tmp->next->next->value[0] == '('
 				|| is_redir(tmp->next->next)))
 			return (1);
-	return (printf("ha ana x"), 0);
+	return (0);
 }
 
 int	check_syntax_1(t_node *tmp)
@@ -70,9 +70,7 @@ int	check_syntax_3(t_node *tmp)
 	int		i;
 
 	str = tmp->value;
-	(1) && ((str = NULL) && (i = -1));
-	if (!tmp->value[0])
-		return (tmp->val_vide = 1, 1);
+	(1) && ((str = 0) && (i = -1));
 	tmp->list_arg = c_nlist();
 	if (!tmp->list_arg)
 		return (0);

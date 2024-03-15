@@ -87,6 +87,11 @@ char	*ft_expand(char *cmd)
 	int		l;
 
 	(1) && (k = 0, i = 0, j = 0, l = 0, venv = NULL);
+	if (!ft_strncmp(cmd, "$?"))
+	{
+		new_cmd = ft_itoa(ft_status(0, 0));
+		return (new_cmd);
+	}
 	(1) && (new_cmd = malloc(1), new_cmd[0] = '\0');
 	while (cmd[i])
 	{

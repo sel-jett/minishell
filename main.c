@@ -1,36 +1,5 @@
 #include "includes/minishell.h"
 
-int ft_strlen(char *str)
-{
-    int i = 0;
-    while(str[i])
-        i++;
-    return i;
-}
-
-char *ft_strjoin2(char *s1,char *s2)
-{
-    if (!s1)
-        return (s2);
-    if (!s2)
-        return (s1);
-    char *str = my_malloc(ft_strlen(s1) + ft_strlen(s2) + 1,1);
-    int i = 0;
-    int j = 0;
-    while (s1[i])
-    {
-        str[j] = s1[i];
-        i++;j++;
-    }
-    i  = 0;
-    while (s1[i])
-    {
-        str[j] = s1[i];
-        i++;j++;
-    }
-    return (str);
-}
-
 bool	is_redir(t_node *tmp)
 {
 	if (tmp->mode == TOKEN_HEREDOC || tmp->mode == TOKEN_REDIR_IN ||
@@ -39,49 +8,6 @@ bool	is_redir(t_node *tmp)
 	return (0);
 }
 
-int	plant_5(t_node	*tmp, t_list *list)
-{
-	t_node	*node;
-	int index;
-
-	node = NULL;
-	if (!list)
-		return (0);
-	while (tmp)
-	{
-		index = 0;
-		if (tmp->mode != TOKEN_SPACE)
-		{
-			check_wilc(tmp);
-			node = c_cpynode(tmp,list->tail,list);
-			if (!node)
-				return (0);
-			add_back(list, node);
-		}
-		if (tmp->next && tmp->next->mode == TOKEN_SPACE)
-				node->flag_space = 1;
-		if (!tmp->next)
-			node->flag_space = 1;
-		if (tmp->list_arg && tmp->list_arg->top)
-			node->flag_expend = 1;
-		tmp = tmp->next;
-	}
-	tmp = list->top;
-	while (tmp)
-	{
-		if (tmp->mode == TOKEN_Double_Q || tmp->mode == TOKEN_Single_Q)
-		{
-			if (tmp->mode == TOKEN_Double_Q)
-				if (tmp->list_arg && tmp->list_arg->top)
-					node->flag_expend = 1;
-			tmp->mode = TOKEN_EXPR;
-		}
-		tmp = tmp->next;
-	}
-
-		// exit(0);
-	return	(1);
-}
 
 // void	handler_signel(int signal, siginfo_t *siginfo, void *vd)
 // {
@@ -122,7 +48,15 @@ void print_in_dot(t_node_arbre *node,int i, int *count, FILE *fp)
 	else if (node->mode == TOKEN_REDIR_IN)
 		fprintf(fp, "  node%d [label=\"%s %s\"];\n", node_id, "<", node->value);
 	else if (node->mode == TOKEN_EXPR)
+	{
 		fprintf(fp, "  node%d [label=\"%s \"];\n", node_id, (char *)node->value);
+		while (node->list->top)
+		{
+			fprintf(fp, "  node%d [label=\"%s \"];\n", *count, node->list->top->value);
+			node->list->top = node->list->top->next;
+		}
+		// node->list->top->value;
+	}
     if (i != -1){
         fprintf(fp, "  node%d -> node%d;\n",i,node_id);
     }
@@ -180,13 +114,15 @@ int	main(int ac, char **av, char **envp)
 				index = 1;
 			if (!index)
 			{
-				add_history(list->str);
+				add_history(list->str);//what's this
 				while (list->str[i])
+				{
 					if (!plants(list, &i))
 					{
 						index = 1;
 						break ;
 					}
+				}
 				if (!index)
 					if (!plant_4(list))
 						index = 1;

@@ -95,7 +95,9 @@ int	*get_files(struct s_nnode *list)
 			fd[i] = open(tmp->value, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 			if (fd[i] == -1)
 			{
-				perror("open error");
+				ft_printf("minishell: %s", tmp->value);
+				ft_printf(": %s\n", strerror(errno));
+				// perror("open error");
 				return (0);
 			}
 			i++;
@@ -118,32 +120,77 @@ void	ft_close_fd(int *fd)
 	}
 }
 
-void	ft_execute_redir_out(t_node_arbre *tree, t_env	*env, t_env *exp)
+int	*ft_redir_in_files(struct s_nnode *list)
 {
 	int				*fd;
-	int				status;
-	pid_t			pid;
 	struct s_nnode	*tmp;
 	int				i;
 
+	i = 0;
+	tmp = list;
+	while (tmp)
+	{
+		if (tmp->avant_ == 3)
+			i++;
+		tmp = tmp->next;
+	}
+	tmp = list;
+	fd = my_malloc(sizeof(int) * (i + 1), 1);
+	i = 0;
+	while (tmp)
+	{
+		if (tmp->avant_ == 3)
+		{
+			fd[i] = open(tmp->value, O_RDONLY);
+			if (fd[i] == -1)
+			{
+				ft_printf("minishell: ", tmp->value);
+				ft_printf(": ", strerror(errno));
+				ft_printf("\n", NULL);
+				// perror("open error");
+				return (NULL);
+			}
+			i++;
+		}
+		tmp = tmp->next;
+	}
+	fd[i] = -100;
+	return (fd);	
+}
+
+void	ft_execute_redir_out(t_node_arbre *tree, t_env	*env, t_env *exp)
+{
+	int				*fd;
+	int				*sd;
+	struct s_nnode	*tmp;
+	struct s_nnode	*smp;
+	int				i;
+	int				j;
+	int				orig_stdout;
+	int				orig_stdin;
+
+	orig_stdout = dup(1);
+	orig_stdin = dup(0);
 	tmp = tree->list_redir->top;
+	smp = tree->list_redir->top;
+	sd = ft_redir_in_files(smp);
 	fd = get_files(tmp);
+	if (fd == NULL || sd == NULL)
+		return ;
 	i = 0;
 	while (fd[i] != -100)
 		i++;
-	pid = fork();
-	if (pid == -1)
-	{
-		perror("fork error");
-		return ;
-	}
-	if (pid == 0)
-	{
+	j = 0;
+	while (sd[j] != -100)
+		j++;
+	if (i > 0)
 		dup2(fd[i - 1], 1);
-		ft_close_fd(fd);
-		ft_execute_redir(tree, &env, &exp);
-		exit(0);
-	}
-	waitpid(pid, &status, 0);
-	ft_status(status, 1);
+	if (j > 0)
+		dup2(sd[j - 1], 0);
+	// exit(0);
+	ft_close_fd(fd);
+	ft_close_fd(sd);
+	ft_execute_redir(tree, &env, &exp);
+	dup2(orig_stdout, 1);
+	dup2(orig_stdin, 0);
 }

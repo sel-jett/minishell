@@ -56,12 +56,16 @@ int	add_list_redir(t_node *node)
 				tmp->avant_ = 2;
 				if (tmp->prev->prev->mode == TOKEN_REDIR_IN)
 					tmp->avant_ = 3;
+				if (tmp->prev->prev->mode == TOKEN_REDIR_APPEND)
+					tmp->avant_ = 4;
 			}
 			else if (tmp->prev && is_redir(tmp->prev) && is_text(tmp))
 			{
 				tmp->avant_ = 2;
 				if (tmp->prev->mode == TOKEN_REDIR_IN)
 					tmp->avant_ = 3;
+				if (tmp->prev->mode == TOKEN_REDIR_APPEND)
+					tmp->avant_ = 4;
 			}
 			redir_node = c_nnode(tmp);
 			if (!redir_node)

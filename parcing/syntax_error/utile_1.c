@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:19:17 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/14 20:58:15 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/15 03:07:19 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ int	check_enter_parentheses(t_node *node)
 	{
 		if (node && node->prev && node->prev->prev
 			&& (is_text(node->prev->prev) || is_redir(node->prev->prev)))
-			return (printf("ha ana 1\n"), 0);
+			return (affichage(), 0);
 	}
 	else if ((node && node->prev)
 		&& (is_text(node->prev) || is_redir(node->prev)))
-		return (printf("ha ana 2\n"), 0);
+		return (affichage(), 0);
 	if (node && node->next)
 		node = node->next;
 	while (node && node->value[0] != ')')
@@ -57,12 +57,6 @@ int	check_apres_parentheses(t_node *node)
 				== TOKEN_PARENTHESE && node->next->value[0] == '(')))
 		return (0);
 	return (1);
-}
-
-void	checksinglq(t_node *tmp)
-{
-	if (!tmp-> value[0])
-		tmp->val_vide = 1;
 }
 
 int	check_exp(t_node *tmp)
@@ -96,17 +90,17 @@ int	plant_4(t_list *list)
 			{
 				count_parentheses++;
 				if (!check_enter_parentheses(tmp))
-					return (printf("syntax error 0!\n"), 0);
+					return (0);
 			}
 			else if (tmp->mode == TOKEN_PARENTHESE && tmp->value[0] == ')'
 				&& count_parentheses == 0)
-				return (printf("syntax error 1!\n"), 0);
+				return (affichage(), 0);
 			else if (tmp->mode == TOKEN_PARENTHESE && tmp->value[0] == ')'
 				&& count_parentheses >= 1)
 			{
 				count_parentheses--;
 				if (!check_apres_parentheses(tmp))
-					return (printf("syntax error 2!\n"), 0);
+					return (affichage(), 0);
 			}
 			else if (tmp->mode == TOKEN_OR || tmp->mode
 				== TOKEN_AND || tmp->mode == TOKEN_PIPE)
@@ -124,13 +118,11 @@ int	plant_4(t_list *list)
 			if (tmp->mode == TOKEN_Double_Q || tmp->mode == TOKEN_EXPR)
 			{
 				if (!check_syntax_3(tmp))
-					return (printf("syntax error 5!\n"), 0);
+					return (0);
 				if (tmp->mode == TOKEN_EXPR)
 					if (!check_exp(tmp))
 						return (affichage(), 0);
 			}
-			else if (tmp->mode == TOKEN_Single_Q)
-				checksinglq(tmp);
 			tmp = tmp->next;
 		}
 	}

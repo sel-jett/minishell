@@ -138,60 +138,6 @@ Shadow byte legend (one shadow byte represents 8 application bytes):
   Shadow gap:              cc
 ==45131==ABORTING
 [1]    45131 abort      ./minishell
-<-------------------------------------->
-minishell > $path
-error execve
-=================================================================
-==46453==ERROR: AddressSanitizer: global-buffer-overflow on address 0x00010e584dae at pc 0x00010e5b8b97 bp 0x7ffee169a110 sp 0x7ffee16998e0
-READ of size 16 at 0x00010e584dae thread T0
-    #0 0x10e5b8b96 in wrap_write+0x176 (libclang_rt.asan_osx_dynamic.dylib:x86_64h+0x1fb96)
-    #1 0x10e5824f3 in ft_execve+0x43 (minishell:x86_64+0x10001d4f3)
-    #2 0x10e577a86 in ft_handler+0x366 (minishell:x86_64+0x100012a86)
-    #3 0x10e577e13 in ft_execute_child+0x123 (minishell:x86_64+0x100012e13)
-    #4 0x10e5781ac in ft_execute_cmd+0x29c (minishell:x86_64+0x1000131ac)
-    #5 0x10e577047 in execute+0x237 (minishell:x86_64+0x100012047)
-    #6 0x10e56ac54 in main+0x764 (minishell:x86_64+0x100005c54)
-    #7 0x7fff6e446cc8 in start+0x0 (libdyld.dylib:x86_64+0x1acc8)
-
-0x00010e584dae is located 50 bytes to the left of global variable '<string literal>' defined in 'execution/utils.c:39:33' (0x10e584de0) of size 2
-  '<string literal>' is ascii string '='
-0x00010e584dae is located 0 bytes to the right of global variable '<string literal>' defined in 'execution/utils.c:18:12' (0x10e584da0) of size 14
-  '<string literal>' is ascii string 'error execve
-'
-SUMMARY: AddressSanitizer: global-buffer-overflow (libclang_rt.asan_osx_dynamic.dylib:x86_64h+0x1fb96) in wrap_write+0x176
-Shadow bytes around the buggy address:
-  0x100021cb0960: f9 f9 f9 f9 00 04 f9 f9 f9 f9 f9 f9 03 f9 f9 f9
-  0x100021cb0970: f9 f9 f9 f9 07 f9 f9 f9 f9 f9 f9 f9 02 f9 f9 f9
-  0x100021cb0980: f9 f9 f9 f9 04 f9 f9 f9 f9 f9 f9 f9 02 f9 f9 f9
-  0x100021cb0990: f9 f9 f9 f9 07 f9 f9 f9 f9 f9 f9 f9 02 f9 f9 f9
-  0x100021cb09a0: f9 f9 f9 f9 00 00 05 f9 f9 f9 f9 f9 00 00 00 03
-=>0x100021cb09b0: f9 f9 f9 f9 00[06]f9 f9 f9 f9 f9 f9 02 f9 f9 f9
-  0x100021cb09c0: f9 f9 f9 f9 04 f9 f9 f9 f9 f9 f9 f9 00 00 00 00
-  0x100021cb09d0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-  0x100021cb09e0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-  0x100021cb09f0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-  0x100021cb0a00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-Shadow byte legend (one shadow byte represents 8 application bytes):
-  Addressable:           00
-  Partially addressable: 01 02 03 04 05 06 07 
-  Heap left redzone:       fa
-  Freed heap region:       fd
-  Stack left redzone:      f1
-  Stack mid redzone:       f2
-  Stack right redzone:     f3
-  Stack after return:      f5
-  Stack use after scope:   f8
-  Global redzone:          f9
-  Global init order:       f6
-  Poisoned by user:        f7
-  Container overflow:      fc
-  Array cookie:            ac
-  Intra object redzone:    bb
-  ASan internal:           fe
-  Left alloca redzone:     ca
-  Right alloca redzone:    cb
-  Shadow gap:              cc
-==46453==ABORTING
 <-------------------------------------------------------------->
 ➜  minimini git:(master) ✗ bash
 
@@ -204,3 +150,5 @@ bash-3.2$
 
 <------------------------------------------------------------->
 
+
+echo bonjour > test\ 1

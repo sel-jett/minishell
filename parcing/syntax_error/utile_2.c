@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:17:58 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/14 20:37:16 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/15 03:09:16 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ t_node_arbre	*parse_cmd(t_node **tmp)
 	t_node			*node;
 	t_node_arbre	*arbre_node;
 
-	arbre_node = NULL;
+	arbre_node = 0;
 	if ((*tmp)->mode == TOKEN_PARENTHESE && (*tmp)->value[0] == '(')
 		return (parse_parenthese(tmp));
 	if ((*tmp)->mode == TOKEN_EXPR)
