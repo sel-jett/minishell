@@ -19,6 +19,8 @@
 # include "structs.h"
 # include <unistd.h>
 # include <fcntl.h>
+# include <string.h>
+# include <errno.h>
 # include <signal.h>
 # include <readline/readline.h>
 # include <readline/history.h>

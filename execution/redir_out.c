@@ -95,7 +95,9 @@ int	*get_files(struct s_nnode *list)
 			fd[i] = open(tmp->value, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 			if (fd[i] == -1)
 			{
-				perror("open error");
+				ft_printf("minishell: %s", tmp->value);
+				ft_printf(": %s\n", strerror(errno));
+				// perror("open error");
 				return (0);
 			}
 			i++;
@@ -142,7 +144,10 @@ int	*ft_redir_in_files(struct s_nnode *list)
 			fd[i] = open(tmp->value, O_RDONLY);
 			if (fd[i] == -1)
 			{
-				perror("open error");
+				ft_printf("minishell: ", tmp->value);
+				ft_printf(": ", strerror(errno));
+				ft_printf("\n", NULL);
+				// perror("open error");
 				return (NULL);
 			}
 			i++;
