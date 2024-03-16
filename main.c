@@ -50,11 +50,11 @@ void print_in_dot(t_node_arbre *node,int i, int *count, FILE *fp)
 	else if (node->mode == TOKEN_EXPR)
 	{
 		fprintf(fp, "  node%d [label=\"%s \"];\n", node_id, (char *)node->value);
-		while (node->list->top)
-		{
-			fprintf(fp, "  node%d [label=\"%s \"];\n", *count, node->list->top->value);
-			node->list->top = node->list->top->next;
-		}
+		// while (node->list->top)
+		// {
+		// 	fprintf(fp, "  node%d [label=\"%s \"];\n", *count, node->list->top->value);
+		// 	node->list->top = node->list->top->next;
+		// }
 		// node->list->top->value;
 	}
     if (i != -1){
@@ -148,6 +148,7 @@ int	main(int ac, char **av, char **envp)
 				// exit(0);
 				if (!index)
 				{
+					// printf("[%d]\n",arbre->racine->list->top->flag_expend);
 					// exit(0);
 					// env = ft_env_parser(envp);
 					// env = ft_env_parser(envp);

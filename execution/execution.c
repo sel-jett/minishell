@@ -12,7 +12,7 @@
 
 #include "../includes/minishell.h"
 
-void	execute(t_node_arbre	*tree, t_env	*env, t_env	*exp)
+void	execute(t_node_arbre *tree, t_env *env, t_env *exp)
 {
 	if (!tree)
 		return ;
@@ -30,4 +30,7 @@ void	execute(t_node_arbre	*tree, t_env	*env, t_env	*exp)
 		ft_execute_redir_out(tree, env, exp);
 	else if (tree->mode == TOKEN_REDIR_IN)
 		ft_execute_redir_out(tree, env, exp);
+	else if (tree->mode == TOKEN_REDIR_APPEND)
+		ft_execute_redir_out(tree, env, exp);
+	
 }

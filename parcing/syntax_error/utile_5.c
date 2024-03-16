@@ -33,9 +33,9 @@ int is_empty(char *str)
 
 int ft_status(int status, bool mode)
 {
-	static int stat = 0;
+	static int	stat;
 
-	if (mode)
+	if (mode == 1)
 		stat = status;
 	return (stat);
 }

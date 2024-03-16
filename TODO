@@ -54,9 +54,6 @@ bash-3.2$ unset  TERM_PROGRAM TERM HOMEBREW_TEMP SHELL TMPDIR TERM_PROGRAM_VERSI
 <----------------------_>
 exit status 
 
-
-<------>
-exit
 <------>
 ➜  minimini git:(master) ✗ env -i ./minishell 
 minishell > ls
@@ -80,65 +77,9 @@ r12 = 0x0000000000000000  r13 = 0x0000000000000000  r14 = 0x0000000000000000  r1
 AddressSanitizer can not provide additional info.
 SUMMARY: AddressSanitizer: SEGV (/Users/amel-has/Desktop/minimini/./minishell:x86_64+0x100012809) in ft_handler+0xe9
 ==44750==ABORTING
-<---------------------->
-minishell > cd -
-=================================================================
-==45131==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x60200000942f at pc 0x0001001ce345 bp 0x7ffeefa47080 sp 0x7ffeefa47078
-READ of size 1 at 0x60200000942f thread T0
-    #0 0x1001ce344 in cd_home+0x2e4 (minishell:x86_64+0x100016344)
-    #1 0x1001ce89e in cd+0x5e (minishell:x86_64+0x10001689e)
-    #2 0x1001cedfe in ft_builtin+0x1be (minishell:x86_64+0x100016dfe)
-    #3 0x1001cb18f in ft_execute_cmd+0x27f (minishell:x86_64+0x10001318f)
-    #4 0x1001ca047 in execute+0x237 (minishell:x86_64+0x100012047)
-    #5 0x1001bdc54 in main+0x764 (minishell:x86_64+0x100005c54)
-    #6 0x7fff6e446cc8 in start+0x0 (libdyld.dylib:x86_64+0x1acc8)
 
-0x60200000942f is located 1 bytes to the left of 2-byte region [0x602000009430,0x602000009432)
-allocated by thread T0 here:
-    #0 0x10023b17d in wrap_malloc+0x9d (libclang_rt.asan_osx_dynamic.dylib:x86_64h+0x4917d)
-    #1 0x1001d429f in ft_strjoin_char+0x2f (minishell:x86_64+0x10001c29f)
-    #2 0x1001d4b55 in ft_expand+0x685 (minishell:x86_64+0x10001cb55)
-    #3 0x1001cb0cb in ft_execute_cmd+0x1bb (minishell:x86_64+0x1000130cb)
-    #4 0x1001ca047 in execute+0x237 (minishell:x86_64+0x100012047)
-    #5 0x1001bdc54 in main+0x764 (minishell:x86_64+0x100005c54)
-    #6 0x7fff6e446cc8 in start+0x0 (libdyld.dylib:x86_64+0x1acc8)
-
-SUMMARY: AddressSanitizer: heap-buffer-overflow (minishell:x86_64+0x100016344) in cd_home+0x2e4
-Shadow bytes around the buggy address:
-  0x1c0400001230: fa fa 00 00 fa fa 00 01 fa fa 00 00 fa fa 05 fa
-  0x1c0400001240: fa fa 00 00 fa fa 00 02 fa fa 00 00 fa fa 06 fa
-  0x1c0400001250: fa fa 00 00 fa fa 00 00 fa fa 00 00 fa fa 00 00
-  0x1c0400001260: fa fa 00 00 fa fa 03 fa fa fa 00 00 fa fa 02 fa
-  0x1c0400001270: fa fa 00 00 fa fa 01 fa fa fa 02 fa fa fa 03 fa
-=>0x1c0400001280: fa fa 01 fa fa[fa]02 fa fa fa 00 00 fa fa fa fa
-  0x1c0400001290: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
-  0x1c04000012a0: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
-  0x1c04000012b0: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
-  0x1c04000012c0: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
-  0x1c04000012d0: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
-Shadow byte legend (one shadow byte represents 8 application bytes):
-  Addressable:           00
-  Partially addressable: 01 02 03 04 05 06 07 
-  Heap left redzone:       fa
-  Freed heap region:       fd
-  Stack left redzone:      f1
-  Stack mid redzone:       f2
-  Stack right redzone:     f3
-  Stack after return:      f5
-  Stack use after scope:   f8
-  Global redzone:          f9
-  Global init order:       f6
-  Poisoned by user:        f7
-  Container overflow:      fc
-  Array cookie:            ac
-  Intra object redzone:    bb
-  ASan internal:           fe
-  Left alloca redzone:     ca
-  Right alloca redzone:    cb
-  Shadow gap:              cc
-==45131==ABORTING
-[1]    45131 abort      ./minishell
 <-------------------------------------------------------------->
+
 ➜  minimini git:(master) ✗ bash
 
 The default interactive shell is now zsh.
@@ -150,8 +91,11 @@ bash-3.2$
 
 <------------------------------------------------------------->
 
-
 echo bonjour > test\ 1
+
+echo '"$PATH"'
+
+echo "'$PATH'"
 
 cat ' ' && ls
 ls " " || ls
