@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 21:22:32 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/16 01:10:53 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/16 06:16:18 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	add_list_redir(t_node *node)
 			tmp1 = tmp1->next;
 		}
 	}
-	tmp = tmp->next;
+	// tmp = tmp->next;
 	if (tmp && tmp->mode == TOKEN_SPACE)
 		tmp = tmp->next;
 	while (tmp && (tmp->mode == TOKEN_PARENTHESE || is_text(tmp) || tmp->mode
@@ -99,7 +99,6 @@ t_node_arbre	*add_commade(t_node	*tmp)
 	}
 	if (tmp->list_arg && tmp->list_arg->top)
 	{
-		printf("ha ama >> \n");
 		new_node->list_arg = c_nlist();
 		if (!new_node->list_arg)
 			return (NULL);

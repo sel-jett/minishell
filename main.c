@@ -145,9 +145,9 @@ int	main(int ac, char **av, char **envp)
 					if (!plant_6(nlist->top, &arbre->racine))
 						(1 == 1) && (printf("ERROR7\n"), index = 1);
 				}
+				// exit(0);
 				if (!index)
 				{
-					printf("[%d]\n",arbre->racine->list->top->flag_expend);
 					// exit(0);
 					// env = ft_env_parser(envp);
 					// env = ft_env_parser(envp);
@@ -160,7 +160,7 @@ int	main(int ac, char **av, char **envp)
 					// 	arbre->racine->list->top = arbre->racine->list->top->next;
 					// }
 					// puts(arbre->racine->list->top->value);
-					// execute(arbre->racine, env, exp);
+					execute(arbre->racine, env, exp);
 					// my_malloc(0, 0);
 				}
 			}
