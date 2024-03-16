@@ -37,7 +37,7 @@ int	plant_5(t_node	*tmp, t_list *list)
 		// 	node->flag_space = 1;
 		if (tmp->list_arg && tmp->list_arg->top)
 		{
-			printf("je suis la");
+			// printf("je suis la");
 			node->flag_expend = 1;
 			if (tmp->mode == TOKEN_EXPR)
 				node->flag_expend = 2;
@@ -52,7 +52,7 @@ int	plant_5(t_node	*tmp, t_list *list)
 			if (tmp->mode == TOKEN_Double_Q)
 				if (tmp->list_arg && tmp->list_arg->top)
 				{
-					printf("je suis la");
+					// printf("je suis la");
 					node->flag_expend = 1;
 				}
 			tmp->mode = TOKEN_EXPR;

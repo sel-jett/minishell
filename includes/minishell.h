@@ -130,7 +130,7 @@ void			ft_sort_list(t_env **env);
 int				ft_strncmp(char *s1, char *s2);
 ////////////////////////////////////// EXPAND //////////////////
 int				count_expand(char *cmd);
-char			*ft_expand(char *cmd);
+char			*ft_expand(t_env *exp, char *cmd);
 char            *ft_itoa(int n);
 
 #endif

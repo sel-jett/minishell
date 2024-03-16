@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 12:09:39 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/08 15:12:17 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/16 06:17:54 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,12 +151,12 @@ void	ft_execute_cmd(t_node_arbre *tree, t_env **env, t_env **exp)
 	while (cmmd[i])
 	{
 		if (smp->flag_expend == 1)
-			cmmd[i] = ft_expand(cmmd[i]);
+			cmmd[i] = ft_expand(*exp, cmmd[i]);
+		else if (smp->flag_expend == 2)
+			cmmd[i] = ft_expand(*exp, cmmd[i]);
 		smp = smp->next; 
 		i++;
 	}
-	// ft_print_arr(cmmd);
-	// exit(0);
 	if (is_builtin(cmmd[0]))
 	{
 		ft_builtin(cmmd, env, exp);

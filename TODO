@@ -93,11 +93,7 @@ bash-3.2$
 
 echo bonjour > test\ 1
 
-echo '"$PATH"'
 
-echo "'$PATH'"
-
-cat ' ' && ls
 ls " " || ls
 minishell: syntax error near unexpected token
 
@@ -118,3 +114,33 @@ To update your account to use zsh, please run `chsh -s /bin/zsh`.
 For more details, please visit https://support.apple.com/kb/HT208050.
 bash-3.2$ env | grep SHLVL
 SHLVL=4
+
+bash-3.2$ cat << $HOME
+> "$HOME"
+> dd
+> $HOME
+"/Users/sel-jett"
+dd
+bash-3.2$ cat << "$HOME"
+> "$HOME"
+> $HOME
+"$HOME"
+bash-3.2$ cat << $HOME
+> '$HOME'
+> $HOME
+'/Users/sel-jett'
+
+bash-3.2$ cat << "'$HOME'"
+> dd
+> d
+> d
+> d
+> 
+> $HOME
+> '$HOME'
+dd
+d
+d
+d
+
+$HOME

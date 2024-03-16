@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 21:59:00 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/15 06:46:05 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/16 06:15:41 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char	*ft_strjoin_char(char *s1, char s2)
 static void	ft_norminette(int *i, int *k, char *cmd)
 {
 	(*i)++;
-	while (cmd[*i] && cmd[*i] != '-')
+	while (cmd[*i] && cmd[*i] != '-' && cmd[*i] != 32 && cmd[*i] != '\'')
 	{
 		(*k)++;
 		(*i)++;
@@ -67,7 +67,7 @@ static char	*ft_second_norminette(int *i, int *k, char *cmd)
 	venv = malloc(*k + 1);
 	while (*k > 0)
 	{
-		if (cmd[*i - *k] == '-')
+		if (cmd[*i - *k] == '-' || cmd[*i - *k] == 32 || cmd[*i - *k] == '\'')
 			break;
 		venv[l] = cmd[*i - *k];
 		l++;
@@ -77,16 +77,15 @@ static char	*ft_second_norminette(int *i, int *k, char *cmd)
 	return (venv);
 }
 
-char	*ft_expand(char *cmd)
+char	*ft_expand(t_env *exp, char *cmd)
 {
 	char	*new_cmd;
 	char	*venv;
 	int		k;
 	int		i;
-	int		j;
 	int		l;
 
-	(1) && (k = 0, i = 0, j = 0, l = 0, venv = NULL);
+	(1) && (k = 0, i = 0, l = 0, venv = NULL);
 	if (!ft_strncmp(cmd, "$?"))
 	{
 		new_cmd = ft_itoa(ft_status(0, 0));
@@ -100,16 +99,15 @@ char	*ft_expand(char *cmd)
 		{
 			ft_norminette(&i, &k, cmd);
 			venv = ft_second_norminette(&i, &k, cmd);
-			if (getenv(venv))
-				new_cmd = ft_strjoin(new_cmd, getenv(venv));
-			j += ft_strlen_b(getenv(venv));
+			if (value_key(exp, venv))
+				new_cmd = ft_strjoin(new_cmd, value_key(exp, venv));
 			continue;
 		}
-		j += ft_strlen_b(venv);
+		venv = NULL;
 		new_cmd = ft_strjoin_char(new_cmd, cmd[i]);
-		j++;
 		i++;
 	}
-	new_cmd[j] = '\0';
+	i = ft_strlen_b(new_cmd);
+	new_cmd[i] = '\0';
 	return (new_cmd);
 }

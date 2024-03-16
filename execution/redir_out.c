@@ -59,7 +59,7 @@ void	ft_execute_redir(t_node_arbre *tree, t_env **env, t_env **exp)
 	i = 0;
 	while (cmmd[i])
 	{
-		cmmd[i] = ft_expand(cmmd[i]);
+		cmmd[i] = ft_expand(*exp, cmmd[i]);
 		i++;
 	}
 	if (is_builtin(cmmd[0]))
@@ -228,6 +228,8 @@ void	ft_execute_redir_out(t_node_arbre *tree, t_env	*env, t_env *exp)
 
 	orig_stdout = dup(1);
 	orig_stdin = dup(0);
+	// dprintf(2, "lfassi = %s\n", tree->list_redir->top->value);
+	// exit(0);
 	tmp = tree->list_redir->top;
 	smp = tree->list_redir->top;
 	amp = tree->list_redir->top;
