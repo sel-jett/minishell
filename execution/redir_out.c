@@ -228,6 +228,10 @@ void	ft_execute_redir_out(t_node_arbre *tree, t_env	*env, t_env *exp)
 
 	orig_stdout = dup(1);
 	orig_stdin = dup(0);
+	if (!ft_strncmp(tree->list_redir->top->value, ">>") || \
+		!ft_strncmp(tree->list_redir->top->value, ">") || \
+		!ft_strncmp(tree->list_redir->top->value, "<"))
+		tree->list_redir->top = tree->list_redir->top->next;
 	// dprintf(2, "lfassi = %s\n", tree->list_redir->top->value);
 	// exit(0);
 	tmp = tree->list_redir->top;

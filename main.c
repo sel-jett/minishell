@@ -145,6 +145,7 @@ int	main(int ac, char **av, char **envp)
 					if (!plant_6(nlist->top, &arbre->racine))
 						(1 == 1) && (printf("ERROR7\n"), index = 1);
 				}
+				// exit(0);
 				if (!index)
 				{
 					// printf("[%d]\n",arbre->racine->list->top->flag_expend);

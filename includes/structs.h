@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:49:09 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/15 01:15:26 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/16 05:56:09 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_nnode
 	int				flag_wilc;
 	int				avant_;
 	int				flag_apresred;
+	int				mode;
 	struct s_nnode	*next;
 }	t_nnode;
 
