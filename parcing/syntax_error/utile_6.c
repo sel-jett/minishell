@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 03:19:27 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/15 03:20:41 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/16 02:31:40 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,17 @@ int	plant_5(t_node	*tmp, t_list *list)
 				return (0);
 			add_back(list, node);
 		}
-		if (tmp->next && tmp->next->mode == TOKEN_SPACE)
+		if (tmp->prev && tmp->prev->mode == TOKEN_SPACE)
 			node->flag_space = 1;
-		if (!tmp->next)
-			node->flag_space = 1;
+		// if (!tmp->next)
+		// 	node->flag_space = 1;
 		if (tmp->list_arg && tmp->list_arg->top)
+		{
+			printf("je suis la");
 			node->flag_expend = 1;
+			if (tmp->mode == TOKEN_EXPR)
+				node->flag_expend = 2;
+		}
 		tmp = tmp->next;
 	}
 	tmp = list->top;
@@ -46,7 +51,10 @@ int	plant_5(t_node	*tmp, t_list *list)
 		{
 			if (tmp->mode == TOKEN_Double_Q)
 				if (tmp->list_arg && tmp->list_arg->top)
+				{
+					printf("je suis la");
 					node->flag_expend = 1;
+				}
 			tmp->mode = TOKEN_EXPR;
 		}
 		tmp = tmp->next;

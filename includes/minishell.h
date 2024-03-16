@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:48:58 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/15 01:19:23 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/15 05:10:34 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 // void            affiche(t_list *list);
 int             plant_5(t_node	*tmp, t_list *list);
 int             add_args(t_nlist *list, char *str, int *i);
-void            affichage(void);
+void            affichage(int n);
 int				ft_status(int status, bool mode);
 void			check_wilc(t_node *node);
 bool			is_spaces(char c);
