@@ -58,10 +58,10 @@ int	plant_5(t_node	*tmp, t_list *list)
 				return (0);
 			add_back(list, node);
 		}
-		if (tmp->next && tmp->next->mode == TOKEN_SPACE)
+		if (tmp->prev && tmp->prev->mode == TOKEN_SPACE)
 				node->flag_space = 1;
-		if (!tmp->next)
-			node->flag_space = 1;
+		// if (!tmp->next)
+		// 	node->flag_space = 1;
 		if (tmp->list_arg && tmp->list_arg->top)
 			node->flag_expend = 1;
 		tmp = tmp->next;
@@ -124,11 +124,11 @@ void print_in_dot(t_node_arbre *node,int i, int *count, FILE *fp)
 	else if (node->mode == TOKEN_EXPR)
 	{
 		fprintf(fp, "  node%d [label=\"%s \"];\n", node_id, (char *)node->value);
-		while (node->list->top)
-		{
-			fprintf(fp, "  node%d [label=\"%s \"];\n", *count, node->list->top->value);
-			node->list->top = node->list->top->next;
-		}
+		// while (node->list->top)
+		// {
+		// 	fprintf(fp, "  node%d [label=\"%s \"];\n", *count, node->list->top->value);
+		// 	node->list->top = node->list->top->next;
+		// }
 		// node->list->top->value;
 	}
     if (i != -1){

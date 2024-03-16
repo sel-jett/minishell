@@ -97,7 +97,6 @@ int	*get_files(struct s_nnode *list)
 			{
 				ft_printf("minishell: %s", tmp->value);
 				ft_printf(": %s\n", strerror(errno));
-				// perror("open error");
 				return (0);
 			}
 			i++;
@@ -147,7 +146,6 @@ int	*ft_redir_in_files(struct s_nnode *list)
 				ft_printf("minishell: ", tmp->value);
 				ft_printf(": ", strerror(errno));
 				ft_printf("\n", NULL);
-				// perror("open error");
 				return (NULL);
 			}
 			i++;
@@ -158,14 +156,73 @@ int	*ft_redir_in_files(struct s_nnode *list)
 	return (fd);	
 }
 
+int	*ft_append_files(struct s_nnode *list)
+{
+	int				*fd;
+	struct s_nnode	*tmp;
+	int				i;
+
+	i = 0;
+	tmp = list;
+	while (tmp)
+	{
+		if (tmp->avant_ == 4)
+			i++;
+		tmp = tmp->next;
+	}
+	tmp = list;
+	fd = my_malloc(sizeof(int) * (i + 1), 1);
+	i = 0;
+	while (tmp)
+	{
+		if (tmp->avant_ == 4)
+		{
+			fd[i] = open(tmp->value, O_CREAT | O_WRONLY | O_APPEND , 0644);
+			if (fd[i] == -1)
+			{
+				ft_printf("minishell: %s", tmp->value);
+				ft_printf(": %s\n", strerror(errno));
+				return (0);
+			}
+			i++;
+		}
+		tmp = tmp->next;
+	}
+	fd[i] = -100;
+	return (fd);
+}
+
+void	files_dupper(int *fd, int *sd, int *ad)
+{
+	int	i;
+	int	j;
+	int	k;
+
+	i = 0;
+	j = 0;
+	k = 0;
+	while (fd[i] != -100)
+		i++;
+	while (sd[j] != -100)
+		j++;
+	while (ad[k] != -100)
+		k++;
+	if (i > 0)
+		dup2(fd[i - 1], 1);
+	if (j > 0)
+		dup2(sd[j - 1], 0);
+	if (k > 0)
+		dup2(ad[k - 1], 1);
+}
+
 void	ft_execute_redir_out(t_node_arbre *tree, t_env	*env, t_env *exp)
 {
 	int				*fd;
 	int				*sd;
+	int				*ad;
 	struct s_nnode	*tmp;
 	struct s_nnode	*smp;
-	int				i;
-	int				j;
+	struct s_nnode	*amp;
 	int				orig_stdout;
 	int				orig_stdin;
 
@@ -173,23 +230,14 @@ void	ft_execute_redir_out(t_node_arbre *tree, t_env	*env, t_env *exp)
 	orig_stdin = dup(0);
 	tmp = tree->list_redir->top;
 	smp = tree->list_redir->top;
+	amp = tree->list_redir->top;
+	ad = ft_append_files(amp);
 	sd = ft_redir_in_files(smp);
 	fd = get_files(tmp);
-	if (fd == NULL || sd == NULL)
-		return ;
-	i = 0;
-	while (fd[i] != -100)
-		i++;
-	j = 0;
-	while (sd[j] != -100)
-		j++;
-	if (i > 0)
-		dup2(fd[i - 1], 1);
-	if (j > 0)
-		dup2(sd[j - 1], 0);
-	// exit(0);
+	files_dupper(fd, sd, ad);
 	ft_close_fd(fd);
 	ft_close_fd(sd);
+	ft_close_fd(ad);
 	ft_execute_redir(tree, &env, &exp);
 	dup2(orig_stdout, 1);
 	dup2(orig_stdin, 0);

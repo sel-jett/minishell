@@ -74,7 +74,7 @@ int				add_list_redir(t_node *tmp);
 int				plant_6(t_node *top, t_node_arbre **racine);
 ///////////////////////// EXECUTION //////////////////////////
 
-void			ft_handler(char **envp, char **cmmd, char **path);
+char			*ft_handler(char **cmmd, char **path);
 void			ft_execute_child(char **envp, char **cmmd, char **path);
 int				ft_status(int status, bool mode);
 void			execute(t_node_arbre *tree, t_env *e, t_env *exp);
@@ -119,7 +119,7 @@ char			*ft_strjoin(char *s1, char *s2);
 void			echo(const char **path, int mode);
 void			ft_unset(char **cmd, t_env **cnev, t_env **exp);
 void			ft_export(char **cmd, t_env **cnev, t_env **exp);
-void			cd(const char **path, t_env **cenv);
+void			cd(const char **path, t_env **cenv ,t_env **exp);
 void			ft_lstadd_back(t_env **lst, t_env *neww);
 int				ft_strlen_b(const char *str);
 void			ft_env(t_env *tmp);

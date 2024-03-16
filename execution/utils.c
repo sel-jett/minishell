@@ -15,7 +15,12 @@
 void	ft_execve(char *env_var, char **env, char **cmmd)
 {
 	if (execve(env_var, cmmd, env) == -1)
-		write(2, "error execve\n", 16);
+	{
+		ft_printf("minishell: ", cmmd[0]);
+		ft_printf(": ", NULL);
+		perror("");
+		exit(126);
+	}
 }
 
 char	**env_to_arr(t_env *env)
@@ -52,7 +57,7 @@ void	ft_print_arr(char **arr)
 	i = 0;
 	while (arr[i])
 	{
-		printf("%s\n", arr[i]);
+		dprintf(2, "%s\n", arr[i]);
 		i++;
 	}
 }
@@ -72,6 +77,29 @@ int	liked_size(t_node *tree)
 	return (i);
 }
 
+// char	**linkedlist_to_arr(t_node *tree)
+// {
+// 	char	**arr;
+// 	int		i;
+// 	t_node	*tree_tmp;
+// 	t_node	*tmp;
+
+// 	tree_tmp = tree;
+// 	tmp = tree;
+// 	i = liked_size(tree_tmp);
+// 	arr = my_malloc(sizeof(char *) * (i + 1), 1);
+// 	i = 0;
+// 	while (tmp)
+// 	{
+// 		arr[i] = ft_strdup(tmp->value);
+// 		i++;
+// 		tmp = tmp->next;
+// 	}
+// 	arr[i] = NULL;
+// 	return (arr);
+// }
+
+
 char	**linkedlist_to_arr(t_node *tree)
 {
 	char	**arr;
@@ -83,13 +111,26 @@ char	**linkedlist_to_arr(t_node *tree)
 	tmp = tree;
 	i = liked_size(tree_tmp);
 	arr = my_malloc(sizeof(char *) * (i + 1), 1);
-	i = 0;
-	while (tmp)
+	while (i >= 0)
 	{
-		arr[i] = ft_strdup(tmp->value);
-		i++;
-		tmp = tmp->next;
+		arr[i] = NULL;
+		i--;
 	}
+	i = 0;
+	while(tmp->list->top)
+	{
+		if (!tmp->list->top->flag_space)
+		{
+			arr[i] = ft_strjoin(arr[i], tmp->list->top->value);
+		}
+		else if (tmp->list->top->flag_space == 1)
+		{
+			i++;
+			arr[i] = ft_strjoin(arr[i], tmp->list->top->value);
+		}
+		tmp->list->top = tmp->list->top->next;
+	}
+	i++;
 	arr[i] = NULL;
 	return (arr);
 }
