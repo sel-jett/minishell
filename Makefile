@@ -3,7 +3,7 @@ SRCS = ./parcing/allocation_free/creation1.c ./parcing/allocation_free/my_malloc
        ./parcing/add_in_list/plant_3.c ./parcing/add_in_list/plant_1.c ./parcing/add_in_list/plant_2.c \
 	   ./parcing/add_in_list/spaces.c ./parcing/syntax_error/utile_1.c ./parcing/allocation_free/creation2.c \
 	   ./parcing/add_in_list/plants.c ./parcing/allocation_free/creation3.c ./parcing/syntax_error/utile_2.c \
-	   ./parcing/syntax_error/utile_3.c  ./parcing/syntax_error/utile_4.c \
+	   ./parcing/syntax_error/utile_3.c  ./parcing/syntax_error/utile_4.c ./parcing/syntax_error/utile_6.c\
 	   ./execution/execution.c ./execution/execute.c ./execution/pipe.c ./execution/or.c ./execution/subshell.c \
 	   ./execution/and.c ./execution/redir_out.c ./parcing/syntax_error/utile_5.c\
 	   ./builtins/cd.c ./builtins/echo.c ./builtins/export_checker.c ./builtins/env_parser.c \

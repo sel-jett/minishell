@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:14:17 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/13 17:09:37 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/15 01:16:12 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	add_nback(t_nlist *list, t_nnode *node)
 	{
 		list->top = node;
 		list->tail = node;
-		list->len++;
 		return ;
 	}
 	tmp = list->top;
@@ -31,7 +30,6 @@ void	add_nback(t_nlist *list, t_nnode *node)
 	tmp->next = node;
 	list->tail = node;
 	list->tail->next = 0;
-	list->len++;
 }
 
 t_nnode	*c_nnode(t_node *node)
@@ -57,6 +55,5 @@ t_nlist	*c_nlist(void)
 		return (0);
 	new->top = 0;
 	new->tail = 0;
-	new->len = 0;
 	return (new);
 }

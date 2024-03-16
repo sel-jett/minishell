@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:49:09 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/13 22:24:23 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/15 01:15:26 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ typedef struct s_nlist
 {
 	struct s_nnode	*top;
 	struct s_nnode	*tail;
-	int				len;
 }	t_nlist;
 
 typedef struct s_data
@@ -65,7 +64,6 @@ struct s_list
 {
 	t_node	*top;
 	t_node	*tail;
-	int		len;
 	char	*str;
 };
 

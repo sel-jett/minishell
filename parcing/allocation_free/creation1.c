@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:13:42 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/13 22:08:19 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/15 02:47:43 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ t_node	*c_node(char *str, t_node *tail, int mode, t_list *list)
 	new_node->next = 0;
 	new_node->prev = tail;
 	new_node->mode = mode;
-	new_node->val_vide = 0;
 	new_node->list_arg = 0;
 	new_node->list_redir = 0;
 	new_node->flag_expend = 0;
@@ -45,7 +44,6 @@ t_node	*c_cpynode(t_node *node, t_node *tail, t_list *list)
 	new_node->next = 0;
 	new_node->prev = tail;
 	new_node->mode = node->mode;
-	new_node->val_vide = node->val_vide;
 	new_node->list_arg = node->list_arg;
 	new_node->list_redir = node->list_redir;
 	new_node->flag_expend = 0;
@@ -63,8 +61,7 @@ t_list	*c_list(void)
 	new_list = my_malloc(sizeof(t_list), 1);
 	if (!new_list)
 		return (0);
-	new_list->len = 0;
-	new_list->top = NULL;
+	new_list->top = 0;
 	return (new_list);
 }
 
@@ -78,7 +75,6 @@ void	add_back(t_list *list, t_node *node)
 	{
 		list->top = node;
 		list->tail = node;
-		list->len++;
 		return ;
 	}
 	tmp = list->top;
@@ -87,5 +83,4 @@ void	add_back(t_list *list, t_node *node)
 	tmp->next = node;
 	list->tail = node;
 	list->tail->next = 0;
-	list->len++;
 }

@@ -96,3 +96,25 @@ echo bonjour > test\ 1
 echo '"$PATH"'
 
 echo "'$PATH'"
+
+cat ' ' && ls
+ls " " || ls
+minishell: syntax error near unexpected token
+
+
+bash-3.2$ env | grep SHLVL
+SHLVL=2
+bash-3.2$ bash
+
+The default interactive shell is now zsh.
+To update your account to use zsh, please run `chsh -s /bin/zsh`.
+For more details, please visit https://support.apple.com/kb/HT208050.
+bash-3.2$ env | grep SHLVL
+SHLVL=3
+bash-3.2$ bash
+
+The default interactive shell is now zsh.
+To update your account to use zsh, please run `chsh -s /bin/zsh`.
+For more details, please visit https://support.apple.com/kb/HT208050.
+bash-3.2$ env | grep SHLVL
+SHLVL=4

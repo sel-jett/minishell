@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:06:53 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/13 22:04:34 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/15 03:22:09 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,8 @@ int	plant_3( t_list *list, int *i)
 				return (0);
 		}
 		else
-			return (0);
+			return (printf("minishell: syntax \
+			error near unexpected token\n"), 0);
 	}
 	return (1);
 }
