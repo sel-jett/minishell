@@ -163,9 +163,9 @@ int main(int ac, char **av, char **envp)
 					// 	arbre->racine->list_redir->top = arbre->racine->list_redir->top->next;
 
 					// }
-					printf("[%d][%d][%d]\n",arbre->racine->list_redir->top->avant_,
-					arbre->racine->list_redir->top->next->avant_,
-					arbre->racine->list_redir->top->next->next->avant_);
+					// printf("[%d][%d][%d]\n",arbre->racine->list_redir->top->avant_,
+					// arbre->racine->list_redir->top->next->avant_,
+					// arbre->racine->list_redir->top->next->next->avant_);
 					// exit(0);
 					// env = ft_env_parser(envp);
 					// env = ft_env_parser(envp);

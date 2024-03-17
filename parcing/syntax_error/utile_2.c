@@ -6,15 +6,15 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:17:58 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/17 08:08:12 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/17 21:30:30 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-t_node_arbre	*new_sub(t_node_arbre *racine)
+t_node_arbre *new_sub(t_node_arbre *racine)
 {
-	t_node_arbre	*node;
+	t_node_arbre *node;
 
 	node = my_malloc(sizeof(t_node_arbre), 1);
 	if (!node)
@@ -27,9 +27,9 @@ t_node_arbre	*new_sub(t_node_arbre *racine)
 	return (node);
 }
 
-t_node_arbre	*parse_parenthese(t_node **tmp)
+t_node_arbre *parse_parenthese(t_node **tmp)
 {
-	t_node_arbre	*node;
+	t_node_arbre *node;
 
 	*tmp = (*tmp)->next;
 	while ((*tmp)->value[0] != ')')
@@ -42,10 +42,10 @@ t_node_arbre	*parse_parenthese(t_node **tmp)
 	return (node);
 }
 
-t_node_arbre	*parse_cmd(t_node **tmp)
+t_node_arbre *parse_cmd(t_node **tmp)
 {
-	t_node			*node;
-	t_node_arbre	*arbre_node;
+	t_node *node;
+	t_node_arbre *arbre_node;
 
 	arbre_node = 0;
 	if ((*tmp)->mode == TOKEN_PARENTHESE && (*tmp)->value[0] == '(')
@@ -72,7 +72,7 @@ bool ft_strcmp(char *s1, char *s2)
 	{
 		if (s1[i] != s2[i])
 			return (0);
-		i++;	
+		i++;
 	}
 	if (!s1[i] && !s2[i])
 		return (1);
@@ -82,29 +82,35 @@ bool ft_strcmp(char *s1, char *s2)
 int ft_strlen(char *str)
 {
 	int i = 0;
-	while(str[i])
+	while (str[i])
 		i++;
-	return (i);	
+	return (i);
 }
 
-bool	open_herdoc(t_nnode *node)
+bool open_herdoc(t_nnode *node,char **file)
 {
-	char *str = NULL;
-	char *file;
-	static int n;
-	int		fd;
+	char		*str;
+	int			n;
+	int			fd;
 
-	file = ft_strjoin("file",ft_itoa(n));
-	fd = open(file, O_CREAT | O_RDWR, S_IRUSR | S_IWUSR);
+	(1) && (str = 0, n= 0);
+	while (1)
+	{
+		*file = ft_strjoin("/tmp/file", ft_itoa(n));
+		if (access(*file, F_OK))
+			break;
+		n++;
+	}
+	fd = open(*file, O_CREAT | O_RDWR, S_IRUSR | S_IWUSR);
 	if (fd == -1)
-		return (printf("hna"),0);
+		return (0);
 	n++;
 	while (1)
 	{
 		str = readline("heredoc> ");
 		if (node->next)
 		{
-			if (ft_strcmp(node->next->value,str))
+			if (ft_strcmp(node->next->value, str))
 				break;
 			str = ft_strjoin(str, "\n");
 			write(fd, str, ft_strlen(str));
@@ -113,11 +119,12 @@ bool	open_herdoc(t_nnode *node)
 	return (1);
 }
 
-t_node_arbre	*parse_redir(t_node **tmp)
+t_node_arbre *parse_redir(t_node **tmp)
 {
-	t_node_arbre	*node_left;
-	t_node_arbre	*node;
-	t_nnode			*i_node = NULL;
+	t_node_arbre *node_left;
+	t_node_arbre *node;
+	t_nnode *i_node = NULL;
+	char			*file = NULL;
 
 	node_left = parse_cmd(tmp);
 	if (*tmp && is_redir(*tmp))
@@ -129,11 +136,11 @@ t_node_arbre	*parse_redir(t_node **tmp)
 		{
 			if (i_node->mode == TOKEN_HEREDOC)
 			{
-				if (!open_herdoc(i_node))
+				if (!open_herdoc(i_node, &file))
 					return (0);
 				if (i_node->next)
-					i_node->next->value = "file0";
-					i_node->value = "<";
+					i_node->next->value = file;
+				i_node->value = "<";
 				i_node->mode = TOKEN_REDIR_IN;
 			}
 			i_node = i_node->next;
@@ -154,9 +161,9 @@ t_node_arbre	*parse_redir(t_node **tmp)
 	return (node_left);
 }
 
-t_node_arbre	*new_node(int mode, t_node_arbre *left, t_node_arbre *right)
+t_node_arbre *new_node(int mode, t_node_arbre *left, t_node_arbre *right)
 {
-	t_node_arbre	*node;
+	t_node_arbre *node;
 
 	if (!right)
 		return (NULL);

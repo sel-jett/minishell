@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utile_3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 21:22:32 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/17 04:33:24 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/17 21:06:41 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int	add_list_redir(t_node *node)
 			if (tmp1->mode != TOKEN_SPACE)
 			{
 				tmp1->avant_ = 1;
-					
 				redir_node = c_nnode(tmp1);
 				if (!redir_node)
 					return (0);
@@ -57,7 +56,7 @@ int	add_list_redir(t_node *node)
 				&& is_redir(tmp->prev->prev) && is_text(tmp))
 			{
 				tmp->avant_ = 2;
-				if (tmp->prev->prev->mode == TOKEN_REDIR_IN)
+				if (tmp->prev->prev->mode == TOKEN_REDIR_IN || tmp->prev->prev->mode == TOKEN_HEREDOC)
 					tmp->avant_ = 3;
 				if (tmp->prev->prev->mode == TOKEN_REDIR_APPEND)
 					tmp->avant_ = 4;
@@ -74,10 +73,7 @@ int	add_list_redir(t_node *node)
 			if (!redir_node)
 				return (0);
 			if (tmp->prev && tmp->prev->mode == TOKEN_SPACE && !ope(tmp->prev->prev)) 
-			{
-				// if (tmp)
 				redir_node->flag_space = 1;
-			}
 			add_nback(node->list_redir, redir_node);
 		}
 		tmp = tmp->next;

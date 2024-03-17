@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 23:55:37 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/08 14:13:53 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/17 07:14:44 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	*find_oldpwd(t_env *cenv)
 	if (cenv)
 	{
 		str = ft_strjoin(cenv->key, "=");
-		return (ft_strjoin(str, cenv->value));
+		return (cenv->key);
 	}
 	return (NULL);
 }

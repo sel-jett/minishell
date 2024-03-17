@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:12:44 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/08 15:32:38 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/17 20:16:42 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	ft_execute_right(t_node_arbre *t, int f[2], t_env *e, t_env *d)
 	exit(0);
 }
 
-static void	finish_him(pid_t pid[2], int fd[2])
+static void	close_pipe(pid_t pid[2], int fd[2])
 {
 	close(fd[0]);
 	close(fd[1]);
@@ -72,5 +72,5 @@ void	ft_execute_pipe(t_node_arbre *tree, t_env *e, t_env *exp)
 	}
 	if (pid[1] == 0)
 		ft_execute_right(tree, fd, e, exp);
-	finish_him(pid, fd);
+	close_pipe(pid, fd);
 }

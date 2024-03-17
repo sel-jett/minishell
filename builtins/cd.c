@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 23:18:52 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/17 06:14:25 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/17 07:21:21 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	ft_env(t_env *tmp)
 
 int	cd_error(const char *path)
 {
-	// printf("path: %s\n", path);
 	if (chdir(path) != 0 && ft_strncmp_one((char *)path, ".."))
 	{
 		ft_fpintf("mminishell: cd");
@@ -108,20 +107,18 @@ void	ft_second_cd(t_env **cenv, t_env **exp, char *b, const char ** path)
 	pwd = find_pwd(*cenv);
 	temp_old = find_oldpwd(*cenv);
 	ft_list_remove_if(cenv, "PWD", ft_strncmp_one);
-	if (temp_old)
-	{
-		ft_list_remove_if(cenv, "OLDPWD", ft_strncmp_one);
-		ft_list_remove_if(exp, "OLDPWD", ft_strncmp_one);
-	}
+	ft_list_remove_if(exp, "PWD", ft_strncmp_one);
+	ft_list_remove_if(cenv, "OLDPWD", ft_strncmp_one);
+	ft_list_remove_if(exp, "OLDPWD", ft_strncmp_one);
 	temp_old = ft_strjoin("OLD", ft_strdup(pwd));
-	ft_lstadd_back(cenv, env_new(temp_old, NULL));
-	ft_lstadd_back(exp, env_new(temp_old, NULL));
+	ft_lstadd_back(cenv, env_new(temp_old, *cenv));
+	ft_lstadd_back(exp, env_new(temp_old, *exp));
 	if (getcwd(b, PATH_MAX))
 		temp = ft_strjoin("PWD=", getcwd(b, PATH_MAX));
 	else
 		temp = pwd_joiner(temp_old, temp, (char *)path[0]);
-	ft_lstadd_back(cenv, env_new(temp, NULL));
-	ft_lstadd_back(exp, env_new(temp, NULL));
+	ft_lstadd_back(cenv, env_new(temp, *cenv));
+	ft_lstadd_back(exp, env_new(temp, *exp));
 }
 
 void	cd(const char **path, t_env **cenv, t_env **exp)
@@ -129,7 +126,7 @@ void	cd(const char **path, t_env **cenv, t_env **exp)
 	char	*b;
 
 	b = my_malloc(PATH_MAX + 1, 1);
-	if (!ft_strncmp((char *)path[0], "~") || !ft_strncmp((char *)path[0], "--"))
+	if (!path[0] || !ft_strncmp((char *)path[0], "~") || !ft_strncmp((char *)path[0], "--"))
 		path[0] = value_key(*cenv, "HOME");
 	else if (!ft_strncmp((char *)path[0], "-"))
 	{
@@ -173,7 +170,7 @@ void	ft_builtin(char **cmd, t_env **cenv, t_env **exp)
 
 	tmp = *cenv;
 	if (!ft_strncmp(cmd[0], "cd"))
-		cd((const char **)(cmd + 1), &tmp, exp);
+		cd((const char **)(cmd + 1), cenv, exp);
 	else if (!ft_strncmp(cmd[0], "echo"))
 		echo((const char **)(cmd + 1), 0);
 	else if (!ft_strncmp(cmd[0], "exit"))
