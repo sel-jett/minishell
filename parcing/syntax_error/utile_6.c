@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 03:19:27 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/17 02:27:51 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/17 04:32:18 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	plant_5(t_node	*tmp, t_list *list)
 				return (0);
 			add_back(list, node);
 		}
-		if ((tmp->prev && tmp->prev->mode == TOKEN_SPACE))
+		if ((tmp->prev && tmp->prev->mode == TOKEN_SPACE) && tmp->prev->prev && !ope(tmp->prev->prev))
 			node->flag_space = 1;
 		if (tmp->list_arg && tmp->list_arg->top)
 		{

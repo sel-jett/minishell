@@ -148,6 +148,13 @@ int main(int ac, char **av, char **envp)
 				// exit(0);
 				if (!index)
 				{
+					// while (arbre->racine->right->list->top)
+					// {
+					// 	// dprintf(2, "[%s]\n", arbre->racine->right->list->top->value);
+					// 	dprintf(2, "[%s][%d]\n", arbre->racine->right->list->top->value, arbre->racine->right->list->top->flag_space);
+					// 	arbre->racine->right->list->top = arbre->racine->right->list->top->next;
+
+					// }
 					// while (arbre->racine->list_redir->top)
 					// {
 					// 	// dprintf(2, "[%s]\n", arbre->racine->list_redir->top->value);

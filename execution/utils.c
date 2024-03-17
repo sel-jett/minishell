@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:07:13 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/17 04:28:49 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/17 05:17:35 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,9 +110,11 @@ char	**linkedlist_to_arr(t_node *tree)
 	tree_tmp = tree;
 	tmp = tree;
 		// exit(0);
+	dprintf(2, "[[[[%s]]]]\n", tree->list->top->value);
 	i = liked_size(tree_tmp);
 	arr = my_malloc(sizeof(char *) * (i + 1), 1);
-		// dprintf(2, "value: %s\n", tmp->list->top->value);
+		// dprintf(2, "value: %d\n", i);
+	// i = 2;
 	while (i >= 0)
 	{
 		arr[i] = NULL;
