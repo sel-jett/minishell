@@ -111,16 +111,7 @@ int	*get_files(struct s_nnode *list)
 	while (tmp)
 	{
 		if (tmp->avant_ == 2)
-		{
-			fd[i] = open(tmp->value, O_CREAT | O_WRONLY | O_TRUNC, 0644);
-			if (fd[i] == -1)
-			{
-				ft_printf("minishell: %s", tmp->value);
-				ft_printf(": %s\n", strerror(errno));
-				return (0);
-			}
 			i++;
-		}
 		tmp = tmp->next;
 	}
 	fd[i] = -100;
@@ -149,7 +140,7 @@ int	*ft_redir_in_files(struct s_nnode *list)
 	tmp = list;
 	while (tmp)
 	{
-		if (tmp->avant_ == 3)
+		if (tmp->avant_ == 2)
 			i++;
 		tmp = tmp->next;
 	}
@@ -158,23 +149,41 @@ int	*ft_redir_in_files(struct s_nnode *list)
 	i = 0;
 	while (tmp)
 	{
-		if (tmp->avant_ == 3)
-		{
-			fd[i] = open(tmp->value, O_RDONLY);
-			if (fd[i] == -1)
-			{
-				ft_printf("minishell: ", tmp->value);
-				ft_printf(": ", strerror(errno));
-				ft_printf("\n", NULL);
-				return (NULL);
-			}
+		if (tmp->avant_ == 2)
 			i++;
-		}
 		tmp = tmp->next;
 	}
 	fd[i] = -100;
-	return (fd);	
+	return (fd);
 }
+
+
+// int	*ft_redir_in_files(struct s_nnode *list)
+// {
+// 	int				*fd;
+// 	struct s_nnode	*tmp;
+// 	int				i;
+
+// 	i = 0;
+// 	tmp = list;
+// 	while (tmp)
+// 	{
+// 		if (tmp->avant_ == 3)
+// 			i++;
+// 		tmp = tmp->next;
+// 	}
+// 	tmp = list;
+// 	fd = my_malloc(sizeof(int) * (i + 1), 1);
+// 	i = 0;
+// 	while (tmp)
+// 	{
+// 		if (tmp->avant_ == 3)
+// 			i++;
+// 		tmp = tmp->next;
+// 	}
+// 	fd[i] = -100;
+// 	return (fd);	
+// }
 
 int	*ft_append_files(struct s_nnode *list)
 {
@@ -196,16 +205,7 @@ int	*ft_append_files(struct s_nnode *list)
 	while (tmp)
 	{
 		if (tmp->avant_ == 4)
-		{
-			fd[i] = open(tmp->value, O_CREAT | O_WRONLY | O_APPEND , 0644);
-			if (fd[i] == -1)
-			{
-				ft_printf("minishell: %s", tmp->value);
-				ft_printf(": %s\n", strerror(errno));
-				return (0);
-			}
 			i++;
-		}
 		tmp = tmp->next;
 	}
 	fd[i] = -100;
@@ -238,11 +238,11 @@ void	files_dupper(int *fd, int *sd, int *ad, struct s_nnode	*cnt)
 		cnt = cnt->next;
 	}
 	if (f == 1)
-		dup2(fd[i - 1], 1);
+		dup2(sd[i - 1], 1);
 	else if (f == 2)
 		dup2(ad[k - 1], 1);
 	if (sd && j > 0)
-		dup2(sd[j - 1], 0);
+		dup2(fd[j - 1], 0);
 }
 
 void	ft_execute_redir_out(t_node_arbre *tree, t_env	*env, t_env *exp)
@@ -254,8 +254,12 @@ void	ft_execute_redir_out(t_node_arbre *tree, t_env	*env, t_env *exp)
 	struct s_nnode	*smp;
 	struct s_nnode	*amp;
 	struct s_nnode	*cnt;
+	struct s_nnode	*wnt;
 	int				orig_stdout;
 	int				orig_stdin;
+	int				i = 0;
+	int				j = 0;
+	int				k = 0;
 
 	orig_stdout = dup(1);
 	orig_stdin = dup(0);
@@ -269,9 +273,48 @@ void	ft_execute_redir_out(t_node_arbre *tree, t_env	*env, t_env *exp)
 	smp = tree->list_redir->top;
 	amp = tree->list_redir->top;
 	cnt = tree->list_redir->top;
+	wnt = tree->list_redir->top;
 	ad = ft_append_files(amp);
 	sd = ft_redir_in_files(smp);
 	fd = get_files(tmp);
+	while (wnt)
+	{
+		if (wnt->avant_ == 3)
+		{
+			fd[i] = open(wnt->value, O_RDONLY);
+			if (fd[i] == -1)
+			{
+				ft_printf("minishell: ", wnt->value);
+				ft_printf(": ", strerror(errno));
+				ft_printf("\n", NULL);
+				return ;
+			}
+			i++;
+		}
+		else if (wnt->avant_ == 2)
+		{
+			sd[j] = open(wnt->value, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+			if (sd[j] == -1)
+			{
+				ft_printf("minishell: %s", wnt->value);
+				ft_printf(": %s\n", strerror(errno));
+				return ;
+			}
+			j++;
+		}
+		else if (wnt->avant_ == 4)
+		{
+			ad[k] = open(wnt->value, O_CREAT | O_WRONLY | O_APPEND , 0644);
+			if (ad[k] == -1)
+			{
+				ft_printf("minishell: %s", wnt->value);
+				ft_printf(": %s\n", strerror(errno));
+				return ;
+			}
+			k++;
+		}
+		wnt = wnt->next;
+	}
 	files_dupper(fd, sd, ad, cnt);
 	if (fd)
 		ft_close_fd(fd);
