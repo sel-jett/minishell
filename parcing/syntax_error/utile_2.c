@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:17:58 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/16 06:20:50 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/16 07:23:28 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,11 @@ bool ft_strcmp(char *s1, char *s2)
 		return (0);
 	while (s1[i] && s2[i])
 	{
-		if(s1[i] != s2[i])
+		if (s1[i] != s2[i])
 			return (0);
 		i++;	
 	}
-	if (!s2[i] && !s2[i])
+	if (!s1[i] && !s2[i])
 		return (1);
 	return (0);
 }
@@ -104,9 +104,9 @@ bool open_herdoc(t_nnode *node)
 		str = readline("heredoc> ");
 		if (node->next)
 		{
-			if (ft_strcmp(node->next->value,str) == 1)
+			if (ft_strcmp(node->next->value,str))
 				break;
-			str = ft_strjoin(str,"\n");
+			str = ft_strjoin(str, "\n");
 			write(fd, str, ft_strlen(str));
 		}
 	}

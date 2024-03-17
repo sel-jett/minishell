@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:49:09 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/17 02:15:01 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/17 02:20:34 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_nnode
 {
 	char			*value;
 	int				flag_wilc;
+	int				flag_space;
 	int				avant_;
 	int				flag_apresred;
 	int				mode;
