@@ -34,25 +34,3 @@ dd
 d
 d
 d
-
-$HOME
-
-bash-3.2$ ''
-bash: : command not found
-bash-3.2$ 
-
-<<<<<<< HEAD
-<-------------------->
-bash-3.2$ ls < l
-bash: l: No such file or directory
-bash-3.2$ 
-=======
-ls < in
-
-ls < in > o3 > o4
->>>>>>> cf61b69f52cff10c81717cc5be87c948a8dbbbae
-ls | ls ls | ls ls | ls ls | ls ls | ls ls | ls ls | ls ls | ls ls | ls ls | ls ls | ls ls | ls ls | ls ls | ls ls | ls ls | ls ls | ls ls | ls ls | ls ls | ls ls | ls ls | ls ls | ls ls | ls ls | ls ls | ls ls | ls ls | ls ls | ls ls | ls ls | ls ls | ls ls | ls ls | ls ls | ls ls | ls ls | ls ls | ls ls | ls ls | ls ls | ls ls | ls ls | ls ls | ls ls | ls ls | ls ls | ls ls | ls ls | ls ls | ls ls | ls ls | ls ls | ls ls |  
-
-
-
-ls |
