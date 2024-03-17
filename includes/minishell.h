@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:48:58 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/16 05:24:13 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/17 02:16:48 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ void			ft_print_arr(char **arr);
 int				liked_size(t_node *tree);
 char			**linkedlist_to_arr(t_node *tree);
 char			*get_path(t_env *env);
+char	        **redirlist_to_arr(t_nlist *list_redir);
 
 ///////////////////////// BUILTINS //////////////////////////
 

@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 12:09:39 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/16 06:17:54 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/17 01:38:42 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,12 @@ void	ft_execute_cmd(t_node_arbre *tree, t_env **env, t_env **exp)
 	i = 0;
 	tmp = tree->list->top;
 	smp = tree->list->top;
+	while (tree->list->top)
+	{
+		dprintf(2, "[%s][%d]\n", tree->list->top->value, tree->list->top->flag_space);
+		tree->list->top = tree->list->top->next;
+		// i++;
+	}
 	envp = env_to_arr(*env);
 	path = ft_split(get_path(*env), ':');
 	cmmd = linkedlist_to_arr(tmp);

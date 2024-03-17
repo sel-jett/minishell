@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 21:59:00 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/16 06:15:41 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/17 00:10:09 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char	*ft_strjoin_char(char *s1, char s2)
 static void	ft_norminette(int *i, int *k, char *cmd)
 {
 	(*i)++;
-	while (cmd[*i] && cmd[*i] != '-' && cmd[*i] != 32 && cmd[*i] != '\'')
+	while (cmd[*i] && cmd[*i] != '-' && cmd[*i] != 32 && (cmd[*i] < '\"' || cmd[*i] > 47))
 	{
 		(*k)++;
 		(*i)++;
@@ -67,7 +67,7 @@ static char	*ft_second_norminette(int *i, int *k, char *cmd)
 	venv = malloc(*k + 1);
 	while (*k > 0)
 	{
-		if (cmd[*i - *k] == '-' || cmd[*i - *k] == 32 || cmd[*i - *k] == '\'')
+		if (cmd[*i - *k] == '-' || cmd[*i - *k] == 32 || (cmd[*i] < '\"' && cmd[*i] > 47))
 			break;
 		venv[l] = cmd[*i - *k];
 		l++;

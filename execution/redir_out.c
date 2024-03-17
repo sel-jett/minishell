@@ -55,7 +55,8 @@ void	ft_execute_redir(t_node_arbre *tree, t_env **env, t_env **exp)
 	// exit(0);
 	envp = env_to_arr(*env);
 	path = ft_split(get_path(*env), ':');
-	cmmd = ft_tree_to_cmd(tree);
+	cmmd = redirlist_to_arr(tree->list_redir);
+	// cmmd = ft_tree_to_cmd(tree);
 	i = 0;
 	while (cmmd[i])
 	{
@@ -232,8 +233,8 @@ void	ft_execute_redir_out(t_node_arbre *tree, t_env	*env, t_env *exp)
 		!ft_strncmp(tree->list_redir->top->value, ">") || \
 		!ft_strncmp(tree->list_redir->top->value, "<"))
 		tree->list_redir->top = tree->list_redir->top->next;
-	// dprintf(2, "lfassi = %s\n", tree->list_redir->top->value);
-	// exit(0);
+	dprintf(2, "lfassi = %s\n", tree->list_redir->top->value);
+	exit(0);
 	tmp = tree->list_redir->top;
 	smp = tree->list_redir->top;
 	amp = tree->list_redir->top;
