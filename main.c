@@ -148,6 +148,14 @@ int main(int ac, char **av, char **envp)
 				// exit(0);
 				if (!index)
 				{
+					// while (arbre->racine->list_redir->top)
+					// {
+					// 	// dprintf(2, "[%s]\n", arbre->racine->list_redir->top->value);
+					// 	dprintf(2, "[%s][%d][%d]\n", arbre->racine->list_redir->top->value, arbre->racine->list_redir->top->avant_, \
+					// 	arbre->racine->list_redir->top->flag_space);
+					// 	arbre->racine->list_redir->top = arbre->racine->list_redir->top->next;
+
+					// }
 					// printf("[%d]\n",arbre->racine->list->top->flag_expend);
 					// exit(0);
 					// env = ft_env_parser(envp);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 12:09:39 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/17 02:42:39 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/17 04:29:35 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,7 @@ void	ft_execute_child(char **envp, char **cmmd, char **path)
 
 void	ft_execute_cmd(t_node_arbre *tree, t_env **env, t_env **exp)
 {
+	static int oop;
 	int				i;
 	char			**cmmd;
 	char			**path;
@@ -145,15 +146,28 @@ void	ft_execute_cmd(t_node_arbre *tree, t_env **env, t_env **exp)
 	i = 0;
 	tmp = tree->list->top;
 	smp = tree->list->top;
-	// while (tree->list->top)
-	// {
-	// 	dprintf(2, "[%s][%d]\n", tree->list->top->value, tree->list->top->flag_space);
-	// 	tree->list->top = tree->list->top->next;
-	// 	// i++;
-	// }
+	while (tree->list->top)
+	{
+		dprintf(2, "[%s][%d]\n", tree->list->top->value, tree->list->top->flag_space);
+		tree->list->top = tree->list->top->next;
+		// i++;
+	}
+	i = 0;
+	oop += 1;
 	envp = env_to_arr(*env);
 	path = ft_split(get_path(*env), ':');
 	cmmd = linkedlist_to_arr(tmp);
+	if (oop == 2)
+	{
+		// i = 0;
+		// while (cmmd[i])
+		// {
+		// 	i++;
+		// }
+		dprintf(2, "[%s]\n", cmmd[0]);
+		dprintf(2, "exit(0)\n");
+		exit(0);
+	}
 	while (cmmd[i])
 	{
 		if (smp->flag_expend == 1)

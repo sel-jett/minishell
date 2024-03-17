@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:07:13 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/17 02:18:28 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/17 04:28:49 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,10 +109,10 @@ char	**linkedlist_to_arr(t_node *tree)
 
 	tree_tmp = tree;
 	tmp = tree;
-		// dprintf(2, "value: %s\n", tmp->list->top->value);
 		// exit(0);
 	i = liked_size(tree_tmp);
 	arr = my_malloc(sizeof(char *) * (i + 1), 1);
+		// dprintf(2, "value: %s\n", tmp->list->top->value);
 	while (i >= 0)
 	{
 		arr[i] = NULL;
@@ -174,15 +174,19 @@ char	**redirlist_to_arr(t_nlist *tree)
 	i = 0;
 	while(tmp->top)
 	{
-		if (!tmp->top->flag_space)
+		if (!tmp->top->flag_space && tmp->top->avant_ == 1)
 		{
 			arr[i] = ft_strjoin(arr[i], tmp->top->value);
 		}
-		else if (tmp->top->flag_space == 1)
+		else if (tmp->top->flag_space == 1 && ft_strncmp(tmp->top->value, ">") && ft_strncmp(tmp->top->value, ">>") && ft_strncmp(tmp->top->value, "<"))
 		{
 			i++;
 			arr[i] = ft_strjoin(arr[i], tmp->top->value);
 		}
+		// {
+		// 	i++;
+		// 	arr[i] = ft_strjoin(arr[i], tmp->top->value);
+		// }
 		tmp->top = tmp->top->next;
 	}
 	i++;

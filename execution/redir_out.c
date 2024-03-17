@@ -55,14 +55,26 @@ void	ft_execute_redir(t_node_arbre *tree, t_env **env, t_env **exp)
 	// exit(0);
 	envp = env_to_arr(*env);
 	path = ft_split(get_path(*env), ':');
+		// dprintf(2, "[%s]\n", tree->list_redir->top->value);
+		// exit(0);
 	// while (tree->list_redir->top)
 	// {
-	// 	dprintf(2, "[%s][%d]\n", tree->list_redir->top->value, tree->list_redir->top->flag_space);
+	// 	// dprintf(2, "[%s]\n", tree->list_redir->top->value);
+	// 	dprintf(2, "[%s][%d][%d]\n", tree->list_redir->top->value, tree->list_redir->top->avant_, \
+	// 	tree->list_redir->top->flag_space);
 	// 	tree->list_redir->top = tree->list_redir->top->next;
 	
 	// }
 	// exit(0);
+	// exit(0);
 	cmmd = redirlist_to_arr(tree->list_redir);
+	// i = 0;
+	// while (cmmd[i])
+	// {
+	// 	dprintf(2, "[][%s][]\n", cmmd[i]);
+	// 	i++;
+	// }
+	// exit(0);
 	// cmmd = ft_tree_to_cmd(tree);
 	i = 0;
 	while (cmmd[i])
@@ -200,27 +212,37 @@ int	*ft_append_files(struct s_nnode *list)
 	return (fd);
 }
 
-void	files_dupper(int *fd, int *sd, int *ad)
+void	files_dupper(int *fd, int *sd, int *ad, struct s_nnode	*cnt)
 {
 	int	i;
 	int	j;
 	int	k;
+	int	f;
 
 	i = 0;
 	j = 0;
 	k = 0;
-	while (fd[i] != -100)
+	f = 0;
+	while (fd && fd[i] != -100)
 		i++;
-	while (sd[j] != -100)
+	while (sd && sd[j] != -100)
 		j++;
-	while (ad[k] != -100)
+	while (ad && ad[k] != -100)
 		k++;
-	if (i > 0)
+	while (cnt)
+	{
+		if (!ft_strncmp(cnt->value, ">"))
+			f = 1;
+		else if (!ft_strncmp(cnt->value, ">>"))
+			f = 2;
+		cnt = cnt->next;
+	}
+	if (f == 1)
 		dup2(fd[i - 1], 1);
-	if (j > 0)
-		dup2(sd[j - 1], 0);
-	if (k > 0)
+	else if (f == 2)
 		dup2(ad[k - 1], 1);
+	if (sd && j > 0)
+		dup2(sd[j - 1], 0);
 }
 
 void	ft_execute_redir_out(t_node_arbre *tree, t_env	*env, t_env *exp)
@@ -231,6 +253,7 @@ void	ft_execute_redir_out(t_node_arbre *tree, t_env	*env, t_env *exp)
 	struct s_nnode	*tmp;
 	struct s_nnode	*smp;
 	struct s_nnode	*amp;
+	struct s_nnode	*cnt;
 	int				orig_stdout;
 	int				orig_stdin;
 
@@ -245,13 +268,26 @@ void	ft_execute_redir_out(t_node_arbre *tree, t_env	*env, t_env *exp)
 	tmp = tree->list_redir->top;
 	smp = tree->list_redir->top;
 	amp = tree->list_redir->top;
+	cnt = tree->list_redir->top;
 	ad = ft_append_files(amp);
 	sd = ft_redir_in_files(smp);
 	fd = get_files(tmp);
-	files_dupper(fd, sd, ad);
-	ft_close_fd(fd);
-	ft_close_fd(sd);
-	ft_close_fd(ad);
+	files_dupper(fd, sd, ad, cnt);
+	if (fd)
+		ft_close_fd(fd);
+	if (sd)
+		ft_close_fd(sd);
+	if (ad)
+		ft_close_fd(ad);
+	// while (tree->list_redir->top)
+	// {
+	// 	// dprintf(2, "[%s]\n", tree->list_redir->top->value);
+	// 	dprintf(2, "[%s][%d][%d]\n", tree->list_redir->top->value, tree->list_redir->top->avant_, \
+	// 	tree->list_redir->top->flag_space);
+	// 	tree->list_redir->top = tree->list_redir->top->next;
+	
+	// }
+	// exit(0);
 	ft_execute_redir(tree, &env, &exp);
 	dup2(orig_stdout, 1);
 	dup2(orig_stdin, 0);
