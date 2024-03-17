@@ -1,13 +1,12 @@
 #include "includes/minishell.h"
 
-bool	is_redir(t_node *tmp)
+bool is_redir(t_node *tmp)
 {
 	if (tmp->mode == TOKEN_HEREDOC || tmp->mode == TOKEN_REDIR_IN ||
 		tmp->mode == TOKEN_REDIR_OUT || tmp->mode == TOKEN_REDIR_APPEND)
 		return (1);
 	return (0);
 }
-
 
 // void	handler_signel(int signal, siginfo_t *siginfo, void *vd)
 // {
@@ -22,13 +21,13 @@ bool	is_redir(t_node *tmp)
 // 	}
 // }
 
-void print_in_dot(t_node_arbre *node,int i, int *count, FILE *fp)
+void print_in_dot(t_node_arbre *node, int i, int *count, FILE *fp)
 {
-    if (node == NULL)
-        return;
-    int node_id = ++(*count);
+	if (node == NULL)
+		return;
+	int node_id = ++(*count);
 	if (node->mode == 5)
-    	fprintf(fp, "  node%d [label=\"%s \"];\n", node_id, "|");
+		fprintf(fp, "  node%d [label=\"%s \"];\n", node_id, "|");
 	else if (node->mode == 1)
 		fprintf(fp, "  node%d [label=\"%s \"];\n", node_id, ">");
 	else if (node->mode == 6)
@@ -53,39 +52,40 @@ void print_in_dot(t_node_arbre *node,int i, int *count, FILE *fp)
 		// while (node->list->top)
 		// {
 		// 	fprintf(fp, "  node%d [label=\"%s \"];\n", *count, node->list->top->value);
-		// 	node->list->top = node->list->top->next;
+		// 	node->list->top = node->top->next;
 		// }
 		// node->list->top->value;
 	}
-    if (i != -1){
-        fprintf(fp, "  node%d -> node%d;\n",i,node_id);
-    }
-    print_in_dot(node->left,node_id,count, fp);
-    print_in_dot(node->right,node_id,count, fp);
+	if (i != -1)
+	{
+		fprintf(fp, "  node%d -> node%d;\n", i, node_id);
+	}
+	print_in_dot(node->left, node_id, count, fp);
+	print_in_dot(node->right, node_id, count, fp);
 }
 
 void print_tree(t_node_arbre *root)
- {
+{
 	FILE *fp;
 	int count;
 
 	count = 0;
 	fp = stdout;
-    fprintf(fp, "digraph {\n");
+	fprintf(fp, "digraph {\n");
 	print_in_dot(root, -1, &count, fp);
-    fprintf(fp, "}\n");
+	fprintf(fp, "}\n");
 	// fclose(fp);
 }
 
-int	main(int ac, char **av, char **envp)
+int main(int ac, char **av, char **envp)
 {
-	t_list  *list;
-	int     i;
-	int		index;
-	t_arbre	*arbre;
-	t_list	*nlist;
-	t_env	*env;
-	t_env	*exp;
+	t_list *list;
+	int i;
+	int index;
+	t_arbre *arbre;
+	t_list *nlist;
+	t_env *env;
+	t_env *exp;
 
 	list = NULL;
 	// struct sigaction	sa;
@@ -109,18 +109,18 @@ int	main(int ac, char **av, char **envp)
 		{
 			list->str = readline("minishell > ");
 			if (!list->str)
-				exit(write(1,"exit\n",5));
+				exit(write(1, "exit\n", 5));
 			if (is_empty(list->str))
 				index = 1;
 			if (!index)
 			{
-				add_history(list->str);//what's this
+				add_history(list->str); // what's this
 				while (list->str[i])
 				{
 					if (!plants(list, &i))
 					{
 						index = 1;
-						break ;
+						break;
 					}
 				}
 				if (!index)
@@ -137,8 +137,8 @@ int	main(int ac, char **av, char **envp)
 				if (!index)
 				{
 					arbre = c_arbre();
-						if (!arbre)
-							index = 1;
+					if (!arbre)
+						index = 1;
 				}
 				if (!index)
 				{
@@ -155,10 +155,10 @@ int	main(int ac, char **av, char **envp)
 					// ft_print_arr(envp);
 					// ft_env(env);
 					// print_tree(arbre->racine);
-					// while (arbre->racine->list->top)
+					// while (arbre->racine->top)
 					// {
-						// puts(arbre->racine->right->list->top->next->value);
-					// 	arbre->racine->list->top = arbre->racine->list->top->next;
+					// puts(arbre->racine->right->list->top->next->value);
+					// 	arbre->racine->top = arbre->racine->list->top->next;
 					// }
 					// puts(arbre->racine->list->top->value);
 					execute(arbre->racine, env, exp);

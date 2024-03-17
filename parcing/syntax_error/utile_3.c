@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 21:22:32 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/16 06:16:18 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/17 01:57:26 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,13 @@ t_node_arbre	*add_commade(t_node	*tmp)
 			return (NULL);
 		new_node->list_arg = tmp->list_arg;
 	}
+	// t_node *x = new_node->list->top ;
+	// while(x)
+	// {
+	// 	printf("[%s]->",x->value);
+	// 	x = x->next;
+	// }
+	// printf("\n");
 	return (new_node);
 }
 

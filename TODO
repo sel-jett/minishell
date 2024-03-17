@@ -19,7 +19,7 @@ declare -x GIT_ASKPASS="/Applications/Visual Studio Code.app/Contents/Resources/
 declare -x HOME="/Users/amel-has"
 declare -x HOMEBREW_CACHE="/tmp/amel-has/Homebrew/Caches"
 declare -x HOMEBREW_TEMP="/tmp/amel-has/Homebrew/Temp"
-declare -x LANG="en_US.UTF-8"
+declare -x LANG="en_US.UTF-8"`
 declare -x LESS="-R"
 declare -x LOGNAME="amel-has"
 declare -x LSCOLORS="Gxfxcxdxbxegedabagacad"
@@ -144,3 +144,7 @@ d
 d
 
 $HOME
+
+bash-3.2$ ''
+bash: : command not found
+bash-3.2$ 

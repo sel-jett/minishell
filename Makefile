@@ -14,7 +14,8 @@ SRCS = ./parcing/allocation_free/creation1.c ./parcing/allocation_free/my_malloc
 OBJS    = $(SRCS:.c=.o)
 # READLINE_LIB = $(shell brew --prefix readline)/lib
 # READLINE_INC = $(shell brew --prefix readline)/include
-CFLAGS 	=   -Wall -Wextra -Werror -fsanitize=address -g
+# -fsanitize=address -g
+CFLAGS 	=   -Wall -Wextra -Werror 
 RM 		= @rm -f
 all : $(NAME) clean
 
