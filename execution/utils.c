@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:07:13 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/17 05:17:35 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/17 05:54:23 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ int	liked_size(t_node *tree)
 
 char	**linkedlist_to_arr(t_node *tree)
 {
+	// static int oop;
 	char	**arr;
 	int		i;
 	t_node	*tree_tmp;
@@ -109,30 +110,26 @@ char	**linkedlist_to_arr(t_node *tree)
 
 	tree_tmp = tree;
 	tmp = tree;
-		// exit(0);
-	dprintf(2, "[[[[%s]]]]\n", tree->list->top->value);
 	i = liked_size(tree_tmp);
 	arr = my_malloc(sizeof(char *) * (i + 1), 1);
-		// dprintf(2, "value: %d\n", i);
-	// i = 2;
 	while (i >= 0)
 	{
 		arr[i] = NULL;
 		i--;
 	}
 	i = 0;
-	while(tmp->list->top)
+	while(tmp)
 	{
-		if (!tmp->list->top->flag_space)
+		if (!tmp->flag_space)
 		{
-			arr[i] = ft_strjoin(arr[i], tmp->list->top->value);
+			arr[i] = ft_strjoin(arr[i], tmp->value);
 		}
-		else if (tmp->list->top->flag_space == 1)
+		else if (tmp->flag_space == 1)
 		{
 			i++;
-			arr[i] = ft_strjoin(arr[i], tmp->list->top->value);
+			arr[i] = ft_strjoin(arr[i], tmp->value);
 		}
-		tmp->list->top = tmp->list->top->next;
+		tmp = tmp->next;
 	}
 	i++;
 	arr[i] = NULL;
@@ -164,8 +161,6 @@ char	**redirlist_to_arr(t_nlist *tree)
 
 	tree_tmp = tree;
 	tmp = tree;
-		// dprintf(2, "value: %s\n", tmp->top->value);
-		// exit(0);
 	i = liked_size_redir(tree_tmp);
 	arr = my_malloc(sizeof(char *) * (i + 1), 1);
 	while (i >= 0)
@@ -185,10 +180,6 @@ char	**redirlist_to_arr(t_nlist *tree)
 			i++;
 			arr[i] = ft_strjoin(arr[i], tmp->top->value);
 		}
-		// {
-		// 	i++;
-		// 	arr[i] = ft_strjoin(arr[i], tmp->top->value);
-		// }
 		tmp->top = tmp->top->next;
 	}
 	i++;

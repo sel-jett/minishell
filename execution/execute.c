@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 12:09:39 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/17 05:25:33 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/17 06:31:28 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,13 +79,12 @@ bool	is_builtin(char *cmd)
 char	*ft_handler(char **cmmd, char **path)
 {
 	int				i;
-	int				check;
 	char			*env_var;
 
-	if (!cmmd || !cmmd[0] || !cmmd[0][0])
+	if (!cmmd || !cmmd[0])
 		return (NULL);
-	(1) && (check = 0, i = 0, env_var = cmmd[0]);
-	while (path[i])
+	(1) && (i = 0, env_var = cmmd[0]);
+	while (path[i] && cmmd[0][0])
 	{
 		if (cmmd[0][0] == '/')
 			env_var = ft_strjoin("/", cmmd[0]);
@@ -99,12 +98,9 @@ char	*ft_handler(char **cmmd, char **path)
 			return (env_var);
 		i++;
 	}
-	if (!check)
-	{
-		ft_printf("minishell: ", cmmd[0]);
-		ft_printf(": command not found\n", NULL);
-		ft_status(127, 1);
-	}
+	ft_printf("minishell: ", cmmd[0]);
+	ft_printf(": command not found\n", NULL);
+	ft_status(127, 1);
 	return (NULL);
 }
 
@@ -114,6 +110,8 @@ void	ft_execute_child(char **envp, char **cmmd, char **path)
 	int 	status;
 	char	*env_var;
 
+	if (!path || !path[0])
+		return ;
 	env_var = ft_handler(cmmd, path);
 	if (env_var)
 	{
@@ -135,7 +133,6 @@ void	ft_execute_child(char **envp, char **cmmd, char **path)
 
 void	ft_execute_cmd(t_node_arbre *tree, t_env **env, t_env **exp)
 {
-	static int oop;
 	int				i;
 	char			**cmmd;
 	char			**path;
@@ -143,40 +140,12 @@ void	ft_execute_cmd(t_node_arbre *tree, t_env **env, t_env **exp)
 	t_node			*tmp;
 	t_node			*smp;
 
-	while (tree->right->list->top)
-	{
-		// dprintf(2, "[%s]\n", tree->right->list->top->value);
-		dprintf(2, "[%s][%d]\n", tree->right->list->top->value, tree->right->list->top->flag_space);
-		tree->right->list->top = tree->right->list->top->next;
-	}
-	exit(0);
-	exit(0);
 	i = 0;
 	tmp = tree->list->top;
 	smp = tree->list->top;
-	// while (tree->list->top)
-	// {
-	// 	dprintf(2, "[%s][%d]\n", tree->list->top->value, tree->list->top->flag_space);
-	// 	tree->list->top = tree->list->top->next;
-	// 	// i++;
-	// }
-	// exit(0);
-	i = 0;
-	oop += 1;
 	envp = env_to_arr(*env);
 	path = ft_split(get_path(*env), ':');
 	cmmd = linkedlist_to_arr(tmp);
-	if (oop == 2)
-	{
-		i = 0;
-		while (cmmd[i])
-		{
-			dprintf(2, "[%s]\n", cmmd[i]);
-			i++;
-		}
-		// dprintf(2, "exit(0)\n");
-		exit(0);
-	}
 	while (cmmd[i])
 	{
 		if (smp->flag_expend == 1)

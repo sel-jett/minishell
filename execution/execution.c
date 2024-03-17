@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:12:36 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/08 15:12:37 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/17 05:35:39 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,14 @@
 
 void	execute(t_node_arbre *tree, t_env *env, t_env *exp)
 {
+	
+	// while (tree->right->list->top)
+	// {
+	// 	// dprintf(2, "[%s]\n", tree->right->list->top->value);
+	// 	dprintf(2, "[%s][%d]\n", tree->right->list->top->value, tree->right->list->top->flag_space);
+	// 	tree->right->list->top = tree->right->list->top->next;
+	// }
+	// exit(0);
 	if (!tree)
 		return ;
 	if (tree->mode == 0)

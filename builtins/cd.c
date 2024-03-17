@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 23:18:52 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/08 15:38:09 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/17 06:14:25 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,13 +179,13 @@ void	ft_builtin(char **cmd, t_env **cenv, t_env **exp)
 	else if (!ft_strncmp(cmd[0], "exit"))
 		exit(ft_status(0, 0));
 	else if (!ft_strncmp(cmd[0], "env"))
-		ft_env(tmp);
+		ft_env(*cenv);
 	else if (!ft_strncmp(cmd[0], "pwd"))
 		printf("%s\n", value_key(tmp, "PWD"));
 	else if (!ft_strncmp(cmd[0], "export"))
 		ft_export((cmd + 1), cenv, exp);
 	else if (!ft_strncmp(cmd[0], "unset"))
-		ft_unset((cmd + 1), &tmp, exp);
+		ft_unset((cmd + 1), cenv, exp);
 	else
 	{
 		ft_printf("minishell: ", cmd[0]);
