@@ -118,3 +118,7 @@ $HOME
 bash-3.2$ ''
 bash: : command not found
 bash-3.2$ 
+
+ls < in
+
+ls < in > o3 > o4
