@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 12:09:39 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/17 02:19:52 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/17 02:42:39 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,12 +145,12 @@ void	ft_execute_cmd(t_node_arbre *tree, t_env **env, t_env **exp)
 	i = 0;
 	tmp = tree->list->top;
 	smp = tree->list->top;
-	while (tree->list->top)
-	{
-		dprintf(2, "[%s][%d]\n", tree->list->top->value, tree->list->top->flag_space);
-		tree->list->top = tree->list->top->next;
-		// i++;
-	}
+	// while (tree->list->top)
+	// {
+	// 	dprintf(2, "[%s][%d]\n", tree->list->top->value, tree->list->top->flag_space);
+	// 	tree->list->top = tree->list->top->next;
+	// 	// i++;
+	// }
 	envp = env_to_arr(*env);
 	path = ft_split(get_path(*env), ':');
 	cmmd = linkedlist_to_arr(tmp);

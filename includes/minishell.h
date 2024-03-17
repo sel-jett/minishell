@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:48:58 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/17 02:16:48 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/17 02:51:57 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 // # include "/Users/amel-has/.brew/opt/readline/include/readline/history.h"
 // void			print_tree(t_node_arbre    *tree, int c);
 // void            affiche(t_list *list);
+int ope(t_node *node);
 int             plant_5(t_node	*tmp, t_list *list);
 int             add_args(t_nlist *list, char *str, int *i);
 void            affichage(int n);

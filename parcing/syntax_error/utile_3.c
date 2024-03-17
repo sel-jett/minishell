@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 21:22:32 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/17 01:57:26 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/17 02:54:03 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,12 @@ int	add_list_redir(t_node *node)
 			if (tmp1->mode != TOKEN_SPACE)
 			{
 				tmp1->avant_ = 1;
+					
 				redir_node = c_nnode(tmp1);
 				if (!redir_node)
 					return (0);
+				if (tmp1->prev && tmp1->prev->mode == TOKEN_SPACE)
+					redir_node->flag_space = 1;
 				add_nback(node->list_redir, redir_node);
 			}
 			tmp1 = tmp1->next;
@@ -70,6 +73,11 @@ int	add_list_redir(t_node *node)
 			redir_node = c_nnode(tmp);
 			if (!redir_node)
 				return (0);
+			if (tmp->prev && tmp->prev->mode == TOKEN_SPACE && !ope(tmp->prev->prev)) 
+			{
+				// if (tmp)
+				redir_node->flag_space = 1;
+			}
 			add_nback(node->list_redir, redir_node);
 		}
 		tmp = tmp->next;

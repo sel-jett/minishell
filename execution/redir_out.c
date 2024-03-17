@@ -55,13 +55,13 @@ void	ft_execute_redir(t_node_arbre *tree, t_env **env, t_env **exp)
 	// exit(0);
 	envp = env_to_arr(*env);
 	path = ft_split(get_path(*env), ':');
-	while (tree->list_redir->top)
-	{
-		dprintf(2, "[%s][%d]\n", tree->list_redir->top->value, tree->list_redir->top->flag_space);
-		tree->list_redir->top = tree->list_redir->top->next;
+	// while (tree->list_redir->top)
+	// {
+	// 	dprintf(2, "[%s][%d]\n", tree->list_redir->top->value, tree->list_redir->top->flag_space);
+	// 	tree->list_redir->top = tree->list_redir->top->next;
 	
-	}
-	exit(0);
+	// }
+	// exit(0);
 	cmmd = redirlist_to_arr(tree->list_redir);
 	// cmmd = ft_tree_to_cmd(tree);
 	i = 0;
