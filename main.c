@@ -145,9 +145,9 @@ int main(int ac, char **av, char **envp)
 					if (!plant_6(nlist->top, &arbre->racine))
 						(1 == 1) && (printf("ERROR7\n"), index = 1);
 				}
-				// exit(0);
 				if (!index)
 				{
+					
 					// while (arbre->racine->right->list->top)
 					// {
 					// 	// dprintf(2, "[%s]\n", arbre->racine->right->list->top->value);
@@ -163,12 +163,15 @@ int main(int ac, char **av, char **envp)
 					// 	arbre->racine->list_redir->top = arbre->racine->list_redir->top->next;
 
 					// }
-					// printf("[%d]\n",arbre->racine->list->top->flag_expend);
+					printf("[%d][%d][%d]\n",arbre->racine->list_redir->top->avant_,
+					arbre->racine->list_redir->top->next->avant_,
+					arbre->racine->list_redir->top->next->next->avant_);
 					// exit(0);
 					// env = ft_env_parser(envp);
 					// env = ft_env_parser(envp);
 					// ft_print_arr(envp);
 					// ft_env(env);
+					// printf("[%d]\n",arbre->racine->mode);
 					// print_tree(arbre->racine);
 					// while (arbre->racine->top)
 					// {

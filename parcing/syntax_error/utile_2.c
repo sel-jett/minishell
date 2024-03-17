@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:17:58 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/16 07:23:28 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/17 08:08:12 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int ft_strlen(char *str)
 	return (i);	
 }
 
-bool open_herdoc(t_nnode *node)
+bool	open_herdoc(t_nnode *node)
 {
 	char *str = NULL;
 	char *file;
@@ -122,6 +122,8 @@ t_node_arbre	*parse_redir(t_node **tmp)
 	node_left = parse_cmd(tmp);
 	if (*tmp && is_redir(*tmp))
 	{
+		if ((*tmp)->mode == TOKEN_HEREDOC)
+			(*tmp)->mode = TOKEN_REDIR_IN;
 		i_node = (*tmp)->list_redir->top;
 		while (i_node)
 		{
@@ -129,6 +131,10 @@ t_node_arbre	*parse_redir(t_node **tmp)
 			{
 				if (!open_herdoc(i_node))
 					return (0);
+				if (i_node->next)
+					i_node->next->value = "file0";
+					i_node->value = "<";
+				i_node->mode = TOKEN_REDIR_IN;
 			}
 			i_node = i_node->next;
 		}

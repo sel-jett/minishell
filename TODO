@@ -118,3 +118,8 @@ $HOME
 bash-3.2$ ''
 bash: : command not found
 bash-3.2$ 
+
+<-------------------->
+bash-3.2$ ls < l
+bash: l: No such file or directory
+bash-3.2$ 

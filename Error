@@ -1,0 +1,18 @@
+minishell > clear
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==76058==ERROR: AddressSanitizer: SEGV on unknown address 0x000000000000 (pc 0x000104dcbcf0 bp 0x7ffeeae386a0 sp 0x7ffeeae38460 T0)
+==76058==The signal is caused by a READ memory access.
+==76058==Hint: address points to the zero page.
+    #0 0x104dcbcf0 in main+0x800 (minishell:x86_64+0x100004cf0)
+    #1 0x7fff73b8dcc8 in start+0x0 (libdyld.dylib:x86_64+0x1acc8)
+
+==76058==Register values:
+rax = 0x0000000000000000  rbx = 0x00007ffeeae384c0  rcx = 0x0000000000000000  rdx = 0x0000100000000000  
+rdi = 0x0000100000000000  rsi = 0x0000100000000000  rbp = 0x00007ffeeae386a0  rsp = 0x00007ffeeae38460  
+ r8 = 0x0000200000000000   r9 = 0x0000000000000000  r10 = 0xffffffffffffffff  r11 = 0x00000fffffffffff  
+r12 = 0x0000000000000000  r13 = 0x0000000000000000  r14 = 0x0000000000000000  r15 = 0x0000000000000000  
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV (minishell:x86_64+0x100004cf0) in main+0x800
+==76058==ABORTING
+[1]    76058 abort      ./minishell
