@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 11:44:57 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/17 06:26:51 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/17 22:05:56 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*value_key(t_env *tmp, char *key)
 {
 	while (tmp)
 	{
-		if (!ft_strncmp_one(tmp->key, key))
+		if (!ft_strncmp(tmp->key, key))
 			return (tmp->value);
 		tmp = tmp->next;
 	}
