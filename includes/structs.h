@@ -5,10 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/17 03:49:09 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/17 22:03:13 by amel-has         ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2024/03/18 06:24:56 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
@@ -27,6 +28,7 @@ typedef struct s_nnode
 	char			*value;
 	int				flag_wilc;
 	int				flag_space;
+	int				flag_expend;
 	int				avant_;
 	int				flag_apresred;
 	int				mode;

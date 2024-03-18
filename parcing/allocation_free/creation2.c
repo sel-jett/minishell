@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:14:17 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/17 22:03:20 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/18 06:25:03 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ t_nnode	*c_nnode(t_node *node)
 	new_nnode = my_malloc(sizeof(t_nnode), 1);
 	if (!new_nnode)
 		return (0);
+	new_nnode->flag_expend = node->flag_expend;
 	new_nnode->value = node->value;
 	new_nnode->next = 0;
 	new_nnode->mode = node->mode;

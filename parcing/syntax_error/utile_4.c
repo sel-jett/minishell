@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 21:32:37 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/16 01:35:24 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/18 01:48:20 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,9 @@ int	check_syntax_3(t_node *tmp)
 	{
 		while (str && str[i] && str[i] == '$')
 		{
+			tmp->flag_expend = 1;
+			if (tmp->mode == TOKEN_EXPR)
+				tmp->flag_expend = 2;
 			i++;
 			if (str && str[i] && !add_args(tmp->list_arg, &str[i], &i))
 				return (0);

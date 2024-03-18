@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:17:58 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/18 06:10:18 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/18 06:26:40 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,13 +87,13 @@ int ft_strlen(char *str)
 	return (i);
 }
 
-bool open_herdoc(t_nnode *node,char **file)
+bool open_herdoc(t_nnode *node, char **file)
 {
 	char		*str;
 	int			n;
 	int			fd;
-	(1) && (str = 0, n= 0);
 
+	(1) && (str = 0, n= 0);
 	while (1)
 	{
 		*file = ft_strjoin("/tmp/file", ft_itoa(n));
@@ -127,7 +127,7 @@ t_node_arbre *parse_redir(t_node **tmp)
 	t_node_arbre *node_left;
 	t_node_arbre *node;
 	t_nnode *i_node = NULL;
-	char			*file = NULL;
+	char *file = NULL;
 
 	node_left = parse_cmd(tmp);
 	if (*tmp && is_redir(*tmp))

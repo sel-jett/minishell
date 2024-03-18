@@ -171,7 +171,6 @@ int main(int ac, char **av, char **envp)
 					// arbre->racine->list_redir->top->next->avant_,
 					// arbre->racine->list_redir->top->next->next->avant_);
 					// exit(0);
-					// exit(0);
 					// env = ft_env_parser(envp);
 					// env = ft_env_parser(envp);
 					// ft_print_arr(envp);
