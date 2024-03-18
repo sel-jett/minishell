@@ -179,7 +179,10 @@ int main(int ac, char **av, char **envp)
 					// 	arbre->racine->top = arbre->racine->list->top->next;
 					// }
 					// puts(arbre->racine->list->top->value);
-					// printf("[%d]",arbre->racine->list_redir->top->flag_expend);
+					// while(arbre->racine->list_redir->top){
+					// printf("[%d]\n",arbre->racine->list_redir->top->flag_expend);
+					// arbre->racine->list_redir->top = arbre->racine->list_redir->top->next;
+					// }
 					execute(arbre->racine, env, exp);
 					// my_malloc(0, 0);
 				}

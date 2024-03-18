@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 21:22:32 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/18 00:28:30 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/18 02:20:27 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	add_list_redir(t_node *node)
 	t_node	*tmp;
 	t_node	*tmp1;
 	t_nnode	*redir_node;
+	int i = 0;
 
 	(1) && (tmp = node, redir_node = NULL, tmp1 = NULL);
 	node->list_redir = c_nlist();
@@ -50,6 +51,17 @@ int	add_list_redir(t_node *node)
 	while (tmp && (tmp->mode == TOKEN_PARENTHESE || is_text(tmp) || tmp->mode
 			== TOKEN_SPACE || is_redir(tmp)))
 	{
+		i = 0;
+		while (tmp->value && tmp->value[i])
+		{
+			if (tmp->value  && tmp->value[i] == '$')
+			{
+				tmp->flag_expend = 1;
+				if (tmp->mode == TOKEN_EXPR)
+					tmp->flag_expend = 2;
+			}
+			i++;
+		}
 		if (tmp->mode != TOKEN_SPACE)
 		{
 			if (tmp->prev && tmp->prev->prev
