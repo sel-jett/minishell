@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 21:22:32 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/17 21:06:41 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/18 00:28:30 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	add_list_redir(t_node *node)
 			else if (tmp->prev && is_redir(tmp->prev) && is_text(tmp))
 			{
 				tmp->avant_ = 2;
-				if (tmp->prev->mode == TOKEN_REDIR_IN)
+				if (tmp->prev->mode == TOKEN_REDIR_IN || tmp->prev->mode == TOKEN_HEREDOC)
 					tmp->avant_ = 3;
 				if (tmp->prev->mode == TOKEN_REDIR_APPEND)
 					tmp->avant_ = 4;

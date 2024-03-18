@@ -163,9 +163,9 @@ int main(int ac, char **av, char **envp)
 					// 	arbre->racine->list_redir->top = arbre->racine->list_redir->top->next;
 
 					// }
-					// printf("[%d][%d][%d]\n",arbre->racine->list_redir->top->avant_,
-					// arbre->racine->list_redir->top->next->avant_,
-					// arbre->racine->list_redir->top->next->next->avant_);
+					// printf("[%s][%s][%s]\n",arbre->racine->list_redir->top->value,
+					// arbre->racine->list_redir->top->next->value,
+					// arbre->racine->list_redir->top->next->next->value);
 					// exit(0);
 					// env = ft_env_parser(envp);
 					// env = ft_env_parser(envp);
@@ -179,7 +179,8 @@ int main(int ac, char **av, char **envp)
 					// 	arbre->racine->top = arbre->racine->list->top->next;
 					// }
 					// puts(arbre->racine->list->top->value);
-					execute(arbre->racine, env, exp);
+					printf("[%d]",arbre->racine->list_redir->top->flag_expend);
+					// execute(arbre->racine, env, exp);
 					// my_malloc(0, 0);
 				}
 			}
