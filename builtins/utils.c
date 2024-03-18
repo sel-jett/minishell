@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: salah <salah@student.42.fr>                +#+  +:+       +#+        */
+/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 08:37:52 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/02/27 18:26:47 by salah            ###   ########.fr       */
+/*   Updated: 2024/03/18 06:09:42 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,25 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (str);
 }
 
+char	*ft_strjoin2(char *s1, char *s2)
+{
+	int		size;
+	char	*str;
+	int		i;
+
+	size = ft_strlen_b(s1) + ft_strlen_b(s2);
+	if (!size)
+		return (0);
+	str = malloc(size + 1);
+	i = 0;
+	size = 0;
+	while (s1 && s1[i])
+		(1) && (str[i] = s1[i], i++);
+	while (s2 && s2[size])
+		(1) && (str[i + size] = s2[size], size++);
+	str[i + size] = '\0';
+	return (free(s1), str);
+}
 char	*ft_strdup(char *s)
 {
 	int		i;

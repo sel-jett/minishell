@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 21:59:00 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/17 00:10:09 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/18 05:44:10 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*ft_strjoin_char(char *s1, char s2)
 	int		i;
 
 	size = ft_strlen_b(s1) + 1;
-	str = malloc(size + 1);
+	str = my_malloc(size + 1,1);
 	i = 0;
 	size = 0;
 	while (s1 && s1[i])
@@ -64,7 +64,7 @@ static char	*ft_second_norminette(int *i, int *k, char *cmd)
 {
 	int l = 0;
 	char *venv;
-	venv = malloc(*k + 1);
+	venv = my_malloc(*k + 1, 1);
 	while (*k > 0)
 	{
 		if (cmd[*i - *k] == '-' || cmd[*i - *k] == 32 || (cmd[*i] < '\"' && cmd[*i] > 47))
@@ -91,7 +91,7 @@ char	*ft_expand(t_env *exp, char *cmd)
 		new_cmd = ft_itoa(ft_status(0, 0));
 		return (new_cmd);
 	}
-	(1) && (new_cmd = malloc(1), new_cmd[0] = '\0');
+	(1) && (new_cmd = my_malloc(1,1), new_cmd[0] = '\0');
 	while (cmd[i])
 	{
 		l = 0;

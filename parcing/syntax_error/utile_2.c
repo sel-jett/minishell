@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:17:58 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/17 21:30:30 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/18 06:10:18 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,8 @@ bool open_herdoc(t_nnode *node,char **file)
 	char		*str;
 	int			n;
 	int			fd;
-
 	(1) && (str = 0, n= 0);
+
 	while (1)
 	{
 		*file = ft_strjoin("/tmp/file", ft_itoa(n));
@@ -104,7 +104,6 @@ bool open_herdoc(t_nnode *node,char **file)
 	fd = open(*file, O_CREAT | O_RDWR, S_IRUSR | S_IWUSR);
 	if (fd == -1)
 		return (0);
-	n++;
 	while (1)
 	{
 		str = readline("heredoc> ");
@@ -112,10 +111,14 @@ bool open_herdoc(t_nnode *node,char **file)
 		{
 			if (ft_strcmp(node->next->value, str))
 				break;
-			str = ft_strjoin(str, "\n");
+			str = ft_strjoin2(str, "\n");
 			write(fd, str, ft_strlen(str));
 		}
+			free(str);
+
 	}
+	if (str)
+		(1) && (free(str),str = NULL);
 	return (1);
 }
 

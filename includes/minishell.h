@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:48:58 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/17 02:51:57 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/18 06:07:11 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ void			ft_list_remove_if(t_env **begin_list, void *data_ref, int (*cmp)());
 char			*ft_strdup(char *s);
 void			ft_fpintf(const char *msg);
 char			*ft_strjoin(char *s1, char *s2);
+char			*ft_strjoin2(char *s1, char *s2);
 void			echo(const char **path, int mode);
 void			ft_unset(char **cmd, t_env **cnev, t_env **exp);
 void			ft_export(char **cmd, t_env **cnev, t_env **exp);

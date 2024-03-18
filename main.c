@@ -76,7 +76,10 @@ void print_tree(t_node_arbre *root)
 	fprintf(fp, "}\n");
 	// fclose(fp);
 }
-
+void f()
+{
+	system("leaks minishell");
+}
 int main(int ac, char **av, char **envp)
 {
 	t_list *list;
@@ -93,6 +96,7 @@ int main(int ac, char **av, char **envp)
 	// sa.sa_sigaction = handler_signel;
 	// sigaction(SIGINT,&sa,NULL);
 	// rl_catch_signals = 0;
+	// atexit(f);
 	env = ft_env_parser(envp);
 	exp = ft_env_parser(envp);
 	ft_lstadd_back(&exp, env_new("OLDPWD", exp));
@@ -167,6 +171,7 @@ int main(int ac, char **av, char **envp)
 					// arbre->racine->list_redir->top->next->avant_,
 					// arbre->racine->list_redir->top->next->next->avant_);
 					// exit(0);
+					// exit(0);
 					// env = ft_env_parser(envp);
 					// env = ft_env_parser(envp);
 					// ft_print_arr(envp);
@@ -179,8 +184,10 @@ int main(int ac, char **av, char **envp)
 					// 	arbre->racine->top = arbre->racine->list->top->next;
 					// }
 					// puts(arbre->racine->list->top->value);
-					execute(arbre->racine, env, exp);
-					// my_malloc(0, 0);
+					// execute(arbre->racine, env, exp);
+				// return (0);
+					free(list->str);
+					my_malloc(0, 0);
 				}
 			}
 		}

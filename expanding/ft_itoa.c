@@ -36,7 +36,7 @@ char    *ft_itoa(int n)
     m = n;
     n = 0;
     size = ft_size(m);
-    tab = malloc(size + 1);
+    tab = my_malloc(size + 1, 1);
     if (!tab)
         return (0);
     tab[size] = '\0';
