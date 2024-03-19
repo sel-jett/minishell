@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:07:13 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/19 07:28:25 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/19 20:16:18 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,13 +183,18 @@ char	**redirlist_to_arr(t_nlist *tree)
 {
 	char	**arr;
 	int		i;
+	int		j;
 	t_nlist	*tree_tmp;
 	t_nlist	*tmp;
+	t_nlist	*smp;
 
 	tree_tmp = tree;
 	tmp = tree;
+	smp = tree;
 	i = liked_size_redir(tree_tmp);
 	arr = my_malloc(sizeof(char *) * (i + 1), 1);
+	if (!arr)
+		return (NULL);
 	while (i >= 0)
 	{
 		arr[i] = NULL;
@@ -198,30 +203,33 @@ char	**redirlist_to_arr(t_nlist *tree)
 	i = 0;
 	while(tmp->top)
 	{
-		dprintf(2, "[%s][%d]\n", tmp->top->value, tmp->top->flag_wilc);
+		j = i;
 		if (!tmp->top->flag_space && tmp->top->avant_ == 1)
 		{
 			arr[i] = ft_strjoin(arr[i], tmp->top->value);
+			if (!arr[i])
+				return (NULL);
 		}
 		else if (tmp->top->flag_space == 1 && ft_strncmp(tmp->top->value, ">") && ft_strncmp(tmp->top->value, ">>") && ft_strncmp(tmp->top->value, "<"))
 		{
 			i++;
 			arr[i] = ft_strjoin(arr[i], tmp->top->value);
+			if (!arr[i])
+				return (NULL);
+		}
+		if (i > j)
+		{
+			if (tmp->top->flag_wilc)
+			{
+				arr[i] = ft_strdup(ft_execute_wild(arr[i]));
+				if (!arr[i])
+					return (NULL);
+			}
 		}
 		tmp->top = tmp->top->next;
 	}
-	exit(0);
 	i++;
 	arr[i] = NULL;
-	i = 0;
-	while (arr[i])
-	{
-		if (ft_execute_wild(arr[i]))
-			arr[i] = ft_strdup(ft_execute_wild(arr[i]));
-		// dprintf(2, "[%s]\n", arr[i]);
-		i++;
-	}
-	// ft_print_arr(arr);
-	// arr = array_dupper(arr);
+	arr = array_dupper(arr);
 	return (arr);
 }

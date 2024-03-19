@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 21:26:25 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/19 03:36:25 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/19 07:46:35 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,8 +110,12 @@ char    *ft_execute_wild(char *str)
         {
             if ((dp->d_name)[0] != '.')
             {
-            sdk = ft_strjoin(sdk, dp->d_name);
+                sdk = ft_strjoin(sdk, dp->d_name);
+                if (!sdk)
+                    return (NULL);
                 sdk = ft_strjoin(sdk, " ");
+                if (!sdk)
+                    return (NULL);
             }
         }
         return (sdk);
@@ -131,7 +135,11 @@ char    *ft_execute_wild(char *str)
                 if ((dp->d_name)[0] != '.')
                 {
                     sdk = ft_strjoin(sdk, dp->d_name);
+                    if (!sdk)
+                        return (NULL);
                     sdk = ft_strjoin(sdk, " ");
+                    if (!sdk)
+                        return (NULL);
                 }
             }
         return (sdk);
@@ -145,7 +153,11 @@ char    *ft_execute_wild(char *str)
                 if ((dp->d_name)[0] != '.')
                 {
                     sdk = ft_strjoin(sdk, dp->d_name);
+                    if (!sdk)
+                        return (NULL);
                     sdk = ft_strjoin(sdk, " ");
+                    if (!sdk)
+                        return (NULL);
                 }
             }
         }
@@ -154,7 +166,11 @@ char    *ft_execute_wild(char *str)
     else
     {
         while ((dp = readdir(dir)) != NULL)
+        {
             sdk = ft_strjoin(dp->d_name, " ");
+            if (!sdk)
+                return (NULL);
+        }
         return (sdk);
     }
     closedir(dir);

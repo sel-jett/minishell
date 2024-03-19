@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 12:09:39 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/19 07:36:48 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/19 19:58:32 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,12 +87,22 @@ char	*ft_handler(char **cmmd, char **path)
 	while (path[i] && cmmd[0][0])
 	{
 		if (cmmd[0][0] == '/')
+		{
 			env_var = ft_strjoin("/", cmmd[0]);
+			if (!env_var)
+				return (NULL);
+		}
 		else if (cmmd[0][0] != '.')
 		{
 			env_var = ft_strjoin("/", cmmd[0]);
+			if (!env_var)
+				return (NULL);
 			env_var = ft_strjoin(path[i], env_var);
+			if (!env_var)
+				return (NULL);
 			env_var = ft_strjoin("/", env_var);
+			if (!env_var)
+				return (NULL);
 		}
 		if (!access(env_var, F_OK | X_OK))
 			return (env_var);
@@ -147,51 +157,37 @@ char **c(char *str, int *len)
 
 char    **array_dupper(char **str)
 {
-    char **str_r;
-    char     **s1;
-    char     **s2;
+    char    **str_r;
+    char    **s;
+    int     i;
     int     len;
-    int        i;
+    int        j;
 
-    len = 0;
-    if (str[0])
+    i = 0;len = 0;
+    while (str[i])
     {
-        s1 = c(str[0], &len);
-        if (!s1)
-            return (0);
-    }
-    if (str[1])
-    {
-        s2 = c(str[1], &len);
-        if (!s2)
-            return (0);;
+        c(str[i], &len);
+        i++;
     }
     str_r = malloc(sizeof(char *) * (len + 1));
     if (!str_r)
-        return (0);
+        return (0);    
     len = 0;
-    if (str[0])
+    i = 0;
+    while(str[i])
     {
-        i = 0;
-        while (s1[i])
+        j = 0;
+        s = ft_split(str[i],' ');
+        if (!s)
+            return (printf("ha ana\n"),NULL);
+        while (s[j])
         {
-            str_r[len] = s1[i];
+            str_r[len] = s[j];
             len++;
-            i++;
+            j++;
         }
+        i++;
     }
-    if (str[1])
-    {
-        i = 0;
-        while (s2[i])
-        {
-            str_r[len] = s2[i];
-            len++;
-            i++;
-        }
-    }
-    if (str[2])
-        str_r[len++] = str[2];
     str_r[len] = NULL;
     return (str_r);
 }
@@ -209,14 +205,28 @@ void	ft_execute_cmd(t_node_arbre *tree, t_env **env, t_env **exp)
 	tmp = tree->list->top;
 	smp = tree->list->top;
 	envp = env_to_arr(*env);
+	if (!envp)
+		return ;
 	path = ft_split(get_path(*env), ':');
+	if (!path)
+		return ;
 	cmmd = linkedlist_to_arr(tmp);
+	if (!cmmd)
+		return ;
 	while (cmmd[i])
 	{
 		if (smp->flag_expend == 1)
+		{
 			cmmd[i] = ft_expand(*exp, cmmd[i]);
+			if (!cmmd[i])
+				return ;
+		}
 		else if (smp->flag_expend == 2)
+		{
 			cmmd[i] = ft_expand(*exp, cmmd[i]);
+			if (!cmmd[i])
+				return ;
+		}
 		smp = smp->next;
 		i++;
 	}
@@ -225,10 +235,15 @@ void	ft_execute_cmd(t_node_arbre *tree, t_env **env, t_env **exp)
 	while (cmmd[i])
 	{
 		if (ft_execute_wild(cmmd[i]) && smp->flag_wilc == 1)
+		{
 			cmmd[i] = ft_strdup(ft_execute_wild(cmmd[i]));
+			if (!cmmd[i])
+				return ;
+		}
 		smp = smp->next;
 		i++;
 	}
+	cmmd = array_dupper(cmmd);
 	if (is_builtin(cmmd[0]))
 	{
 		ft_builtin(cmmd, env, exp);
