@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utile_1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:19:17 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/15 05:09:42 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/19 04:02:47 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ int	plant_4(t_list *list)
 		(1) && (tmp = list->top, list->top->prev = 0);
 		while (tmp)
 		{
+			check_wilc(tmp);
 			if (tmp->mode == TOKEN_PARENTHESE && tmp->value[0] == '(')
 			{
 				count_parentheses++;

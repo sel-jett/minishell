@@ -102,7 +102,7 @@ int main(int ac, char **av, char **envp)
 	ft_lstadd_back(&exp, env_new("OLDPWD", exp));
 	ft_sort_list(&exp);
 	(void)ac;
-	(void)envp;
+	// (void)envp;
 	(void)av;
 	while (1)
 	{
@@ -151,7 +151,6 @@ int main(int ac, char **av, char **envp)
 				}
 				if (!index)
 				{
-					
 					// while (arbre->racine->right->list->top)
 					// {
 					// 	// dprintf(2, "[%s]\n", arbre->racine->right->list->top->value);
@@ -183,13 +182,13 @@ int main(int ac, char **av, char **envp)
 					// 	arbre->racine->top = arbre->racine->list->top->next;
 					// }
 					// puts(arbre->racine->list->top->value);
-					// execute(arbre->racine, env, exp);
+					execute(arbre->racine, env, exp);
 				// return (0);
 					free(list->str);
-					my_malloc(0, 0);
 				}
 			}
 		}
 	}
+	my_malloc(0, 0);
 	return (0);
 }

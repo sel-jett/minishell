@@ -6,34 +6,11 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 07:03:43 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/04 18:06:14 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/18 23:28:16 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "builtins.h"
 #include "../includes/minishell.h"
-
-// static char	*grep_first(char *cmd)
-// {
-// 	int		i;
-// 	int		j;
-// 	char	*str;
-
-// 	i = 0;
-// 	while (cmd[i] && cmd[i] != '=')
-// 		i++;
-// 	str = my_malloc(i + 1, 1);
-// 	j = -1;
-// 	while (++j < i)
-// 		str[j] = cmd[i];
-// 	str[j] = '\0';
-// 	return (str);
-// }
-
-// static int	append_check(char *cmd)
-// {
-
-// }
 
 static	int	equal_check(char *cmd)
 {
@@ -72,6 +49,7 @@ void	ft_env_export(t_env *tmp)
 void	ft_export(char **cmd, t_env **cnev, t_env **exp)
 {
 	int		i;
+	char	*tmp;
 
 	i = 0;
 	if (!ft_strlen_b(cmd[0]))
@@ -82,16 +60,19 @@ void	ft_export(char **cmd, t_env **cnev, t_env **exp)
 
 	while (cmd[i])
 	{
-		if (!check_first(cmd[i]))
+		tmp = ft_expand(*exp, get_key(cmd[i]));
+		if (!tmp[0] && cmd[i][0] != '$')
+			tmp = get_key(cmd[i]);
+		if (!check_first(cmd[i], *exp))
 			return ;
 		if (equal_check(cmd[i]) != 0 && equal_check(cmd[i]) != -10)
 		{
-			ft_list_remove_if(exp, get_key(cmd[i]), ft_strncmp_one);
-			ft_list_remove_if(cnev, get_key(cmd[i]), ft_strncmp_one);
+			ft_list_remove_if(exp, tmp, ft_strncmp_one);
+			ft_list_remove_if(cnev, tmp, ft_strncmp_one);
 		}
 		else if (equal_check(cmd[i]) != -10)
 		{
-			if (!value_key(*exp, get_key(cmd[i])))
+			if (!value_key(*exp, tmp))
 			{
 				ft_lstadd_back(exp, env_new(cmd[i], *exp));
 				i++;

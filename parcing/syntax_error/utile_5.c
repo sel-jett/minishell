@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utile_5.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 20:49:46 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/16 01:33:30 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/19 06:04:06 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void check_wilc(t_node *node)
 	int i;
 
 	i = 0;
-	while (node->value[i])
+	while (node->value[i] && node->mode == TOKEN_EXPR)
 	{
 		if (node->value[i] == '*')
 			node->flag_wilc = 1;

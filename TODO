@@ -34,3 +34,7 @@ dd
 d
 d
 d
+ minishell > export *O
+ minishell > minishell > export *M
+zsh: segmentation fault  ./minishell
+zsh: segmentation fault  ./minishell

@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 11:44:57 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/17 22:05:56 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/18 23:00:54 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,10 +90,12 @@ t_env	*env_new(char *data, t_env *tmp)
 	char	*str;
 
 	node = my_malloc(sizeof(t_env), 1);
-	str = get_key(data);
+	str = ft_expand(tmp, get_key(data));
+	if (!str || !str[0])
+		str = get_key(data);
 	if (check_key(data))
 	{
-		node->key = get_key(data);
+		node->key = str;
 		node->value = ft_strjoin(get_value(data), value_key(tmp, str));
 		ft_list_remove_if(&tmp, str, ft_strncmp_one);
 	}

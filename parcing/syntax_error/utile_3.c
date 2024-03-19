@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utile_3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 21:22:32 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/18 06:27:34 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/19 06:06:40 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,14 @@ t_node_arbre	*add_commade(t_node	*tmp)
 	if (!new_node->list)
 		return (0);
 	new_node->list->top = tmp;
+	// t_node *x = new_node->list->top;
+	// while(x)
+	// {
+	// 	// check_wilc(x);
+	// 	printf("[%d]->",x->flag_wilc);
+	// 	x = x->next;
+	// }
+	// exit(1);
 	node = tmp;
 	while (node && (node->mode == TOKEN_EXPR))
 		node = node->next;

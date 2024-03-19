@@ -3,34 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:48:58 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/18 06:07:11 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/19 03:49:46 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include <stdlib.h>
 # include <stdio.h>
+# include <string.h>
+# include <stdlib.h>
 # include <limits.h>
 # include "structs.h"
 # include <unistd.h>
 # include <fcntl.h>
-# include <string.h>
+# include <dirent.h>
 # include <errno.h>
 # include <signal.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <stdbool.h>
- #include <fcntl.h>
 // # include "/Users/amel-has/.brew/opt/readline/include/readline/readline.h"
 // # include "/Users/amel-has/.brew/opt/readline/include/readline/history.h"
 // void			print_tree(t_node_arbre    *tree, int c);
 // void            affiche(t_list *list);
-int ope(t_node *node);
+
+char            **array_dupper(char **str);
+int             ope(t_node *node);
 int             plant_5(t_node	*tmp, t_list *list);
 int             add_args(t_nlist *list, char *str, int *i);
 void            affichage(int n);
@@ -96,6 +98,7 @@ int				liked_size(t_node *tree);
 char			**linkedlist_to_arr(t_node *tree);
 char			*get_path(t_env *env);
 char	        **redirlist_to_arr(t_nlist *list_redir);
+char            *ft_execute_wild(char *str);
 
 ///////////////////////// BUILTINS //////////////////////////
 
@@ -113,7 +116,7 @@ int				ft_strncmp_two(char *tmp, char *pwd);
 t_env			*ft_env_parser(char **env);
 char			*find_pwd(t_env *cenv);
 char			*ft_strtrim(char *cmd);
-int				check_first(char *cmd);
+int				check_first(char *cmd, t_env *exp);
 char			*find_oldpwd(t_env *cenv);
 t_env			*ft_lstlast(t_env *lst);
 void			ft_list_remove_if(t_env **begin_list, void *data_ref, int (*cmp)());

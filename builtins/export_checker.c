@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_checker.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: salah <salah@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 07:26:29 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/02/27 18:40:06 by salah            ###   ########.fr       */
+/*   Updated: 2024/03/18 23:28:33 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,42 +17,44 @@ static int	is_alpha(int c)
 	return ((c >= 65 && c <= 90) || (c >= 97 && c <= 122));
 }
 
-static int	is_upper(int c)
-{
-	return (c >= 65 && c <= 90);
-}
-
 static int	is_num(int c)
 {
 	return (c >= 48 && c <= 57);
 }
 
-int	check_first(char *cmd)
+int	check_first(char *cmd, t_env *env)
 {
 	int	i;
 	int	check2;
+	char *tmp;
 
+	tmp = ft_expand(env, get_key(cmd));
+	if ((!tmp || !tmp[0]) && cmd[0] != '$')
+		tmp = cmd;
 	(1) && (i = 0, check2 = 0);
-	if (cmd[i] != '_' && !is_alpha(cmd[i]))
+	if (tmp[i] != '_' && !is_alpha(tmp[i]))
 	{
-		printf("minishell: export: `%s':", cmd);
+		if (!tmp[0])
+			printf("minishell: export: `=%s':", get_value(cmd));
+		else if (value_key(env, cmd))
+			printf("minishell: export: `%s':", ft_strjoin(value_key(env, cmd), get_value(cmd)));
+		else
+			printf("minishell: export: `%s':", cmd);
 		printf(" not a valid identifier\n");
 		return (0);
 	}
 	i++;
-	while (cmd[i] && cmd[i] != '=')
+	while (tmp[i] && tmp[i] != '=')
 	{
-		if (cmd[i] != '_' && !is_alpha(cmd[i]) && !is_num(cmd[i]))
+		if (tmp[i] != '_' && !is_alpha(tmp[i]) && !is_num(tmp[i]))
 			check2++;
-		if (cmd[i + 1] && cmd[i + 1] == '=' && cmd[i] == '+')
+		if (tmp[i + 1] && tmp[i + 1] == '=' && tmp[i] == '+')
 			check2--;
-		else if (is_upper(cmd[i]))
-			return (0);
 		i++;
 	}
 	if (check2)
 	{
-		printf("minishell: export: `%s':", cmd);
+		printf("minishell: export: `%s':", tmp);
 		printf(" not a valid identifier\n");
 		return (0);
 	}

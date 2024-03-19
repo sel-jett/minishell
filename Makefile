@@ -9,13 +9,13 @@ SRCS = ./parcing/allocation_free/creation1.c ./parcing/allocation_free/my_malloc
 	   ./builtins/cd.c ./builtins/echo.c ./builtins/export_checker.c ./builtins/env_parser.c \
 	   ./builtins/export.c ./builtins/ft_split.c ./builtins/ft_strlcpy.c \
 	   ./builtins/pwd.c ./builtins/unset.c ./builtins/utils.c ./builtins/ft_sort_list.c \
-	   ./expanding/expand.c ./expanding/ft_itoa.c ./execution/utils.c
+	   ./expanding/expand.c ./expanding/ft_itoa.c ./execution/utils.c ./execution/wild.c
 
 OBJS    = $(SRCS:.c=.o)
 # READLINE_LIB = $(shell brew --prefix readline)/lib
 # READLINE_INC = $(shell brew --prefix readline)/include
 # 
-CFLAGS 	=   -Wall -Wextra -Werror #-fsanitize=address -g
+CFLAGS 	=   -Wall -Wextra -Werror -fsanitize=address -g
 RM 		= @rm -f
 all : $(NAME) clean
 

@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 12:09:39 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/17 06:50:14 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/19 07:36:48 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,71 @@ void	ft_execute_child(char **envp, char **cmmd, char **path)
 	}
 }
 
+char **c(char *str, int *len)
+{
+    char **str_r;
+    int     i = 0;
+
+    str_r = ft_split(str, ' ');
+    if (!str_r)
+        return (0);
+    while (str_r[i])
+        i++;
+    (*len) += i;
+    return (str_r);
+}
+
+char    **array_dupper(char **str)
+{
+    char **str_r;
+    char     **s1;
+    char     **s2;
+    int     len;
+    int        i;
+
+    len = 0;
+    if (str[0])
+    {
+        s1 = c(str[0], &len);
+        if (!s1)
+            return (0);
+    }
+    if (str[1])
+    {
+        s2 = c(str[1], &len);
+        if (!s2)
+            return (0);;
+    }
+    str_r = malloc(sizeof(char *) * (len + 1));
+    if (!str_r)
+        return (0);
+    len = 0;
+    if (str[0])
+    {
+        i = 0;
+        while (s1[i])
+        {
+            str_r[len] = s1[i];
+            len++;
+            i++;
+        }
+    }
+    if (str[1])
+    {
+        i = 0;
+        while (s2[i])
+        {
+            str_r[len] = s2[i];
+            len++;
+            i++;
+        }
+    }
+    if (str[2])
+        str_r[len++] = str[2];
+    str_r[len] = NULL;
+    return (str_r);
+}
+
 void	ft_execute_cmd(t_node_arbre *tree, t_env **env, t_env **exp)
 {
 	int				i;
@@ -152,11 +217,18 @@ void	ft_execute_cmd(t_node_arbre *tree, t_env **env, t_env **exp)
 			cmmd[i] = ft_expand(*exp, cmmd[i]);
 		else if (smp->flag_expend == 2)
 			cmmd[i] = ft_expand(*exp, cmmd[i]);
-		smp = smp->next; 
+		smp = smp->next;
 		i++;
 	}
-	// dprintf(2, "[%s]\n", cmmd[0]);
-	// exit(0);
+	i = 0;
+	smp = tree->list->top;
+	while (cmmd[i])
+	{
+		if (ft_execute_wild(cmmd[i]) && smp->flag_wilc == 1)
+			cmmd[i] = ft_strdup(ft_execute_wild(cmmd[i]));
+		smp = smp->next;
+		i++;
+	}
 	if (is_builtin(cmmd[0]))
 	{
 		ft_builtin(cmmd, env, exp);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utile_6.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 03:19:27 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/18 01:43:54 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/19 06:00:36 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ int	plant_5(t_node	*tmp, t_list *list)
 		index = 0;
 		if (tmp->mode != TOKEN_SPACE)
 		{
-			check_wilc(tmp);
 			node = c_cpynode(tmp, list->tail, list);
 			if (!node)
 				return (0);
+			check_wilc(node);
 			add_back(list, node);
 		}
 		if ((tmp->prev && tmp->prev->mode == TOKEN_SPACE) && tmp->prev->prev && !ope(tmp->prev->prev))
