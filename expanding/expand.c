@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 21:59:00 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/19 07:48:56 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/20 03:55:04 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,5 +126,7 @@ char	*ft_expand(t_env *exp, char *cmd)
 	}
 	i = ft_strlen_b(new_cmd);
 	new_cmd[i] = '\0';
+	if (!new_cmd || !new_cmd[0])
+		new_cmd = NULL;
 	return (new_cmd);
 }

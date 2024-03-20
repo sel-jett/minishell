@@ -37,4 +37,45 @@ d
  minishell > export *O
  minishell > minishell > export *M
 zsh: segmentation fault  ./minishell
-zsh: segmentation fault  ./minishell
+zsh: segmentation fault  ./minishelldeclare -x SECURITYSESSIONID="186a8"
+declare -x MallocNanoZone="0"
+declare -x COMMAND_MODE="unix2003"
+declare -x PATH="/Users/sel-jett/.docker/bin:/Users/sel-jett/.local/bin/:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Library/Apple/usr/bin:/Users/sel-jett/.docker/bin:/Users/sel-jett/.local/bin/"
+declare -x HOME="/Users/sel-jett"
+declare -x SHELL="/bin/zsh"
+declare -x LaunchInstanceID="58BE09F2-1AE9-455A-9A6B-F65A0B78FA5D"
+declare -x __CF_USER_TEXT_ENCODING="0x19385:0x0:0x0"
+declare -x XPC_SERVICE_NAME="0"
+declare -x SSH_AUTH_SOCK="/private/tmp/com.apple.launchd.B0bdAJOxlP/Listeners"
+declare -x XPC_FLAGS="0x0"
+declare -x LOGNAME="sel-jett"
+declare -x TMPDIR="/var/folders/zz/zyxvpxvq6csfxvn_n000clhm0034w5/T/"
+declare -x ORIGINAL_XDG_CURRENT_DESKTOP="undefined"
+declare -x SHLVL="1"
+declare -x PWD="/Users/sel-jett/Desktop/minishell"
+declare -x TERM_PROGRAM="vscode"
+declare -x TERM_PROGRAM_VERSION="1.83.1"
+declare -x LANG="en_US.UTF-8"
+declare -x COLORTERM="truecolor"
+declare -x GIT_ASKPASS="/Applications/Visual Studio Code.app/Contents/Resources/app/extensions/git/dist/askpass.sh"
+declare -x VSCODE_GIT_ASKPASS_NODE="/Applications/Visual Studio Code.app/Contents/Frameworks/Code Helper (Plugin).app/Contents/MacOS/Code Helper (Plugin)"
+declare -x VSCODE_GIT_ASKPASS_EXTRA_ARGS="--ms-enable-electron-run-as-node"
+declare -x VSCODE_GIT_ASKPASS_MAIN="/Applications/Visual Studio Code.app/Contents/Resources/app/extensions/git/dist/askpass-main.js"
+declare -x VSCODE_GIT_IPC_HANDLE="/var/folders/zz/zyxvpxvq6csfxvn_n000clhm0034w5/T/vscode-git-4b3985d26b.sock"
+declare -x VSCODE_INJECTION="1"
+declare -x ZDOTDIR="/Users/sel-jett"
+declare -x USER_ZDOTDIR="/Users/sel-jett"
+declare -x TERM="xterm-256color"
+declare -x _="/Users/sel-jett/Desktop/minishell/./minishell"
+declare -x OLDPWD
+
+
+< file3  > f1 > f2 > f3 < in > f4 > f5 | ls > f6 > f7
+
+TEST
+declare -x TEST
+declare -x TEST
+
+export TEST=LOL && echo $TEST$TEST$TEST=lol$TEST
+
+export TEST="ls       -l     - a" && echo $TEST && $LS

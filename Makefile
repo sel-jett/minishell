@@ -15,7 +15,7 @@ OBJS    = $(SRCS:.c=.o)
 # READLINE_LIB = $(shell brew --prefix readline)/lib
 # READLINE_INC = $(shell brew --prefix readline)/include
 # 
-CFLAGS 	=   -Wall -Wextra -Werror -fsanitize=address -g
+CFLAGS 	=   -Wall -Wextra -Werror
 RM 		= @rm -f
 all : $(NAME) clean
 

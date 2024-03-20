@@ -43,18 +43,26 @@ void print_in_dot(t_node_arbre *node, int i, int *count, FILE *fp)
 	else if (node->mode == TOKEN_REDIR_APPEND)
 		fprintf(fp, "  node%d [label=\"%s \"];\n", node_id, ">>");
 	else if (node->mode == TOKEN_REDIR_OUT)
+	{
 		fprintf(fp, "  node%d [label=\"%s %s\"];\n", node_id, ">", node->list_redir->tail->value);
+		while (node->list_redir->top)
+		{
+			fprintf(fp, "  node%d [label=\"%s \"];\n", *count, node->list_redir->top->value);
+			node->list_redir->top = node->list_redir->top->next;
+		}
+	}
 	else if (node->mode == TOKEN_REDIR_IN)
+	{
 		fprintf(fp, "  node%d [label=\"%s %s\"];\n", node_id, "<", node->value);
+	}
 	else if (node->mode == TOKEN_EXPR)
 	{
 		fprintf(fp, "  node%d [label=\"%s \"];\n", node_id, (char *)node->value);
-		// while (node->list->top)
-		// {
-		// 	fprintf(fp, "  node%d [label=\"%s \"];\n", *count, node->list->top->value);
-		// 	node->list->top = node->top->next;
-		// }
-		// node->list->top->value;
+		while (node->list->top)
+		{
+			fprintf(fp, "  node%d [label=\"%s \"];\n", *count, node->list->top->value);
+			node->list->top = node->list->top->next;
+		}
 	}
 	if (i != -1)
 	{
@@ -99,6 +107,8 @@ int main(int ac, char **av, char **envp)
 	// atexit(f);
 	env = ft_env_parser(envp);
 	exp = ft_env_parser(envp);
+	if (!env_new("OLDPWD", exp))
+		return (0);
 	ft_lstadd_back(&exp, env_new("OLDPWD", exp));
 	ft_sort_list(&exp);
 	(void)ac;

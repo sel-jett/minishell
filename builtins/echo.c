@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 07:39:43 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/08 13:38:22 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/20 04:15:32 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,17 @@ void	echo(const char **path, int mode)
 {
 	int	check;
 
+	check = 0;
+	dprintf(2, "path\n");
+	while (path[check])
+	{
+		dprintf(2, "%s\n", path[check]);
+		check++;
+		// if (path[check])
+		// 	printf(" ");
+	}
+	dprintf(2, "path\n");
+	exit(1);
 	(void)mode;
 	check = echo_check(path[0]);
 	if (check == -1)

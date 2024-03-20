@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 07:26:29 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/18 23:28:33 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/20 03:21:32 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,40 @@ static int	is_num(int c)
 	return (c >= 48 && c <= 57);
 }
 
+int	check_key(char *key)
+{
+	int	i;
+
+	i = 0;
+	if (!key)
+		return (0);
+	if (key[i] != '_' && !is_alpha(key[i]))
+		return (0);
+	i++;
+	while (key[i])
+	{
+		if (key[i] != '_' && !is_alpha(key[i]) && !is_num(key[i]))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 int	check_first(char *cmd, t_env *env)
 {
 	int	i;
 	int	check2;
 	char *tmp;
-
+	
+	// if (!get_key(cmd))
+	// {
+	// 	return (0);
+	// }
+	if (!get_key(cmd))
+	{
+		dprintf(2, "minishell: export: `%s': not a valid identifier\n", cmd);
+		return (0);
+	}
 	tmp = ft_expand(env, get_key(cmd));
 	if ((!tmp || !tmp[0]) && cmd[0] != '$')
 		tmp = cmd;

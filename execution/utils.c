@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:07:13 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/19 20:16:18 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/20 03:42:38 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,18 +148,6 @@ char	**linkedlist_to_arr(t_node *tree)
 	}
 	i++;
 	arr[i] = NULL;
-	// i = 0;
-	// while (arr[i])
-	// {
-	// 	if (ft_execute_wild(arr[i]))
-	// 		arr[i] = ft_strdup(ft_execute_wild(arr[i]));
-	// 	// dprintf(2, "[%s]\n", arr[i]);
-	// 	i++;
-	// }
-	// arr = array_dupper(arr);
-	// ft_print_arr(arr);
-	// exit(0);
-	// exit(0);
 	return (arr);
 }
 
@@ -212,7 +200,8 @@ char	**redirlist_to_arr(t_nlist *tree)
 		}
 		else if (tmp->top->flag_space == 1 && ft_strncmp(tmp->top->value, ">") && ft_strncmp(tmp->top->value, ">>") && ft_strncmp(tmp->top->value, "<"))
 		{
-			i++;
+			if (arr[i])
+				i++;
 			arr[i] = ft_strjoin(arr[i], tmp->top->value);
 			if (!arr[i])
 				return (NULL);

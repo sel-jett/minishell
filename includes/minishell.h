@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:48:58 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/19 03:49:46 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/20 03:21:45 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ char            *ft_execute_wild(char *str);
 
 ///////////////////////// BUILTINS //////////////////////////
 
+int	            chekcer(char *data);
 bool			is_builtin(char *cmd);
 int				ft_strlen_b(const char *str);
 size_t			ft_strlcpy(char *dst, const char *src, size_t dstsize);

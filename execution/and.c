@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 12:09:42 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/17 05:37:19 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/20 04:04:47 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	ft_execute_and(t_node_arbre *tree, t_env *e, t_env *exp)
 	{
 		// while (tree->right->list->top)
 		// {
-		// 	dprintf(2, "waaa: %s\n", tree->right->list->top->value);
 		// 	tree->right->list->top = tree->right->list->top->next;
 		// }
 		// exit(0);

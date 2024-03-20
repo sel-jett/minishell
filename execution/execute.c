@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 12:09:39 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/19 19:58:32 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/20 05:20:23 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,8 +200,10 @@ void	ft_execute_cmd(t_node_arbre *tree, t_env **env, t_env **exp)
 	char			**envp;
 	t_node			*tmp;
 	t_node			*smp;
+	int				check;
 
 	i = 0;
+	check = 0;
 	tmp = tree->list->top;
 	smp = tree->list->top;
 	envp = env_to_arr(*env);
@@ -211,19 +213,28 @@ void	ft_execute_cmd(t_node_arbre *tree, t_env **env, t_env **exp)
 	if (!path)
 		return ;
 	cmmd = linkedlist_to_arr(tmp);
+	// while (cmmd[i])
+	// {
+	// 	dprintf(2, "cmmd[%d]: %s\n", i, cmmd[i]);
+	// 	i++;
+	// }
+	// i = 0;
 	if (!cmmd)
 		return ;
 	while (cmmd[i])
 	{
 		if (smp->flag_expend == 1)
 		{
-			cmmd[i] = ft_expand(*exp, cmmd[i]);
+			// cmmd[i] = ft_expand(*exp, cmmd[i]);
+			dprintf(2, "mode: %d\n", smp->mode);
 			if (!cmmd[i])
 				return ;
 		}
 		else if (smp->flag_expend == 2)
 		{
-			cmmd[i] = ft_expand(*exp, cmmd[i]);
+			// cmmd[i] = ft_expand(*exp, cmmd[i]);
+			dprintf(2, "mode: %d\n", smp->mode);
+			check = 1;
 			if (!cmmd[i])
 				return ;
 		}
@@ -237,13 +248,15 @@ void	ft_execute_cmd(t_node_arbre *tree, t_env **env, t_env **exp)
 		if (ft_execute_wild(cmmd[i]) && smp->flag_wilc == 1)
 		{
 			cmmd[i] = ft_strdup(ft_execute_wild(cmmd[i]));
+			check = 1;
 			if (!cmmd[i])
 				return ;
 		}
 		smp = smp->next;
 		i++;
 	}
-	cmmd = array_dupper(cmmd);
+	if (check)
+		cmmd = array_dupper(cmmd);
 	if (is_builtin(cmmd[0]))
 	{
 		ft_builtin(cmmd, env, exp);
