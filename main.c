@@ -175,16 +175,18 @@ int main(int ac, char **av, char **envp)
 					// ft_print_arr(envp);
 					// ft_env(env);
 					// printf("[%d]\n",arbre->racine->mode);
-					// print_tree(arbre->racine);
+					print_tree(arbre->racine);
 					// while (arbre->racine->top)
 					// {
 					// puts(arbre->racine->right->list->top->next->value);
 					// 	arbre->racine->top = arbre->racine->list->top->next;
 					// }
+				
+					
 					// puts(arbre->racine->list->top->value);
-					execute(arbre->racine, env, exp);
+					// execute(arbre->racine, env, exp);
 				// return (0);
-					free(list->str);
+					// free(list->str);
 				}
 			}
 		}
