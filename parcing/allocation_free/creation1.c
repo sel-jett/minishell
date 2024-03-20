@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:13:42 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/15 02:47:43 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/20 05:40:05 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ t_node	*c_node(char *str, t_node *tail, int mode, t_list *list)
 	new_node = my_malloc(sizeof(t_node), 1);
 	if (!new_node)
 		return (0);
+	new_node->flag_quote = 0;
 	new_node->value = str;
 	new_node->next = 0;
 	new_node->prev = tail;

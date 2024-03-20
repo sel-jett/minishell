@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 21:22:32 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/20 02:07:17 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/20 05:45:48 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@ int	add_list_redir(t_node *node)
 	t_node	*tmp;
 	t_node	*tmp1;
 	t_nnode	*redir_node;
-	int i = 0;
+	t_nnode *tmp_node;
 
+	int i = 0;
 	(1) && (tmp = node, redir_node = NULL, tmp1 = NULL);
 	node->list_redir = c_nlist();
 	if (!node->list_redir)
@@ -91,6 +92,15 @@ int	add_list_redir(t_node *node)
 			add_nback(node->list_redir, redir_node);
 		}
 		tmp = tmp->next;
+	}
+	tmp_node = node->list_redir->top;
+	while (tmp_node)
+	{
+		if (tmp_node->mode == TOKEN_REDIR_OUT)
+			tmp_node->mode_d = 1;
+		if (tmp_node->mode == TOKEN_REDIR_APPEND)
+				tmp_node->mode_d = 2;
+		tmp_node = tmp_node->next;
 	}
 	return (1);
 }
