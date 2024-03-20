@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 21:22:32 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/20 01:58:34 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/20 02:07:17 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ int	add_list_redir(t_node *node)
 			tmp1 = tmp1->next;
 		}
 	}
-	// tmp = tmp->next;
 	if (tmp && tmp->mode == TOKEN_SPACE)
 		tmp = tmp->next;
 	while (tmp && (tmp->mode == TOKEN_PARENTHESE || is_text(tmp) || tmp->mode
