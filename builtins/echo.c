@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 07:39:43 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/20 06:00:05 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/20 07:29:21 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	echo(const char **path, int mode)
 	// 	// if (path[check])
 	// 	// 	printf(" ");
 	// }
+	// check = 0;
 	// dprintf(2, "path\n");
 	// exit(1);
 	(void)mode;

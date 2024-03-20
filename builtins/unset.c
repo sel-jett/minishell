@@ -6,14 +6,22 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 22:27:43 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/19 20:57:53 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/20 07:22:23 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // #include "builtins.h"
 #include "../includes/minishell.h"
 
-static int	is_alpha_2(char *c)
+int	is_alpha_3(char c)
+{
+	if (!((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') \
+		|| c == '_' || (c >= '0' && c <= '9')))
+		return (0);
+	return (1);
+}
+
+int	is_alpha_2(char *c)
 {
 	int	i;
 

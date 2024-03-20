@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 21:59:00 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/20 03:55:04 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/20 10:39:07 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char	*ft_strjoin_char(char *s1, char s2)
 static void	ft_norminette(int *i, int *k, char *cmd)
 {
 	(*i)++;
-	while (cmd[*i] && cmd[*i] != '-' && cmd[*i] != 32 && (cmd[*i] < '\"' || cmd[*i] > 47))
+	while (is_alpha_3(cmd[*i]))
 	{
 		(*k)++;
 		(*i)++;
@@ -71,7 +71,7 @@ static char	*ft_second_norminette(int *i, int *k, char *cmd)
 		return (NULL);
 	while (*k > 0)
 	{
-		if (cmd[*i - *k] == '-' || cmd[*i - *k] == 32 || (cmd[*i] < '\"' && cmd[*i] > 47))
+		if (!is_alpha_3(cmd[*i - *k]))
 			break;
 		venv[l] = cmd[*i - *k];
 		l++;
@@ -95,6 +95,12 @@ char	*ft_expand(t_env *exp, char *cmd)
 		new_cmd = ft_itoa(ft_status(0, 0));
 		if (!new_cmd)
 			return (NULL);
+		return (new_cmd);
+	}
+	else if (!ft_strncmp_one(cmd, "$?"))
+	{
+		new_cmd = ft_itoa(ft_status(0, 0));
+		new_cmd = ft_strjoin(new_cmd, cmd + 2);
 		return (new_cmd);
 	}
 	new_cmd = my_malloc(1,1);

@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 12:09:39 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/20 06:52:05 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/20 10:37:21 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,7 +179,7 @@ char    **array_dupper(char **str)
         j = 0;
         s = ft_split(str[i],' ');
         if (!s)
-            return (printf("ha ana\n"),NULL);
+            return (NULL);
         while (s[j])
         {
             str_r[len] = s[j];
@@ -192,11 +192,25 @@ char    **array_dupper(char **str)
     return (str_r);
 }
 
+
+
+int	first_key_checker(char *cmmd)
+{
+	int	i;
+
+	i = 0;
+	if (cmmd[i] && cmmd[i] == '$' && cmmd[i + 1] && !is_alpha_3(cmmd[i + 1]) \
+		&& cmmd[i + 1] != '?')
+		return (1);
+	return (0);
+}
+
 void	ft_execute_cmd(t_node_arbre *tree, t_env **env, t_env **exp)
 {
 	int				i;
 	char			**cmmd;
 	char			**path;
+	char			*backup;
 	char			**envp;
 	t_node			*tmp;
 	t_node			*smp;
@@ -213,37 +227,48 @@ void	ft_execute_cmd(t_node_arbre *tree, t_env **env, t_env **exp)
 	if (!path)
 		return ;
 	cmmd = linkedlist_to_arr(tmp);
-	// while (cmmd[i])
-	// {
-	// 	dprintf(2, "cmmd[%d]: %s\n", i, cmmd[i]);
-	// 	i++;
-	// }
-	// i = 0;
+	// ft_print_arr(cmmd);
 	if (!cmmd)
 		return ;
+	// ft_print_arr(cmmd);
+	// exit(0);
 	while (cmmd[i])
 	{
-		if (smp->flag_expend == 1)
+		if (smp->flag_expend == 1 && !first_key_checker(cmmd[i]))
 		{
-			cmmd[i] = ft_expand(*exp, cmmd[i]);
-			// dprintf(2, "mode:[%s] %d\n", smp->value, smp->flag_quote);
+			backup = ft_expand(*exp, cmmd[i]);
+			if (!backup)
+				cmmd[i] = "";
+			else
+				cmmd[i] = backup;
+			// printf("%s\n", cmmd[i]);
+			// cmmd[i] = ft_expand(*exp, cmmd[i]);
 			if (!smp->flag_quote)
 				check = 1;
 			if (!cmmd[i])
-				return ;
+				break ;
 		}
-		else if (smp->flag_expend == 2)
+		else if (smp->flag_expend == 2 && !first_key_checker(cmmd[i]))
 		{
-			cmmd[i] = ft_expand(*exp, cmmd[i]);
-			// dprintf(2, "mode: [%s] %d\n", smp->value, smp->flag_quote);
+			backup = ft_expand(*exp, cmmd[i]);
+			if (!backup)
+				cmmd[i] = "";
+			else
+				cmmd[i] = backup;
+			// printf("%s\n", cmmd[i]);
+			// cmmd[i] = ft_expand(*exp, cmmd[i]);
 			if (!smp->flag_quote)
 				check = 1;
 			if (!cmmd[i])
-				return ;
+				break ;
 		}
-		smp = smp->next;
 		i++;
+		smp = smp->next;
 	}
+	// printf("dsfsdfdsf\n");
+	// ft_print_arr(cmmd);
+	// printf("dsfsdfdsf\n");
+	// exit(0);
 	i = 0;
 	smp = tree->list->top;
 	while (cmmd[i])
@@ -259,7 +284,10 @@ void	ft_execute_cmd(t_node_arbre *tree, t_env **env, t_env **exp)
 		i++;
 	}
 	if (check)
+	{
 		cmmd = array_dupper(cmmd);
+		cmmd = joyner(cmmd);	
+	}
 	if (is_builtin(cmmd[0]))
 	{
 		ft_builtin(cmmd, env, exp);

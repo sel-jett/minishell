@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:48:58 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/20 03:21:45 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/20 09:37:57 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,5 +140,7 @@ int				ft_strncmp(char *s1, char *s2);
 int				count_expand(char *cmd);
 char			*ft_expand(t_env *exp, char *cmd);
 char            *ft_itoa(int n);
+int             is_alpha_3(char c);
+char            **joyner(char **str);
 
 #endif

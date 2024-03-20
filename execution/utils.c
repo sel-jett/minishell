@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:07:13 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/20 03:42:38 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/20 10:08:00 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,11 @@ int	liked_size(t_node *tree)
 	tmp = tree;
 	while (tmp)
 	{
+		// if (!(tmp->value)[0])
+		// {
+		// 	tmp = tmp->next;
+		// 	continue;
+		// }
 		i++;
 		tmp = tmp->next;
 	}
@@ -105,6 +110,53 @@ int	liked_size(t_node *tree)
 // 	return (arr);
 // }
 
+void count_joyner(char **str,int *len)
+{
+    int i = 0;
+    int j = 0;
+
+    while (str[i])
+    {
+        j = 0;
+        while(str[i][j] !='\\' && str[i][j])
+        {
+            (*len)++;
+            j++;
+        }
+        if (str[i][j] != '\\')
+            (*len)++;
+        i++;
+    }
+}
+
+char **joyner(char **str)
+{
+    int i = 0;
+    int j = 0;
+    int len = 0;
+    int k = 0;
+
+    count_joyner(str, &len);
+    char *str_r = my_malloc((sizeof(char)*(len+1)), 1);
+    if (!str_r)
+        return (0);
+    while (str[i])
+    {
+        j = 0;
+        while(str[i][j] !='\\' && str[i][j])
+        {
+            str_r[k] = str[i][j];
+            k++;
+            j++;
+        }
+        if (str[i][j] !='\\')
+            str_r[k++] = ' ';
+        i++;
+    }
+    str_r[k] = '\0';
+    char **s_f = ft_split(str_r,' ');
+    return (s_f);
+}
 
 
 char	**linkedlist_to_arr(t_node *tree)
@@ -131,6 +183,14 @@ char	**linkedlist_to_arr(t_node *tree)
 	i = 0;
 	while(tmp)
 	{
+		if (!(tmp->value)[0] && i > 0 && tmp->flag_space == 0)
+		{
+			tmp = tmp->next;
+			if (!tmp)
+				break;
+			arr[i] = ft_strjoin(arr[i], "\\");
+			tmp->flag_space = 1;
+		}
 		if (!tmp->flag_space)
 		{
 			arr[i] = ft_strjoin(arr[i], tmp->value);
