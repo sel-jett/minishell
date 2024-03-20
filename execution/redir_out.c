@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 22:12:12 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/20 05:09:35 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/20 05:45:46 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,12 +203,14 @@ void	files_dupper(int *fd, int *sd, int *ad, struct s_nnode	*cnt)
 		k++;
 	while (cnt)
 	{
+		// dprintf(2, "mode: %d\n", cnt->mode);
 		if (cnt->mode == TOKEN_REDIR_OUT)
 			f = 1;
 		else if (cnt->mode == TOKEN_REDIR_APPEND)
 			f = 2;
 		cnt = cnt->next;
 	}
+	// exit(0);
 	if (f == 1)
 		dup2(fd[i - 1], 1);
 	else if (f == 2)

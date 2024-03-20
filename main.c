@@ -191,10 +191,12 @@ int main(int ac, char **av, char **envp)
 					// puts(arbre->racine->right->list->top->next->value);
 					// 	arbre->racine->top = arbre->racine->list->top->next;
 					// }
+				
+					
 					// puts(arbre->racine->list->top->value);
 					execute(arbre->racine, env, exp);
 				// return (0);
-					free(list->str);
+					// free(list->str);
 				}
 			}
 		}

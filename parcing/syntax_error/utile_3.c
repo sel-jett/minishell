@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utile_3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 21:22:32 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/19 06:06:40 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/20 02:07:17 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ int	add_list_redir(t_node *node)
 			tmp1 = tmp1->next;
 		}
 	}
-	// tmp = tmp->next;
 	if (tmp && tmp->mode == TOKEN_SPACE)
 		tmp = tmp->next;
 	while (tmp && (tmp->mode == TOKEN_PARENTHESE || is_text(tmp) || tmp->mode
@@ -108,14 +107,6 @@ t_node_arbre	*add_commade(t_node	*tmp)
 	if (!new_node->list)
 		return (0);
 	new_node->list->top = tmp;
-	// t_node *x = new_node->list->top;
-	// while(x)
-	// {
-	// 	// check_wilc(x);
-	// 	printf("[%d]->",x->flag_wilc);
-	// 	x = x->next;
-	// }
-	// exit(1);
 	node = tmp;
 	while (node && (node->mode == TOKEN_EXPR))
 		node = node->next;
@@ -131,13 +122,6 @@ t_node_arbre	*add_commade(t_node	*tmp)
 			return (NULL);
 		new_node->list_arg = tmp->list_arg;
 	}
-	// t_node *x = new_node->list->top ;
-	// while(x)
-	// {
-	// 	printf("[%s]->",x->value);
-	// 	x = x->next;
-	// }
-	// printf("\n");
 	return (new_node);
 }
 
