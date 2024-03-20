@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utile_6.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 03:19:27 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/20 05:41:36 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/20 06:47:17 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,12 @@ int	plant_5(t_node	*tmp, t_list *list)
 		{
 			if (tmp->mode == TOKEN_Double_Q)
 			{
-				tmp->flag_apresred = 1;
+				tmp->flag_quote = 1;
 				if (tmp->list_arg && tmp->list_arg->top)
 					node->flag_expend = 1;
 			}
 			if (tmp->mode == TOKEN_Single_Q)
-				tmp->flag_apresred = 2;
+				tmp->flag_quote = 2;
 			tmp->mode = TOKEN_EXPR;
 		}
 		tmp = tmp->next;
