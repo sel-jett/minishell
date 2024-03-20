@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 22:12:12 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/20 05:45:46 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/20 06:31:49 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,25 +192,20 @@ void	files_dupper(int *fd, int *sd, int *ad, struct s_nnode	*cnt)
 	j = 0;
 	k = 0;
 	f = 0;
-	while (cnt)
-	{
-		dprintf(2, "[%d]\n", cnt->mode);
-		cnt = cnt->next;
-	}
+	while (fd && fd[i] != -100)
+		i++;
 	while (sd && sd[j] != -100)
 		j++;
 	while (ad && ad[k] != -100)
 		k++;
 	while (cnt)
 	{
-		// dprintf(2, "mode: %d\n", cnt->mode);
-		if (cnt->mode == TOKEN_REDIR_OUT)
+		if (cnt->mode_d == 1)
 			f = 1;
-		else if (cnt->mode == TOKEN_REDIR_APPEND)
+		else if (cnt->mode_d == 2)
 			f = 2;
 		cnt = cnt->next;
 	}
-	// exit(0);
 	if (f == 1)
 		dup2(fd[i - 1], 1);
 	else if (f == 2)
@@ -238,10 +233,6 @@ void	ft_execute_redir_out(t_node_arbre *tree, t_env	*env, t_env *exp)
 
 	orig_stdout = dup(1);
 	orig_stdin = dup(0);
-	if (!ft_strncmp(tree->list_redir->top->value, ">>") || \
-		!ft_strncmp(tree->list_redir->top->value, ">") || \
-		!ft_strncmp(tree->list_redir->top->value, "<"))
-		tree->list_redir->top = tree->list_redir->top->next;
 	tmp = tree->list_redir->top;
 	smp = tree->list_redir->top;
 	amp = tree->list_redir->top;

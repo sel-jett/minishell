@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/03/20 05:21:41 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/20 05:47:28 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_nnode
 	int				avant_;
 	int				flag_apresred;
 	int				mode;
+	int				mode_d;
 	struct s_nnode	*next;
 }	t_nnode;
 
@@ -61,6 +62,7 @@ typedef struct s_node
 	int				flag_expend;
 	int				flag_space;
 	int				avant_;
+	int				flag_quote;
 	int				flag_apresred;
 }	t_node;
 

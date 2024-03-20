@@ -69,9 +69,6 @@ declare -x TERM="xterm-256color"
 declare -x _="/Users/sel-jett/Desktop/minishell/./minishell"
 declare -x OLDPWD
 
-
-< file3  > f1 > f2 > f3 < in > f4 > f5 | ls > f6 > f7
-
 TEST
 declare -x TEST
 declare -x TEST
