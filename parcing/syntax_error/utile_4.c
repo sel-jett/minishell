@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 21:32:37 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/18 01:48:20 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/21 01:40:39 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,14 +87,5 @@ int	check_syntax_3(t_node *tmp)
 		if (str[i])
 			i++;
 	}
-	// if (tmp->list_arg && tmp->list_arg->top)
-	// {
-	// 	while (tmp->list_arg->top)
-	// 	{
-	// 		printf("[%s]\n",tmp->list_arg->top->value);
-	// 		tmp->list_arg->top = tmp->list_arg->top->next; 
-	// 	}
-	// }
-	// exit(0);
 	return (1);
 }

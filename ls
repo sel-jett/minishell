@@ -1,0 +1,13 @@
+Makefile
+TODO
+a.out.dSYM
+builtins
+execution
+expanding
+galaxy.c
+includes
+ls
+main.c
+minishell
+parcing
+test.c

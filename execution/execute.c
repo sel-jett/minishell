@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 12:09:39 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/19 19:58:32 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/21 03:36:33 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,12 +119,14 @@ void	ft_execute_child(char **envp, char **cmmd, char **path)
 	pid_t	pid;
 	int 	status;
 	char	*env_var;
+	extern	int x;
 
 	if (!path || !path[0])
 		return ;
 	env_var = ft_handler(cmmd, path);
 	if (env_var)
 	{
+		x = 1;
 		pid = fork();
 		if (pid == -1)
 		{
@@ -133,6 +135,7 @@ void	ft_execute_child(char **envp, char **cmmd, char **path)
 		}
 		else if (!pid)
 		{
+			def_sig();
 			ft_execve(env_var, envp, cmmd);
 			exit(0);
 		}

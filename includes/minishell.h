@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:48:58 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/19 03:49:46 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/21 03:34:33 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,8 @@ int				add_one(t_list	*list, int *i, int mode);
 int				add_list_redir(t_node *tmp);
 int				plant_6(t_node *top, t_node_arbre **racine);
 ///////////////////////// EXECUTION //////////////////////////
-
+void igno_sig(void);
+void def_sig(void);
 char			*ft_handler(char **cmmd, char **path);
 void			ft_execute_child(char **envp, char **cmmd, char **path);
 int				ft_status(int status, bool mode);

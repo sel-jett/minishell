@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   subshell.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 14:29:50 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/08 15:13:12 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/21 02:09:33 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@ void	ft_execute_subshell(t_node_arbre *tree, t_env *e, t_env *exp)
 {
 	int	pid;
 	int	status;
+	extern int x;
 
+	x = 1;
 	pid = fork();
 	if (pid == -1)
 	{

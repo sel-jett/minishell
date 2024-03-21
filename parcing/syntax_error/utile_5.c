@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utile_5.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 20:49:46 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/19 06:04:06 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/21 01:21:02 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void affichage(int n)
 {
-	printf("minishell: syntax error near unexpected token %d\n",n);
+	printf("minishell:syntax error near unexpected token %d\n",n);
 }
 
 int is_empty(char *str)

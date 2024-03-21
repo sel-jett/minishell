@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:12:44 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/18 20:19:59 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/21 02:07:34 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,14 @@ void	ft_execute_pipe(t_node_arbre *tree, t_env *e, t_env *exp)
 {
 	int		fd[2];
 	pid_t	pid[2];
+	extern int x;
 
 	if (pipe(fd) == -1)
 	{
 		perror("pipe error");
 		return ;
 	}
+	x = 1;
 	pid[0] = fork();
 	if (pid[0] == -1)
 	{

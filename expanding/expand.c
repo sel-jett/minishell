@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 21:59:00 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/19 07:48:56 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/21 00:38:52 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ char	*ft_expand(t_env *exp, char *cmd)
 		new_cmd = ft_itoa(ft_status(0, 0));
 		if (!new_cmd)
 			return (NULL);
+		ft_status(0, 1);
 		return (new_cmd);
 	}
 	new_cmd = my_malloc(1,1);
