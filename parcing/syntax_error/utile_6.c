@@ -6,70 +6,20 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 03:19:27 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/21 08:12:28 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/21 08:37:03 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int ope(t_node *node)
+int	ope(t_node *node)
 {
-	if (!node)//
-		return (1);//
+	if (!node)
+		return (1);
 	if (node->mode == TOKEN_AND || node->mode == TOKEN_OR
 		|| node->mode == TOKEN_PIPE || is_redir(node))
 		return (1);
 	return (0);
-}
-
-int	plant_5(t_node	*tmp, t_list *list)
-{
-	t_node	*node;
-	int		index;
-
-	node = 0;
-	if (!list)
-		return (0);
-	while (tmp)
-	{
-		index = 0;
-		if (tmp->mode != TOKEN_SPACE)
-		{
-			node = c_cpynode(tmp, list->tail, list);
-			if (!node)
-				return (0);
-			check_wilc(node);
-			add_back(list, node);
-		}
-		if ((tmp->prev && tmp->prev->mode == TOKEN_SPACE)
-			&& tmp->prev->prev && !ope(tmp->prev->prev))
-			node->flag_space = 1;
-		if (tmp->list_arg && tmp->list_arg->top)
-		{
-			node->flag_expend = 1;
-			if (tmp->mode == TOKEN_EXPR)
-				node->flag_expend = 2;
-		}
-		tmp = tmp->next;
-	}
-	tmp = list->top;
-	while (tmp)
-	{
-		if (tmp->mode == TOKEN_Double_Q || tmp->mode == TOKEN_Single_Q)
-		{
-			if (tmp->mode == TOKEN_Double_Q)
-			{
-				tmp->flag_quote = 1;
-				if (tmp->list_arg && tmp->list_arg->top)
-					node->flag_expend = 1;
-			}
-			if (tmp->mode == TOKEN_Single_Q)
-				tmp->flag_quote = 2;
-			tmp->mode = TOKEN_EXPR;
-		}
-		tmp = tmp->next;
-	}
-	return (1);
 }
 
 t_node_arbre	*parse_redir(t_node **tmp)
@@ -131,13 +81,36 @@ t_node_arbre	*new_node(int mode, t_node_arbre *left, t_node_arbre *right)
 	return (node);
 }
 
+int	read_line_herdoc(int fd, t_nnode *node)
+{
+	char	*str;
+
+	str = 0;
+	while (1)
+	{
+		str = readline("heredoc> ");
+		if (node->next)
+		{
+			if (ft_strcmp(node->next->value, str))
+				break ;
+			str = ft_strjoin2(str, "\n");
+			if (!str)
+				return (0);
+			write(fd, str, ft_strlen(str));
+		}
+		free(str);
+	}
+	if (str)
+		(1) && (free(str), str = NULL);
+	return (1);
+}
+
 bool	open_herdoc(t_nnode *node, char **file)
 {
-	char		*str;
 	int			n;
 	int			fd;
 
-	(1) && (str = 0, n = 0);
+	(1) && (n = 0);
 	while (1)
 	{
 		*file = ft_strjoin("/tmp/file", ft_itoa(n));
@@ -148,19 +121,6 @@ bool	open_herdoc(t_nnode *node, char **file)
 	fd = open(*file, O_CREAT | O_RDWR, S_IRUSR | S_IWUSR);
 	if (fd == -1)
 		return (0);
-	while (1)
-	{
-		str = readline("heredoc> ");
-		if (node->next)
-		{
-			if (ft_strcmp(node->next->value, str))
-				break ;
-			str = ft_strjoin2(str, "\n");
-			write(fd, str, ft_strlen(str));
-		}
-		free(str);
-	}
-	if (str)
-		(1) && (free(str), str = NULL);
+	read_line_herdoc(fd, node);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:19:17 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/21 08:18:36 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/21 08:27:45 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static int	oxe_check_entre_parentheses(t_node *node)
 	}
 	return (1);
 }
+
 int	check_enter_parentheses(t_node *node)
 {
 	int	i;
@@ -29,7 +30,7 @@ int	check_enter_parentheses(t_node *node)
 
 	(1) && (i = 0, j = 0);
 	if (!oxe_check_entre_parentheses(node))
-		return (0);	
+		return (0);
 	else if ((node && node->prev)
 		&& (is_text(node->prev) || is_redir(node->prev)))
 		return (0);

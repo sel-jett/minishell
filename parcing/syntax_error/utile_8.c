@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 08:19:01 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/21 08:19:02 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/21 08:37:53 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,55 @@ int	plant_4(t_list *list)
 	}
 	if (count_parentheses != 0)
 		return (affichage(8), ft_status(258, 1), 0);
+	return (1);
+}
+
+int	plant_5(t_node	*tmp, t_list *list)
+{
+	t_node	*node;
+	int		index;
+
+	node = 0;
+	if (!list)
+		return (0);
+	while (tmp)
+	{
+		index = 0;
+		if (tmp->mode != TOKEN_SPACE)
+		{
+			node = c_cpynode(tmp, list->tail, list);
+			if (!node)
+				return (0);
+			check_wilc(node);
+			add_back(list, node);
+		}
+		if ((tmp->prev && tmp->prev->mode == TOKEN_SPACE)
+			&& tmp->prev->prev && !ope(tmp->prev->prev))
+			node->flag_space = 1;
+		if (tmp->list_arg && tmp->list_arg->top)
+		{
+			node->flag_expend = 1;
+			if (tmp->mode == TOKEN_EXPR)
+				node->flag_expend = 2;
+		}
+		tmp = tmp->next;
+	}
+	tmp = list->top;
+	while (tmp)
+	{
+		if (tmp->mode == TOKEN_Double_Q || tmp->mode == TOKEN_Single_Q)
+		{
+			if (tmp->mode == TOKEN_Double_Q)
+			{
+				tmp->flag_quote = 1;
+				if (tmp->list_arg && tmp->list_arg->top)
+					node->flag_expend = 1;
+			}
+			if (tmp->mode == TOKEN_Single_Q)
+				tmp->flag_quote = 2;
+			tmp->mode = TOKEN_EXPR;
+		}
+		tmp = tmp->next;
+	}
 	return (1);
 }
