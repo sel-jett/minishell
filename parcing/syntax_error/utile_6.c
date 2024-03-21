@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 03:19:27 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/21 08:37:03 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/21 08:59:05 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,29 +26,12 @@ t_node_arbre	*parse_redir(t_node **tmp)
 {
 	t_node_arbre	*node_left;
 	t_node_arbre	*node;
-	t_nnode			*i_node;
-	char			*file;
 
-	(1) && (i_node = 0, file = 0);
 	node_left = parse_cmd(tmp);
 	if (*tmp && is_redir(*tmp))
 	{
-		if ((*tmp)->mode == TOKEN_HEREDOC)
-			(*tmp)->mode = TOKEN_REDIR_IN;
-		i_node = (*tmp)->list_redir->top;
-		while (i_node)
-		{
-			if (i_node->mode == TOKEN_HEREDOC)
-			{
-				if (!open_herdoc(i_node, &file))
-					return (0);
-				if (i_node->next)
-					i_node->next->value = file;
-				i_node->value = "<";
-				i_node->mode = TOKEN_REDIR_IN;
-			}
-			i_node = i_node->next;
-		}
+		if (!open_herdoc_0(*tmp))
+			return (0);
 		node = c_node_arbre(*tmp);
 		if (!node)
 			return (NULL);
@@ -56,8 +39,7 @@ t_node_arbre	*parse_redir(t_node **tmp)
 		if (!node->list_redir)
 			return (NULL);
 		node->list_redir = (*tmp)->list_redir;
-		node->left = node_left;
-		*tmp = (*tmp)->next;
+		(1) && (node->left = node_left, *tmp = (*tmp)->next);
 		while ((*tmp) && (*tmp)->mode != TOKEN_PIPE && (*tmp)->mode
 			!= TOKEN_AND && (*tmp)->mode != TOKEN_OR)
 			*tmp = (*tmp)->next;
