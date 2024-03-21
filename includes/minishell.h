@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:48:58 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/21 08:58:58 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/21 09:30:07 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 // void			print_tree(t_node_arbre    *tree, int c);
 // void            affiche(t_list *list);
 int	open_herdoc_0(t_node *tmp);
+int	add_two( t_list *list, int *i, int mode);
 int	oxe5(t_node *tmp);
 int	check_exp(t_node *tmp);
 int	check_apres_parentheses(t_node *node);
