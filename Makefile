@@ -5,9 +5,9 @@ SRCS = ./parcing/allocation_free/creation1.c ./parcing/allocation_free/my_malloc
 	   ./parcing/add_in_list/plants.c ./parcing/allocation_free/creation3.c ./parcing/syntax_error/utile_2.c \
 	   ./parcing/syntax_error/utile_3.c  ./parcing/syntax_error/utile_4.c ./parcing/syntax_error/utile_6.c\
 	   ./execution/execution.c ./execution/execute.c ./execution/pipe.c ./execution/or.c ./execution/subshell.c \
-	   ./execution/and.c ./execution/redir_out.c ./parcing/syntax_error/utile_5.c\
+	   ./execution/and.c ./execution/redir_out.c ./parcing/syntax_error/utile_5.c ./parcing/syntax_error/utile_8.c\
 	   ./builtins/cd.c ./builtins/echo.c ./builtins/export_checker.c ./builtins/env_parser.c \
-	   ./builtins/export.c ./builtins/ft_split.c ./builtins/ft_strlcpy.c \
+	   ./builtins/export.c ./builtins/ft_split.c ./builtins/ft_strlcpy.c ./parcing/syntax_error/utile_7.c \
 	   ./builtins/pwd.c ./builtins/unset.c ./builtins/utils.c ./builtins/ft_sort_list.c \
 	   ./expanding/expand.c ./expanding/ft_itoa.c ./execution/utils.c ./execution/wild.c
 

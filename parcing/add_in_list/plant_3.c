@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:06:53 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/21 01:40:00 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/21 05:41:55 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ int	plant_3( t_list *list, int *i)
 				return (0);
 		}
 		else
-			return (affichage(-2), ft_status(258, 1),0);
+			return (affichage(-2), ft_status(258, 1), 0);
 	}
 	return (1);
 }

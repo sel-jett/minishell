@@ -6,19 +6,25 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:34:19 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/21 01:22:41 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/21 08:09:01 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+static int	oxe_1(char c)
+{
+	if (c == '\t' || c == '\v'
+		|| c == '\f' || c == '\n'
+		|| c == '\r')
+		return (1);
+	return (0);
+}
+
 int	plants(t_list *list, int *i)
 {
-	if (list->str[*i] == '\t' || list->str[*i] == '\v'
-		|| list->str[*i] == '\f' || list->str[*i] == '\n'
-		|| list->str[*i] == '\r')
-		list->str[*i] = ' ';
-	else if ((list->str[*i] == '"' || list->str[*i] == '\''))
+	(oxe_1(list->str[*i])) && (list->str[*i] = ' ');
+	if ((list->str[*i] == '"' || list->str[*i] == '\''))
 	{
 		if (!plant_1(list, i))
 			return (ft_status(258, 1), affichage(-1), 0);
