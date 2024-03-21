@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 12:09:39 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/21 03:36:33 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/21 05:35:01 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,7 +182,7 @@ char    **array_dupper(char **str)
         j = 0;
         s = ft_split(str[i],' ');
         if (!s)
-            return (printf("ha ana\n"),NULL);
+            return (NULL);
         while (s[j])
         {
             str_r[len] = s[j];
@@ -195,18 +195,42 @@ char    **array_dupper(char **str)
     return (str_r);
 }
 
+
+
+int	first_key_checker(char *cmmd)
+{
+	int	i;
+
+	i = 0;
+	if (cmmd[i] && cmmd[i] == '$' && cmmd[i + 1] && !is_alpha_3(cmmd[i + 1]) \
+		&& cmmd[i + 1] != '?')
+		return (1);
+	return (0);
+}
+
 void	ft_execute_cmd(t_node_arbre *tree, t_env **env, t_env **exp)
 {
 	int				i;
 	char			**cmmd;
 	char			**path;
+	char			*backup;
 	char			**envp;
 	t_node			*tmp;
 	t_node			*smp;
+	int				check;
+	// static int				s;
 
 	i = 0;
+	check = 0;
 	tmp = tree->list->top;
 	smp = tree->list->top;
+	// s++;
+	// if (s == 3)
+	// {
+	// // 	ft_env(*env);
+	// 	// ft_print_arr(envp);
+	// 	exit(1);
+	// }
 	envp = env_to_arr(*env);
 	if (!envp)
 		return ;
@@ -218,20 +242,32 @@ void	ft_execute_cmd(t_node_arbre *tree, t_env **env, t_env **exp)
 		return ;
 	while (cmmd[i])
 	{
-		if (smp->flag_expend == 1)
+		if (smp->flag_expend == 1 && !first_key_checker(cmmd[i]))
 		{
-			cmmd[i] = ft_expand(*exp, cmmd[i]);
+			backup = ft_expand(*exp, cmmd[i]);
+			if (!backup)
+				cmmd[i] = "";
+			else
+				cmmd[i] = backup;
+			if (!smp->flag_quote)
+				check = 1;
 			if (!cmmd[i])
-				return ;
+				break ;
 		}
-		else if (smp->flag_expend == 2)
+		else if (smp->flag_expend == 2 && !first_key_checker(cmmd[i]))
 		{
-			cmmd[i] = ft_expand(*exp, cmmd[i]);
+			backup = ft_expand(*exp, cmmd[i]);
+			if (!backup)
+				cmmd[i] = "";
+			else
+				cmmd[i] = backup;
+			if (!smp->flag_quote)
+				check = 1;
 			if (!cmmd[i])
-				return ;
+				break ;
 		}
-		smp = smp->next;
 		i++;
+		smp = smp->next;
 	}
 	i = 0;
 	smp = tree->list->top;
@@ -240,13 +276,18 @@ void	ft_execute_cmd(t_node_arbre *tree, t_env **env, t_env **exp)
 		if (ft_execute_wild(cmmd[i]) && smp->flag_wilc == 1)
 		{
 			cmmd[i] = ft_strdup(ft_execute_wild(cmmd[i]));
+			check = 1;
 			if (!cmmd[i])
 				return ;
 		}
 		smp = smp->next;
 		i++;
 	}
-	cmmd = array_dupper(cmmd);
+	if (check)
+	{
+		cmmd = array_dupper(cmmd);
+		cmmd = joyner(cmmd);	
+	}
 	if (is_builtin(cmmd[0]))
 	{
 		ft_builtin(cmmd, env, exp);

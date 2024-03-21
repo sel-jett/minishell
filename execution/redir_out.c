@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 22:12:12 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/18 02:36:48 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/20 06:31:49 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,30 +64,9 @@ void	ft_execute_redir(t_node_arbre *tree, t_env **env, t_env **exp)
 	char			**path;
 	char			**envp;
 
-	// exit(0);
 	envp = env_to_arr(*env);
 	path = ft_split(get_path(*env), ':');
-		// dprintf(2, "[%s]\n", tree->list_redir->top->value);
-		// exit(0);
-	// while (tree->list_redir->top)
-	// {
-	// 	// dprintf(2, "[%s]\n", tree->list_redir->top->value);
-	// 	dprintf(2, "[%s][%d][%d]\n", tree->list_redir->top->value, tree->list_redir->top->avant_, \
-	// 	tree->list_redir->top->flag_space);
-	// 	tree->list_redir->top = tree->list_redir->top->next;
-	
-	// }
-	// exit(0);
-	// exit(0);
 	cmmd = redirlist_to_arr(tree->list_redir);
-	// i = 0;
-	// while (cmmd[i])
-	// {
-	// 	dprintf(2, "[][%s][]\n", cmmd[i]);
-	// 	i++;
-	// }
-	// exit(0);
-	// cmmd = ft_tree_to_cmd(tree);
 	i = 0;
 	while (cmmd[i])
 	{
@@ -221,9 +200,9 @@ void	files_dupper(int *fd, int *sd, int *ad, struct s_nnode	*cnt)
 		k++;
 	while (cnt)
 	{
-		if (!ft_strncmp(cnt->value, ">"))
+		if (cnt->mode_d == 1)
 			f = 1;
-		else if (!ft_strncmp(cnt->value, ">>"))
+		else if (cnt->mode_d == 2)
 			f = 2;
 		cnt = cnt->next;
 	}
@@ -232,9 +211,7 @@ void	files_dupper(int *fd, int *sd, int *ad, struct s_nnode	*cnt)
 	else if (f == 2)
 		dup2(ad[k - 1], 1);
 	if (sd && j > 0)
-	{
 		dup2(sd[j - 1], 0);
-	}
 }
 
 void	ft_execute_redir_out(t_node_arbre *tree, t_env	*env, t_env *exp)
@@ -256,10 +233,6 @@ void	ft_execute_redir_out(t_node_arbre *tree, t_env	*env, t_env *exp)
 
 	orig_stdout = dup(1);
 	orig_stdin = dup(0);
-	if (!ft_strncmp(tree->list_redir->top->value, ">>") || \
-		!ft_strncmp(tree->list_redir->top->value, ">") || \
-		!ft_strncmp(tree->list_redir->top->value, "<"))
-		tree->list_redir->top = tree->list_redir->top->next;
 	tmp = tree->list_redir->top;
 	smp = tree->list_redir->top;
 	amp = tree->list_redir->top;

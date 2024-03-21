@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 11:44:57 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/18 23:00:54 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/21 01:12:21 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,32 @@ char	*value_key(t_env *tmp, char *key)
 	return (NULL);
 }
 
+int	chekcer(char *data)
+{
+	int	i;
+	int	check;
+
+	i = 0;
+	check = 0;
+	if (!data)
+		return (0);
+	while (data[i])
+	{
+		if (data[i] == '+')
+		{
+			check = 1;	
+			break;
+		}
+		i++;
+	}
+	if (!check)
+		return (1);
+	i++;
+	if (data[i] && data[i] != '=')
+		return (0);
+	return (1);
+}
+
 char	*get_key(char *data)
 {
 	int		i;
@@ -32,10 +58,17 @@ char	*get_key(char *data)
 
 	i = 0;
 	j = -1;
+	
+	if (!chekcer(data))
+	{
+		return (NULL);
+	}
 	if (data)
 		while (data[i] && data[i] != '=' && data[i] != '+')
 			i++;
 	str = my_malloc(i + 1, 1);
+	if (!str)
+		return (NULL);
 	while (++j < i)
 		str[j] = data[j];
 	str[i] = '\0';
@@ -88,21 +121,28 @@ t_env	*env_new(char *data, t_env *tmp)
 {
 	t_env	*node;
 	char	*str;
+	char	*gt_value;
+	char	*value_of;
 
 	node = my_malloc(sizeof(t_env), 1);
+	if (!node || !get_key(data))
+		return (NULL);
 	str = ft_expand(tmp, get_key(data));
 	if (!str || !str[0])
 		str = get_key(data);
-	if (check_key(data))
+	value_of = value_key(tmp, str);
+	if (check_key(data) && value_of)
 	{
+		gt_value = get_value(data);
 		node->key = str;
-		node->value = ft_strjoin(get_value(data), value_key(tmp, str));
+		node->value = ft_strjoin(gt_value, value_of);
+		node->next = NULL;
 		ft_list_remove_if(&tmp, str, ft_strncmp_one);
+		return (node);
 	}
 	else
 		node->value = get_value(data);
 	node->key = str;
-		// dprintf(2, "node->value = %s\n", node->value);
 	node->next = NULL;
 	return (node);
 }
@@ -159,6 +199,8 @@ t_env	*ft_env_parser(char **env)
 	lst = NULL;
 	while (env[i])
 	{
+		if (!env_new(env[i], NULL))
+			return (NULL);
 		ft_lstadd_back(&lst, env_new(env[i], NULL));
 		i++;
 	}

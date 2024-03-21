@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 07:26:29 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/18 23:28:33 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/21 00:50:18 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,37 @@ static int	is_num(int c)
 	return (c >= 48 && c <= 57);
 }
 
+int	check_key(char *key)
+{
+	int	i;
+
+	i = 0;
+	if (!key)
+		return (0);
+	if (key[i] != '_' && !is_alpha(key[i]))
+		return (0);
+	i++;
+	while (key[i])
+	{
+		if (key[i] != '_' && !is_alpha(key[i]) && !is_num(key[i]))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 int	check_first(char *cmd, t_env *env)
 {
 	int	i;
 	int	check2;
 	char *tmp;
 
+	if (!get_key(cmd) || ft_strncmp_one("$", get_key(cmd)) == 0)
+	{
+		dprintf(2, "minishell: export: `%s': not a valid identifier\n", cmd);
+		ft_status(1, 1);
+		return (0);
+	}
 	tmp = ft_expand(env, get_key(cmd));
 	if ((!tmp || !tmp[0]) && cmd[0] != '$')
 		tmp = cmd;
@@ -41,6 +66,7 @@ int	check_first(char *cmd, t_env *env)
 		else
 			printf("minishell: export: `%s':", cmd);
 		printf(" not a valid identifier\n");
+		ft_status(1, 1);
 		return (0);
 	}
 	i++;
@@ -56,6 +82,7 @@ int	check_first(char *cmd, t_env *env)
 	{
 		printf("minishell: export: `%s':", tmp);
 		printf(" not a valid identifier\n");
+		ft_status(1, 1);
 		return (0);
 	}
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:48:58 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/21 03:34:33 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/21 05:36:39 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ char            *ft_execute_wild(char *str);
 
 ///////////////////////// BUILTINS //////////////////////////
 
+int	            chekcer(char *data);
 bool			is_builtin(char *cmd);
 int				ft_strlen_b(const char *str);
 size_t			ft_strlcpy(char *dst, const char *src, size_t dstsize);
@@ -140,5 +141,7 @@ int				ft_strncmp(char *s1, char *s2);
 int				count_expand(char *cmd);
 char			*ft_expand(t_env *exp, char *cmd);
 char            *ft_itoa(int n);
+int             is_alpha_3(char c);
+char            **joyner(char **str);
 
 #endif
