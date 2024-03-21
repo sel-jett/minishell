@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 21:59:00 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/20 10:39:07 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/20 20:34:02 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ char	*ft_expand(t_env *exp, char *cmd)
 	int		l;
 
 	(1) && (k = 0, i = 0, l = 0, venv = NULL);
+	if (!cmd)
+		return (NULL);
 	if (!ft_strncmp(cmd, "$?"))
 	{
 		new_cmd = ft_itoa(ft_status(0, 0));

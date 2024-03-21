@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 11:44:57 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/20 03:20:07 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/21 01:12:21 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ char	*get_key(char *data)
 		while (data[i] && data[i] != '=' && data[i] != '+')
 			i++;
 	str = my_malloc(i + 1, 1);
+	if (!str)
+		return (NULL);
 	while (++j < i)
 		str[j] = data[j];
 	str[i] = '\0';
@@ -134,6 +136,7 @@ t_env	*env_new(char *data, t_env *tmp)
 		gt_value = get_value(data);
 		node->key = str;
 		node->value = ft_strjoin(gt_value, value_of);
+		node->next = NULL;
 		ft_list_remove_if(&tmp, str, ft_strncmp_one);
 		return (node);
 	}

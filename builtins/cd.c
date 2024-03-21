@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 23:18:52 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/20 02:07:09 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/21 00:54:58 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	ft_env(t_env *tmp)
 		printf("%s\n", tmp->value);
 		tmp = tmp->next;
 	}
+	ft_status(0, 1);
 }
 
 int	cd_error(const char *path)
@@ -167,22 +168,36 @@ void	ft_printf(const char *str, const char *str2)
 void	ft_builtin(char **cmd, t_env **cenv, t_env **exp)
 {
 	t_env	*tmp;
+	// static int	check;
+
+	// 	check++;
+	// if (check == 3)
+	// 	exit(1);
 
 	tmp = *cenv;
 	if (!ft_strncmp(cmd[0], "cd"))
 		cd((const char **)(cmd + 1), cenv, exp);
 	else if (!ft_strncmp(cmd[0], "echo"))
+	{
 		echo((const char **)(cmd + 1), 0);
+		ft_status(0, 1);	
+	}
 	else if (!ft_strncmp(cmd[0], "exit"))
 		exit(ft_status(0, 0));
 	else if (!ft_strncmp(cmd[0], "env"))
 		ft_env(*cenv);
 	else if (!ft_strncmp(cmd[0], "pwd"))
+	{
 		printf("%s\n", value_key(tmp, "PWD"));
+		ft_status(0, 1);
+	}
 	else if (!ft_strncmp(cmd[0], "export"))
 		ft_export((cmd + 1), cenv, exp);
 	else if (!ft_strncmp(cmd[0], "unset"))
+	{
 		ft_unset((cmd + 1), cenv, exp);
+		
+	}
 	else
 	{
 		ft_printf("minishell: ", cmd[0]);

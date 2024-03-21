@@ -6,30 +6,40 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 07:39:43 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/20 07:29:21 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/20 21:22:48 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // #include "builtins.h"
 #include "../includes/minishell.h"
 
-static	int	echo_check(const char *path)
+static	int	echo_check(const char **path)
 {
 	int	i;
+	int	j;
 
 	i = 0;
-	if (!path || !path[i])
+	if (!path || !path[0] || !path[0][0])
 		return (-1);
-	if (path[i] == '-')
+	if (path[0][0] == '-')
 	{
-		while (path[i] && path[i] > 32)
+		while (path[i] && path[i][0] == '-')
 		{
-			if (path[i] != 'n')
-				return (0);
+			j = 1;
+			while (path[i][j] && path[i][j] > 32)
+			{
+				if (path[i][j] != 'n')
+					return (0);
+				j++;
+			}
 			i++;
 		}
 	}
-	return (i);
+	else
+		return (0);
+	if (i > 0)
+		return i;
+	return (1);
 }
 
 void	echo(const char **path, int mode)
@@ -37,19 +47,8 @@ void	echo(const char **path, int mode)
 	int	check;
 
 	check = 0;
-	// dprintf(2, "path\n");
-	// while (path[check])
-	// {
-	// 	dprintf(2, "%s\n", path[check]);
-	// 	check++;
-	// 	// if (path[check])
-	// 	// 	printf(" ");
-	// }
-	// check = 0;
-	// dprintf(2, "path\n");
-	// exit(1);
 	(void)mode;
-	check = echo_check(path[0]);
+	check = echo_check(path);
 	if (check == -1)
 	{
 		printf("\n");
@@ -69,7 +68,7 @@ void	echo(const char **path, int mode)
 	}
 	else
 	{
-		// path++;
+		path = path + check;
 		while(*path)
 		{
 			printf("%s", *path);

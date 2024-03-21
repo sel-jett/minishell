@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 07:03:43 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/20 05:28:25 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/21 01:12:05 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,17 +140,18 @@ void	ft_export(char **cmd, t_env **cnev, t_env **exp)
 {
 	int		i;
 	char	*tmp;
+	
 
 	i = 0;
 	if (!ft_strlen_b(cmd[0]))
 	{
 		ft_env_export(*exp);
+		ft_status(0, 1);
 		return ;
 	}
-
 	while (cmd[i])
 	{
-		if (cmd[i][0] != '$' && !check_first(cmd[i], *exp))
+		if (!check_first(cmd[i], *exp))
 			return ;
 		tmp = ft_expand(*exp, get_key(cmd[i]));
 		if (!tmp[0] && cmd[i][0] != '$')
@@ -165,6 +166,7 @@ void	ft_export(char **cmd, t_env **cnev, t_env **exp)
 			if (!value_key(*exp, tmp))
 			{
 				ft_lstadd_back(exp, env_new(cmd[i], *exp));
+				ft_status(0, 1);
 				i++;
 				continue;
 			}
@@ -173,8 +175,8 @@ void	ft_export(char **cmd, t_env **cnev, t_env **exp)
 		{
 			ft_lstadd_back(cnev, env_new(cmd[i], *cnev));
 			ft_lstadd_back(exp, env_new(cmd[i], *exp));
+			ft_status(0, 1);
 		}
 		i++;
 	}
-	ft_sort_list(exp);
 }

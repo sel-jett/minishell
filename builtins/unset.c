@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 22:27:43 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/20 07:22:23 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/20 20:19:09 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,13 @@ void	ft_unset(char **cmd, t_env **cnev, t_env **exp)
 				write(2, dptr[j], ft_strlen_b(dptr[j]));
 				write(2, "': not a valid identifier\n", 27);
 				check = 1;
+				ft_status(1, 1);
 			}
 			if (!check)
 			{
 				ft_list_remove_if(cnev, dptr[j], ft_strncmp);
 				ft_list_remove_if(exp, dptr[j], ft_strncmp);
+				ft_status(0, 1);
 			}
 			j++;
 		}

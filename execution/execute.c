@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 12:09:39 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/20 10:37:21 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/21 00:40:46 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,11 +215,19 @@ void	ft_execute_cmd(t_node_arbre *tree, t_env **env, t_env **exp)
 	t_node			*tmp;
 	t_node			*smp;
 	int				check;
+	// static int				s;
 
 	i = 0;
 	check = 0;
 	tmp = tree->list->top;
 	smp = tree->list->top;
+	// s++;
+	// if (s == 3)
+	// {
+	// // 	ft_env(*env);
+	// 	// ft_print_arr(envp);
+	// 	exit(1);
+	// }
 	envp = env_to_arr(*env);
 	if (!envp)
 		return ;
@@ -227,11 +235,8 @@ void	ft_execute_cmd(t_node_arbre *tree, t_env **env, t_env **exp)
 	if (!path)
 		return ;
 	cmmd = linkedlist_to_arr(tmp);
-	// ft_print_arr(cmmd);
 	if (!cmmd)
 		return ;
-	// ft_print_arr(cmmd);
-	// exit(0);
 	while (cmmd[i])
 	{
 		if (smp->flag_expend == 1 && !first_key_checker(cmmd[i]))
@@ -241,8 +246,6 @@ void	ft_execute_cmd(t_node_arbre *tree, t_env **env, t_env **exp)
 				cmmd[i] = "";
 			else
 				cmmd[i] = backup;
-			// printf("%s\n", cmmd[i]);
-			// cmmd[i] = ft_expand(*exp, cmmd[i]);
 			if (!smp->flag_quote)
 				check = 1;
 			if (!cmmd[i])
@@ -255,8 +258,6 @@ void	ft_execute_cmd(t_node_arbre *tree, t_env **env, t_env **exp)
 				cmmd[i] = "";
 			else
 				cmmd[i] = backup;
-			// printf("%s\n", cmmd[i]);
-			// cmmd[i] = ft_expand(*exp, cmmd[i]);
 			if (!smp->flag_quote)
 				check = 1;
 			if (!cmmd[i])
@@ -265,10 +266,6 @@ void	ft_execute_cmd(t_node_arbre *tree, t_env **env, t_env **exp)
 		i++;
 		smp = smp->next;
 	}
-	// printf("dsfsdfdsf\n");
-	// ft_print_arr(cmmd);
-	// printf("dsfsdfdsf\n");
-	// exit(0);
 	i = 0;
 	smp = tree->list->top;
 	while (cmmd[i])
