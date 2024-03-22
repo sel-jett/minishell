@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 03:19:27 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/22 07:10:20 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/22 09:09:05 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,14 @@ static bool	is_text2(t_nnode *tmp)
 	return (0);
 }
 
-void	ft_count(t_nnode *node, int *len)
+void	ft_count(t_nnode *node, int *len, int *index)
 {
 	int	i;
 
 	while (node && is_text2(node))
 	{
+		if (node->mode != TOKEN_EXPR)
+			*index = 1;
 		i = 0;
 		while (node->value[i])
 		{
@@ -38,7 +40,7 @@ void	ft_count(t_nnode *node, int *len)
 	}
 }
 
-char	*cancat(t_nnode *node)
+char	*cancat(t_nnode *node, int *index)
 {
 	int		len;
 	int		i;
@@ -46,7 +48,7 @@ char	*cancat(t_nnode *node)
 	t_nnode	*tmp;
 
 	(1) && (len = 0, tmp = node);
-	ft_count(node, &len);
+	ft_count(node, &len, index);
 	str = my_malloc(len + 1, 1);
 	if (!str)
 		return (0);
@@ -70,19 +72,21 @@ char	*cancat(t_nnode *node)
 int	read_line_herdoc(int fd, t_nnode *node, t_env *exp)
 {
 	char	*str;
+	int		index;
 
-	str = 0;
+	(1) && (index = 0, str = 0);
 	while (1)
 	{
 		str = readline("heredoc> ");
 		if (node->next)
 		{
-			if (ft_strcmp(cancat(node->next), str))
+			if (ft_strcmp(cancat(node->next, &index), str))
 				break ;
 			str = ft_strjoin2(str, "\n");
 			if (!str)
 				return (0);
-			str = ft_expand(exp, str);
+			if (index == 0)
+				str = ft_expand(exp, str);
 			if (!str)
 				return (0);
 			write(fd, str, ft_strlen(str));

@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:48:58 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/22 08:19:26 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/22 20:54:20 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,14 +120,19 @@ void			ft_printf(const char *str, const char *str2);
 void			ft_execve(char *env_var, char **env, char **cmmd);
 char			**env_to_arr(t_env *env);
 void			ft_print_arr(char **arr);
+char			**arr_filler(t_node	*tmp, char **arr, int i);
 int				liked_size(t_node *tree);
 char			**linkedlist_to_arr(t_node *tree);
 char			*get_path(t_env *env);
-char	        **redirlist_to_arr(t_nlist *list_redir);
-char            *ft_execute_wild(char *str);
+char			**redirlist_to_arr(t_nlist *list_redir);
+int				length(char *s, char *str);
+int				only_wild(char *str);
+char			*ft_execute_wild(char *str);
 
 ///////////////////////// BUILTINS //////////////////////////
 
+int				first_key_checker(char *cmmd);
+int				contain_wild(char *str);
 int				global_checker(char *str);
 int				chekcer(char *data);
 int				ft_strncmp_wild(const char *s1, const char *s2, size_t n);
@@ -179,8 +184,8 @@ void			cd_application(t_env **cenv, t_env **exp, char *b, const char **path);
 ////////////////////////////////////// EXPAND //////////////////
 int				count_expand(char *cmd);
 char			*ft_expand(t_env *exp, char *cmd);
-char            *ft_itoa(int n);
-int             is_alpha_3(char c);
-char            **joyner(char **str);
+char			*ft_itoa(int n);
+int				is_alpha_3(char c);
+char			**joyner(char **str);
 
 #endif

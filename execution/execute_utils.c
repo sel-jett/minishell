@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:03:47 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/22 08:04:28 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/22 20:46:40 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	ft_execute_child(char **envp, char **cmmd, char **path)
 	char		*env_var;
 	extern int	x;
 
-	if (!path || !path[0])
+	if (!path || !path[0] || !envp || !envp[0])
 		return ;
 	env_var = ft_handler(cmmd, path);
 	if (env_var)

@@ -6,13 +6,13 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 21:59:00 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/22 01:14:31 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/22 19:42:20 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int count_expand(char *cmd)
+int	count_expand(char *cmd)
 {
 	int		i;
 	int		j;
@@ -25,12 +25,12 @@ int count_expand(char *cmd)
 		{
 			while (cmd[i] && cmd[i] != '-')
 				i++;
-			continue;
+			continue ;
 		}
 		j++;
 		i++;
 	}
-	return j;
+	return (j);
 }
 
 char	*ft_strjoin_char(char *s1, char s2)
@@ -40,7 +40,7 @@ char	*ft_strjoin_char(char *s1, char s2)
 	int		i;
 
 	size = ft_strlen_b(s1) + 1;
-	str = my_malloc(size + 1,1);
+	str = my_malloc(size + 1, 1);
 	if (!str)
 		return (NULL);
 	i = 0;
@@ -64,15 +64,17 @@ static void	ft_count_expand(int *i, int *k, char *cmd)
 
 static char	*expand_malloc(int *i, int *k, char *cmd)
 {
-	int l = 0;
-	char *venv;
+	int		l;
+	char	*venv;
+
+	l = 0;
 	venv = my_malloc(*k + 1, 1);
 	if (!venv)
 		return (NULL);
 	while (*k > 0)
 	{
 		if (!is_alpha_3(cmd[*i - *k]))
-			break;
+			break ;
 		venv[l] = cmd[*i - *k];
 		l++;
 		(*k)--;
@@ -108,7 +110,7 @@ char	*ft_expand(t_env *exp, char *cmd)
 		new_cmd = ft_strjoin(new_cmd, cmd + 2);
 		return (new_cmd);
 	}
-	new_cmd = my_malloc(1,1);
+	new_cmd = my_malloc(1, 1);
 	if (!new_cmd)
 		return (NULL);
 	new_cmd[0] = '\0';
@@ -127,7 +129,7 @@ char	*ft_expand(t_env *exp, char *cmd)
 				if (!new_cmd)
 					return (NULL);
 			}
-			continue;
+			continue ;
 		}
 		venv = NULL;
 		new_cmd = ft_strjoin_char(new_cmd, cmd[i]);
