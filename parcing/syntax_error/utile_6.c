@@ -6,61 +6,65 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 03:19:27 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/21 08:59:05 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/21 23:27:17 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	ope(t_node *node)
+static bool	is_text2(t_nnode *tmp)
 {
-	if (!node)
-		return (1);
-	if (node->mode == TOKEN_AND || node->mode == TOKEN_OR
-		|| node->mode == TOKEN_PIPE || is_redir(node))
+	if (tmp->mode == TOKEN_EXPR || tmp->mode == TOKEN_Double_Q
+		|| tmp->mode == TOKEN_Single_Q)
 		return (1);
 	return (0);
 }
 
-t_node_arbre	*parse_redir(t_node **tmp)
+void	ft_count(t_nnode *node, int *len)
 {
-	t_node_arbre	*node_left;
-	t_node_arbre	*node;
+	int	i;
 
-	node_left = parse_cmd(tmp);
-	if (*tmp && is_redir(*tmp))
+	while (node && is_text2(node))
 	{
-		if (!open_herdoc_0(*tmp))
-			return (0);
-		node = c_node_arbre(*tmp);
-		if (!node)
-			return (NULL);
-		node->list_redir = c_nlist();
-		if (!node->list_redir)
-			return (NULL);
-		node->list_redir = (*tmp)->list_redir;
-		(1) && (node->left = node_left, *tmp = (*tmp)->next);
-		while ((*tmp) && (*tmp)->mode != TOKEN_PIPE && (*tmp)->mode
-			!= TOKEN_AND && (*tmp)->mode != TOKEN_OR)
-			*tmp = (*tmp)->next;
-		return (node);
+		i = 0;
+		while (node->value[i])
+		{
+			i++;
+			(*len)++;
+		}
+		if (node->flage_space_ap == 1)
+			break ;
+		node = node->next;
 	}
-	return (node_left);
 }
 
-t_node_arbre	*new_node(int mode, t_node_arbre *left, t_node_arbre *right)
+char	*cancat(t_nnode *node)
 {
-	t_node_arbre	*node;
+	int		len;
+	int		i;
+	char	*str;
+	t_nnode	*tmp;
 
-	if (!right)
-		return (NULL);
-	node = my_malloc(sizeof(t_node_arbre), 1);
-	if (!node)
-		return (NULL);
-	node->mode = mode;
-	node->left = left;
-	node->right = right;
-	return (node);
+	(1) && (len = 0, tmp = node);
+	ft_count(node, &len);
+	str = my_malloc(len + 1, 1);
+	if (!str)
+		return (0);
+	len = 0;
+	while (tmp && is_text2(tmp))
+	{
+		i = 0;
+		while (tmp->value[i])
+		{
+			str[len] = tmp->value[i];
+			i++;
+			len++;
+		}
+		if (tmp->flage_space_ap == 1)
+			break ;
+		tmp = tmp->next;
+	}
+	return (str[len] = '\0', str);
 }
 
 int	read_line_herdoc(int fd, t_nnode *node)
@@ -73,7 +77,7 @@ int	read_line_herdoc(int fd, t_nnode *node)
 		str = readline("heredoc> ");
 		if (node->next)
 		{
-			if (ft_strcmp(node->next->value, str))
+			if (ft_strcmp(cancat(node->next), str))
 				break ;
 			str = ft_strjoin2(str, "\n");
 			if (!str)
