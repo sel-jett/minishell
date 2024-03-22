@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 12:09:39 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/21 00:40:46 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/21 21:37:00 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,14 +141,14 @@ void	ft_execute_child(char **envp, char **cmmd, char **path)
 	}
 }
 
-char **c(char *str, int *len)
+char **checkerr(char *str, int *len)
 {
     char **str_r;
     int     i = 0;
 
     str_r = ft_split(str, ' ');
     if (!str_r)
-        return (0);
+        return (NULL);
     while (str_r[i])
         i++;
     (*len) += i;
@@ -164,14 +164,18 @@ char    **array_dupper(char **str)
     int        j;
 
     i = 0;len = 0;
+	if (!str)
+		return (NULL);
     while (str[i])
     {
-        c(str[i], &len);
+        checkerr(str[i], &len);
+		if (!str[i])
+			return (NULL);
         i++;
     }
     str_r = malloc(sizeof(char *) * (len + 1));
     if (!str_r)
-        return (0);    
+        return (NULL);    
     len = 0;
     i = 0;
     while(str[i])
@@ -212,22 +216,15 @@ void	ft_execute_cmd(t_node_arbre *tree, t_env **env, t_env **exp)
 	char			**path;
 	char			*backup;
 	char			**envp;
+	char			*wild;
 	t_node			*tmp;
 	t_node			*smp;
 	int				check;
-	// static int				s;
 
 	i = 0;
 	check = 0;
 	tmp = tree->list->top;
 	smp = tree->list->top;
-	// s++;
-	// if (s == 3)
-	// {
-	// // 	ft_env(*env);
-	// 	// ft_print_arr(envp);
-	// 	exit(1);
-	// }
 	envp = env_to_arr(*env);
 	if (!envp)
 		return ;
@@ -246,7 +243,7 @@ void	ft_execute_cmd(t_node_arbre *tree, t_env **env, t_env **exp)
 				cmmd[i] = "";
 			else
 				cmmd[i] = backup;
-			if (!smp->flag_quote)
+			if (smp->flag_quote != 1 && smp->flag_quote != 2)
 				check = 1;
 			if (!cmmd[i])
 				break ;
@@ -258,7 +255,7 @@ void	ft_execute_cmd(t_node_arbre *tree, t_env **env, t_env **exp)
 				cmmd[i] = "";
 			else
 				cmmd[i] = backup;
-			if (!smp->flag_quote)
+			if (smp->flag_quote != 1 && smp->flag_quote != 2)
 				check = 1;
 			if (!cmmd[i])
 				break ;
@@ -270,12 +267,13 @@ void	ft_execute_cmd(t_node_arbre *tree, t_env **env, t_env **exp)
 	smp = tree->list->top;
 	while (cmmd[i])
 	{
-		if (ft_execute_wild(cmmd[i]) && smp->flag_wilc == 1)
+		wild = ft_execute_wild(cmmd[i]);
+		if (wild && smp->flag_wilc == 1)
 		{
-			cmmd[i] = ft_strdup(ft_execute_wild(cmmd[i]));
-			check = 1;
+			cmmd[i] = ft_strdup(wild);
 			if (!cmmd[i])
 				return ;
+			check = 1;
 		}
 		smp = smp->next;
 		i++;
@@ -283,7 +281,11 @@ void	ft_execute_cmd(t_node_arbre *tree, t_env **env, t_env **exp)
 	if (check)
 	{
 		cmmd = array_dupper(cmmd);
-		cmmd = joyner(cmmd);	
+		if (!cmmd)
+			return ;
+		cmmd = joyner(cmmd);
+		if (!cmmd)
+			return ;	
 	}
 	if (is_builtin(cmmd[0]))
 	{
@@ -291,4 +293,5 @@ void	ft_execute_cmd(t_node_arbre *tree, t_env **env, t_env **exp)
 		return ;
 	}
 	ft_execute_child(envp, cmmd, path);
+
 }

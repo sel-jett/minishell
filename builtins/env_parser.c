@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 11:44:57 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/21 01:12:21 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/21 23:18:26 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,19 @@ int	chekcer(char *data)
 		return (0);
 	while (data[i])
 	{
-		if (data[i] == '+')
+		if (data[i] == '=')
+			return (1);
+		else if (data[i] == '+')
 		{
-			check = 1;	
-			break;
+			check = 1;
+			break ;
 		}
 		i++;
 	}
 	if (!check)
 		return (1);
 	i++;
-	if (data[i] && data[i] != '=')
+	if ((data[i] && data[i] != '=') || !data[i])
 		return (0);
 	return (1);
 }
@@ -58,7 +60,6 @@ char	*get_key(char *data)
 
 	i = 0;
 	j = -1;
-	
 	if (!chekcer(data))
 	{
 		return (NULL);
@@ -90,9 +91,10 @@ char	*get_value(char *data)
 		i++;
 	if (!data[i])
 		return (NULL);
-	i++;
-	s = j - i;
+	(1) && (i++, s = j - i);
 	str = my_malloc(s + 1, 1);
+	if (!str)
+		return (NULL);
 	j = -1;
 	while (++j < s)
 	{
@@ -128,82 +130,20 @@ t_env	*env_new(char *data, t_env *tmp)
 	if (!node || !get_key(data))
 		return (NULL);
 	str = ft_expand(tmp, get_key(data));
-	if (!str || !str[0])
-		str = get_key(data);
+	(!str || !str[0]) && (str = get_key(data));
 	value_of = value_key(tmp, str);
 	if (check_key(data) && value_of)
 	{
 		gt_value = get_value(data);
-		node->key = str;
+		(node->key = str) && (node->next = NULL);
 		node->value = ft_strjoin(gt_value, value_of);
-		node->next = NULL;
+		if (!node->value)
+			return (NULL);
 		ft_list_remove_if(&tmp, str, ft_strncmp_one);
 		return (node);
 	}
 	else
 		node->value = get_value(data);
-	node->key = str;
-	node->next = NULL;
+	(node->key = str) && (node->next = NULL);
 	return (node);
-}
-
-t_env	*ft_lstlast(t_env *lst)
-{
-	if (!lst)
-		return (NULL);
-	while (lst->next)
-		lst = lst->next;
-	return (lst);
-}
-
-void	ft_lstadd_back(t_env **lst, t_env *new)
-{
-	t_env	*node;
-
-	if (!lst)
-		return ;
-	if (!(*lst))
-	{
-		*lst = new;
-		return ;
-	}
-	node = ft_lstlast(*lst);
-	node->next = new;
-}
-
-void	ft_list_remove_if(t_env **begin_list, void *data_ref, int (*cmp)())
-{
-	t_env	*cur;
-
-	if (begin_list == NULL || *begin_list == NULL)
-		return ;
-	cur = *begin_list;
-	if (cmp(cur->key, data_ref) == 0)
-	{
-		*begin_list = cur->next;
-		ft_list_remove_if(begin_list, data_ref, cmp);
-	}
-	else
-	{
-		cur = *begin_list;
-		ft_list_remove_if(&cur->next, data_ref, cmp);
-	}
-}
-
-t_env	*ft_env_parser(char **env)
-{
-	int		i;
-	t_env	*lst;
-
-	i = 0;
-	lst = NULL;
-	while (env[i])
-	{
-		if (!env_new(env[i], NULL))
-			return (NULL);
-		ft_lstadd_back(&lst, env_new(env[i], NULL));
-		i++;
-	}
-	ft_list_remove_if(&lst, "OLDPWD", ft_strncmp_one);
-	return (lst);
 }

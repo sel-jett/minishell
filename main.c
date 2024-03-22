@@ -107,13 +107,21 @@ int main(int ac, char **av, char **envp)
 	// atexit(f);
 	env = ft_env_parser(envp);
 	exp = ft_env_parser(envp);
+	if (!env)
+	{
+		ft_lstadd_back(&env, env_new("PATH=/Users/sel-jett/.docker/bin:/usr/gnu/bin:/usr/local/bin:/bin:/usr/bin:.", env));
+		ft_lstadd_back(&env, env_new("SHLVL=1", env));
+		ft_lstadd_back(&env, env_new("_=/usr/bin/env", env));
+		ft_lstadd_back(&exp, env_new("PATH=/Users/sel-jett/.docker/bin:/usr/gnu/bin:/usr/local/bin:/bin:/usr/bin:.", exp));
+		ft_lstadd_back(&exp, env_new("SHLVL=1", exp));
+		ft_lstadd_back(&exp, env_new("_=/usr/bin/env", env));
+	}
 	if (!env_new("OLDPWD", exp))
 		return (0);
 	ft_lstadd_back(&exp, env_new("OLDPWD", exp));
-	// ft_sort_list(&exp);
 	(void)ac;
-	// (void)envp;
 	(void)av;
+	// (void)envp;
 	while (1)
 	{
 		(1) && (index = 0, i = 0, list = c_list(), list->str = 0);

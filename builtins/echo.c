@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 07:39:43 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/20 21:22:48 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/21 22:50:11 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,18 @@ static	int	echo_check(const char **path)
 	return (1);
 }
 
+void	echo_n(int check, const char **path)
+{
+	path = path + check;
+	while(*path)
+	{
+		printf("%s", *path);
+		path++;
+		if (*path)
+			printf(" ");
+	}
+}
+
 void	echo(const char **path, int mode)
 {
 	int	check;
@@ -67,14 +79,5 @@ void	echo(const char **path, int mode)
 		printf("\n");
 	}
 	else
-	{
-		path = path + check;
-		while(*path)
-		{
-			printf("%s", *path);
-			path++;
-			if (*path)
-				printf(" ");
-		}
-	}
+		echo_n(check, path);
 }

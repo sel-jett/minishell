@@ -104,6 +104,20 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (str);
 }
 
+int only_wild(char *str)
+{
+    int i;
+
+    i = 0;
+    while (str[i])
+    {
+        if (str[i] != '*')
+            return (0);
+        i++;
+    }
+    return (1);
+}
+
 
 char    *ft_execute_wild(char *str)
 {
@@ -114,7 +128,7 @@ char    *ft_execute_wild(char *str)
 
     sdk = "";
     dir = opendir(".");
-     if (strcmp(str, ".") == 0 || strcmp(str, "*") == 0)
+     if (strcmp(str, ".") == 0 || only_wild(str) == 0)
     {
         while ((dp = readdir(dir)) != NULL)
         {

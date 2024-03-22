@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:07:13 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/20 10:08:00 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/21 21:37:06 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,7 +161,6 @@ char **joyner(char **str)
 
 char	**linkedlist_to_arr(t_node *tree)
 {
-	// static int oop;
 	char	**arr;
 	int		i;
 	t_node	*tree_tmp;

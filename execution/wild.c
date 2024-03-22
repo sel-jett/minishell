@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 21:26:25 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/19 07:46:35 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/21 21:12:30 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,20 @@ int length_accelerator(char *s, char *str)
     return (j);
 }
 
+int only_wild(char *str)
+{
+    int i;
+
+    i = 0;
+    while (str[i])
+    {
+        if (str[i] != '*')
+            return (0);
+        i++;
+    }
+    return (1);
+}
+
 char    *ft_execute_wild(char *str)
 {
     DIR     *dir;
@@ -104,7 +118,7 @@ char    *ft_execute_wild(char *str)
 
     sdk = "";
     dir = opendir(".");
-     if (strcmp(str, ".") == 0 || strcmp(str, "*") == 0)
+     if (ft_strncmp(str, ".") == 0 || only_wild(str) == 0)
     {
         while ((dp = readdir(dir)) != NULL)
         {
@@ -148,7 +162,7 @@ char    *ft_execute_wild(char *str)
     {
         while ((dp = readdir(dir)) != NULL)
         {
-            if (!strcmp((dp->d_name + length_accelerator(dp->d_name, str)), str + 1))
+            if (!ft_strncmp((dp->d_name + length_accelerator(dp->d_name, str)), str + 1))
             {
                 if ((dp->d_name)[0] != '.')
                 {

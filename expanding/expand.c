@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 21:59:00 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/20 20:34:02 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/21 21:20:29 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ char	*ft_strjoin_char(char *s1, char s2)
 	return (str);
 }
 
-static void	ft_norminette(int *i, int *k, char *cmd)
+static void	ft_count_expand(int *i, int *k, char *cmd)
 {
 	(*i)++;
 	while (is_alpha_3(cmd[*i]))
@@ -62,7 +62,7 @@ static void	ft_norminette(int *i, int *k, char *cmd)
 	}
 }
 
-static char	*ft_second_norminette(int *i, int *k, char *cmd)
+static char	*expand_malloc(int *i, int *k, char *cmd)
 {
 	int l = 0;
 	char *venv;
@@ -102,6 +102,8 @@ char	*ft_expand(t_env *exp, char *cmd)
 	else if (!ft_strncmp_one(cmd, "$?"))
 	{
 		new_cmd = ft_itoa(ft_status(0, 0));
+		if (!new_cmd)
+			return (NULL);
 		new_cmd = ft_strjoin(new_cmd, cmd + 2);
 		return (new_cmd);
 	}
@@ -114,8 +116,8 @@ char	*ft_expand(t_env *exp, char *cmd)
 		l = 0;
 		if (cmd[i] && cmd[i] == '$')
 		{
-			ft_norminette(&i, &k, cmd);
-			venv = ft_second_norminette(&i, &k, cmd);
+			ft_count_expand(&i, &k, cmd);
+			venv = expand_malloc(&i, &k, cmd);
 			if (!venv)
 				return (NULL);
 			if (value_key(exp, venv))

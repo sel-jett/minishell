@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:48:58 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/20 09:37:57 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/21 23:05:31 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <stdbool.h>
+
 // # include "/Users/amel-has/.brew/opt/readline/include/readline/readline.h"
 // # include "/Users/amel-has/.brew/opt/readline/include/readline/history.h"
 // void			print_tree(t_node_arbre    *tree, int c);
@@ -136,6 +137,15 @@ void			ft_print_arr(char **arr);
 void			ft_builtin(char **cmd, t_env **cenv, t_env **exp);
 void			ft_sort_list(t_env **env);
 int				ft_strncmp(char *s1, char *s2);
+char			*path_getter(char	*temp, char	*temp_old, char *b, const char **path);
+int				cd_error(const char *path);
+void			cd_second(void);
+int				cd_old(const char *path);
+int				cd_home(const char *path);
+void			cd_application(t_env **cenv, t_env **exp, char *b, const char **path);
+
+
+
 ////////////////////////////////////// EXPAND //////////////////
 int				count_expand(char *cmd);
 char			*ft_expand(t_env *exp, char *cmd);

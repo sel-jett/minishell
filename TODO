@@ -34,8 +34,8 @@ dd
 d
 d
 d
- minishell > export *O
- minishell > minishell > export *M
+minishell > export *O
+minishell > minishell > export *M
 zsh: segmentation fault  ./minishell
 zsh: segmentation fault  ./minishelldeclare -x SECURITYSESSIONID="186a8"
 declare -x MallocNanoZone="0"
@@ -70,15 +70,13 @@ declare -x _="/Users/sel-jett/Desktop/minishell/./minishell"
 declare -x OLDPWD
 
 TEST
-declare -x TEST
+declare -x TEST `
 declare -x TEST
 
 export TEST=LOL && echo $TEST$TEST$TEST=lol$TEST
 
 export TEST="ls       -l     - a" && echo $TEST && $LS
 
-
-cd -
 env -i
 
 unset doesnt work 
@@ -86,3 +84,12 @@ unset doesnt work
 declare -x SECURITYSESSIONID="186a8
 
 $var= "ls -la"
+
+echo$?
+
+- my_malloc(checker) :
+    - get_key √
+    - expand √
+    - value_key √
+    - env_new √
+
