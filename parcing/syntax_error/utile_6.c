@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 03:19:27 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/21 23:27:17 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/22 01:46:15 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ char	*cancat(t_nnode *node)
 	return (str[len] = '\0', str);
 }
 
-int	read_line_herdoc(int fd, t_nnode *node)
+int	read_line_herdoc(int fd, t_nnode *node, t_env *exp)
 {
 	char	*str;
 
@@ -82,6 +82,9 @@ int	read_line_herdoc(int fd, t_nnode *node)
 			str = ft_strjoin2(str, "\n");
 			if (!str)
 				return (0);
+			str = ft_expand(exp, str);
+			if (!str)
+				return (0);
 			write(fd, str, ft_strlen(str));
 		}
 		free(str);
@@ -91,7 +94,7 @@ int	read_line_herdoc(int fd, t_nnode *node)
 	return (1);
 }
 
-bool	open_herdoc(t_nnode *node, char **file)
+bool	open_herdoc(t_nnode *node, char **file, t_env *exp)
 {
 	int			n;
 	int			fd;
@@ -107,6 +110,6 @@ bool	open_herdoc(t_nnode *node, char **file)
 	fd = open(*file, O_CREAT | O_RDWR, S_IRUSR | S_IWUSR);
 	if (fd == -1)
 		return (0);
-	read_line_herdoc(fd, node);
+	read_line_herdoc(fd, node, exp);
 	return (1);
 }

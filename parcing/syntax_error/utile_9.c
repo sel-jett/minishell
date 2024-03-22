@@ -6,13 +6,13 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 08:49:28 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/21 23:27:30 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/22 01:46:39 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	open_herdoc_0(t_node *tmp)
+int	open_herdoc_0(t_node *tmp, t_env *exp)
 {
 	char		*file;
 	t_nnode		*i_node;
@@ -25,7 +25,7 @@ int	open_herdoc_0(t_node *tmp)
 	{
 		if (i_node->mode == TOKEN_HEREDOC)
 		{
-			if (!open_herdoc(i_node, &file))
+			if (!open_herdoc(i_node, &file, exp))
 				return (0);
 			if (i_node->next)
 				i_node->next->value = file;
@@ -37,15 +37,15 @@ int	open_herdoc_0(t_node *tmp)
 	return (1);
 }
 
-t_node_arbre	*parse_redir(t_node **tmp)
+t_node_arbre	*parse_redir(t_node **tmp, t_env *exp)
 {
 	t_node_arbre	*node_left;
 	t_node_arbre	*node;
 
-	node_left = parse_cmd(tmp);
+	node_left = parse_cmd(tmp, exp);
 	if (*tmp && is_redir(*tmp))
 	{
-		if (!open_herdoc_0(*tmp))
+		if (!open_herdoc_0(*tmp, exp))
 			return (0);
 		node = c_node_arbre(*tmp);
 		if (!node)
@@ -86,4 +86,13 @@ int	ope(t_node *node)
 		|| node->mode == TOKEN_PIPE || is_redir(node))
 		return (1);
 	return (0);
+}
+
+void	check_(t_node *tmp, t_nnode *redir_node)
+{
+	if (tmp->next && tmp->next->mode == TOKEN_SPACE)
+		redir_node->flage_space_ap = 1;
+	if (tmp->prev && tmp->prev->mode
+		== TOKEN_SPACE && !ope(tmp->prev->prev))
+		redir_node->flag_space = 1;
 }

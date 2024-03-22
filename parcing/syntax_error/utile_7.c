@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 05:52:54 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/21 09:10:55 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/22 01:46:27 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,45 +39,45 @@ t_node_arbre	*add_commade(t_node	*tmp)
 	return (new_node);
 }
 
-t_node_arbre	*parse_pipe(t_node **tmp)
+t_node_arbre	*parse_pipe(t_node **tmp, t_env *exp)
 {
 	t_node_arbre	*node;
 
-	node = parse_redir(tmp);
+	node = parse_redir(tmp, exp);
 	if (!node)
 		return (NULL);
 	while (*tmp && (*tmp)->mode == TOKEN_PIPE)
 	{
 		*tmp = (*tmp)->next;
-		node = new_node(TOKEN_PIPE, node, parse_redir(tmp));
+		node = new_node(TOKEN_PIPE, node, parse_redir(tmp, exp));
 		if (!node)
 			return (NULL);
 	}
 	return (node);
 }
 
-t_node_arbre	*parse_and_or(t_node **tmp)
+t_node_arbre	*parse_and_or(t_node **tmp, t_env *exp)
 {
 	t_node_arbre	*node;
 	int				mode;
 
-	node = parse_pipe(tmp);
+	node = parse_pipe(tmp, exp);
 	if (!node)
 		return (NULL);
 	while (*tmp && (((*tmp)->mode == TOKEN_OR) || ((*tmp)->mode == TOKEN_AND)))
 	{
 		mode = (*tmp)->mode;
 		*tmp = (*tmp)->next;
-		node = new_node(mode, node, parse_pipe(tmp));
+		node = new_node(mode, node, parse_pipe(tmp, exp));
 		if (!node)
 			return (NULL);
 	}
 	return (node);
 }
 
-int	plant_6(t_node *top, t_node_arbre **racine)
+int	plant_6(t_node *top, t_node_arbre **racine, t_env *exp)
 {
-	*racine = parse_and_or(&top);
+	*racine = parse_and_or(&top, exp);
 	if (!(*racine))
 		return (0);
 	return (1);
