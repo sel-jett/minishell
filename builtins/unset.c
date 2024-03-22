@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 22:27:43 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/21 03:06:06 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/22 07:49:45 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	ft_unset(char **cmd, t_env **cnev, t_env **exp)
 		{
 			if (check == 1 || !is_alpha_2(dptr[j]))
 			{
-				write(2, "mminishell: unset: `" , 20);
+				write(2, "mminishell: unset: `", 20);
 				write(2, dptr[j], ft_strlen_b(dptr[j]));
 				write(2, "': not a valid identifier\n", 27);
 				check = 1;
