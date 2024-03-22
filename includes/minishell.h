@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:48:58 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/21 23:05:31 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/22 05:52:07 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,15 @@
 // # include "/Users/amel-has/.brew/opt/readline/include/readline/history.h"
 // void			print_tree(t_node_arbre    *tree, int c);
 // void            affiche(t_list *list);
-
+int	open_herdoc_0(t_node *tmp);
+int	add_two( t_list *list, int *i, int mode);
+int	oxe5(t_node *tmp);
+int	check_exp(t_node *tmp);
+int	check_apres_parentheses(t_node *node);
+int	check_enter_parentheses(t_node *node);
+bool	open_herdoc(t_nnode *node, char **file);
+bool    ft_strcmp(char *s1, char *s2);
+int	ft_strlen(char *str);
 char            **array_dupper(char **str);
 int             ope(t_node *node);
 int             plant_5(t_node	*tmp, t_list *list);
@@ -79,7 +87,18 @@ int				add_one(t_list	*list, int *i, int mode);
 int				add_list_redir(t_node *tmp);
 int				plant_6(t_node *top, t_node_arbre **racine);
 ///////////////////////// EXECUTION //////////////////////////
-
+void			igno_sig(void);
+void			def_sig(void);
+int				ft_count_cmd(t_node_arbre *tree);
+char			**ft_tree_to_cmd(t_node_arbre *tree);
+void			ft_execute_redir(t_node_arbre *tree, t_env **env, t_env **exp);
+int				*get_files(struct s_nnode *list);
+void			ft_close_fd(int *fd);
+int				*ft_redir_in_files(struct s_nnode *list);
+int				*ft_append_files(struct s_nnode *list);
+int				ft_dup2(int fd, int std);
+int				files_dupper(int *fd, int *sd, int *ad, struct s_nnode *cnt);
+int				open_infile(struct s_nnode *wnt, int *sd, int *i, t_env *env);
 char			*ft_handler(char **cmmd, char **path);
 void			ft_execute_child(char **envp, char **cmmd, char **path);
 int				ft_status(int status, bool mode);

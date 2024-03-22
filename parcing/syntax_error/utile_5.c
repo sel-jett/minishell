@@ -3,35 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   utile_5.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 20:49:46 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/19 06:04:06 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/21 08:01:08 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void affichage(int n)
+void	affichage(int n)
 {
-	printf("minishell: syntax error near unexpected token %d\n",n);
+	printf("minishell:syntax error near unexpected token %d\n", n);
 }
 
-int is_empty(char *str)
+int	is_empty(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] != ' ' && str[i] != '\t' && str[i] != '\n' && str[i] != '\v' && str[i] != '\f' && str[i] != '\v')
+		if (str[i] != ' ' && str[i] != '\t' && str[i] != '\n'
+			&& str[i] != '\v' && str[i] != '\f' && str[i] != '\v')
 			return (0);
 		i++;
 	}
 	return (1);
 }
 
-int ft_status(int status, bool mode)
+int	ft_status(int status, bool mode)
 {
 	static int	stat;
 
@@ -40,9 +41,9 @@ int ft_status(int status, bool mode)
 	return (stat);
 }
 
-void check_wilc(t_node *node)
+void	check_wilc(t_node *node)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (node->value[i] && node->mode == TOKEN_EXPR)
@@ -53,11 +54,11 @@ void check_wilc(t_node *node)
 	}
 }
 
-int add_args(t_nlist *list, char *str, int *i)
+int	add_args(t_nlist *list, char *str, int *i)
 {
-	int len;
-	char *s;
-	t_nnode *node;
+	int		len;
+	char	*s;
+	t_nnode	*node;
 
 	len = 0;
 	if (!str)

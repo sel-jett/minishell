@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/03/20 05:47:28 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/22 03:04:36 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_nnode
 	int				flag_apresred;
 	int				mode;
 	int				mode_d;
+	int				flage_space_ap;
 	struct s_nnode	*next;
 }	t_nnode;
 
@@ -64,6 +65,7 @@ typedef struct s_node
 	int				avant_;
 	int				flag_quote;
 	int				flag_apresred;
+	int				flage_space_ap;
 }	t_node;
 
 struct s_list
@@ -91,6 +93,13 @@ enum
 	TOKEN_DOLLAR,
 	TOKEN_PARENTHESE,
 };
+
+typedef struct s_files
+{
+	int				*sd;
+	int				*fd;
+	int				*ad;
+}	t_files;
 
 typedef struct s_node_arbre
 {

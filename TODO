@@ -4,7 +4,7 @@ bash-3.2$ //
 bash: //: is a directory
 -------------->
 
-exit status 
+exit status
 <------------------------------------------------------------->
 
 bash-3.2$ cat << $HOME
@@ -27,7 +27,7 @@ bash-3.2$ cat << "'$HOME'"
 > d
 > d
 > d
-> 
+>
 > $HOME
 > '$HOME'
 dd
@@ -79,17 +79,8 @@ export TEST="ls       -l     - a" && echo $TEST && $LS
 
 env -i
 
-unset doesnt work 
+unset doesnt work
  export | grep SECURITYSESSIONID
 declare -x SECURITYSESSIONID="186a8
 
 $var= "ls -la"
-
-echo$?
-
-- my_malloc(checker) :
-    - get_key √
-    - expand √
-    - value_key √
-    - env_new √
-

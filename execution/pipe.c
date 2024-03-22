@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:12:44 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/18 20:19:59 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/22 06:13:27 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,29 +48,29 @@ static void	close_pipe(pid_t pid[2], int fd[2])
 
 void	ft_execute_pipe(t_node_arbre *tree, t_env *e, t_env *exp)
 {
-	int		fd[2];
-	pid_t	pid[2];
+	int			fd[2];
+	pid_t		pid[2];
+	extern int	x;
 
 	if (pipe(fd) == -1)
 	{
 		perror("pipe error");
 		return ;
 	}
+	x = 1;
 	pid[0] = fork();
 	if (pid[0] == -1)
 	{
 		perror("fork error");
 		return ;
 	}
-	if (pid[0] == 0)
-		ft_execute_left(tree, fd, e, exp);
+	(pid[0] == 0) && (ft_execute_left(tree, fd, e, exp), 0);
 	pid[1] = fork();
 	if (pid[1] == -1)
 	{
 		perror("fork error");
 		return ;
 	}
-	if (pid[1] == 0)
-		ft_execute_right(tree, fd, e, exp);
+	(pid[1] == 0) && (ft_execute_right(tree, fd, e, exp), 0);
 	close_pipe(pid, fd);
 }

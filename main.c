@@ -1,5 +1,17 @@
 #include "includes/minishell.h"
 
+int x = 0;
+
+void igno_sig(void)
+{
+	signal(SIGQUIT,SIG_IGN);
+	signal(SIGINT,SIG_IGN);
+}
+void def_sig(void)
+{
+	signal(SIGQUIT,SIG_DFL);
+	signal(SIGINT,SIG_DFL);
+}
 bool is_redir(t_node *tmp)
 {
 	if (tmp->mode == TOKEN_HEREDOC || tmp->mode == TOKEN_REDIR_IN ||
@@ -8,18 +20,23 @@ bool is_redir(t_node *tmp)
 	return (0);
 }
 
-// void	handler_signel(int signal, siginfo_t *siginfo, void *vd)
-// {
-// 	(void)vd;
-// 	(void)siginfo;
-// 	if (signal == SIGINT)
-// 	{
-// 		printf("\n");
-// 		rl_on_new_line();
-// 		rl_replace_line("",1);
-// 		rl_redisplay();
-// 	}
-// }
+void	handler_signel(int signal, siginfo_t *siginfo, void *vd)
+{
+	(void)vd;
+	(void)siginfo;
+	if (signal == SIGINT)
+	{
+		if (x == 0)
+		{
+			printf("\n");
+			rl_on_new_line();
+			// rl_replace_line("", 0);
+			rl_redisplay();
+		}
+		else
+			printf("\n");
+	}
+}
 
 void print_in_dot(t_node_arbre *node, int i, int *count, FILE *fp)
 {
@@ -99,12 +116,13 @@ int main(int ac, char **av, char **envp)
 	t_env *exp;
 
 	list = NULL;
-	// struct sigaction	sa;
-	// sa.sa_flags = SA_SIGINFO;
-	// sa.sa_sigaction = handler_signel;
-	// sigaction(SIGINT,&sa,NULL);
+	struct sigaction	sa;
+	sa.sa_flags = SA_SIGINFO;
+	sa.sa_sigaction = handler_signel;
+	sigaction(SIGINT,&sa, NULL);
+	sigaction(SIGQUIT,&sa, NULL);
+
 	// rl_catch_signals = 0;
-	// atexit(f);
 	env = ft_env_parser(envp);
 	exp = ft_env_parser(envp);
 	if (!env)
@@ -129,14 +147,15 @@ int main(int ac, char **av, char **envp)
 			(1) && (printf("ERROR CREAT LISTE\n") && (index = 1));
 		if (!index)
 		{
-			list->str = readline("minishell > ");
+			if (x == 0)
+				list->str = readline("minishell > ");
 			if (!list->str)
 				exit(write(1, "exit\n", 5));
 			if (is_empty(list->str))
 				index = 1;
 			if (!index)
 			{
-				add_history(list->str); // what's this
+				add_history(list->str);
 				while (list->str[i])
 				{
 					if (!plants(list, &i))
@@ -199,12 +218,14 @@ int main(int ac, char **av, char **envp)
 					// 	puts(arbre->racine->list->top->value);
 					// 	arbre->racine->list->top = arbre->racine->list->top->next;
 					// }
-				
-					
+
+
 					// puts(arbre->racine->list->top->value);
 					execute(arbre->racine, env, exp);
-				// return (0);
-					// free(list->str);
+					sigaction(SIGINT,&sa, NULL);
+					sigaction(SIGQUIT,&sa, NULL);
+					x = 0;
+					free(list->str);
 				}
 			}
 		}

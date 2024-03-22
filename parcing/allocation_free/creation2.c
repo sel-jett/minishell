@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:14:17 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/20 05:13:53 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/21 21:06:04 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ t_nnode	*c_nnode(t_node *node)
 	new_nnode->flag_wilc = node->flag_wilc;
 	new_nnode->avant_ = node->avant_;
 	new_nnode->flag_space = node->flag_space;
+	new_nnode->flage_space_ap = 0;
 	new_nnode->mode_d = 0;
 	return (new_nnode);
 }

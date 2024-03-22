@@ -6,323 +6,147 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 22:12:12 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/20 06:31:49 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/22 05:54:37 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	ft_count_cmd(t_node_arbre *tree)
+int	open_outfile(struct s_nnode *wnt, int *fd, int *j, t_env *env)
 {
-	int	i;
+	char	*backup;
 
-	i = 0;
-	while (tree->list_redir->top)
+	if (wnt->flag_expend == 1 || wnt->flag_expend == 2)
 	{
-		if (tree->list_redir->top->avant_ == 1 || \
-			(tree->list_redir->top->avant_ == 0 && \
-		 		ft_strncmp(tree->list_redir->top->value, ">") && \
-				 	ft_strncmp(tree->list_redir->top->value, ">>") && \
-				 		ft_strncmp(tree->list_redir->top->value, "<")))
-			i++;
-		tree->list_redir->top = tree->list_redir->top->next;
-	}
-	return (i);
-}
-
-char	**ft_tree_to_cmd(t_node_arbre *tree)
-{
-	int				i;
-	char			**cmmd;
-	struct s_nnode	*tmp;
-
-	tmp = tree->list_redir->top;
-	i = ft_count_cmd(tree);
-	cmmd = my_malloc(sizeof(char *) * (i + 1), 1);
-	i = 0;
-	tree->list_redir->top = tmp;
-	while (tree->list_redir->top)
-	{
-		if (tree->list_redir->top->avant_ == 1 || (tree->list_redir->top->avant_ == 0 && \
-			ft_strncmp(tree->list_redir->top->value, ">") && \
-			ft_strncmp(tree->list_redir->top->value, ">>") && \
-			ft_strncmp(tree->list_redir->top->value, "<")))
-			{
-				cmmd[i] = ft_strdup(tree->list_redir->top->value);
-				i++;
-			}
-		tree->list_redir->top = tree->list_redir->top->next;
-	}
-	cmmd[i] = NULL;
-	return (cmmd);
-}
-
-void	ft_execute_redir(t_node_arbre *tree, t_env **env, t_env **exp)
-{
-	int				i;
-	char			**cmmd;
-	char			**path;
-	char			**envp;
-
-	envp = env_to_arr(*env);
-	path = ft_split(get_path(*env), ':');
-	cmmd = redirlist_to_arr(tree->list_redir);
-	i = 0;
-	while (cmmd[i])
-	{
-		cmmd[i] = ft_expand(*env, cmmd[i]);
-		i++;
-	}
-	if (is_builtin(cmmd[0]))
-	{
-		ft_builtin(cmmd, env, exp);
-		return ;
-	}
-	ft_execute_child(envp, cmmd, path);
-}
-
-
-int	*get_files(struct s_nnode *list)
-{
-	int				*fd;
-	struct s_nnode	*tmp;
-	int				i;
-
-	i = 0;
-	tmp = list;
-	while (tmp)
-	{
-		if (tmp->avant_ == 2)
-			i++;
-		tmp = tmp->next;
-	}
-	tmp = list;
-	fd = my_malloc(sizeof(int) * (i + 1), 1);
-	i = 0;
-	while (tmp)
-	{
-		if (tmp->avant_ == 2)
+		backup = ft_strdup(wnt->value);
+		wnt->value = ft_expand(env, wnt->value);
+		if (!wnt->value)
 		{
-			fd[i] = 0;
-			i++;
+			ft_printf("minishell: ", backup);
+			ft_printf(": ", "ambiguous redirect\n");
+			ft_status(1, 1);
+			return (0);
 		}
-		tmp = tmp->next;
 	}
-	fd[i] = -100;
-	return (fd);
+	fd[*j] = open(wnt->value, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	if (fd[*j] == -1)
+	{
+		ft_printf("minishell: ", wnt->value);
+		ft_printf(": ", strerror(errno));
+		ft_printf("\n", NULL);
+		ft_status(1, 1);
+		return (0);
+	}
+	(*j)++;
+	return (1);
 }
 
-void	ft_close_fd(int *fd)
+int	open_appendfile(struct s_nnode *wnt, int *ad, int *k, t_env *env)
 {
-	int	i;
+	char	*backup;
 
-	i = 0;
-	while (fd[i] != -100)
+	if (wnt->flag_expend == 1 || wnt->flag_expend == 2)
 	{
-		close(fd[i]);
-		i++;
-	}
-}
-
-int	*ft_redir_in_files(struct s_nnode *list)
-{
-	int				*fd;
-	struct s_nnode	*tmp;
-	int				i;
-
-	i = 0;
-	tmp = list;
-	while (tmp)
-	{
-		if (tmp->avant_ == 3)
-			i++;
-		tmp = tmp->next;
-	}
-	tmp = list;
-	fd = my_malloc(sizeof(int) * (i + 1), 1);
-	i = 0;
-	while (tmp)
-	{
-		if (tmp->avant_ == 3)
-			i++;
-		tmp = tmp->next;
-	}
-	fd[i] = -100;
-	return (fd);
-}
-
-int	*ft_append_files(struct s_nnode *list)
-{
-	int				*fd;
-	struct s_nnode	*tmp;
-	int				i;
-
-	i = 0;
-	tmp = list;
-	while (tmp)
-	{
-		if (tmp->avant_ == 4)
-			i++;
-		tmp = tmp->next;
-	}
-	tmp = list;
-	fd = my_malloc(sizeof(int) * (i + 1), 1);
-	i = 0;
-	while (tmp)
-	{
-		if (tmp->avant_ == 4)
+		backup = ft_strdup(wnt->value);
+		wnt->value = ft_expand(env, wnt->value);
+		if (!wnt->value)
 		{
-			fd[i] = 0;
-			i++;
+			ft_printf("minishell: ", backup);
+			ft_printf(": ", "ambiguous redirect\n");
+			ft_status(1, 1);
+			return (0);
 		}
-		tmp = tmp->next;
 	}
-	fd[i] = -100;
-	return (fd);
+	ad[*k] = open(wnt->value, O_CREAT | O_WRONLY | O_APPEND, 0644);
+	if (ad[*k] == -1)
+	{
+		ft_printf("minishell: %s", wnt->value);
+		ft_printf(": %s\n", strerror(errno));
+		ft_status(1, 1);
+		return (0);
+	}
+	(*k)++;
+	return (1);
 }
 
-void	files_dupper(int *fd, int *sd, int *ad, struct s_nnode	*cnt)
+int	loop_opener(struct s_nnode *wnt, t_files *file, t_env *env)
 {
 	int	i;
 	int	j;
 	int	k;
-	int	f;
 
-	i = 0;
-	j = 0;
-	k = 0;
-	f = 0;
-	while (fd && fd[i] != -100)
-		i++;
-	while (sd && sd[j] != -100)
-		j++;
-	while (ad && ad[k] != -100)
-		k++;
-	while (cnt)
-	{
-		if (cnt->mode_d == 1)
-			f = 1;
-		else if (cnt->mode_d == 2)
-			f = 2;
-		cnt = cnt->next;
-	}
-	if (f == 1)
-		dup2(fd[i - 1], 1);
-	else if (f == 2)
-		dup2(ad[k - 1], 1);
-	if (sd && j > 0)
-		dup2(sd[j - 1], 0);
-}
-
-void	ft_execute_redir_out(t_node_arbre *tree, t_env	*env, t_env *exp)
-{
-	int				*fd;
-	int				*sd;
-	int				*ad;
-	struct s_nnode	*tmp;
-	struct s_nnode	*smp;
-	struct s_nnode	*amp;
-	struct s_nnode	*cnt;
-	struct s_nnode	*wnt;
-	int				orig_stdout;
-	int				orig_stdin;
-	char			*backup;
-	int				i = 0;
-	int				j = 0;
-	int				k = 0;
-
-	orig_stdout = dup(1);
-	orig_stdin = dup(0);
-	tmp = tree->list_redir->top;
-	smp = tree->list_redir->top;
-	amp = tree->list_redir->top;
-	cnt = tree->list_redir->top;
-	wnt = tree->list_redir->top;
-	ad = ft_append_files(amp);
-	sd = ft_redir_in_files(smp);
-	fd = get_files(tmp);
+	(1) && (i = 0, j = 0, k = 0);
 	while (wnt)
 	{
 		if (wnt->avant_ == 3)
 		{
-			if (wnt->flag_expend == 1 || wnt->flag_expend == 2)
-			{
-				backup = ft_strdup(wnt->value);
-				wnt->value = ft_strdup(ft_expand(env, wnt->value));
-				if (!wnt->value)
-				{
-					ft_printf("minishell: ", backup);
-					ft_printf(": ", "ambiguous redirect");
-					ft_printf("\n", NULL);
-					return ;
-				}
-			}
-			sd[i] = open(wnt->value, O_RDONLY);
-			if (sd[i] == -1)
-			{
-				ft_printf("minishell: ", wnt->value);
-				ft_printf(": ", strerror(errno));
-				ft_printf("\n", NULL);
-				return ;
-			}
-			i++;
+			if (!open_infile(wnt, file->sd, &i, env))
+				return (0);
 		}
 		else if (wnt->avant_ == 2)
 		{
-			if (wnt->flag_expend == 1 || wnt->flag_expend == 2)
-			{	
-				backup = ft_strdup(wnt->value);
-				wnt->value = ft_strdup(ft_expand(env, wnt->value));
-				if (!wnt->value)
-				{
-					ft_printf("minishell: ", backup);
-					ft_printf(": ", "ambiguous redirect");
-					ft_printf("\n", NULL);
-					return ;
-				}
-			}
-			fd[j] = open(wnt->value, O_CREAT | O_WRONLY | O_TRUNC, 0644);
-			if (fd[j] == -1)
-			{
-				ft_printf("minishell: ", wnt->value);
-				ft_printf(": ", "ambiguous redirect");
-				ft_printf("\n", NULL);
-				return ;
-			}
-			j++;
+			if (!open_outfile(wnt, file->fd, &j, env))
+				return (0);
 		}
 		else if (wnt->avant_ == 4)
 		{
-			if (wnt->flag_expend == 1 || wnt->flag_expend == 2)
-			{
-				backup = ft_strdup(wnt->value);
-				wnt->value = ft_strdup(ft_expand(env, wnt->value));
-				if (!wnt->value)
-				{
-					ft_printf("minishell: ", backup);
-					ft_printf(": ", strerror(errno));
-					ft_printf("\n", NULL);
-					return ;
-				}
-			}
-			ad[k] = open(wnt->value, O_CREAT | O_WRONLY | O_APPEND , 0644);
-			if (ad[k] == -1)
-			{
-				ft_printf("minishell: %s", wnt->value);
-				ft_printf(": %s\n", strerror(errno));
-				return ;
-			}
-			k++;
+			if (!open_appendfile(wnt, file->ad, &k, env))
+				return (0);
 		}
 		wnt = wnt->next;
 	}
-	files_dupper(fd, sd, ad, cnt);
-	if (fd)
-		ft_close_fd(fd);
-	if (sd)
-		ft_close_fd(sd);
-	if (ad)
-		ft_close_fd(ad);
+	return (1);
+}
+
+int	files_opener(t_node_arbre *tree, t_files *file, t_env	*env)
+{
+	struct s_nnode	*tmp;
+	struct s_nnode	*smp;
+	struct s_nnode	*amp;
+	struct s_nnode	*wnt;
+	int				i;
+
+	tmp = tree->list_redir->top;
+	smp = tree->list_redir->top;
+	amp = tree->list_redir->top;
+	wnt = tree->list_redir->top;
+	file->ad = ft_append_files(amp);
+	file->sd = ft_redir_in_files(smp);
+	file->fd = get_files(tmp);
+	i = loop_opener(wnt, file, env);
+	if (!i)
+	{
+		if (file->fd)
+			ft_close_fd(file->fd);
+		if (file->sd)
+			ft_close_fd(file->sd);
+		if (file->ad)
+			ft_close_fd(file->ad);
+		return (0);
+	}
+	return (1);
+}
+
+void	ft_execute_redir_out(t_node_arbre *tree, t_env	*env, t_env *exp)
+{
+	t_files			*file;
+	struct s_nnode	*cnt;
+	int				orig_stdout;
+	int				orig_stdin;
+
+	file = my_malloc(sizeof(t_files), 1);
+	orig_stdout = dup(1);
+	orig_stdin = dup(0);
+	cnt = tree->list_redir->top;
+	if (!files_opener(tree, file, env))
+	{
+		ft_status(1, 1);
+		return ;
+	}
+	files_dupper(file->fd, file->sd, file->ad, cnt);
+	(file->fd) && (ft_close_fd(file->fd), 0);
+	(file->sd) && (ft_close_fd(file->sd), 0);
+	(file->ad) && (ft_close_fd(file->ad), 0);
 	ft_execute_redir(tree, &env, &exp);
 	dup2(orig_stdout, 1);
 	dup2(orig_stdin, 0);

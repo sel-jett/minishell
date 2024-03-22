@@ -6,64 +6,107 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 03:19:27 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/21 20:21:47 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/22 01:16:38 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int ope(t_node *node)
+static bool	is_text2(t_nnode *tmp)
 {
-	if (node->mode == TOKEN_AND || node->mode == TOKEN_OR || node->mode == TOKEN_PIPE || is_redir(node))
+	if (tmp->mode == TOKEN_EXPR || tmp->mode == TOKEN_Double_Q
+		|| tmp->mode == TOKEN_Single_Q)
 		return (1);
 	return (0);
 }
 
-int	plant_5(t_node	*tmp, t_list *list)
+void	ft_count(t_nnode *node, int *len)
 {
-	t_node	*node;
-	int		index;
+	int	i;
 
-	node = 0;
-	if (!list)
+	while (node && is_text2(node))
+	{
+		i = 0;
+		while (node->value[i])
+		{
+			i++;
+			(*len)++;
+		}
+		if (node->flage_space_ap == 1)
+			break ;
+		node = node->next;
+	}
+}
+
+char	*cancat(t_nnode *node)
+{
+	int		len;
+	int		i;
+	char	*str;
+	t_nnode	*tmp;
+
+	(1) && (len = 0, tmp = node);
+	ft_count(node, &len);
+	str = my_malloc(len + 1, 1);
+	if (!str)
 		return (0);
-	while (tmp)
+	len = 0;
+	while (tmp && is_text2(tmp))
 	{
-		index = 0;
-		if (tmp->mode != TOKEN_SPACE)
+		i = 0;
+		while (tmp->value[i])
 		{
-			node = c_cpynode(tmp, list->tail, list);
-			if (!node)
+			str[len] = tmp->value[i];
+			i++;
+			len++;
+		}
+		if (tmp->flage_space_ap == 1)
+			break ;
+		tmp = tmp->next;
+	}
+	return (str[len] = '\0', str);
+}
+
+int	read_line_herdoc(int fd, t_nnode *node)
+{
+	char	*str;
+
+	str = 0;
+	while (1)
+	{
+		str = readline("heredoc> ");
+		if (node->next)
+		{
+			if (ft_strcmp(cancat(node->next), str))
+				break ;
+			str = ft_strjoin2(str, "\n");
+			if (!str)
 				return (0);
-			check_wilc(node);
-			add_back(list, node);
+			write(fd, str, ft_strlen(str));
 		}
-		if ((tmp->prev && tmp->prev->mode == TOKEN_SPACE) && tmp->prev->prev && !ope(tmp->prev->prev))
-			node->flag_space = 1;
-		if (tmp->list_arg && tmp->list_arg->top)
-		{
-			node->flag_expend = 1;
-			if (tmp->mode == TOKEN_EXPR)
-				node->flag_expend = 2;
-		}
-		tmp = tmp->next;
+		free(str);
 	}
-	tmp = list->top;
-	while (tmp)
+	if (str)
+		(1) && (free(str), str = NULL);
+	return (1);
+}
+
+bool	open_herdoc(t_nnode *node, char **file)
+{
+	int			n;
+	int			fd;
+
+	(1) && (n = 0);
+	while (1)
 	{
-		if (tmp->mode == TOKEN_Double_Q || tmp->mode == TOKEN_Single_Q)
-		{
-			if (tmp->mode == TOKEN_Double_Q)
-			{
-				tmp->flag_quote = 1;
-				if (tmp->list_arg && tmp->list_arg->top)
-					node->flag_expend = 1;
-			}
-			if (tmp->mode == TOKEN_Single_Q)
-				tmp->flag_quote = 2;
-			tmp->mode = TOKEN_EXPR;
-		}
-		tmp = tmp->next;
+		*file = ft_strjoin("/tmp/file", ft_itoa(n));
+		if (access(*file, F_OK))
+			break ;
+		n++;
 	}
+	fd = open(*file, O_CREAT | O_RDWR, S_IRUSR | S_IWUSR);
+	if (fd == -1)
+		return (0);
+	read_line_herdoc(fd, node);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:07:13 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/21 21:37:06 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/22 06:35:12 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,87 +77,60 @@ int	liked_size(t_node *tree)
 	tmp = tree;
 	while (tmp)
 	{
-		// if (!(tmp->value)[0])
-		// {
-		// 	tmp = tmp->next;
-		// 	continue;
-		// }
 		i++;
 		tmp = tmp->next;
 	}
 	return (i);
 }
 
-// char	**linkedlist_to_arr(t_node *tree)
-// {
-// 	char	**arr;
-// 	int		i;
-// 	t_node	*tree_tmp;
-// 	t_node	*tmp;
-
-// 	tree_tmp = tree;
-// 	tmp = tree;
-// 	i = liked_size(tree_tmp);
-// 	arr = my_malloc(sizeof(char *) * (i + 1), 1);
-// 	i = 0;
-// 	while (tmp)
-// 	{
-// 		arr[i] = ft_strdup(tmp->value);
-// 		i++;
-// 		tmp = tmp->next;
-// 	}
-// 	arr[i] = NULL;
-// 	return (arr);
-// }
-
-void count_joyner(char **str,int *len)
+void	count_joyner(char **str, int *len)
 {
-    int i = 0;
-    int j = 0;
+	int	i;
+	int	j;
 
-    while (str[i])
-    {
-        j = 0;
-        while(str[i][j] !='\\' && str[i][j])
-        {
-            (*len)++;
-            j++;
-        }
-        if (str[i][j] != '\\')
-            (*len)++;
-        i++;
-    }
+	i = 0;
+	while (str[i])
+	{
+		j = 0;
+		while (str[i][j] != '\\' && str[i][j])
+		{
+			(*len)++;
+			j++;
+		}
+		if (str[i][j] != '\\')
+			(*len)++;
+		i++;
+	}
 }
 
-char **joyner(char **str)
+char	**joyner(char **str)
 {
-    int i = 0;
-    int j = 0;
-    int len = 0;
-    int k = 0;
+	int		i;
+	int		j;
+	int		len;
+	int		k;
+	char	*str_r;
 
-    count_joyner(str, &len);
-    char *str_r = my_malloc((sizeof(char)*(len+1)), 1);
-    if (!str_r)
-        return (0);
-    while (str[i])
-    {
-        j = 0;
-        while(str[i][j] !='\\' && str[i][j])
-        {
-            str_r[k] = str[i][j];
-            k++;
-            j++;
-        }
-        if (str[i][j] !='\\')
-            str_r[k++] = ' ';
-        i++;
-    }
-    str_r[k] = '\0';
-    char **s_f = ft_split(str_r,' ');
-    return (s_f);
+	(1) && (i = 0, j = 0, len = 0, k = 0);
+	count_joyner(str, &len);
+	str_r = my_malloc((sizeof(char) * (len + 1)), 1);
+	if (!str_r)
+		return (0);
+	while (str[i])
+	{
+		j = 0;
+		while (str[i][j] != '\\' && str[i][j])
+		{
+			str_r[k] = str[i][j];
+			(1) && (k++, j++);
+		}
+		if (str[i][j] != '\\')
+			str_r[k++] = ' ';
+		i++;
+	}
+	str_r[k] = '\0';
+	return (ft_split(str_r, ' '));
 }
-
 
 char	**linkedlist_to_arr(t_node *tree)
 {
@@ -180,13 +153,13 @@ char	**linkedlist_to_arr(t_node *tree)
 		i--;
 	}
 	i = 0;
-	while(tmp)
+	while (tmp)
 	{
 		if (!(tmp->value)[0] && i > 0 && tmp->flag_space == 0)
 		{
 			tmp = tmp->next;
 			if (!tmp)
-				break;
+				break ;
 			arr[i] = ft_strjoin(arr[i], "\\");
 			tmp->flag_space = 1;
 		}
@@ -225,7 +198,6 @@ static int	liked_size_redir(t_nlist *tree)
 	return (i);
 }
 
-
 char	**redirlist_to_arr(t_nlist *tree)
 {
 	char	**arr;
@@ -248,7 +220,7 @@ char	**redirlist_to_arr(t_nlist *tree)
 		i--;
 	}
 	i = 0;
-	while(tmp->top)
+	while (tmp->top)
 	{
 		j = i;
 		if (!tmp->top->flag_space && tmp->top->avant_ == 1)
@@ -257,7 +229,9 @@ char	**redirlist_to_arr(t_nlist *tree)
 			if (!arr[i])
 				return (NULL);
 		}
-		else if (tmp->top->flag_space == 1 && ft_strncmp(tmp->top->value, ">") && ft_strncmp(tmp->top->value, ">>") && ft_strncmp(tmp->top->value, "<"))
+		else if (tmp->top->flag_space == 1 && ft_strncmp(tmp->top->value, ">") \
+				&& ft_strncmp(tmp->top->value, ">>") && \
+				ft_strncmp(tmp->top->value, "<"))
 		{
 			if (arr[i])
 				i++;
