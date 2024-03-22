@@ -135,21 +135,19 @@ char **f(char **str)
 
 int main()
 {
-    // char **str = malloc(sizeof(char *) * 5);
-    // if (!str)
-    //     return (0);
-    // str[0] = "\\";
-    // str[1] = "y";
-    // str[2] = "x";
-    // str[3] = "c";
-    // str[4] = 0;
-    // char **s = f(str);
-    // int i = 0;
-    // while (s[i])
-    // {
-    //     printf("%s\n",s[i]);
-    //     i++;
-    // }
-	int i = 0;
-	printf("%d\n", (i == 0));
+    char **str = malloc(sizeof(char *) * 5);
+    if (!str)
+        return (0);
+    str[0] = "\\";
+    str[1] = "y";
+    str[2] = "x";
+    str[3] = "c";
+    str[4] = 0;
+    char **s = f(str);
+    int i = 0;
+    while (s[i])
+    {
+        printf("%s\n",s[i]);
+        i++;
+    }
 }

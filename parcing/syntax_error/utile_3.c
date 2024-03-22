@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 21:22:32 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/22 01:12:56 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/22 01:45:38 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,11 +112,7 @@ int	add_list_redir(t_node *node)
 			redir_node = c_nnode(tmp);
 			if (!redir_node)
 				return (0);
-			if (tmp->next && tmp->next->mode == TOKEN_SPACE)
-				redir_node->flage_space_ap = 1;
-			if (tmp->prev && tmp->prev->mode
-				== TOKEN_SPACE && !ope(tmp->prev->prev))
-				redir_node->flag_space = 1;
+			check_(tmp, redir_node);
 			add_nback(node->list_redir, redir_node);
 		}
 		tmp = tmp->next;

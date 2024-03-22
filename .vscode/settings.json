@@ -1,6 +1,8 @@
 {
     "files.associations": {
         "__node_handle": "c",
-        "sstream": "c"
+        "sstream": "c",
+        "__locale": "c",
+        "cstring": "c"
     }
 }

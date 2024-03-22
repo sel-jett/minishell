@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:48:58 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/22 05:52:07 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/22 07:11:53 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,14 @@
 // # include "/Users/amel-has/.brew/opt/readline/include/readline/history.h"
 // void			print_tree(t_node_arbre    *tree, int c);
 // void            affiche(t_list *list);
-int	open_herdoc_0(t_node *tmp);
+int	open_herdoc_0(t_node *tmp, t_env *exp);
+void	check_(t_node *tmp, t_nnode *redir_node);
 int	add_two( t_list *list, int *i, int mode);
 int	oxe5(t_node *tmp);
 int	check_exp(t_node *tmp);
 int	check_apres_parentheses(t_node *node);
 int	check_enter_parentheses(t_node *node);
-bool	open_herdoc(t_nnode *node, char **file);
+bool	open_herdoc(t_nnode *node, char **file,t_env *exp);
 bool    ft_strcmp(char *s1, char *s2);
 int	ft_strlen(char *str);
 char            **array_dupper(char **str);
@@ -50,11 +51,11 @@ void			check_wilc(t_node *node);
 bool			is_spaces(char c);
 bool			is_text(t_node *tmp);
 bool			is_redir(t_node *tmp);
-t_node_arbre	*parse_and_or(t_node **tmp);
-t_node_arbre	*parse_pipe(t_node **tmp);
-t_node_arbre	*parse_redir(t_node **tmp);
-t_node_arbre	*parse_cmd(t_node **tmp);
-t_node_arbre	*parse_parenthese(t_node **tmp);
+t_node_arbre	*parse_and_or(t_node **tmp,t_env *exp);
+t_node_arbre	*parse_pipe(t_node **tmp,t_env *exp);
+t_node_arbre	*parse_redir(t_node **tmp,t_env *exp);
+t_node_arbre	*parse_cmd(t_node **tmp,t_env *exp);
+t_node_arbre	*parse_parenthese(t_node **tmp, t_env *exp);
 t_node_arbre	*new_sub(t_node_arbre *racine);
 t_node_arbre	*new_node(int mode, t_node_arbre *left, t_node_arbre *right);
 t_node			*c_cpynode(t_node *node, t_node *tail, t_list *list);
@@ -85,7 +86,7 @@ int				check(int c);
 int				is_empty(char *str);
 int				add_one(t_list	*list, int *i, int mode);
 int				add_list_redir(t_node *tmp);
-int				plant_6(t_node *top, t_node_arbre **racine);
+int				plant_6(t_node *top, t_node_arbre **racine, t_env *exp);
 ///////////////////////// EXECUTION //////////////////////////
 void			igno_sig(void);
 void			def_sig(void);
