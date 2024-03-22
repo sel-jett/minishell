@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:48:58 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/22 07:11:53 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/22 08:19:26 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,13 @@ int				add_one(t_list	*list, int *i, int mode);
 int				add_list_redir(t_node *tmp);
 int				plant_6(t_node *top, t_node_arbre **racine, t_env *exp);
 ///////////////////////// EXECUTION //////////////////////////
+
+char			*ft_str_joiner(char **env_var, char **path, char **cmmd, int *i);
 void			igno_sig(void);
 void			def_sig(void);
+char			**checkerr(char *str, int *len);
+char			**ft_spliter(char **str, char	**str_r);
+char			**array_dupper(char **str);
 int				ft_count_cmd(t_node_arbre *tree);
 char			**ft_tree_to_cmd(t_node_arbre *tree);
 void			ft_execute_redir(t_node_arbre *tree, t_env **env, t_env **exp);
@@ -110,7 +115,7 @@ void			ft_execute_and(t_node_arbre *tree, t_env *e, t_env *exp);
 void			ft_execute_or(t_node_arbre *tree, t_env *e, t_env *exp);
 void			ft_execute_subshell(t_node_arbre *tree, t_env *e, t_env *exp);
 void			ft_execute_redir_out(t_node_arbre *tree, t_env	*env, t_env *exp);
-// void			ft_execute_redir_in(t_node_arbre *tree, t_env *env, t_env *exp);
+void			count_joyner(char **str, int *len);
 void			ft_printf(const char *str, const char *str2);
 void			ft_execve(char *env_var, char **env, char **cmmd);
 char			**env_to_arr(t_env *env);
@@ -123,7 +128,12 @@ char            *ft_execute_wild(char *str);
 
 ///////////////////////// BUILTINS //////////////////////////
 
-int	            chekcer(char *data);
+int				global_checker(char *str);
+int				chekcer(char *data);
+int				ft_strncmp_wild(const char *s1, const char *s2, size_t n);
+int				ft_strlen_wild_end(char *s);
+int				ft_strlen_wild_first(char *s);
+int				ft_strlen_wild_first_count(char *s);
 bool			is_builtin(char *cmd);
 int				ft_strlen_b(const char *str);
 size_t			ft_strlcpy(char *dst, const char *src, size_t dstsize);
