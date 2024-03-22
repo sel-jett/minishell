@@ -92,3 +92,5 @@ $var= "ls -la"
 bash-3.2$ echo $!
 minishell > echo $!
 $!
+
+handel in herdoc ctrl + c/

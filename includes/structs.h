@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/03/20 05:47:28 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/21 21:02:41 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_nnode
 	char			*value;
 	int				flag_wilc;
 	int				flag_space;
+	int				flage_space_ap;
 	int				flag_expend;
 	int				avant_;
 	int				flag_apresred;
@@ -61,6 +62,7 @@ typedef struct s_node
 	t_list			*list;
 	int				flag_expend;
 	int				flag_space;
+	int				flage_space_ap;
 	int				avant_;
 	int				flag_quote;
 	int				flag_apresred;

@@ -28,6 +28,7 @@ void	handler_signel(int signal, siginfo_t *siginfo, void *vd)
 	{
 		if (x == 0)
 		{
+			ft_status(1, 1);
 			printf("\n");
 			rl_on_new_line();
 			rl_replace_line("", 0);
@@ -105,13 +106,15 @@ void f()
 {
 	system("leaks minishell");
 }
+
+
 int main(int ac, char **av, char **envp)
 {
 	t_list *list;
 	int i;
 	int index;
 	t_arbre *arbre;
-	t_list *nlist;
+	t_list *nlist = NULL;
 	t_env *env;
 	t_env *exp;
 
@@ -119,8 +122,8 @@ int main(int ac, char **av, char **envp)
 	struct sigaction	sa;
 	sa.sa_flags = SA_SIGINFO;
 	sa.sa_sigaction = handler_signel;
-	sigaction(SIGINT,&sa, NULL);
-	sigaction(SIGQUIT,&sa, NULL);
+	sigaction(SIGINT, &sa, NULL);
+	sigaction(SIGQUIT, &sa, NULL);
 
 	rl_catch_signals = 0;
 	env = ft_env_parser(envp);
@@ -128,9 +131,7 @@ int main(int ac, char **av, char **envp)
 	if (!env_new("OLDPWD", exp))
 		return (0);
 	ft_lstadd_back(&exp, env_new("OLDPWD", exp));
-	// ft_sort_list(&exp);
 	(void)ac;
-	// (void)envp;
 	(void)av;
 	while (1)
 	{
@@ -175,7 +176,7 @@ int main(int ac, char **av, char **envp)
 				}
 				if (!index)
 				{
-					if (!plant_6(nlist->top, &arbre->racine))
+					if (!plant_6(nlist->top, &arbre->racine ,exp))
 						(1 == 1) && (printf("ERROR7\n"), index = 1);
 				}
 				if (!index)
