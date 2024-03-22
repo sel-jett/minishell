@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 07:39:43 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/21 22:50:11 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/22 07:47:11 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,14 @@ static	int	echo_check(const char **path)
 	else
 		return (0);
 	if (i > 0)
-		return i;
+		return (i);
 	return (1);
 }
 
 void	echo_n(int check, const char **path)
 {
 	path = path + check;
-	while(*path)
+	while (*path)
 	{
 		printf("%s", *path);
 		path++;

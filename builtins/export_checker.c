@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_checker.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 07:26:29 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/21 20:53:02 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/22 07:48:40 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ int	check_key(char *key)
 
 int	check_first(char *cmd, t_env *env)
 {
-	int	i;
-	int	check2;
-	char *tmp;
+	int		i;
+	int		check2;
+	char	*tmp;
 
 	if (!get_key(cmd) || ft_strncmp_one("$", get_key(cmd)) == 0)
 	{
@@ -62,7 +62,8 @@ int	check_first(char *cmd, t_env *env)
 		if (!tmp[0])
 			printf("minishell: export: `=%s':", get_value(cmd));
 		else if (value_key(env, cmd))
-			printf("minishell: export: `%s':", ft_strjoin(value_key(env, cmd), get_value(cmd)));
+			printf("minishell: export: `%s':",
+				ft_strjoin(value_key(env, cmd), get_value(cmd)));
 		else
 			printf("minishell: export: `%s':", cmd);
 		printf(" not a valid identifier\n");

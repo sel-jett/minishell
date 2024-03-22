@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 08:37:52 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/19 07:35:32 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/22 07:49:58 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ char	*ft_strjoin2(char *s1, char *s2)
 	str[i + size] = '\0';
 	return (free(s1), str);
 }
+
 char	*ft_strdup(char *s)
 {
 	int		i;
