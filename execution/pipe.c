@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:12:44 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/22 06:13:27 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/23 07:22:13 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	ft_execute_left(t_node_arbre *t, int f[2], t_env *e, t_env *d)
 	close(f[0]);
 	close(f[1]);
 	execute(t->left, e, d);
-	exit(0);
+	exit(127);
 }
 
 static void	ft_execute_right(t_node_arbre *t, int f[2], t_env *e, t_env *d)
@@ -35,15 +35,26 @@ static void	ft_execute_right(t_node_arbre *t, int f[2], t_env *e, t_env *d)
 	close(f[0]);
 	close(f[1]);
 	execute(t->right, e, d);
-	exit(0);
+	exit(127);
 }
 
 static void	close_pipe(pid_t pid[2], int fd[2])
 {
+	int	status;
+
 	close(fd[0]);
 	close(fd[1]);
-	waitpid(pid[0], NULL, 0);
-	waitpid(pid[1], NULL, 0);
+	waitpid(pid[0], &status, 0);
+	waitpid(pid[1], &status, 0);
+	if (WIFEXITED(status))
+        ft_status(WEXITSTATUS(status), 1);
+    else if (WIFSIGNALED(status))
+    {
+        ft_status(128 + WTERMSIG(status), 1);
+        if (WTERMSIG(status) == SIGQUIT)
+            dprintf(2, "Quit: %d\n", SIGQUIT);
+    }
+	// ft_status((status % 255), 1);
 }
 
 void	ft_execute_pipe(t_node_arbre *tree, t_env *e, t_env *exp)
@@ -64,13 +75,13 @@ void	ft_execute_pipe(t_node_arbre *tree, t_env *e, t_env *exp)
 		perror("fork error");
 		return ;
 	}
-	(pid[0] == 0) && (ft_execute_left(tree, fd, e, exp), 0);
+	(pid[0] == 0) && (ft_execute_left(tree, fd, e, exp), exit(ft_status(0, 0)), 0);
 	pid[1] = fork();
 	if (pid[1] == -1)
 	{
 		perror("fork error");
 		return ;
 	}
-	(pid[1] == 0) && (ft_execute_right(tree, fd, e, exp), 0);
+	(pid[1] == 0) && (ft_execute_right(tree, fd, e, exp), exit(ft_status(0, 0)), 0);
 	close_pipe(pid, fd);
 }

@@ -3,15 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 22:27:43 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/23 00:39:55 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/23 09:09:30 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "../includes/minishell.h"
+
+int	is_alpha_4(char c)
+{
+	if (!((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') \
+		|| c == '_'))
+		return (0);
+	return (1);
+}
 
 int	is_alpha_3(char c)
 {
@@ -34,6 +42,31 @@ int	is_alpha_2(char *c)
 		i++;
 	}
 	return (1);
+}
+
+t_env* delfirst(t_env **node) {
+    if (*node == NULL)
+        return NULL;
+    *node = (*node)->next;
+    return *node;
+}
+
+void fun(t_env ***node, char *key)
+{    
+    if (ft_strcmp((**node)->key, key))
+    {
+        **node = delfirst(*node);
+        return ;
+    }
+    t_env **tmp1 = *node;
+    while ((*tmp1)->next != NULL)
+    {
+        if (ft_strcmp((*tmp1)->next->key, key)) {
+            (*tmp1)->next = (*tmp1)->next->next;
+            return;
+        }
+        (*tmp1) = (*tmp1)->next;
+    } 
 }
 
 void	ft_unset(char **cmd, t_env **cnev, t_env **exp)
@@ -61,8 +94,8 @@ void	ft_unset(char **cmd, t_env **cnev, t_env **exp)
 			}
 			if (!check)
 			{
-				ft_list_remove_if(cnev, dptr[j], ft_strncmp);
-				ft_list_remove_if(exp, dptr[j], ft_strncmp);
+				fun(&cnev, dptr[j]);
+				fun(&exp, dptr[j]);
 				ft_status(0, 1);
 			}
 			j++;

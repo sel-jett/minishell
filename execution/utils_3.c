@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 20:33:43 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/22 20:34:10 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/23 07:23:30 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_execve(char *env_var, char **env, char **cmmd)
 		ft_printf("minishell: ", cmmd[0]);
 		ft_printf(": ", NULL);
 		perror("");
-		exit(126);
+		exit(127);
 	}
 }
 

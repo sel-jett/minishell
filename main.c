@@ -106,7 +106,32 @@ void f()
 {
 	system("leaks minishell");
 }
+// t_node* delfirstt(t_node **node) {
+//     if (*node == NULL)
+//         return NULL;
+//     *node = (*node)->next;
+//     return *node;
+// }
 
+// void funnn(t_node **node, char *key)
+// {    
+//     t_node *tmp;
+//     if (ft_strcmp((*node)->value, key))
+//     {
+//         *node = delfirstt(node);
+//         return ;
+//     }
+//     t_node *tmp1 = *node;
+//     while (tmp1->next != NULL)
+//     {
+//         if (ft_strcmp(tmp1->next->value, key)) {
+//             tmp = tmp1->next;
+//             tmp1->next = tmp1->next->next;
+//             return;
+//         }
+//         tmp1 = tmp1->next;
+//     } 
+// }
 
 int main(int ac, char **av, char **envp)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 21:59:00 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/22 21:50:36 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/23 06:00:06 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,20 @@ char	*itoa_joiner_status(char *new_cmd, char *cmd)
 	return (ft_strjoin(new_cmd, cmd + 2));
 }
 
+int	alpha_checker(char *cmd)
+{
+	int	i;
+
+	i = 0;
+	while (cmd[i])
+	{
+		if (is_alpha_3(cmd[i]))
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 char	*ft_expand(t_env *exp, char *cmd)
 {
 	char	*new_cmd;
@@ -101,6 +115,8 @@ char	*ft_expand(t_env *exp, char *cmd)
 		return (NULL);
 	new_cmd[0] = '\0';
 	new_cmd = expander(new_cmd, cmd, exp);
+	if (!alpha_checker(cmd) && cmd[0] == '$')
+		return (cmd);
 	i = ft_strlen_b(new_cmd);
 	new_cmd[i] = '\0';
 	if (!new_cmd || !new_cmd[0])
