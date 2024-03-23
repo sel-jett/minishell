@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_out.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 22:12:12 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/22 05:54:37 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/23 04:36:41 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,21 @@ int	open_outfile(struct s_nnode *wnt, int *fd, int *j, t_env *env)
 		wnt->value = ft_expand(env, wnt->value);
 		if (!wnt->value)
 		{
-			ft_printf("minishell: ", backup);
+			ft_printf("minishell: ", wnt->value);
 			ft_printf(": ", "ambiguous redirect\n");
 			ft_status(1, 1);
 			return (0);
 		}
 	}
+	if (wnt->value && only_wild(wnt->value))
+	{
+		ft_printf("minishell: ", wnt->value);
+		ft_printf(": ", "ambiguous redirect\n");
+		ft_status(1, 1);
+		return (0);
+	}
 	fd[*j] = open(wnt->value, O_CREAT | O_WRONLY | O_TRUNC, 0644);
-	if (fd[*j] == -1)
+	if (fd[*j] == -1 || ft_strcmp(wnt->value, "."))
 	{
 		ft_printf("minishell: ", wnt->value);
 		ft_printf(": ", strerror(errno));
@@ -56,6 +63,13 @@ int	open_appendfile(struct s_nnode *wnt, int *ad, int *k, t_env *env)
 			ft_status(1, 1);
 			return (0);
 		}
+	}
+	if (wnt->value && only_wild(wnt->value))
+	{
+		ft_printf("minishell: ", wnt->value);
+		ft_printf(": ", "ambiguous redirect\n");
+		ft_status(1, 1);
+		return (0);
 	}
 	ad[*k] = open(wnt->value, O_CREAT | O_WRONLY | O_APPEND, 0644);
 	if (ad[*k] == -1)

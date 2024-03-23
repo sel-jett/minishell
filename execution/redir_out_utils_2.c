@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_out_utils_2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 05:41:40 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/22 06:04:39 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/23 04:31:37 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,13 @@ int	open_infile(struct s_nnode *wnt, int *sd, int *i, t_env *env)
 			ft_status(1, 1);
 			return (0);
 		}
+	}
+	if (wnt->value && only_wild(wnt->value))
+	{
+		ft_printf("minishell: ", wnt->value);
+		ft_printf(": ", "ambiguous redirect\n");
+		ft_status(1, 1);
+		return (0);
 	}
 	sd[*i] = open(wnt->value, O_RDONLY);
 	if (sd[*i] == -1)
