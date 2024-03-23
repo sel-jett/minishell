@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_utils_2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:06:52 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/22 08:07:21 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/23 04:11:04 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,15 @@ char	**array_dupper(char **str)
 	if (!str_r)
 		return (NULL);
 	return (ft_spliter(str, str_r));
+}
+
+void	backslach_filler(char **str)
+{
+	int i = 0;
+	while (str[i])
+	{
+		if (ft_strcmp(str[i], "\v"))
+			str[i][0] = '\0';
+		i++;
+	}
 }

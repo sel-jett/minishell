@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:48:58 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/23 02:18:51 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/23 03:14:01 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ void			ft_execute_subshell(t_node_arbre *tree, t_env *e, t_env *exp);
 void			ft_execute_redir_out(t_node_arbre *tree, t_env	*env, t_env *exp);
 void			count_joyner(char **str, int *len);
 void			ft_printf(const char *str, const char *str2);
+void			backslach_filler(char **str);
 void			ft_execve(char *env_var, char **env, char **cmmd);
 char			**env_to_arr(t_env *env);
 void			ft_print_arr(char **arr);
@@ -182,6 +183,8 @@ void			cd_application(t_env **cenv, t_env **exp, char *b, const char **path);
 
 
 ////////////////////////////////////// EXPAND //////////////////
+char			*ft_strjoin_char(char *s1, char s2);
+void			ct_exp(int *i, int *k, char *cmd);
 int				count_expand(char *cmd);
 char			*ft_expand(t_env *exp, char *cmd);
 char			*ft_itoa(int n);

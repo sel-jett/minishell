@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utile_8.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 08:19:01 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/23 02:18:12 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/23 03:14:48 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	plant4_oxe1(int *count_parentheses, t_node *tmp)
 	else if (tmp->mode == TOKEN_PARENTHESE && tmp->value[0] == ')'
 		&& (*count_parentheses) >= 1)
 	{
-		count_parentheses--;
+		(*count_parentheses)--;
 		if (!check_apres_parentheses(tmp))
 			return (affichage(3), ft_status(258, 1), 0);
 	}

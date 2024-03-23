@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 22:27:43 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/22 07:49:45 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/23 00:39:55 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "builtins.h"
+
 #include "../includes/minishell.h"
 
 int	is_alpha_3(char c)
