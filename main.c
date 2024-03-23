@@ -31,7 +31,7 @@ void	handler_signel(int signal, siginfo_t *siginfo, void *vd)
 			ft_status(1, 1);
 			printf("\n");
 			rl_on_new_line();
-			// rl_replace_line("", 0);
+			rl_replace_line("", 0);
 			rl_redisplay();
 		}
 		else
@@ -125,7 +125,7 @@ int main(int ac, char **av, char **envp)
 	sigaction(SIGINT, &sa, NULL);
 	sigaction(SIGQUIT, &sa, NULL);
 
-	// rl_catch_signals = 0;
+	rl_catch_signals = 0;
 	env = ft_env_parser(envp);
 	exp = ft_env_parser(envp);
 	if (!env)
@@ -168,7 +168,7 @@ int main(int ac, char **av, char **envp)
 					}
 				}
 				if (!index)
-					if (!plant_4(list))
+					if (!plant_4(list, exp))
 						index = 1;
 				if (!index)
 				{
@@ -186,7 +186,7 @@ int main(int ac, char **av, char **envp)
 				}
 				if (!index)
 				{
-					if (!plant_6(nlist->top, &arbre->racine ,exp))
+					if (!plant_6(nlist->top, &arbre->racine))
 						(1 == 1) && (printf("ERROR7\n"), index = 1);
 				}
 				if (!index)

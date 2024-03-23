@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 08:19:01 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/23 01:13:10 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/23 03:14:48 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,11 @@ static int	plant4_oxe1(int *count_parentheses, t_node *tmp)
 	return (1);
 }
 
-static int	plant4_oxe2(t_node *tmp)
+static int	plant4_oxe2(t_node *tmp, t_env *exp)
 {
 	if (is_redir(tmp))
 	{
-		if (!check_syntax_1(tmp))
+		if (!check_syntax_1(tmp,exp))
 			return (affichage(6), ft_status(258, 1), 0);
 	}
 	if (tmp->mode == TOKEN_Double_Q || tmp->mode == TOKEN_EXPR)
@@ -59,7 +59,7 @@ static int	plant4_oxe2(t_node *tmp)
 	return (1);
 }
 
-int	plant_4(t_list *list)
+int	plant_4(t_list *list, t_env *exp)
 {
 	t_node	*tmp;
 	int		count_parentheses;
@@ -73,7 +73,7 @@ int	plant_4(t_list *list)
 			check_wilc(tmp);
 			if (!plant4_oxe1(&count_parentheses, tmp))
 				return (0);
-			if (!plant4_oxe2(tmp))
+			if (!plant4_oxe2(tmp, exp))
 				return (0);
 			tmp = tmp->next;
 		}
