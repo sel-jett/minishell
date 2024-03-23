@@ -6,23 +6,11 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 11:44:57 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/21 23:18:26 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/23 00:40:39 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "builtins.h"
 #include "../includes/minishell.h"
-
-char	*value_key(t_env *tmp, char *key)
-{
-	while (tmp)
-	{
-		if (!ft_strncmp(tmp->key, key))
-			return (tmp->value);
-		tmp = tmp->next;
-	}
-	return (NULL);
-}
 
 int	chekcer(char *data)
 {
@@ -136,7 +124,7 @@ t_env	*env_new(char *data, t_env *tmp)
 	{
 		gt_value = get_value(data);
 		(node->key = str) && (node->next = NULL);
-		node->value = ft_strjoin(gt_value, value_of);
+		node->value = ft_strjoin(value_of, gt_value);
 		if (!node->value)
 			return (NULL);
 		ft_list_remove_if(&tmp, str, ft_strncmp_one);

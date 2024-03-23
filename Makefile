@@ -8,11 +8,11 @@ SRCS = ./parcing/allocation_free/creation1.c ./parcing/allocation_free/my_malloc
 	   ./execution/execute.c ./execution/pipe.c ./execution/or.c ./execution/subshell.c \
 	   ./execution/and.c ./execution/redir_out_utils.c ./execution/redir_out_utils_2.c \
 	   ./execution/redir_out.c ./parcing/syntax_error/utile_5.c ./parcing/syntax_error/utile_8.c \
-	   ./builtins/env_utils.c ./builtins/cd.c ./builtins/echo.c ./builtins/export_checker.c \
+	   ./builtins/env_parser_utils.c ./builtins/env_utils.c ./builtins/cd.c ./builtins/echo.c ./builtins/export_checker.c \
 	   ./builtins/env_parser.c ./parcing/syntax_error/utile_9.c\
 	   ./builtins/export.c ./builtins/ft_split.c ./builtins/ft_strlcpy.c ./parcing/syntax_error/utile_7.c \
 	   ./builtins/pwd.c ./builtins/unset.c ./builtins/utils.c ./builtins/ft_sort_list.c \
-	   ./expanding/expand.c ./expanding/ft_itoa.c ./execution/utils_3.c ./execution/utils.c \
+	   ./expanding/expand_utils.c ./expanding/expand.c ./expanding/ft_itoa.c ./execution/utils_3.c ./execution/utils.c \
 	   ./execution/wild_utils.c ./execution/wildcard.c ./execution/wild.c \
 	   ./builtins/env.c ./builtins/cd_utils.c ./builtins/builtins.c
 

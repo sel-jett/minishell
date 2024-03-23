@@ -95,3 +95,14 @@ $!
 
 handel in herdoc ctrl + c/
 >>>>>>> 929d532e2f9b08ad903d61346867c98a2c5b0f68
+
+s | fhjfgf
+bash: fhjfgf: command not found
+
+<< l ()
+> l
+bash: syntax error near unexpected token `('
+ $a ""
+
+ bash-3.2$ ls > *
+bash: *: ambiguous redirect

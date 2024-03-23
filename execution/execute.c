@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 12:09:39 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/22 20:53:49 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/23 03:10:34 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,21 @@ char	*dup_wild(char **cmmd, t_node *smp, int *check)
 void	flag_to_expand(t_node *smp, char **cmmd, int *check, t_env **exp)
 {
 	char	*backup;
+
 	int		i;
 
 	i = 0;
 	while (cmmd[i])
 	{
+		if (!cmmd[i][0])
+		{
+			cmmd[i] = my_malloc(3, 1);
+			cmmd[i][0] = '\\';
+			cmmd[i][1] = '\\';
+			cmmd[i][2] = '\0';
+			i++;
+			continue ;
+		}
 		if (smp->flag_expend == 1 && !first_key_checker(cmmd[i]))
 		{
 			backup = ft_expand(*exp, cmmd[i]);
@@ -67,8 +77,11 @@ int	execute_cmd_child(int check, char ***cmmd)
 	if (check)
 	{
 		*cmmd = array_dupper(*cmmd);
+		backslach_filler(*cmmd);
 		if (!*cmmd)
 			return (0);
+		ft_print_arr(*cmmd);
+		exit(0);
 		*cmmd = joyner(*cmmd);
 		if (!*cmmd)
 			return (0);
