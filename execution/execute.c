@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 12:09:39 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/23 03:57:34 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/23 04:01:12 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	execute_cmd_child(int check, char ***cmmd)
 	if (check)
 	{
 		*cmmd = array_dupper(*cmmd);
-		backslach_filler(*cmmd);
+		// backslach_filler(*cmmd);
 		if (!*cmmd)
 			return (0);
 		ft_print_arr(*cmmd);
