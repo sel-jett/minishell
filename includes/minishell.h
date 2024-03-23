@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:48:58 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/22 20:54:20 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/23 02:18:51 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,11 @@ void			check_wilc(t_node *node);
 bool			is_spaces(char c);
 bool			is_text(t_node *tmp);
 bool			is_redir(t_node *tmp);
-t_node_arbre	*parse_and_or(t_node **tmp,t_env *exp);
-t_node_arbre	*parse_pipe(t_node **tmp,t_env *exp);
-t_node_arbre	*parse_redir(t_node **tmp,t_env *exp);
-t_node_arbre	*parse_cmd(t_node **tmp,t_env *exp);
-t_node_arbre	*parse_parenthese(t_node **tmp, t_env *exp);
+t_node_arbre	*parse_and_or(t_node **tmp);
+t_node_arbre	*parse_pipe(t_node **tmp);
+t_node_arbre	*parse_redir(t_node **tmp);
+t_node_arbre	*parse_cmd(t_node **tmp);
+t_node_arbre	*parse_parenthese(t_node **tmp);
 t_node_arbre	*new_sub(t_node_arbre *racine);
 t_node_arbre	*new_node(int mode, t_node_arbre *left, t_node_arbre *right);
 t_node			*c_cpynode(t_node *node, t_node *tail, t_list *list);
@@ -63,7 +63,7 @@ t_nlist			*c_nlist(void);
 t_nnode			*c_nnode(t_node *node);
 void			add_nback(t_nlist *list, t_nnode *node);
 int				add_args(t_nlist *list, char *str, int *i);
-int				check_syntax_1(t_node *tmp);
+int				check_syntax_1(t_node *tmp, t_env *exp);
 int				check_syntax_2(t_node *tmp);
 int				check_syntax_3(t_node *tmp);
 int				check_syntax_4(t_node *tmp);
@@ -81,12 +81,12 @@ int				plant_3(t_list *list, int *i);
 int				plant_1(t_list *list, int *i);
 int				plant_2(t_list *list, int *i);
 int				spaces(t_list *list, int *i);
-int				plant_4(t_list *list);
+int				plant_4(t_list *list, t_env *exp);
 int				check(int c);
 int				is_empty(char *str);
 int				add_one(t_list	*list, int *i, int mode);
 int				add_list_redir(t_node *tmp);
-int				plant_6(t_node *top, t_node_arbre **racine, t_env *exp);
+int				plant_6(t_node *top, t_node_arbre **racine);
 ///////////////////////// EXECUTION //////////////////////////
 
 char			*ft_str_joiner(char **env_var, char **path, char **cmmd, int *i);

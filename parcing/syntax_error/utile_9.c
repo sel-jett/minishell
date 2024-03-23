@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 08:49:28 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/22 01:46:39 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/23 02:22:44 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,14 @@ int	open_herdoc_0(t_node *tmp, t_env *exp)
 	return (1);
 }
 
-t_node_arbre	*parse_redir(t_node **tmp, t_env *exp)
+t_node_arbre	*parse_redir(t_node **tmp)
 {
 	t_node_arbre	*node_left;
 	t_node_arbre	*node;
 
-	node_left = parse_cmd(tmp, exp);
+	node_left = parse_cmd(tmp);
 	if (*tmp && is_redir(*tmp))
 	{
-		if (!open_herdoc_0(*tmp, exp))
-			return (0);
 		node = c_node_arbre(*tmp);
 		if (!node)
 			return (NULL);

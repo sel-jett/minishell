@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:17:58 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/22 01:45:01 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/23 02:00:27 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,14 @@ t_node_arbre	*new_sub(t_node_arbre *racine)
 	return (node);
 }
 
-t_node_arbre	*parse_parenthese(t_node **tmp, t_env *exp)
+t_node_arbre	*parse_parenthese(t_node **tmp)
 {
 	t_node_arbre	*node;
 
 	*tmp = (*tmp)->next;
 	while ((*tmp)->value[0] != ')')
 	{
-		node = new_sub(parse_and_or(tmp, exp));
+		node = new_sub(parse_and_or(tmp));
 		if (!node)
 			return (NULL);
 	}
@@ -42,14 +42,14 @@ t_node_arbre	*parse_parenthese(t_node **tmp, t_env *exp)
 	return (node);
 }
 
-t_node_arbre	*parse_cmd(t_node **tmp, t_env *exp)
+t_node_arbre	*parse_cmd(t_node **tmp)
 {
 	t_node			*node;
 	t_node_arbre	*arbre_node;
 
 	arbre_node = 0;
 	if ((*tmp)->mode == TOKEN_PARENTHESE && (*tmp)->value[0] == '(')
-		return (parse_parenthese(tmp, exp));
+		return (parse_parenthese(tmp));
 	if ((*tmp)->mode == TOKEN_EXPR)
 	{
 		node = *tmp;
