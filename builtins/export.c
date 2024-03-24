@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 07:03:43 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/24 06:16:50 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/24 09:35:54 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,10 @@ void	ft_export(char **cmd, t_env **cnev, t_env **exp)
 	while (cmd[i])
 	{
 		if (!check_first(cmd[i], *exp))
-			return ;
+		{
+			i++;
+			continue ;
+		}
 		tmp = ft_expand(*exp, get_key(cmd[i]));
 		if (!tmp[0] && cmd[i][0] != '$')
 			tmp = get_key(cmd[i]);

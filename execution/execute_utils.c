@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:03:47 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/23 07:24:16 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/24 10:13:24 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char	*ft_handler(char **cmmd, char **path)
 	if (!cmmd || !cmmd[0])
 		return (NULL);
 	(1) && (i = 0, env_var = cmmd[0]);
-	while (path[i] && cmmd[0][0])
+	while (path && path[i] && cmmd[0][0])
 	{
 		if (cmmd[0][0] == '/')
 		{
@@ -83,7 +83,7 @@ void	ft_execute_child(char **envp, char **cmmd, char **path)
 	char		*env_var;
 	extern int	x;
 
-	if (!path || !path[0] || !envp || !envp[0])
+	if (!envp || !envp[0])
 		return ;
 	env_var = ft_handler(cmmd, path);
 	if (env_var)
@@ -96,9 +96,7 @@ void	ft_execute_child(char **envp, char **cmmd, char **path)
 			return ;
 		}
 		else if (!pid)
-		{
-			(1) && (def_sig(), ft_execve(env_var, envp, cmmd), 0);
-		}
+			(1) && (def_sig(), ft_execve(env_var, envp, cmmd), exit(1), 0);
 		waitpid(pid, &status, 0);
 		ft_status((status % 255), 1);
 	}

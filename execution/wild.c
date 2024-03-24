@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 21:26:25 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/22 19:59:07 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/24 07:12:15 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*return_only_wild(DIR *dir, struct dirent *dp, char *sdk)
 		}
 		dp = readdir(dir);
 	}
-	return (closedir(dir), sdk);
+	return (closedir(dir), wild_sorting(sdk));
 }
 
 char	*return_wild_at_end(DIR *dir, struct dirent *dp, char *sdk, char *str)
@@ -50,7 +50,7 @@ char	*return_wild_at_end(DIR *dir, struct dirent *dp, char *sdk, char *str)
 		}
 		dp = readdir(dir);
 	}
-	return (closedir(dir), sdk);
+	return (closedir(dir), wild_sorting(sdk));
 }
 
 char	*return_wild_at_first(DIR *dir, struct dirent *dp, char *sdk, char *str)
@@ -72,7 +72,7 @@ char	*return_wild_at_first(DIR *dir, struct dirent *dp, char *sdk, char *str)
 		}
 		dp = readdir(dir);
 	}
-	return (closedir(dir), sdk);
+	return (closedir(dir), wild_sorting(sdk));
 }
 
 char	*return_wild_at_none(DIR *dir, struct dirent *dp, char *sdk)
@@ -85,7 +85,7 @@ char	*return_wild_at_none(DIR *dir, struct dirent *dp, char *sdk)
 			return (closedir(dir), NULL);
 		dp = readdir(dir);
 	}
-	return (closedir(dir), sdk);
+	return (closedir(dir), wild_sorting(sdk));
 }
 
 char	*ft_execute_wild(char *str)

@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:48:58 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/24 02:16:12 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/24 07:13:05 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ int				add_list_redir(t_node *tmp);
 int				plant_6(t_node *top, t_node_arbre **racine);
 ///////////////////////// EXECUTION //////////////////////////
 
+char			*ft_wild_joiner(char **ptr3);
+char			*wild_sorting(char *str);
 char			*ft_str_joiner(char **env_var, char **path, char **cmmd, int *i);
 void			igno_sig(void);
 void			def_sig(void);
@@ -164,6 +166,7 @@ void			ft_fpintf(const char *msg);
 char			*ft_strjoin(char *s1, char *s2);
 char			*ft_strjoin2(char *s1, char *s2);
 void			echo(const char **path, int mode);
+int				ft_strncmp_lfassi(char *s1, char *s2);
 void			ft_unset(char **cmd, t_env ***cnev, t_env ***exp);
 void			ft_export(char **cmd, t_env **cnev, t_env **exp);
 void			cd(const char **path, t_env **cenv ,t_env **exp);

@@ -149,7 +149,6 @@ int main(int ac, char **av, char **envp)
 	sa.sa_sigaction = handler_signel;
 	sigaction(SIGINT, &sa, NULL);
 	sigaction(SIGQUIT, &sa, NULL);
-
 	env = ft_env_parser(envp);
 	exp = ft_env_parser(envp);
 	if (!env)
@@ -157,18 +156,14 @@ int main(int ac, char **av, char **envp)
 		ft_lstadd_back(&env, env_new("PATH=/Users/sel-jett/.docker/bin:/usr/gnu/bin:/usr/local/bin:/bin:/usr/bin:.", env));
 		ft_lstadd_back(&env, env_new("SHLVL=1", env));
 		ft_lstadd_back(&env, env_new("_=/usr/bin/env", env));
-		ft_lstadd_back(&env, env_new(ft_strjoin("PWD", getenv("PWD")), env));
-		ft_lstadd_back(&env, env_new("_=/usr/bin/env", exp));
+		ft_lstadd_back(&env, env_new(ft_strjoin("PWD=", "/Users/sel-jett/Desktop/minishell"), env));
+		ft_lstadd_back(&exp, env_new("PATH=/Users/sel-jett/.docker/bin:/usr/gnu/bin:/usr/local/bin:/bin:/usr/bin:.", exp));
 		ft_lstadd_back(&exp, env_new("SHLVL=1", exp));
-		ft_lstadd_back(&exp, env_new("_=/usr/bin/env", env));
-		ft_lstadd_back(&exp, env_new(ft_strjoin("PWD", getenv("PWD")), exp));
+		ft_lstadd_back(&exp, env_new(ft_strjoin("PWD=", "/Users/sel-jett/Desktop/minishell"), exp));
 	}
-	if (!env_new("OLDPWD", exp))
-		return (0);
 	ft_lstadd_back(&exp, env_new("OLDPWD", exp));
 	(void)ac;
 	(void)av;
-	// (void)envp;
 	while (1)
 	{
 		(1) && (index = 0, i = 0, list = c_list(), list->str = 0);

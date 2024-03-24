@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 23:55:37 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/23 20:39:07 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/24 09:47:54 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ char	*find_pwd(t_env *cenv)
 {
 	char	*str;
 
+	if (!cenv)
+		cenv = cenv->next;
 	while (cenv && ft_strncmp_one(cenv->key, "PWD"))
 		cenv = cenv->next;
 	if (!cenv)
