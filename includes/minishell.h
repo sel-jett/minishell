@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:48:58 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/23 05:54:40 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/24 05:44:54 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,14 @@
 // # include "/Users/amel-has/.brew/opt/readline/include/readline/history.h"
 // void			print_tree(t_node_arbre    *tree, int c);
 // void            affiche(t_list *list);
-int	open_herdoc_0(t_node *tmp, t_env *exp);
+int	open_herdoc_0(t_node *tmp, t_env *exp, int *n);
 void	check_(t_node *tmp, t_nnode *redir_node);
 int	add_two( t_list *list, int *i, int mode);
 int	oxe5(t_node *tmp);
 int	check_exp(t_node *tmp);
 int	check_apres_parentheses(t_node *node);
 int	check_enter_parentheses(t_node *node);
-bool	open_herdoc(t_nnode *node, char **file,t_env *exp);
+bool	open_herdoc(t_nnode *node, char **file, t_env *exp, int *n);
 bool    ft_strcmp(char *s1, char *s2);
 int	ft_strlen(char *str);
 char            **array_dupper(char **str);
@@ -63,7 +63,7 @@ t_nlist			*c_nlist(void);
 t_nnode			*c_nnode(t_node *node);
 void			add_nback(t_nlist *list, t_nnode *node);
 int				add_args(t_nlist *list, char *str, int *i);
-int				check_syntax_1(t_node *tmp, t_env *exp);
+int				check_syntax_1(t_node *tmp, t_env *exp, int *n);
 int				check_syntax_2(t_node *tmp);
 int				check_syntax_3(t_node *tmp);
 int				check_syntax_4(t_node *tmp);
@@ -81,7 +81,7 @@ int				plant_3(t_list *list, int *i);
 int				plant_1(t_list *list, int *i);
 int				plant_2(t_list *list, int *i);
 int				spaces(t_list *list, int *i);
-int				plant_4(t_list *list, t_env *exp);
+int				plant_4(t_list *list, t_env *exp, int *n);
 int				check(int c);
 int				is_empty(char *str);
 int				add_one(t_list	*list, int *i, int mode);

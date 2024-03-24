@@ -6,13 +6,13 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 08:49:28 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/23 02:22:44 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/24 05:43:04 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	open_herdoc_0(t_node *tmp, t_env *exp)
+int	open_herdoc_0(t_node *tmp, t_env *exp, int	*n)
 {
 	char		*file;
 	t_nnode		*i_node;
@@ -25,7 +25,7 @@ int	open_herdoc_0(t_node *tmp, t_env *exp)
 	{
 		if (i_node->mode == TOKEN_HEREDOC)
 		{
-			if (!open_herdoc(i_node, &file, exp))
+			if (!open_herdoc(i_node, &file, exp, n))
 				return (0);
 			if (i_node->next)
 				i_node->next->value = file;

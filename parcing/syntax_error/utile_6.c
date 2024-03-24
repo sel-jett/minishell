@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utile_6.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 03:19:27 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/22 09:09:05 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/24 05:42:05 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,15 +69,28 @@ char	*cancat(t_nnode *node, int *index)
 	return (str[len] = '\0', str);
 }
 
-int	read_line_herdoc(int fd, t_nnode *node, t_env *exp)
+void	handler(int signal)
 {
-	char	*str;
-	int		index;
+	extern int x;
 
+	if (signal == SIGINT)
+		close(0);
+}
+
+int	read_line_herdoc(int fd, t_nnode *node, t_env *exp, int *n)
+{
+	char		*str;
+	int			index;
+	extern int	x;
+
+	// igno_sig();
+	signal(SIGINT, handler);
 	(1) && (index = 0, str = 0);
 	while (1)
 	{
 		str = readline("heredoc> ");
+		if (!str)
+			break ;
 		if (node->next)
 		{
 			if (ft_strcmp(cancat(node->next, &index), str))
@@ -95,10 +108,16 @@ int	read_line_herdoc(int fd, t_nnode *node, t_env *exp)
 	}
 	if (str)
 		(1) && (free(str), str = NULL);
+	if (ttyname(0) == 0)
+	{
+		*n = 1;
+		fd = open(ttyname(1), O_RDONLY);
+		dup2(0, fd);
+	}
 	return (1);
 }
 
-bool	open_herdoc(t_nnode *node, char **file, t_env *exp)
+bool	open_herdoc(t_nnode *node, char **file, t_env *exp, int *m)
 {
 	int			n;
 	int			fd;
@@ -114,6 +133,7 @@ bool	open_herdoc(t_nnode *node, char **file, t_env *exp)
 	fd = open(*file, O_CREAT | O_RDWR, S_IRUSR | S_IWUSR);
 	if (fd == -1)
 		return (0);
-	read_line_herdoc(fd, node, exp);
+	if (!read_line_herdoc(fd, node, exp, m))
+		return (0);
 	return (1);
 }

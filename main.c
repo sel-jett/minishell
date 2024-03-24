@@ -31,11 +31,14 @@ void	handler_signel(int signal, siginfo_t *siginfo, void *vd)
 			ft_status(1, 1);
 			printf("\n");
 			rl_on_new_line();
-			// rl_replace_line("", 0);
+			rl_replace_line("", 0);
 			rl_redisplay();
 		}
 		else
+		{
+			ft_status(1, 1);
 			printf("\n");
+		}
 	}
 }
 
@@ -132,6 +135,30 @@ void f()
 //         tmp1 = tmp1->next;
 //     } 
 // }
+// t_node* delfirstt(t_node **node) {
+//     if (*node == NULL)
+//         return NULL;
+//     *node = (*node)->next;
+//     return *node;
+// }
+
+// void funn(t_node ***node, char *key)
+// {
+//     if (ft_strcmp((**node)->value, key))
+//     {
+//         **node = delfirst(*node);
+//         return;
+//     }
+//     t_node **tmp1 = *node;
+//     while ((*tmp1)->next != NULL)
+//     {
+//         if (ft_strcmp((*tmp1)->next->value, key)) {
+//             (*tmp1)->next = (*tmp1)->next->next;
+//             return;
+//         }
+//         *tmp1 = (*tmp1)->next;
+//     }
+// }
 
 int main(int ac, char **av, char **envp)
 {
@@ -142,15 +169,15 @@ int main(int ac, char **av, char **envp)
 	t_list *nlist = NULL;
 	t_env *env;
 	t_env *exp;
-
 	list = NULL;
+	int	n = 0;
 	struct sigaction	sa;
 	sa.sa_flags = SA_SIGINFO;
 	sa.sa_sigaction = handler_signel;
 	sigaction(SIGINT, &sa, NULL);
 	sigaction(SIGQUIT, &sa, NULL);
 
-	// rl_catch_signals = 0;
+	rl_catch_signals = 0;
 	env = ft_env_parser(envp);
 	exp = ft_env_parser(envp);
 	if (!env)
@@ -178,7 +205,10 @@ int main(int ac, char **av, char **envp)
 			if (x == 0)
 				list->str = readline("minishell > ");
 			if (!list->str)
-				exit(write(1, "exit\n", 5));
+			{
+				printf("exit\n");
+				exit(0);
+			}
 			if (is_empty(list->str))
 				index = 1;
 			if (!index)
@@ -193,8 +223,10 @@ int main(int ac, char **av, char **envp)
 					}
 				}
 				if (!index)
-					if (!plant_4(list, exp))
+					if (!plant_4(list, exp, &n))
 						index = 1;
+				if (n == 1)
+					index = 1;
 				if (!index)
 				{
 					nlist = c_list();
@@ -216,42 +248,9 @@ int main(int ac, char **av, char **envp)
 				}
 				if (!index)
 				{
-					// while (arbre->racine->right->list->top)
-					// {
-					// 	// dprintf(2, "[%s]\n", arbre->racine->right->list->top->value);
-					// 	dprintf(2, "[%s][%d]\n", arbre->racine->right->list->top->value, arbre->racine->right->list->top->flag_space);
-					// 	arbre->racine->right->list->top = arbre->racine->right->list->top->next;
-
-					// }
-					// while (arbre->racine->list_redir->top)
-					// {
-					// 	// dprintf(2, "[%s]\n", arbre->racine->list_redir->top->value);
-					// 	dprintf(2, "[%s][%d][%d]\n", arbre->racine->list_redir->top->value, arbre->racine->list_redir->top->avant_, \
-					// 	arbre->racine->list_redir->top->flag_space);
-					// 	arbre->racine->list_redir->top = arbre->racine->list_redir->top->next;
-
-					// }
-					// printf("[%d][%d][%d]\n",arbre->racine->list_redir->top->avant_,
-					// arbre->racine->list_redir->top->next->avant_,
-					// arbre->racine->list_redir->top->next->next->avant_);
-					// exit(0);
-					// env = ft_env_parser(envp);
-					// env = ft_env_parser(envp);
-					// ft_print_arr(envp);
-					// ft_env(env);
-					// printf("[%d]\n",arbre->racine->mode);
-					// print_tree(arbre->racine);
-					// while (arbre->racine->list->top)
-					// {
-					// 	puts(arbre->racine->list->top->value);
-					// 	arbre->racine->list->top = arbre->racine->list->top->next;
-					// }
-
-
-					// puts(arbre->racine->list->top->value);
 					execute(arbre->racine, env, exp);
-					sigaction(SIGINT,&sa, NULL);
-					sigaction(SIGQUIT,&sa, NULL);
+					sigaction(SIGINT, &sa, NULL);
+					sigaction(SIGQUIT, &sa, NULL);
 					x = 0;
 					free(list->str);
 				}
