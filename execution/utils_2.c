@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:10:14 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/23 04:06:07 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/24 13:43:22 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,9 +110,9 @@ char	**joyner(char **str)
 			(1) && (k++, j++);
 		}
 		if (str[i][j] != '\\')
-			str_r[k++] = ' ';
+			str_r[k++] = -32;
 		i++;
 	}
 	str_r[k] = '\0';
-	return (ft_split(str_r, ' '));
+	return (ft_split(str_r, -32));
 }

@@ -97,3 +97,6 @@ bash: syntax error near unexpected token `('
 
 exit 3243259034
 env -i
+
+
+"export "
