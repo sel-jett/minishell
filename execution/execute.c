@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 12:09:39 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/24 10:12:25 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/24 13:03:37 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,113 @@ int	execute_cmd_child(int check, char ***cmmd)
 	return (1);
 }
 
+void array_structer_2(char **str)
+{
+	int i;
+
+	i = 0;
+	while (str && str[i] && str[i][0])
+	{
+		int n = (ft_strlen(str[i]) - 1);
+		if (str[i] && str[i][n] && str[i][n] == '\\')
+			str[i][n] = '\0';
+		i++;
+	}
+}
+
+char	*ft_func(char *str)
+{
+	int	len;
+	int	j;
+
+	len = ft_strlen_b(str);
+	char	*tmp = my_malloc(len - 1, 1);
+	if (!tmp)
+		return (NULL);
+	len = 0;
+	j = 0;
+	while (str[len])
+	{
+		if (str[len] == '\\')
+			len += 2;
+		tmp[j] = str[len];
+		len++;
+		j++;
+	}
+	tmp[j] = '\0';
+	return (tmp);
+}
+
+int ft_strlen_bi(char **str)
+{
+	int i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
+
+char	**ft_func_string(char **str, int i)
+{
+	int	len;
+	int	j;
+
+	len = ft_strlen_bi(str);
+	char	**tmp = my_malloc((len * 8), 1);
+	if (!tmp)
+		return (NULL);
+	len = 0;
+	j = 0;
+	while (str[len])
+	{
+		if (i == len)
+		{
+			len += 1;
+			continue ;
+		}
+		tmp[j] = str[len];
+		len++;
+		j++;
+	}
+	tmp[j] = NULL;
+	return (tmp);
+
+}
+
+char	**array_structer(char **str)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (str && str[i] && str[i][0])
+	{
+		j = 0;
+		while (str[i][j])
+		{
+			 if (str[i][0] == '\\')
+			{
+				if (str[i + 1])
+				{
+					str = ft_func_string(str, i);
+					i = 0;
+					continue ;
+				}
+				else
+				{
+					str[i] = NULL;
+					break ;
+				}
+			}
+			j++;
+		}
+		i++;
+	}
+	str = joyner(str);
+	return (str);
+}
+
 void	ft_execute_cmd(t_node_arbre *tree, t_env **env, t_env **exp)
 {
 	char			**cmmd;
@@ -108,6 +215,7 @@ void	ft_execute_cmd(t_node_arbre *tree, t_env **env, t_env **exp)
 	if (!execute_cmd_child(check, &cmmd))
 		return ;
 	backslach_filler(cmmd);
+	cmmd = array_structer(cmmd);
 	if (is_builtin(cmmd[0]))
 	{
 		ft_builtin(cmmd, env, exp);

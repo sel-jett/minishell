@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 23:18:52 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/21 22:47:37 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/24 13:10:31 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*cd_init(t_env **cenv, t_env **exp)
 	char	*pwd;
 	char	*temp_old;
 
-	pwd = find_pwd(*cenv);
+	pwd = getcwd(0, 0);
 	if (!pwd)
 	{
 		ft_printf("minishell: cd: PWD not set\n", NULL);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 07:12:48 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/24 07:17:11 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/24 13:04:25 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	handler_signel(int signal, siginfo_t *siginfo, void *vd)
 			ft_status(1, 1);
 			printf("\n");
 			rl_on_new_line();
-			rl_replace_line("", 0);
+			// rl_replace_line("", 0);
 			rl_redisplay();
 		}
 		else
@@ -49,7 +49,7 @@ int main(int ac, char **av, char **envp)
 	int					n;
 
 	list = NULL;
-	rl_catch_signals = 0;
+	// rl_catch_signals = 0;
 	nlist = NULL;
 	sa.sa_flags = SA_SIGINFO;
 	sa.sa_sigaction = handler_signel;
@@ -62,10 +62,10 @@ int main(int ac, char **av, char **envp)
 		ft_lstadd_back(&env, env_new("PATH=/Users/sel-jett/.docker/bin:/usr/gnu/bin:/usr/local/bin:/bin:/usr/bin:.", env));
 		ft_lstadd_back(&env, env_new("SHLVL=1", env));
 		ft_lstadd_back(&env, env_new("_=/usr/bin/env", env));
-		ft_lstadd_back(&env, env_new(ft_strjoin("PWD=", "/Users/sel-jett/Desktop/minishell"), env));
+		ft_lstadd_back(&env, env_new(ft_strjoin("PWD=", getcwd(0, 0)), env));
 		ft_lstadd_back(&exp, env_new("PATH=/Users/sel-jett/.docker/bin:/usr/gnu/bin:/usr/local/bin:/bin:/usr/bin:.", exp));
 		ft_lstadd_back(&exp, env_new("SHLVL=1", exp));
-		ft_lstadd_back(&exp, env_new(ft_strjoin("PWD=", "/Users/sel-jett/Desktop/minishell"), exp));
+		ft_lstadd_back(&exp, env_new(ft_strjoin("PWD=", getcwd(0, 0)), exp));
 	}
 	ft_lstadd_back(&exp, env_new("OLDPWD", exp));
 	(void)ac;

@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 22:43:32 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/24 10:17:47 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/24 13:07:34 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 char	*path_getter(char	*temp, char	*temp_old, char *b, const char **path)
 {
-	if (getcwd(b, PATH_MAX))
+	(void)b;
+	if (getcwd(0, 0))
 	{
-		temp = ft_strjoin("PWD=", getcwd(b, PATH_MAX));
+		temp = ft_strjoin("PWD=", getcwd(0, 0));
 		if (!temp)
 			return (NULL);
 	}
@@ -145,7 +146,7 @@ void	ft_builtin(char **cmd, t_env **cenv, t_env **exp)
 		ft_env(*cenv);
 	else if (!ft_strncmp(cmd[0], "pwd"))
 	{
-		printf("%s\n", find_pwd(*cenv));
+		printf("%s\n", getcwd(0, 0));
 		ft_status(0, 1);
 	}
 	else if (!ft_strncmp(cmd[0], "export"))

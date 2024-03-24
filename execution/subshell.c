@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 14:29:50 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/22 06:14:31 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/24 12:23:20 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void	ft_execute_subshell(t_node_arbre *tree, t_env *e, t_env *exp)
 	}
 	if (pid == 0)
 	{
+		// dprintf(2, "pid = %s\n", tree->arbre->racine->left->list_redir->top->value);
+		// exit(1);
 		execute(tree->arbre->racine, e, exp);
 		exit(0);
 	}
