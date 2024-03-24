@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:48:58 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/23 05:54:40 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/24 02:16:12 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,7 +164,7 @@ void			ft_fpintf(const char *msg);
 char			*ft_strjoin(char *s1, char *s2);
 char			*ft_strjoin2(char *s1, char *s2);
 void			echo(const char **path, int mode);
-void			ft_unset(char **cmd, t_env **cnev, t_env **exp);
+void			ft_unset(char **cmd, t_env ***cnev, t_env ***exp);
 void			ft_export(char **cmd, t_env **cnev, t_env **exp);
 void			cd(const char **path, t_env **cenv ,t_env **exp);
 void			ft_lstadd_back(t_env **lst, t_env *neww);

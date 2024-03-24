@@ -114,7 +114,7 @@ void f()
 // }
 
 // void funnn(t_node **node, char *key)
-// {    
+// {
 //     t_node *tmp;
 //     if (ft_strcmp((*node)->value, key))
 //     {
@@ -130,7 +130,7 @@ void f()
 //             return;
 //         }
 //         tmp1 = tmp1->next;
-//     } 
+//     }
 // }
 
 int main(int ac, char **av, char **envp)
@@ -150,7 +150,6 @@ int main(int ac, char **av, char **envp)
 	sigaction(SIGINT, &sa, NULL);
 	sigaction(SIGQUIT, &sa, NULL);
 
-	// rl_catch_signals = 0;
 	env = ft_env_parser(envp);
 	exp = ft_env_parser(envp);
 	if (!env)
@@ -158,9 +157,11 @@ int main(int ac, char **av, char **envp)
 		ft_lstadd_back(&env, env_new("PATH=/Users/sel-jett/.docker/bin:/usr/gnu/bin:/usr/local/bin:/bin:/usr/bin:.", env));
 		ft_lstadd_back(&env, env_new("SHLVL=1", env));
 		ft_lstadd_back(&env, env_new("_=/usr/bin/env", env));
-		ft_lstadd_back(&exp, env_new("PATH=/Users/sel-jett/.docker/bin:/usr/gnu/bin:/usr/local/bin:/bin:/usr/bin:.", exp));
+		ft_lstadd_back(&env, env_new(ft_strjoin("PWD", getenv("PWD")), env));
+		ft_lstadd_back(&env, env_new("_=/usr/bin/env", exp));
 		ft_lstadd_back(&exp, env_new("SHLVL=1", exp));
 		ft_lstadd_back(&exp, env_new("_=/usr/bin/env", env));
+		ft_lstadd_back(&exp, env_new(ft_strjoin("PWD", getenv("PWD")), exp));
 	}
 	if (!env_new("OLDPWD", exp))
 		return (0);
