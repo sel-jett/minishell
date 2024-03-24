@@ -14,7 +14,7 @@ SRCS = ./parcing/allocation_free/creation1.c ./parcing/allocation_free/my_malloc
 	   ./builtins/pwd.c ./builtins/unset.c ./builtins/utils.c ./builtins/ft_sort_list.c \
 	   ./expanding/expand_utils.c ./expanding/expand.c ./expanding/ft_itoa.c ./execution/utils_3.c ./execution/utils.c \
 	   ./execution/wild_utils.c ./execution/wildcard.c ./execution/wild.c \
-	   ./builtins/env.c ./builtins/cd_utils.c ./builtins/builtins.c
+	   ./builtins/env.c ./builtins/cd_utils.c ./builtins/builtins.c ./parcing/syntax_error/utile_10.c \
 
 OBJS    = $(SRCS:.c=.o)
 # READLINE_LIB = $(shell brew --prefix readline)/lib

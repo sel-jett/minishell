@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:00:33 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/13 22:02:01 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/24 06:27:47 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,10 @@ int	plant_1(t_list *list, int *i)
 		if (!fun_(list, i, '\'', TOKEN_Single_Q))
 			return (0);
 	return (1);
+}
+
+void	handler(int signal)
+{
+	if (signal == SIGINT)
+		close(0);
 }

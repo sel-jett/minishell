@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 03:19:27 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/24 05:42:05 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/24 07:01:13 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,23 +69,12 @@ char	*cancat(t_nnode *node, int *index)
 	return (str[len] = '\0', str);
 }
 
-void	handler(int signal)
-{
-	extern int x;
-
-	if (signal == SIGINT)
-		close(0);
-}
-
 int	read_line_herdoc(int fd, t_nnode *node, t_env *exp, int *n)
 {
 	char		*str;
 	int			index;
-	extern int	x;
 
-	// igno_sig();
-	signal(SIGINT, handler);
-	(1) && (index = 0, str = 0);
+	(1) && (index = 0, str = 0, signal(SIGINT, handler));
 	while (1)
 	{
 		str = readline("heredoc> ");
@@ -96,10 +85,7 @@ int	read_line_herdoc(int fd, t_nnode *node, t_env *exp, int *n)
 			if (ft_strcmp(cancat(node->next, &index), str))
 				break ;
 			str = ft_strjoin2(str, "\n");
-			if (!str)
-				return (0);
-			if (index == 0)
-				str = ft_expand(exp, str);
+			(index == 0) && (str = ft_expand(exp, str));
 			if (!str)
 				return (0);
 			write(fd, str, ft_strlen(str));
@@ -107,14 +93,8 @@ int	read_line_herdoc(int fd, t_nnode *node, t_env *exp, int *n)
 		free(str);
 	}
 	if (str)
-		(1) && (free(str), str = NULL);
-	if (ttyname(0) == 0)
-	{
-		*n = 1;
-		fd = open(ttyname(1), O_RDONLY);
-		dup2(0, fd);
-	}
-	return (1);
+		(1) && (free(str), str = 0);
+	return (open_tty(n));
 }
 
 bool	open_herdoc(t_nnode *node, char **file, t_env *exp, int *m)

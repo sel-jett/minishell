@@ -1,24 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/24 07:12:48 by amel-has          #+#    #+#             */
+/*   Updated: 2024/03/24 07:17:11 by amel-has         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "includes/minishell.h"
 
 int x = 0;
-
-void igno_sig(void)
-{
-	signal(SIGQUIT,SIG_IGN);
-	signal(SIGINT,SIG_IGN);
-}
-void def_sig(void)
-{
-	signal(SIGQUIT,SIG_DFL);
-	signal(SIGINT,SIG_DFL);
-}
-bool is_redir(t_node *tmp)
-{
-	if (tmp->mode == TOKEN_HEREDOC || tmp->mode == TOKEN_REDIR_IN ||
-		tmp->mode == TOKEN_REDIR_OUT || tmp->mode == TOKEN_REDIR_APPEND)
-		return (1);
-	return (0);
-}
 
 void	handler_signel(int signal, siginfo_t *siginfo, void *vd)
 {
@@ -42,142 +36,25 @@ void	handler_signel(int signal, siginfo_t *siginfo, void *vd)
 	}
 }
 
-void print_in_dot(t_node_arbre *node, int i, int *count, FILE *fp)
-{
-	if (node == NULL)
-		return;
-	int node_id = ++(*count);
-	if (node->mode == 5)
-		fprintf(fp, "  node%d [label=\"%s \"];\n", node_id, "|");
-	else if (node->mode == 1)
-		fprintf(fp, "  node%d [label=\"%s \"];\n", node_id, ">");
-	else if (node->mode == 6)
-		fprintf(fp, "  node%d [label=\"%s \"];\n", node_id, "&&");
-	else if (node->mode == 7)
-		fprintf(fp, "  node%d [label=\"%s \"];\n", node_id, "||");
-	else if (node->mode == TOKEN_PARENTHESE)
-	{
-		fprintf(fp, "  node%d [label=\"%s \"];\n", node_id, "()");
-		print_in_dot(node->arbre->racine, node_id, count, fp);
-		// print_tree(node->arbre->racine);
-	}
-	else if (node->mode == TOKEN_REDIR_APPEND)
-		fprintf(fp, "  node%d [label=\"%s \"];\n", node_id, ">>");
-	else if (node->mode == TOKEN_REDIR_OUT)
-	{
-		fprintf(fp, "  node%d [label=\"%s %s\"];\n", node_id, ">", node->list_redir->tail->value);
-		// while (node->list_redir->top)
-		// {
-		// 	fprintf(fp, "  node%d [label=\"%s \"];\n", *count, node->list_redir->top->value);
-		// 	node->list_redir->top = node->list_redir->top->next;
-		// }
-	}
-	else if (node->mode == TOKEN_REDIR_IN)
-	{
-		fprintf(fp, "  node%d [label=\"%s %s\"];\n", node_id, "<", node->value);
-	}
-	else if (node->mode == TOKEN_EXPR)
-	{
-		fprintf(fp, "  node%d [label=\"%s \"];\n", node_id, (char *)node->value);
-		// while (node->list->top)
-		// {
-		// 	fprintf(fp, "  node%d [label=\"%s \"];\n", *count, node->list->top->value);
-		// 	node->list->top = node->list->top->next;
-		// }
-	}
-	if (i != -1)
-	{
-		fprintf(fp, "  node%d -> node%d;\n", i, node_id);
-	}
-	print_in_dot(node->left, node_id, count, fp);
-	print_in_dot(node->right, node_id, count, fp);
-}
-
-void print_tree(t_node_arbre *root)
-{
-	FILE *fp;
-	int count;
-
-	count = 0;
-	fp = stdout;
-	fprintf(fp, "digraph {\n");
-	print_in_dot(root, -1, &count, fp);
-	fprintf(fp, "}\n");
-	// fclose(fp);
-}
-void f()
-{
-	system("leaks minishell");
-}
-// t_node* delfirstt(t_node **node) {
-//     if (*node == NULL)
-//         return NULL;
-//     *node = (*node)->next;
-//     return *node;
-// }
-
-// void funnn(t_node **node, char *key)
-// {
-//     t_node *tmp;
-//     if (ft_strcmp((*node)->value, key))
-//     {
-//         *node = delfirstt(node);
-//         return ;
-//     }
-//     t_node *tmp1 = *node;
-//     while (tmp1->next != NULL)
-//     {
-//         if (ft_strcmp(tmp1->next->value, key)) {
-//             tmp = tmp1->next;
-//             tmp1->next = tmp1->next->next;
-//             return;
-//         }
-//         tmp1 = tmp1->next;
-//     } 
-// }
-// t_node* delfirstt(t_node **node) {
-//     if (*node == NULL)
-//         return NULL;
-//     *node = (*node)->next;
-//     return *node;
-// }
-
-// void funn(t_node ***node, char *key)
-// {
-//     if (ft_strcmp((**node)->value, key))
-//     {
-//         **node = delfirst(*node);
-//         return;
-//     }
-//     t_node **tmp1 = *node;
-//     while ((*tmp1)->next != NULL)
-//     {
-//         if (ft_strcmp((*tmp1)->next->value, key)) {
-//             (*tmp1)->next = (*tmp1)->next->next;
-//             return;
-//         }
-//         *tmp1 = (*tmp1)->next;
-//     }
-// }
-
 int main(int ac, char **av, char **envp)
 {
-	t_list *list;
-	int i;
-	int index;
-	t_arbre *arbre;
-	t_list *nlist = NULL;
-	t_env *env;
-	t_env *exp;
-	list = NULL;
-	int	n = 0;
+	t_list				*list;
+	int					i;
+	int					index;
+	t_arbre				*arbre;
+	t_list				*nlist;
+	t_env				*env;
+	t_env				*exp;
 	struct sigaction	sa;
+	int					n;
+
+	list = NULL;
+	rl_catch_signals = 0;
+	nlist = NULL;
 	sa.sa_flags = SA_SIGINFO;
 	sa.sa_sigaction = handler_signel;
 	sigaction(SIGINT, &sa, NULL);
 	sigaction(SIGQUIT, &sa, NULL);
-
-	// rl_catch_signals = 0;
 	env = ft_env_parser(envp);
 	exp = ft_env_parser(envp);
 	if (!env)
@@ -196,10 +73,9 @@ int main(int ac, char **av, char **envp)
 	ft_lstadd_back(&exp, env_new("OLDPWD", exp));
 	(void)ac;
 	(void)av;
-	// (void)envp;
 	while (1)
 	{
-		(1) && (index = 0, i = 0, list = c_list(), list->str = 0);
+		(1) && (n = 0, index = 0, i = 0, list = c_list(), list->str = 0);
 		if (!list)
 			(1) && (printf("ERROR CREAT LISTE\n") && (index = 1));
 		if (!index)
