@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 03:19:27 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/24 07:01:13 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/24 12:39:44 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int	read_line_herdoc(int fd, t_nnode *node, t_env *exp, int *n)
 		free(str);
 	}
 	if (str)
-		(1) && (free(str), str = 0);
+		(1) && (close(fd), free(str), str = 0);
 	return (open_tty(n));
 }
 
