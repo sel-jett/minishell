@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:48:58 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/24 07:13:05 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/24 10:19:41 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,25 +27,23 @@
 # include <readline/history.h>
 # include <stdbool.h>
 
-// # include "/Users/amel-has/.brew/opt/readline/include/readline/readline.h"
-// # include "/Users/amel-has/.brew/opt/readline/include/readline/history.h"
-// void			print_tree(t_node_arbre    *tree, int c);
-// void            affiche(t_list *list);
-int	open_herdoc_0(t_node *tmp, t_env *exp);
-void	check_(t_node *tmp, t_nnode *redir_node);
-int	add_two( t_list *list, int *i, int mode);
-int	oxe5(t_node *tmp);
-int	check_exp(t_node *tmp);
-int	check_apres_parentheses(t_node *node);
-int	check_enter_parentheses(t_node *node);
-bool	open_herdoc(t_nnode *node, char **file,t_env *exp);
-bool    ft_strcmp(char *s1, char *s2);
-int	ft_strlen(char *str);
-char            **array_dupper(char **str);
-int             ope(t_node *node);
-int             plant_5(t_node	*tmp, t_list *list);
-int             add_args(t_nlist *list, char *str, int *i);
-void            affichage(int n);
+int				open_tty(int *n);
+void			handler(int signal);
+int				open_herdoc_0(t_node *tmp, t_env *exp, int *n);
+void			check_(t_node *tmp, t_nnode *redir_node);
+int				add_two( t_list *list, int *i, int mode);
+int				oxe5(t_node *tmp);
+int				check_exp(t_node *tmp);
+int				check_apres_parentheses(t_node *node);
+int				check_enter_parentheses(t_node *node);
+bool			open_herdoc(t_nnode *node, char **file, t_env *exp, int *n);
+bool			ft_strcmp(char *s1, char *s2);
+int				ft_strlen(char *str);
+char			**array_dupper(char **str);
+int				ope(t_node *node);
+int				plant_5(t_node	*tmp, t_list *list);
+int				add_args(t_nlist *list, char *str, int *i);
+void			affichage(int n);
 int				ft_status(int status, bool mode);
 void			check_wilc(t_node *node);
 bool			is_spaces(char c);
@@ -63,7 +61,7 @@ t_nlist			*c_nlist(void);
 t_nnode			*c_nnode(t_node *node);
 void			add_nback(t_nlist *list, t_nnode *node);
 int				add_args(t_nlist *list, char *str, int *i);
-int				check_syntax_1(t_node *tmp, t_env *exp);
+int				check_syntax_1(t_node *tmp, t_env *exp, int *n);
 int				check_syntax_2(t_node *tmp);
 int				check_syntax_3(t_node *tmp);
 int				check_syntax_4(t_node *tmp);
@@ -81,17 +79,17 @@ int				plant_3(t_list *list, int *i);
 int				plant_1(t_list *list, int *i);
 int				plant_2(t_list *list, int *i);
 int				spaces(t_list *list, int *i);
-int				plant_4(t_list *list, t_env *exp);
+int				plant_4(t_list *list, t_env *exp, int *n);
 int				check(int c);
 int				is_empty(char *str);
 int				add_one(t_list	*list, int *i, int mode);
 int				add_list_redir(t_node *tmp);
 int				plant_6(t_node *top, t_node_arbre **racine);
 ///////////////////////// EXECUTION //////////////////////////
-
 char			*ft_wild_joiner(char **ptr3);
 char			*wild_sorting(char *str);
-char			*ft_str_joiner(char **env_var, char **path, char **cmmd, int *i);
+char			*ft_str_joiner(char **env_var,
+					char **path, char **cmmd, int *i);
 void			igno_sig(void);
 void			def_sig(void);
 char			**checkerr(char *str, int *len);
@@ -116,7 +114,8 @@ void			ft_execute_pipe(t_node_arbre *tree, t_env *e, t_env *exp);
 void			ft_execute_and(t_node_arbre *tree, t_env *e, t_env *exp);
 void			ft_execute_or(t_node_arbre *tree, t_env *e, t_env *exp);
 void			ft_execute_subshell(t_node_arbre *tree, t_env *e, t_env *exp);
-void			ft_execute_redir_out(t_node_arbre *tree, t_env	*env, t_env *exp);
+void			ft_execute_redir_out(t_node_arbre *tree,
+					t_env	*env, t_env *exp);
 void			count_joyner(char **str, int *len);
 void			ft_printf(const char *str, const char *str2);
 void			backslach_filler(char **str);
@@ -130,11 +129,9 @@ char			*get_path(t_env *env);
 char			**redirlist_to_arr(t_nlist *list_redir);
 int				length(char *s, char *str);
 int				only_wild(char *str);
-int             is_alpha_4(char c);
+int				is_alpha_4(char c);
 char			*ft_execute_wild(char *str);
-
 ///////////////////////// BUILTINS //////////////////////////
-
 int				first_key_checker(char *cmmd);
 int				contain_wild(char *str);
 int				global_checker(char *str);
@@ -160,7 +157,8 @@ char			*ft_strtrim(char *cmd);
 int				check_first(char *cmd, t_env *exp);
 char			*find_oldpwd(t_env *cenv);
 t_env			*ft_lstlast(t_env *lst);
-void			ft_list_remove_if(t_env **begin_list, void *data_ref, int (*cmp)());
+void			ft_list_remove_if(t_env **begin_list,
+					void *data_ref, int (*cmp)());
 char			*ft_strdup(char *s);
 void			ft_fpintf(const char *msg);
 char			*ft_strjoin(char *s1, char *s2);
@@ -169,7 +167,7 @@ void			echo(const char **path, int mode);
 int				ft_strncmp_lfassi(char *s1, char *s2);
 void			ft_unset(char **cmd, t_env ***cnev, t_env ***exp);
 void			ft_export(char **cmd, t_env **cnev, t_env **exp);
-void			cd(const char **path, t_env **cenv ,t_env **exp);
+void			cd(const char **path, t_env **cenv, t_env **exp);
 void			ft_lstadd_back(t_env **lst, t_env *neww);
 int				ft_strlen_b(const char *str);
 void			ft_env(t_env *tmp);
@@ -177,15 +175,14 @@ void			ft_print_arr(char **arr);
 void			ft_builtin(char **cmd, t_env **cenv, t_env **exp);
 void			ft_sort_list(t_env **env);
 int				ft_strncmp(char *s1, char *s2);
-char			*path_getter(char	*temp, char	*temp_old, char *b, const char **path);
+char			*path_getter(char	*temp, char	*temp_old,
+					char *b, const char **path);
 int				cd_error(const char *path);
 void			cd_second(void);
 int				cd_old(const char *path);
 int				cd_home(const char *path);
-void			cd_application(t_env **cenv, t_env **exp, char *b, const char **path);
-
-
-
+void			cd_application(t_env **cenv, t_env **exp,
+					char *b, const char **path);
 ////////////////////////////////////// EXPAND //////////////////
 char			*ft_strjoin_char(char *s1, char s2);
 void			ct_exp(int *i, int *k, char *cmd);
@@ -194,5 +191,4 @@ char			*ft_expand(t_env *exp, char *cmd);
 char			*ft_itoa(int n);
 int				is_alpha_3(char c);
 char			**joyner(char **str);
-
 #endif

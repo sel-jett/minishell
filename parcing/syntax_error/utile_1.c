@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:19:17 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/21 08:27:45 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/24 07:03:25 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,4 +80,21 @@ int	check_exp(t_node *tmp)
 	if (tmp->prev && tmp->prev->value && tmp->prev->value[0] == '(')
 		return (1);
 	return (0);
+}
+
+int	open_tty(int *n)
+{
+	int	fd;
+
+	if (ttyname(0) == 0)
+	{
+		*n = 1;
+		fd = open(ttyname(1), O_RDONLY);
+		if (fd == -1)
+			return (0);
+		if (dup2(0, fd) == -1)
+			return (0);
+		ft_status(1, 1);
+	}
+	return (1);
 }

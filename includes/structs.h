@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/03/22 07:11:23 by sel-jett         ###   ########.fr       */
+/*   Created: 2024/03/24 06:25:44 by amel-has          #+#    #+#             */
+/*   Updated: 2024/03/24 06:25:45 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
