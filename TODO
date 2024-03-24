@@ -69,21 +69,10 @@ declare -x TERM="xterm-256color"
 declare -x _="/Users/sel-jett/Desktop/minishell/./minishell"
 declare -x OLDPWD
 
-TEST
-declare -x TEST `
-declare -x TEST
-
-export TEST=LOL && echo $TEST$TEST$TEST=lol$TEST
-
-export TEST="ls       -l     - a" && echo $TEST && $LS
-
-env -i
-
 unset doesnt work
  export | grep SECURITYSESSIONID
 declare -x SECURITYSESSIONID="186a8
 
-$var= "ls -la"
 <<<<<<< HEAD
 =======
 
@@ -102,7 +91,9 @@ bash: fhjfgf: command not found
 << l ()
 > l
 bash: syntax error near unexpected token `('
- $a ""
 
- bash-3.2$ ls > *
-bash: *: ambiguous redirect
+
+
+
+exit 3243259034
+env -i

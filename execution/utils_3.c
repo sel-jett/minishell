@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 20:33:43 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/23 07:23:30 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/23 23:30:05 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,11 @@ void	ft_execve(char *env_var, char **env, char **cmmd)
 
 char	**arr_filler(t_node	*tmp, char **arr, int i)
 {
+	int		check;
+
+	check = 0;
+	if (ft_strcmp(tmp->value, "export"))
+		check = 1;
 	while (tmp)
 	{
 		if (!(tmp->value)[0] && i > 0 && tmp->flag_space == 0)
@@ -32,8 +37,11 @@ char	**arr_filler(t_node	*tmp, char **arr, int i)
 			tmp = tmp->next;
 			if (!tmp)
 				break ;
-			arr[i] = ft_strjoin(arr[i], "\\");
-			tmp->flag_space = 1;
+			if (check == 0)
+			{
+				arr[i] = ft_strjoin(arr[i], "\\");
+				tmp->flag_space = 1;
+			}
 		}
 		if (!tmp->flag_space)
 		{

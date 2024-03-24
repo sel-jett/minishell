@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 07:03:43 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/23 07:11:18 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/24 06:16:50 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,63 @@ static	int	equal_check(char *cmd)
 	return (check);
 }
 
-void	ft_env_export(t_env *tmp)
+int	ft_strncmp_lfassi(char *s1, char *s2)
 {
+	int	i;
+
+	i = 0;
+	while (s1[i] && s2[i] && s1[i] == s2[i])
+		i++;
+	return (s1[i] - s2[i]);
+}
+
+void	ft_env_export(t_env *env)
+{
+	t_env	*tmp;
+	t_env	*tmp2;
+	t_env	*tmp3;
+	char	*key;
+	char	*value;
+	int		i;
+
+	tmp = env;
+	tmp3 = env;
+	while (tmp)
+	{
+	i = 0;
+		tmp2 = tmp;
+		while (tmp2->next)
+		{
+			if (ft_strncmp_lfassi(tmp2->key, tmp2->next->key) > 0)
+			{
+				key = tmp2->next->key;
+				value = tmp2->next->value;
+				tmp2->next->key = tmp2->key;
+				tmp2->next->value = tmp2->value;
+				tmp2->key = key;
+				tmp2->value = value;
+				tmp = tmp3;
+				i = 1;
+			}
+			tmp2 = tmp2->next;
+		}
+		if (i == 0)
+			tmp = tmp->next;
+	}
+	tmp = env;
 	while (tmp)
 	{
 		printf("declare -x ");
-		printf("%s", tmp->key);
-		if (tmp->value)
+		if (tmp->key)
+		{
+			printf("%s", tmp->key);
+			if (tmp->value)
+				printf("=\"%s\"\n", tmp->value);
+			else
+				printf("\n");
+		}
+		else if (tmp->value)
 			printf("=\"%s\"\n", tmp->value);
-		else
-			printf("\n");
 		tmp = tmp->next;
 	}
 }
