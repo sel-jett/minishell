@@ -6,13 +6,14 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 07:12:48 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/24 13:04:25 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/24 13:12:58 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minishell.h"
 
 int x = 0;
+
 
 void	handler_signel(int signal, siginfo_t *siginfo, void *vd)
 {
@@ -123,6 +124,7 @@ int main(int ac, char **av, char **envp)
 				}
 				if (!index)
 				{
+					// print_tree(arbre->racine);
 					execute(arbre->racine, env, exp);
 					sigaction(SIGINT, &sa, NULL);
 					sigaction(SIGQUIT, &sa, NULL);
