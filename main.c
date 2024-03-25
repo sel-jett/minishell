@@ -6,13 +6,11 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 07:12:48 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/25 17:15:38 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/25 18:16:57 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minishell.h"
-
-int x = 0;
 
 void	handler_signel(int signal, siginfo_t *siginfo, void *vd)
 {
@@ -20,7 +18,7 @@ void	handler_signel(int signal, siginfo_t *siginfo, void *vd)
 	(void)siginfo;
 	if (signal == SIGINT)
 	{
-		if (x == 0)
+		if (g_x == 0)
 		{
 			ft_status(1, 1);
 			printf("\n");
@@ -72,8 +70,8 @@ int	main(int ac, char **av, char **envp)
 				add_history(var.list->str);
 				read_parse(&var.index, var.list, var.exp, &var.n);
 				add_redir_parse(var.list, &var.index, var.n, &var.nlist);
-				if (x == 10)
-					x = 0;
+				if (g_x == 10)
+					g_x = 0;
 				if (!var.index)
 				{
 					var.arbre = c_arbre();
@@ -90,7 +88,7 @@ int	main(int ac, char **av, char **envp)
 					execute(var.arbre->racine, var.env, var.exp);
 					sigaction(SIGINT, &var.sa, NULL);
 					sigaction(SIGQUIT, &var.sa, NULL);
-					x = 0;
+					g_x = 0;
 					free(var.list->str);
 				}
 			}

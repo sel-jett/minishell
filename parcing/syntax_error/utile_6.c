@@ -6,38 +6,18 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 03:19:27 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/25 17:08:50 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/25 18:18:01 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static bool	is_text2(t_node *tmp)
+bool	is_text2(t_node *tmp)
 {
 	if (tmp->mode == TOKEN_EXPR || tmp->mode == TOKEN_Double_Q
 		|| tmp->mode == TOKEN_Single_Q)
 		return (1);
 	return (0);
-}
-
-void	ft_count(t_node *node, int *len, int *index)
-{
-	int	i;
-
-	while (node && is_text2(node))
-	{
-		if (node->mode != TOKEN_EXPR)
-			*index = 1;
-		i = 0;
-		while (node->value[i])
-		{
-			i++;
-			(*len)++;
-		}
-		if (node->flage_space_ap == 1)
-			break ;
-		node = node->next;
-	}
 }
 
 char	*cancat(t_node *node, int *index)
@@ -69,40 +49,48 @@ char	*cancat(t_node *node, int *index)
 	return (str[len] = '\0', str);
 }
 
+char	*herdoc_handel(t_node *i_node, char *str, t_env *exp)
+{
+	char	*s;
+	int		index;
+
+	index = 0;
+	s = cancat(i_node, &index);
+	if (!s)
+		return (0);
+	if (ft_strcmp(s, str))
+	{
+		free(str);
+		str = NULL;
+		return (0);
+	}
+	str = ft_strjoin2(str, "\n");
+	(index == 0) && (str = ft_expand(exp, str));
+	if (!str)
+		return (0);
+	return (str);
+}
+
 int	read_line_herdoc(int fd, t_node *node, t_env *exp, int *n)
 {
 	char		*str;
-	int			index;
 	t_node		*i_node;
-	extern int 	x;
+	extern int	g_x;
 
-	(1) && (i_node = NULL, index = 0, str = 0, signal(SIGINT, handler));
-	while (1 && x != 10)
+	(1) && (i_node = NULL, str = 0, signal(SIGINT, handler));
+	while (1 && g_x != 10)
 	{
-		if (node && node->next && is_text(node->next))
-			i_node = node->next;
-		else if (node && node->next && node->next->next
-			&& is_text(node->next->next))
-			i_node = node->next->next;
+		i_node_make(node, &i_node);
 		if (!i_node)
 			break ;
 		str = readline("heredoc> ");
 		if (!str)
-		{
- 			break ;
-		}
+			break ;
 		if (node->next && i_node)
 		{
-			if (ft_strcmp(cancat(i_node, &index), str))
-			{
-				free(str);
-				str = NULL;
-				break ;
-			}
-			str = ft_strjoin2(str, "\n");
-			(index == 0) && (str = ft_expand(exp, str));
+			str = herdoc_handel(i_node, str, exp);
 			if (!str)
-				return (0);
+				break ;
 			write(fd, str, ft_strlen(str));
 		}
 		free(str);
@@ -112,7 +100,7 @@ int	read_line_herdoc(int fd, t_node *node, t_env *exp, int *n)
 	return (close(fd), open_tty(n));
 }
 
-bool open_herdoc(t_node *node, char **file, t_env *exp, int *m)
+bool	open_herdoc(t_node *node, char **file, t_env *exp, int *m)
 {
 	int			n;
 	int			fd;

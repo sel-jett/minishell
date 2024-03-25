@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:48:58 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/25 05:06:32 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/25 18:16:03 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@
 # include <readline/history.h>
 # include <stdbool.h>
 
+int				g_x;
+bool			is_text2(t_node *tmp);
+void			ft_count(t_node *node, int *len, int *index);
+void			i_node_make(t_node *node, t_node **i_node);
 void			read_parse(int *index, t_list *list, t_env *exp, int *n);
 void			ctrld(char *str, int *index);
 void			add_redir_parse(t_list *list,

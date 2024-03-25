@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:00:33 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/25 17:08:41 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/25 18:18:42 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,11 @@ int	plant_1(t_list *list, int *i)
 
 void	handler(int signal)
 {
-	extern int x;
+	extern int	g_x;
 
 	if (signal == SIGINT)
 	{
 		close(0);
-		x = 10;
+		g_x = 10;
 	}
 }

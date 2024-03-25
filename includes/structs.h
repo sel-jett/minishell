@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 06:25:44 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/25 05:07:18 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/25 18:18:29 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ typedef struct s_var
 	t_env				*exp;
 	struct sigaction	sa;
 	int					n;
-}t_var;
+}	t_var;
 
 typedef struct s_arbre
 {
