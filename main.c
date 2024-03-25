@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 07:12:48 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/25 02:02:24 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/25 04:11:27 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ int main(int ac, char **av, char **envp)
 				printf("exit\n");
 				exit(0);
 			}
-			printf("[%s]\n",list->str);
 			if (is_empty(list->str))
 				index = 1;
 			if (!index)

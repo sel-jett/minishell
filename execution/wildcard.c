@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 22:12:25 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/22 08:17:44 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/25 02:08:21 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ int	ft_strlen_wild_end(char *s)
 	int	i;
 
 	i = 0;
+	if (!s)
+		return (0);
 	while (s[i] && s[i] != '*')
 		i++;
 	return (i);
@@ -59,6 +61,8 @@ int	ft_strlen_wild_first(char *s)
 	int	j;
 
 	i = 0;
+	if (!s)
+		return (0);
 	while (s[i] && s[i] == '*')
 		i++;
 	j = 0;
