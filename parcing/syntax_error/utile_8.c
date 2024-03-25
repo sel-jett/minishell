@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 08:19:01 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/24 05:44:42 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/25 00:25:00 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static int	plant4_oxe2(t_node *tmp, t_env *exp, int *n)
 	return (1);
 }
 
-int	plant_4(t_list *list, t_env *exp, int *n)
+int plant_4(t_list *list, t_env *exp, int *n)
 {
 	t_node	*tmp;
 	int		count_parentheses;

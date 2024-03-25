@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 07:12:48 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/24 16:20:35 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/25 01:04:07 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,7 @@ int main(int ac, char **av, char **envp)
 		if (!index)
 		{
 			if (x == 0)
-				list->str = readline("minishell > ");
-			// printf("[%s]\n",list->str);
-			// index = 1;
+			list->str = readline("minishell > ");
 			if (!list->str)
 			{
 				printf("exit\n");
@@ -138,7 +136,6 @@ int main(int ac, char **av, char **envp)
 				}
 				if (!index)
 				{
-					// print_tree(arbre->racine);
 					execute(arbre->racine, env, exp);
 					sigaction(SIGINT, &sa, NULL);
 					sigaction(SIGQUIT, &sa, NULL);

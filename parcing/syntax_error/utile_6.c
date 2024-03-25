@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 03:19:27 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/24 14:53:23 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/25 00:50:00 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ static bool	is_text2(t_node *tmp)
 void	ft_count(t_node *node, int *len, int *index)
 {
 	int	i;
-
 	while (node && is_text2(node))
 	{
 		if (node->mode != TOKEN_EXPR)
@@ -75,17 +74,19 @@ int	read_line_herdoc(int fd, t_node *node, t_env *exp, int *n)
 	int			index;
 	t_node		*i_node;
 
-	(1) && (index = 0, str = 0, signal(SIGINT, handler));
+	(1) && (i_node = NULL, index = 0, str = 0, signal(SIGINT, handler));
 	while (1)
 	{
+		if (node && node->next && is_text(node->next))
+			i_node = node->next;
+		else if(node && node->next && node->next->next && is_text(node->next->next))
+			i_node = node->next->next;
+		if (!i_node)
+			break ;
 		str = readline("heredoc> ");
 		if (!str)
 			break ;
-		if (node && node->next && is_text(node->next))
-			i_node = node->next;
-		else if(node && node->next && node->next && node->next->next && is_text(node->next->next))
-			i_node = node->next->next;
-		if (node->next)
+		if (node->next && i_node)
 		{
 			if (ft_strcmp(cancat(i_node, &index), str))
 				break ;
