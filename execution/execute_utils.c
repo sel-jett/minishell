@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:03:47 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/24 14:32:05 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/25 05:18:32 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,13 @@ char	*ft_handler(char **cmmd, char **path)
 				return (NULL);
 		if (!access(env_var, F_OK | X_OK))
 			return (env_var);
+		else if (!access(env_var, F_OK))
+		{
+			ft_printf("minishell: ", cmmd[0]);
+			ft_printf(": Permission denied\n", NULL);
+			ft_status(126, 1);
+			return (NULL);
+		}
 		i++;
 	}
 	ft_printf("minishell: ", cmmd[0]);

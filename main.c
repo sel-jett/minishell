@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 07:12:48 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/25 05:11:19 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/25 07:32:22 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ int	main(int ac, char **av, char **envp)
 				}
 				if (!var.index)
 				{
+					// printf("ah hna\n");
 					execute(var.arbre->racine, var.env, var.exp);
 					sigaction(SIGINT, &var.sa, NULL);
 					sigaction(SIGQUIT, &var.sa, NULL);

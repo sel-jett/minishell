@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 20:33:43 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/24 20:16:54 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/25 02:19:46 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 void	ft_execve(char *env_var, char **env, char **cmmd)
 {
-	if (execve(env_var, cmmd, env) == -1)
+	if (execve(env_var, cmmd, env))
 	{
 		ft_printf("minishell: ", cmmd[0]);
 		ft_printf(": ", NULL);
 		perror("");
-		exit(127);
+		exit(126);
 	}
 }
 

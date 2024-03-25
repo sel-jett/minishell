@@ -1,3 +1,6 @@
+# hada defience 3lach maradich nhandliw backeslach  echo "12\""
+
+#redir da3o
 minishell > mkdir -p a/b/c/d/e/f
 [mkdir -p a/b/c/d/e/f]
 minishell > cd a/b/c/d/e/f/
@@ -25,3 +28,10 @@ minishell > pwd
 echo "> >> < * ? [ ] | ; [ ] || && ( ) & # $  <<"
 echo "$?$USER"
 echo " $?"
+//=------------------>
+minishell > ls >"./outfiles/outfile"x
+minishell > ls >"./outfiles/outfile"l
+minishell > 
+<-------------------------->
+unset HOME && cd
+cd ~ / change repo vers first 
