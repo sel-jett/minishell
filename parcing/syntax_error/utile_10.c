@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 07:04:56 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/25 04:56:49 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/25 17:13:59 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,6 @@ void	ctrld(char *str, int *index)
 		printf("exit\n");
 		exit(0);
 	}
-	if (is_empty(str))
+	if (!*index && is_empty(str))
 		*index = 1;
 }

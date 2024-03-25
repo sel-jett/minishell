@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utile_11.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 04:53:11 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/25 12:57:45 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/25 17:14:33 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	handel_signel_(struct sigaction sa)
 {
-	// rl_catch_signals = 0;
+	rl_catch_signals = 0;
 	sigaction(SIGINT, &sa, NULL);
-	sigaction(SIGQUIT, &sa, NULL);
+	sigaction(SIGQUIT, &sa, NULL);	
 }
 
 void	read_parse(int *index, t_list *list, t_env *exp, int *n)

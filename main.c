@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 07:12:48 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/25 12:55:27 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/25 17:11:14 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	handler_signel(int signal, siginfo_t *siginfo, void *vd)
 			ft_status(1, 1);
 			printf("\n");
 			rl_on_new_line();
-			// rl_replace_line("", 0);
+			rl_replace_line("", 0);
 			rl_redisplay();
 		}
 		else
@@ -59,11 +59,12 @@ int	main(int ac, char **av, char **envp)
 	(void)av;
 	while (1)
 	{
-		(1) && (var.n = 0, var.index = 0, var.list = c_list(), var.list->str = 0);
+		(1) && (var.n = 0, var.index = 0, var.list = c_list());
 		if (!var.list)
 			(1) && (printf("ERROR CREAT LISTE\n") && (var.index = 1));
 		if (!var.index)
 		{
+			var.list->str = 0;
 			var.list->str = readline("minishell > ");
 			ctrld(var.list->str, &var.index);
 			if (!var.index)
@@ -71,6 +72,8 @@ int	main(int ac, char **av, char **envp)
 				add_history(var.list->str);
 				read_parse(&var.index, var.list, var.exp, &var.n);
 				add_redir_parse(var.list, &var.index, var.n, &var.nlist);
+				if (x == 10)
+					x = 0;
 				if (!var.index)
 				{
 					var.arbre = c_arbre();
@@ -84,7 +87,6 @@ int	main(int ac, char **av, char **envp)
 				}
 				if (!var.index)
 				{
-					// printf("ah hna\n");
 					execute(var.arbre->racine, var.env, var.exp);
 					sigaction(SIGINT, &var.sa, NULL);
 					sigaction(SIGQUIT, &var.sa, NULL);
