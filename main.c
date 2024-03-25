@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 07:12:48 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/25 01:49:24 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/25 02:02:24 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	handler_signel(int signal, siginfo_t *siginfo, void *vd)
 			ft_status(1, 1);
 			printf("\n");
 			rl_on_new_line();
-			rl_replace_line("", 0);
+			// rl_replace_line("", 0);
 			rl_redisplay();
 		}
 		else
@@ -50,7 +50,7 @@ int main(int ac, char **av, char **envp)
 	int					n;
 
 	list = NULL;
-	rl_catch_signals = 0;
+	// rl_catch_signals = 0;
 	nlist = NULL;
 	sa.sa_flags = SA_SIGINFO;
 	sa.sa_sigaction = handler_signel;
@@ -109,7 +109,7 @@ int main(int ac, char **av, char **envp)
 					if (is_redir(i_node))
 					{
 						if (!add_list_redir(i_node))
-							return (index = 1, 0);	
+							return (index = 1, 0);
 					}
 					i_node = i_node->next;
 				}

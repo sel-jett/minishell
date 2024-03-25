@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 23:18:52 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/24 22:46:13 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/25 01:41:10 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,17 @@
 
 char	*cd_init(t_env **cenv, t_env **exp, char *pwd)
 {
-	// char	*pwd;
 	char	*temp_old;
 
-	// pwd = getcwd(0, 0);
-	if (!pwd)
+	if (value_key(*cenv, "PWD"))
+		pwd = value_key(*cenv, "PWD");
+	else if (!pwd)
 	{
 		ft_printf("minishell: cd: PWD not set\n", NULL);
 		ft_status(1, 1);
 		return (NULL);
 	}
 	temp_old = find_oldpwd(*exp);
-	ft_list_remove_if(cenv, "PWD", ft_strncmp_one);
 	ft_list_remove_if(exp, "PWD", ft_strncmp_one);
 	ft_list_remove_if(cenv, "OLDPWD", ft_strncmp_one);
 	ft_list_remove_if(exp, "OLDPWD", ft_strncmp_one);
@@ -55,11 +54,9 @@ void	cd_applier(t_env **cenv, t_env **exp, char *b, const char **path)
 	temp_old = cd_init(cenv, exp, b);
 	if (!temp_old)
 		return ;
-	// printf("temp_old: %s\n", temp_old);
 	if (!getcwd(b, PATH_MAX))
 	{
 		cd_second();
-		// temp_old = ft_strjoin(temp_old, (char *)path[0]);
 		tmp = env_new(temp_old, *cenv);
 		if (!tmp)
 			return ;
@@ -67,8 +64,8 @@ void	cd_applier(t_env **cenv, t_env **exp, char *b, const char **path)
 		tmp = env_new(temp_old, *exp);
 		if (!tmp)
 			return ;
+	temp = path_getter(temp, *cenv, 0, path);
 		ft_lstadd_back(exp, tmp);
-	temp = path_getter(temp, temp_old, b, path);
 
 	}
 	else
@@ -80,8 +77,8 @@ void	cd_applier(t_env **cenv, t_env **exp, char *b, const char **path)
 		tmp = env_new(temp_old, *exp);
 		if (!tmp)
 			return ;
+	temp = path_getter(temp, *cenv, 1, path);
 		ft_lstadd_back(exp, tmp);
-	temp = path_getter(temp, temp_old, b, path);
 	}
 	cd_setter(temp, cenv, exp, tmp);
 }
@@ -99,9 +96,15 @@ void	cd(const char **path, t_env **cenv, t_env **exp)
 	char	*b;
 
 	b = my_malloc(PATH_MAX + 1, 1);
-	if (!path[0] || !ft_strncmp((char *)path[0], "~") || \
+	if (!path[0] || !path[0][0] || !ft_strncmp((char *)path[0], "~") || \
 		!ft_strncmp((char *)path[0], "--"))
 	{
+		if ((!path[0] || !path[0][0]) && (!value_key(*cenv, "HOME") || \
+		!(value_key(*cenv, "HOME"))[0]))
+		{
+			ft_status(0, 0);
+			return ;
+		}
 		path[0] = value_key(*cenv, "HOME");
 		if (!path[0])
 		{

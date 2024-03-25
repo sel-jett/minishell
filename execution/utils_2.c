@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:10:14 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/24 14:51:26 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/25 01:18:45 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	ft_print_arr(char **arr)
 	i = 0;
 	while (arr[i])
 	{
-		dprintf(2, "%s\n", arr[i]);
+		dprintf(2, "\"%s\"\n", arr[i]);
 		i++;
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:48:58 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/25 00:11:01 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/25 01:09:35 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,8 +175,7 @@ void			ft_print_arr(char **arr);
 void			ft_builtin(char **cmd, t_env **cenv, t_env **exp);
 void			ft_sort_list(t_env **env);
 int				ft_strncmp(char *s1, char *s2);
-char			*path_getter(char	*temp, char	*temp_old,
-					char *b, const char **path);
+char	*path_getter(char	*temp, t_env *cenv, int i, const char **path);
 int				cd_error(const char *path);
 void			cd_second(void);
 int				cd_old(const char *path);
