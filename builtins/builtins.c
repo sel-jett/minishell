@@ -6,24 +6,27 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 22:43:32 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/24 22:30:07 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/25 01:07:51 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-char	*path_getter(char	*temp, char	*temp_old, char *b, const char **path)
+char	*path_getter(char	*temp, t_env *cenv, int i, const char **path)
 {
-	(void)b;
-	if (getcwd(0, 0))
+	if (i == 1)
 	{
 		temp = ft_strjoin("PWD=", getcwd(0, 0));
+		ft_list_remove_if(&cenv, "PWD", ft_strncmp_one);
 		if (!temp)
 			return (NULL);
 	}
 	else
 	{
-		temp = pwd_joiner(temp_old, temp, (char *)path[0]);
+		temp = ft_strjoin("/", (char *)path[0]);
+		temp = ft_strjoin(ft_strdup(value_key(cenv, "PWD")), temp);
+		temp = ft_strjoin("PWD=", temp);
+		ft_list_remove_if(&cenv, "PWD", ft_strncmp_one);
 		if (!temp)
 			return (NULL);
 	}
@@ -124,7 +127,7 @@ void	ft_exit(char *str)
 	else
 	{
 		ft_printf("exit\n", NULL);
-		exit(0);
+		exit(ft_status(0, 0));
 	}
 }
 
