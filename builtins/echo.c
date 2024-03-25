@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 07:39:43 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/25 13:19:45 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/25 13:50:40 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static	int	echo_check(const char **path)
 	int	j;
 
 	i = 0;
-	if (!path || !path[0] || !path[0][0])
+	if (!path || !path[0])
 		return (-1);
 	if (path[0][0] == '-')
 	{

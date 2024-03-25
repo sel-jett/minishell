@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:03:47 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/25 12:56:08 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/25 13:59:58 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,13 @@ void	ft_execute_child(char **envp, char **cmmd, char **path)
 	char		*env_var;
 	extern int	x;
 
-	if (!envp || !envp[0])
+	if (!envp || !envp[0] || !cmmd || !cmmd[0])
 		return ;
+	// array_checker(cmmd);
+	// dprintf(2, "-------------------------------------------\n");
+	// ft_print_arr(cmmd);
+	// dprintf(2, "-------------------------------------------\n");
+	// return;
 	env_var = ft_handler(cmmd, path);
 	if (env_var || cmmd[0][0] == '/')
 	{
