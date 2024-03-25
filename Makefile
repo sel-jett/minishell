@@ -11,8 +11,8 @@ SRCS = ./parcing/allocation_free/creation1.c ./parcing/allocation_free/my_malloc
 	   ./builtins/env_parser_utils.c ./builtins/env_utils.c ./builtins/cd.c ./builtins/echo.c ./builtins/export_checker.c \
 	   ./builtins/env_parser.c ./parcing/syntax_error/utile_9.c ./parcing/syntax_error/utile_11.c\
 	   ./builtins/export.c ./builtins/ft_split.c ./builtins/ft_strlcpy.c ./parcing/syntax_error/utile_7.c \
-	   ./builtins/pwd.c ./builtins/unset.c ./builtins/utils.c ./builtins/ft_sort_list.c \
-	   ./expanding/expand_utils.c ./expanding/expand.c ./expanding/ft_itoa.c ./execution/utils_3.c ./execution/utils_4.c ./execution/utils.c \
+	   ./builtins/pwd.c ./builtins/unset.c ./builtins/utils.c \
+	   ./expanding/expand_utils.c ./expanding/check.c ./expanding/expand.c ./expanding/ft_itoa.c ./execution/utils_3.c ./execution/utils_4.c ./execution/utils.c \
 	   ./execution/wild_utils.c ./execution/wildcard.c ./execution/wild.c \
 	   ./builtins/env.c ./builtins/cd_utils.c ./builtins/builtins_utils.c ./builtins/builtins_utils_1.c ./builtins/builtins.c ./parcing/syntax_error/utile_10.c \
 

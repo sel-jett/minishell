@@ -6,10 +6,9 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 22:27:43 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/24 14:19:58 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/25 20:45:53 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../includes/minishell.h"
 
@@ -17,14 +16,6 @@ int	is_alpha_4(char c)
 {
 	if (!((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') \
 		|| c == '_'))
-		return (0);
-	return (1);
-}
-
-int	is_alpha_3(char c)
-{
-	if (!((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') \
-		|| c == '_' || (c >= '0' && c <= '9')))
 		return (0);
 	return (1);
 }
@@ -44,17 +35,12 @@ int	is_alpha_2(char *c)
 	return (1);
 }
 
-
-// t_env* delfirst(t_env ***node) {
-// 	**node = (**node)->next;
-// 	return **node;
-// }
-
-t_env **fun(t_env **node, char *key)
+t_env	**fun(t_env **node, char *key)
 {
+	t_env	*tmp1;
+
 	if (*node == NULL)
 		return (NULL);
-
 	if ((*node)->key && ft_strcmp((*node)->key, key))
 	{
 		if (*node == NULL)
@@ -63,16 +49,29 @@ t_env **fun(t_env **node, char *key)
 		(*node)->value = NULL;
 		return (&(*node)->next);
 	}
-	t_env *tmp1 = *node;
+	tmp1 = *node;
 	while ((tmp1)->next != NULL)
 	{
-		if (ft_strcmp((tmp1)->next->key, key)) {
+		if (ft_strcmp((tmp1)->next->key, key))
+		{
 			(tmp1)->next = (tmp1)->next->next;
 			return (node);
 		}
 		tmp1 = tmp1->next;
 	}
 	return (node);
+}
+
+int	ft_unset_write(char *str)
+{
+	int	check;
+
+	write(2, "mminishell: unset: `", 20);
+	write(2, str, ft_strlen_b(str));
+	write(2, "': not a valid identifier\n", 27);
+	check = 1;
+	ft_status(1, 1);
+	return (check);
 }
 
 void	ft_unset(char **cmd, t_env **cnev, t_env **exp)
@@ -91,13 +90,7 @@ void	ft_unset(char **cmd, t_env **cnev, t_env **exp)
 		while (dptr[j])
 		{
 			if (check == 1 || !is_alpha_2(dptr[j]))
-			{
-				write(2, "mminishell: unset: `", 20);
-				write(2, dptr[j], ft_strlen_b(dptr[j]));
-				write(2, "': not a valid identifier\n", 27);
-				check = 1;
-				ft_status(1, 1);
-			}
+				check = ft_unset_write(dptr[j]);
 			if (!check)
 			{
 				cnev = fun(cnev, dptr[j]);

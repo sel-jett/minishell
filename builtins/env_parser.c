@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 11:44:57 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/23 00:40:39 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/25 20:36:44 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ char	*get_value(char *data)
 	return (str);
 }
 
-static int	check_key(char *cmd)
+static int	check_key_1(char *cmd)
 {
 	int	i;
 
@@ -120,7 +120,7 @@ t_env	*env_new(char *data, t_env *tmp)
 	str = ft_expand(tmp, get_key(data));
 	(!str || !str[0]) && (str = get_key(data));
 	value_of = value_key(tmp, str);
-	if (check_key(data) && value_of)
+	if (check_key_1(data) && value_of)
 	{
 		gt_value = get_value(data);
 		(node->key = str) && (node->next = NULL);

@@ -6,30 +6,11 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 23:18:52 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/25 16:47:21 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/25 20:52:23 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-char	*cd_init(t_env **cenv, t_env **exp, char *pwd)
-{
-	char	*temp_old;
-
-	if (value_key(*cenv, "PWD"))
-		pwd = value_key(*cenv, "PWD");
-	else if (!pwd)
-	{
-		ft_printf("minishell: cd: PWD not set\n", NULL);
-		ft_status(1, 1);
-		return (NULL);
-	}
-	temp_old = find_oldpwd(*exp);
-	ft_list_remove_if(exp, "PWD", ft_strncmp_one);
-	ft_list_remove_if(cenv, "OLDPWD", ft_strncmp_one);
-	ft_list_remove_if(exp, "OLDPWD", ft_strncmp_one);
-	return (ft_strjoin("OLDPWD=", ft_strdup(pwd)));
-}
 
 void	cd_setter(char *temp, t_env **cenv, t_env **exp, t_env *tmp)
 {
@@ -78,6 +59,24 @@ void	cd_application(t_env **cenv, t_env **exp, char *b, const char **path)
 	cd_applier(cenv, exp, b, path);
 }
 
+int	cd_home_check(const char **path, t_env *cenv)
+{
+	if ((!path[0] || !path[0][0]) && (!value_key(cenv, "HOME") || \
+		!(value_key(cenv, "HOME"))[0]))
+	{
+		ft_status(0, 0);
+		return (0);
+	}
+	path[0] = value_key(cenv, "HOME");
+	if (!path[0])
+	{
+		ft_printf("minishell: cd: HOME not set\n", NULL);
+		ft_status(1, 1);
+		return (0);
+	}
+	return (1);
+}
+
 void	cd(const char **path, t_env **cenv, t_env **exp)
 {
 	char	*b;
@@ -86,19 +85,8 @@ void	cd(const char **path, t_env **cenv, t_env **exp)
 	if (!path[0] || !path[0][0] || !ft_strncmp((char *)path[0], "~") || \
 		!ft_strncmp((char *)path[0], "--"))
 	{
-		if ((!path[0] || !path[0][0]) && (!value_key(*cenv, "HOME") || \
-		!(value_key(*cenv, "HOME"))[0]))
-		{
-			ft_status(0, 0);
+		if (!cd_home_check(path, *cenv))
 			return ;
-		}
-		path[0] = value_key(*cenv, "HOME");
-		if (!path[0])
-		{
-			ft_printf("minishell: cd: HOME not set\n", NULL);
-			ft_status(1, 1);
-			return ;
-		}
 	}
 	else if (!ft_strncmp((char *)path[0], "-"))
 	{

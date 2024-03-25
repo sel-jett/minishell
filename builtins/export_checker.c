@@ -6,39 +6,20 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 07:26:29 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/25 20:31:40 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/25 20:34:47 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static int	is_alpha(int c)
+int	is_alpha(int c)
 {
 	return ((c >= 65 && c <= 90) || (c >= 97 && c <= 122));
 }
 
-static int	is_num(int c)
+int	is_num(int c)
 {
 	return (c >= 48 && c <= 57);
-}
-
-int	check_key(char *key)
-{
-	int	i;
-
-	i = 0;
-	if (!key)
-		return (0);
-	if (key[i] != '_' && !is_alpha(key[i]))
-		return (0);
-	i++;
-	while (key[i])
-	{
-		if (key[i] != '_' && !is_alpha(key[i]) && !is_num(key[i]))
-			return (0);
-		i++;
-	}
-	return (1);
 }
 
 int	valid_identifier(char *tmp, int i, int check2)

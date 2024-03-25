@@ -3,64 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 21:59:00 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/25 16:04:34 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/25 21:09:57 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-static char	*exp_mlc(int *i, int *k, char *cmd)
-{
-	int		l;
-	char	*venv;
-
-	l = 0;
-	venv = my_malloc(*k + 1, 1);
-	if (!venv)
-		return (NULL);
-	while (*k > 0)
-	{
-		if (!is_alpha_3(cmd[*i - *k]))
-			break ;
-		venv[l] = cmd[*i - *k];
-		l++;
-		(*k)--;
-	}
-	venv[l] = '\0';
-	return (venv);
-}
-
-char	*expander(char *new_cmd, char *cmd, t_env *exp)
-{
-	int		i;
-	int		k;
-	char	*venv;
-
-	(1) && (i = 0, k = 0);
-	while (cmd[i])
-	{
-		if (cmd[i] && cmd[i] == '$')
-		{
-			(1) && (ct_exp(&i, &k, cmd), venv = exp_mlc(&i, &k, cmd));
-			if (!venv)
-				return (NULL);
-			if (value_key(exp, venv))
-			{
-				new_cmd = ft_strjoin(new_cmd, value_key(exp, venv));
-				if (!new_cmd)
-					return (NULL);
-			}
-			continue ;
-		}
-		(1) && (venv = NULL, new_cmd = ft_strjoin_char(new_cmd, cmd[i]));
-		if (i++ && !new_cmd)
-			return (NULL);
-	}
-	return (new_cmd);
-}
 
 char	*itoa_status(char *new_cmd)
 {
@@ -103,13 +53,9 @@ char	*ft_expand(t_env *exp, char *cmd)
 	if (!cmd)
 		return (NULL);
 	if (!ft_strncmp(cmd, "$?"))
-	{
 		return (itoa_status(new_cmd));
-	}
 	else if (!ft_strncmp_one(cmd, "$?"))
-	{
 		return (itoa_joiner_status(new_cmd, cmd));
-	}
 	new_cmd = my_malloc(1, 1);
 	if (!new_cmd)
 		return (NULL);

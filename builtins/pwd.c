@@ -6,29 +6,11 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 23:55:37 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/25 02:05:10 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/25 21:02:55 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "builtins.h"
 #include "../includes/minishell.h"
-
-char	*find_pwd(t_env *cenv)
-{
-	char	*str;
-
-	if (!cenv)
-		cenv = cenv->next;
-	while (cenv && ft_strncmp_one(cenv->key, "PWD"))
-		cenv = cenv->next;
-	if (!cenv)
-		return (NULL);
-	str = ft_strjoin(cenv->key, "=");
-	str = ft_strjoin(str, cenv->value);
-	if (!str)
-		return (getcwd(0, 0));
-	return (str);
-}
 
 char	*find_oldpwd(t_env *cenv)
 {

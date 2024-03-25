@@ -6,12 +6,27 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 07:39:43 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/25 13:50:40 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/25 21:00:49 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // #include "builtins.h"
 #include "../includes/minishell.h"
+
+int	echo_loop(int i, int *j, const char **path)
+{
+	while (path[i][*j] && path[i][*j] > 32)
+	{
+		if (path[i][*j] != 'n')
+		{
+			if (i > 0)
+				(1) && (*j = -1);
+			return (0);
+		}
+		(*j)++;
+	}
+	return (1);
+}
 
 static	int	echo_check(const char **path)
 {
@@ -26,16 +41,8 @@ static	int	echo_check(const char **path)
 		while (path[i] && path[i][0] == '-')
 		{
 			j = 1;
-			while (path[i][j] && path[i][j] > 32)
-			{
-				if (path[i][j] != 'n')
-				{
-					if (i > 0)
-						(1) && (j = -1);
-					break;
-				}
-				j++;
-			}
+			if (!echo_loop(i, &j, path))
+				break ;
 			if (j == -1)
 				break ;
 			i++;
@@ -45,7 +52,7 @@ static	int	echo_check(const char **path)
 		return (0);
 	if (i > 0)
 		return (i);
-	return (1);
+	return (0);
 }
 
 void	echo_n(int check, const char **path)

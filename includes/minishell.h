@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:48:58 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/25 20:14:13 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/25 21:11:14 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,14 +152,18 @@ int				is_alpha_4(char c);
 char			*ft_execute_wild(char *str);
 ///////////////////////// BUILTINS //////////////////////////
 
+int				is_alpha(int c);
+int				is_num(int c);
 int				ft_isdigit(char c);
 void			erorr_builtins(char *cmd);
 int				ft_atoi(const char *str);
+int				check_key(char *key);
 void			exit_print(char *str);
 int				first_key_checker(char *cmmd);
 int				contain_wild(char *str);
 int				global_checker(char *str);
 int				chekcer(char *data);
+char			*cd_init(t_env **cenv, t_env **exp, char *pwd);
 int				ft_strncmp_wild(const char *s1, const char *s2, size_t n);
 int				ft_strlen_wild_end(char *s);
 int				ft_strlen_wild_first(char *s);
@@ -209,7 +213,9 @@ void			cd_application(t_env **cenv, t_env **exp,
 					char *b, const char **path);
 ////////////////////////////////////// EXPAND //////////////////
 
+char			*expander(char *new_cmd, char *cmd, t_env *exp);
 char			*ft_strjoin_char(char *s1, char s2);
+char			*exp_mlc(int *i, int *k, char *cmd);
 void			ct_exp(int *i, int *k, char *cmd);
 int				count_expand(char *cmd);
 char			*ft_expand(t_env *exp, char *cmd);
