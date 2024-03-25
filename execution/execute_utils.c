@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:03:47 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/25 18:35:27 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/25 19:27:19 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,14 +82,14 @@ void	ft_execute_child(char **envp, char **cmmd, char **path)
 	pid_t		pid;
 	int			status;
 	char		*env_var;
-	extern int	x;
+	extern int	g_x;
 
 	if (!envp || !envp[0] || !cmmd || !cmmd[0])
 		return ;
 	env_var = ft_handler(cmmd, path);
 	if (env_var || cmmd[0][0] == '/' || cmmd[0][0] == '.')
 	{
-		x = 1;
+		g_x = 1;
 		pid = fork();
 		if (pid == -1)
 		{

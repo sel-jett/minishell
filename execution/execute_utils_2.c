@@ -6,11 +6,35 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:06:52 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/25 17:30:22 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/25 20:06:59 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+char	*ft_func(char *str)
+{
+	int		len;
+	int		j;
+	char	*tmp;
+
+	len = ft_strlen_b(str);
+	tmp = my_malloc(len - 1, 1);
+	if (!tmp)
+		return (NULL);
+	len = 0;
+	j = 0;
+	while (str[len])
+	{
+		if (str[len] == '\\')
+			len += 2;
+		tmp[j] = str[len];
+		len++;
+		j++;
+	}
+	tmp[j] = '\0';
+	return (tmp);
+}
 
 char	**checkerr(char *str, int *len)
 {

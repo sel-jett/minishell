@@ -6,35 +6,11 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 12:09:39 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/25 18:36:57 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/25 20:07:10 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-char	*ft_func(char *str)
-{
-	int		len;
-	int		j;
-	char	*tmp;
-
-	len = ft_strlen_b(str);
-	tmp = my_malloc(len - 1, 1);
-	if (!tmp)
-		return (NULL);
-	len = 0;
-	j = 0;
-	while (str[len])
-	{
-		if (str[len] == '\\')
-			len += 2;
-		tmp[j] = str[len];
-		len++;
-		j++;
-	}
-	tmp[j] = '\0';
-	return (tmp);
-}
 
 int	ft_strlen_bi(char **str)
 {
@@ -75,35 +51,31 @@ char	**ft_func_string(char **str, int i)
 
 char	**array_structer(char **str)
 {
-	int	i;
-	int	j;
+	int	tab[2];
 
-	i = 0;
-	while (str && str[i] && str[i][0])
+	(1) && (tab[0] = 0, tab[1] = 0);
+	while (str && str[tab[0]] && str[tab[0]][0])
 	{
-		j = 0;
-		while (str[i][j])
+		while (str[tab[0]][tab[1]])
 		{
-			if (str[i][0] == '\\')
+			if (str[tab[0]][0] == '\\')
 			{
-				if (str[i + 1])
+				if (str[tab[0] + 1])
 				{
-					str = ft_func_string(str, i);
-					i = 0;
+					(1) && (str = ft_func_string(str, tab[0]), tab[0] = 0);
 					continue ;
 				}
 				else
 				{
-					str[i] = NULL;
+					str[tab[0]] = NULL;
 					break ;
 				}
 			}
-			j++;
+			tab[1]++;
 		}
-		i++;
+		(1) && (tab[1] = 0, tab[0]++);
 	}
-	str = joyner(str);
-	return (str);
+	return (str = joyner(str), str);
 }
 
 int	array_checker(char **str)

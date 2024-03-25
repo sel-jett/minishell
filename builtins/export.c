@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 07:03:43 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/25 13:38:09 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/25 20:16:42 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static	int	equal_check(char *cmd)
 	return (check);
 }
 
-int	ft_strncmp_lfassi(char *s1, char *s2)
+int	ft_cmp(char *s1, char *s2)
 {
 	int	i;
 
@@ -42,40 +42,8 @@ int	ft_strncmp_lfassi(char *s1, char *s2)
 	return (s1[i] - s2[i]);
 }
 
-void	ft_env_export(t_env *env)
+void	ft_print_env_export(t_env *tmp)
 {
-	t_env	*tmp;
-	t_env	*tmp2;
-	t_env	*tmp3;
-	char	*key;
-	char	*value;
-	int		i;
-
-	tmp = env;
-	tmp3 = env;
-	while (tmp)
-	{
-	i = 0;
-		tmp2 = tmp;
-		while (tmp2->next)
-		{
-			if (tmp2->key && tmp2->next->key && ft_strncmp_lfassi(tmp2->key, tmp2->next->key) > 0)
-			{
-				key = tmp2->next->key;
-				value = tmp2->next->value;
-				tmp2->next->key = tmp2->key;
-				tmp2->next->value = tmp2->value;
-				tmp2->key = key;
-				tmp2->value = value;
-				tmp = tmp3;
-				i = 1;
-			}
-			tmp2 = tmp2->next;
-		}
-		if (i == 0)
-			tmp = tmp->next;
-	}
-	tmp = env;
 	while (tmp)
 	{
 		if (tmp->key || tmp->value)
@@ -94,15 +62,43 @@ void	ft_env_export(t_env *env)
 	}
 }
 
+void	ft_env_export(t_env *env, char *key, int i)
+{
+	t_env	*tmp;
+	t_env	*tmp2;
+	t_env	*tmp3;
+	char	*value;
+
+	(1) && (tmp = env, tmp3 = env);
+	while (tmp)
+	{
+		(1) && (i = 0, tmp2 = tmp);
+		while (tmp2->next)
+		{
+			if (tmp2->key && tmp2->next->key && ft_cmp(tmp2->key, tmp2->next->key) > 0)
+			{
+				(1) && (key = tmp2->next->key, value = tmp2->next->value);
+				(1) && (i = 1, tmp2->next->key = tmp2->key);
+				tmp2->next->value = tmp2->value;
+				(1) && (tmp2->key = key, tmp2->value = value, tmp = tmp3);
+			}
+			tmp2 = tmp2->next;
+		}
+		(i == 0) && (tmp = tmp->next, 0);
+	}
+	ft_print_env_export(env);
+}
+
 void	ft_export(char **cmd, t_env **cnev, t_env **exp)
 {
 	int		i;
 	char	*tmp;
 
 	i = 0;
+	tmp = NULL;
 	if (!cmd || !cmd[0])
 	{
-		ft_env_export(*exp);
+		ft_env_export(*exp, tmp, i);
 		ft_status(0, 1);
 		return ;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wild_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 19:58:34 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/25 01:58:33 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/25 20:14:19 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ char	*wild_sorting(char *str)
 		(1) && (ptr2 = ptr, i = 0);
 		while (*(ptr2 + 1))
 		{
-			if (ft_strncmp_lfassi(*ptr2, *(ptr2 + 1)) > 0)
+			if (ft_cmp(*ptr2, *(ptr2 + 1)) > 0)
 			{
 				(1) && (tmp = *(ptr2), *(ptr2) = *(ptr2 + 1));
 				(1) && (*(ptr2 + 1) = tmp, ptr = ptr3, i = 1);

@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:48:58 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/25 18:19:55 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/25 20:14:13 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@
 # include <readline/history.h>
 # include <stdbool.h>
 
+int				g_x;
+bool			is_text2(t_node *tmp);
+void			ft_count(t_node *node, int *len, int *index);
+void			i_node_make(t_node *node, t_node **i_node);
 void			read_parse(int *index, t_list *list, t_env *exp, int *n);
 void			ctrld(char *str, int *index);
 void			add_redir_parse(t_list *list,
@@ -93,6 +97,7 @@ int				plant_6(t_node *top, t_node_arbre **racine);
 
 
 void			ft_m_error(char *str);
+char			*ft_func(char *str);
 int				open_outfile(struct s_nnode *wnt, int *fd, int *j, t_env *env);
 int				open_appendfile(struct s_nnode *wnt, int *ad, int *k, t_env *env);
 char			*ft_wild_joiner(char **ptr3);
@@ -183,7 +188,7 @@ void			ft_fpintf(const char *msg);
 char			*ft_strjoin(char *s1, char *s2);
 char			*ft_strjoin2(char *s1, char *s2);
 void			echo(const char **path, int mode);
-int				ft_strncmp_lfassi(char *s1, char *s2);
+int				ft_cmp(char *s1, char *s2);
 void			ft_unset(char **cmd, t_env **cnev, t_env **exp);
 void			ft_export(char **cmd, t_env **cnev, t_env **exp);
 void			cd(const char **path, t_env **cenv, t_env **exp);

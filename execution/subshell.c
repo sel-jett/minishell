@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 14:29:50 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/25 17:45:05 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/25 19:35:35 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ void	ft_execute_subshell(t_node_arbre *tree, t_env *e, t_env *exp)
 {
 	int			pid;
 	int			status;
-	extern int	x;
+	extern int	g_x;
 
-	x = 1;
+	g_x = 1;
 	pid = fork();
 	if (pid == -1)
 	{

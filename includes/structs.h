@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 06:25:44 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/25 05:07:18 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/25 20:32:19 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,13 @@ struct s_list
 	char	*str;
 };
 
+typedef struct s_variable
+{
+	int		i;
+	int		check2;
+	char	*tmp;
+}	t_variable;
+
 enum
 {
 	TOKEN_EXPR,
@@ -124,7 +131,7 @@ typedef struct s_var
 	t_env				*exp;
 	struct sigaction	sa;
 	int					n;
-}t_var;
+}	t_var;
 
 typedef struct s_arbre
 {

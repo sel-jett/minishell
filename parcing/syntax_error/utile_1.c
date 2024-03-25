@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:19:17 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/24 07:03:25 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/25 17:33:31 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int	open_tty(int *n)
 		if (fd == -1)
 			return (0);
 		if (dup2(0, fd) == -1)
-			return (0);
+			return (close(fd), 0);
 		ft_status(1, 1);
 	}
 	return (1);

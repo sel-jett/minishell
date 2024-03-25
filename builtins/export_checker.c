@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 07:26:29 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/25 13:42:58 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/25 20:31:40 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,37 +41,8 @@ int	check_key(char *key)
 	return (1);
 }
 
-int	check_first(char *cmd, t_env *env)
+int	valid_identifier(char *tmp, int i, int check2)
 {
-	int		i;
-	int		check2;
-	char	*tmp;
-
-	if (!get_key(cmd) || ft_strncmp_one("$", get_key(cmd)) == 0)
-	{
-		dprintf(2, "minishell: export: `%s': not a valid identifier\n", cmd);
-		ft_status(1, 1);
-		return (0);
-	}
-	tmp = ft_expand(env, get_key(cmd));
-	if ((!tmp || !tmp[0]) && cmd[0] != '$')
-		tmp = cmd;
-	(1) && (i = 0, check2 = 0);
-	if (tmp[i] != '_' && !is_alpha(tmp[i]))
-	{
-		if (!tmp[0] && get_value(cmd))
-			printf("minishell: export: `=%s':", get_value(cmd));
-		else if (!tmp[0] && !get_value(cmd))
-			printf("minishell: export: `':");
-		else if (value_key(env, cmd))
-			printf("minishell: export: `%s':",
-				ft_strjoin(value_key(env, cmd), get_value(cmd)));
-		else
-			printf("minishell: export: `%s':", cmd);
-		printf(" not a valid identifier\n");
-		ft_status(1, 1);
-		return (0);
-	}
 	i++;
 	while (tmp[i] && tmp[i] != '=')
 	{
@@ -89,6 +60,35 @@ int	check_first(char *cmd, t_env *env)
 		return (0);
 	}
 	return (1);
+}
+
+int	check_first(char *cmd, t_env *env)
+{
+	t_variable	v;
+
+	if (!get_key(cmd) || ft_strncmp_one("$", get_key(cmd)) == 0)
+	{
+		dprintf(2, "minishell: export: `%s': not a valid identifier\n", cmd);
+		return (ft_status(1, 1), 0);
+	}
+	v.tmp = ft_expand(env, get_key(cmd));
+	if ((!v.tmp || !v.tmp[0]) && cmd[0] != '$')
+		v.tmp = cmd;
+	(1) && (v.i = 0, v.check2 = 0);
+	if (v.tmp[v.i] != '_' && !is_alpha(v.tmp[v.i]))
+	{
+		if (!v.tmp[0] && get_value(cmd))
+			printf("minishell: export: `=%s':", get_value(cmd));
+		else if (!v.tmp[0] && !get_value(cmd))
+			printf("minishell: export: `':");
+		else if (value_key(env, cmd))
+			printf("minishell: export: `%s':", \
+				ft_strjoin(value_key(env, cmd), get_value(cmd)));
+		else
+			printf("minishell: export: `%s':", cmd);
+		return (printf(" not a valid identifier\n"), ft_status(1, 1), 0);
+	}
+	return (valid_identifier(v.tmp, v.i, v.check2));
 }
 
 char	*ft_strtrim(char *cmd)
