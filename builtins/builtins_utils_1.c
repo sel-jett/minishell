@@ -1,35 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   subshell.c                                         :+:      :+:    :+:   */
+/*   builtins_utils_1.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/29 14:29:50 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/25 17:45:05 by sel-jett         ###   ########.fr       */
+/*   Created: 2024/03/25 16:39:32 by sel-jett          #+#    #+#             */
+/*   Updated: 2024/03/25 16:39:44 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	ft_execute_subshell(t_node_arbre *tree, t_env *e, t_env *exp)
+void	exit_print(char *str)
 {
-	int			pid;
-	int			status;
-	extern int	x;
-
-	x = 1;
-	pid = fork();
-	if (pid == -1)
-	{
-		perror("fork error");
-		return ;
-	}
-	if (pid == 0)
-	{
-		execute(tree->arbre->racine, e, exp);
-		exit(0);
-	}
-	waitpid(pid, &status, 0);
-	ft_status(status, 1);
+	ft_printf("exit\n", NULL);
+	ft_printf("minishell: exit: ", str);
+	ft_printf(": numeric argument required", NULL);
+	ft_printf("\n", NULL);
 }

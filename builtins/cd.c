@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 23:18:52 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/25 01:41:10 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/25 16:47:21 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,38 +48,25 @@ void	cd_applier(t_env **cenv, t_env **exp, char *b, const char **path)
 	char	*temp;
 	char	*temp_old;
 	t_env	*tmp;
+	int		i;
 
 	temp = NULL;
-
 	temp_old = cd_init(cenv, exp, b);
 	if (!temp_old)
 		return ;
 	if (!getcwd(b, PATH_MAX))
-	{
-		cd_second();
-		tmp = env_new(temp_old, *cenv);
-		if (!tmp)
-			return ;
-		ft_lstadd_back(cenv, tmp);
-		tmp = env_new(temp_old, *exp);
-		if (!tmp)
-			return ;
-	temp = path_getter(temp, *cenv, 0, path);
-		ft_lstadd_back(exp, tmp);
-
-	}
+		(1) && (i = 0, cd_second(), 0);
 	else
-	{
-		tmp = env_new(temp_old, *cenv);
-		if (!tmp)
-			return ;
-		ft_lstadd_back(cenv, tmp);
-		tmp = env_new(temp_old, *exp);
-		if (!tmp)
-			return ;
-	temp = path_getter(temp, *cenv, 1, path);
-		ft_lstadd_back(exp, tmp);
-	}
+		i = 1;
+	tmp = env_new(temp_old, *cenv);
+	if (!tmp)
+		return ;
+	ft_lstadd_back(cenv, tmp);
+	tmp = env_new(temp_old, *exp);
+	if (!tmp)
+		return ;
+	temp = path_getter(temp, *cenv, i, path);
+	ft_lstadd_back(exp, tmp);
 	cd_setter(temp, cenv, exp, tmp);
 }
 

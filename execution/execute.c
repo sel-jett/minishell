@@ -6,106 +6,20 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 12:09:39 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/25 14:06:30 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/25 18:36:57 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-char	*dup_wild(char **cmmd, t_node *smp, int *check)
-{
-	int		i;
-	char	*wild;
-
-	i = 0;
-	wild = NULL;
-	while (cmmd[i])
-	{
-		if (contain_wild(cmmd[i]))
-		{
-			wild = ft_execute_wild(cmmd[i]);
-			cmmd[i] = ft_strdup(wild);
-			if (!cmmd[i])
-				return (NULL);
-			*check = 1;
-		}
-		smp = smp->next;
-		i++;
-	}
-	return (cmmd[0]);
-}
-
-void	flag_to_expand(t_node *smp, char **cmmd, int *check, t_env **exp)
-{
-	char	*backup;
-
-	int		i;
-
-	i = 0;
-	while (cmmd[i])
-	{
-		if (!cmmd[i][0])
-		{
-			cmmd[i] = my_malloc(2, 1);
-			cmmd[i][0] = '\v';
-			cmmd[i][1] = '\0';
-			i++;
-			continue ;
-		}
-		if (smp->flag_expend == 1 && !first_key_checker(cmmd[i]))
-		{
-			backup = ft_expand(*exp, cmmd[i]);
-			(!backup) && (cmmd[i] = "");
-			(backup) && (cmmd[i] = backup);
-			(smp->flag_quote != 1 && smp->flag_quote != 2) && (*check = 1);
-		}
-		else if (smp->flag_expend == 2 && !first_key_checker(cmmd[i]))
-		{
-			backup = ft_expand(*exp, cmmd[i]);
-			(!backup) && (cmmd[i] = "");
-			(backup) && (cmmd[i] = backup);
-			(smp->flag_quote != 1 && smp->flag_quote != 2) && (*check = 1);
-		}
-		i++;
-		smp = smp->next;
-	}
-}
-
-int	execute_cmd_child(int check, char ***cmmd)
-{
-	if (check)
-	{
-		*cmmd = array_dupper(*cmmd);
-		if (!*cmmd)
-			return (0);
-		*cmmd = joyner(*cmmd);
-		if (!*cmmd)
-			return (0);
-	}
-	return (1);
-}
-
-void array_structer_2(char **str)
-{
-	int i;
-
-	i = 0;
-	while (str && str[i] && str[i][0])
-	{
-		int n = (ft_strlen(str[i]) - 1);
-		if (str[i] && str[i][n] && str[i][n] == '\\')
-			str[i][n] = '\0';
-		i++;
-	}
-}
-
 char	*ft_func(char *str)
 {
-	int	len;
-	int	j;
+	int		len;
+	int		j;
+	char	*tmp;
 
 	len = ft_strlen_b(str);
-	char	*tmp = my_malloc(len - 1, 1);
+	tmp = my_malloc(len - 1, 1);
 	if (!tmp)
 		return (NULL);
 	len = 0;
@@ -122,9 +36,9 @@ char	*ft_func(char *str)
 	return (tmp);
 }
 
-int ft_strlen_bi(char **str)
+int	ft_strlen_bi(char **str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])
@@ -134,11 +48,12 @@ int ft_strlen_bi(char **str)
 
 char	**ft_func_string(char **str, int i)
 {
-	int	len;
-	int	j;
+	char	**tmp;
+	int		len;
+	int		j;
 
 	len = ft_strlen_bi(str);
-	char	**tmp = my_malloc((len * 8), 1);
+	tmp = my_malloc((len * 8), 1);
 	if (!tmp)
 		return (NULL);
 	len = 0;
@@ -156,7 +71,6 @@ char	**ft_func_string(char **str, int i)
 	}
 	tmp[j] = NULL;
 	return (tmp);
-
 }
 
 char	**array_structer(char **str)
@@ -170,7 +84,7 @@ char	**array_structer(char **str)
 		j = 0;
 		while (str[i][j])
 		{
-			 if (str[i][0] == '\\')
+			if (str[i][0] == '\\')
 			{
 				if (str[i + 1])
 				{
@@ -223,16 +137,10 @@ void	ft_execute_cmd(t_node_arbre *tree, t_env **env, t_env **exp)
 
 	(1) && (tmp = tree->list->top, smp = tree->list->top, check = 0);
 	path = ft_split(get_path(*env), ':');
-	// if (!path)
-	// 	return ;
 	cmmd = linkedlist_to_arr(tmp);
 	if (!cmmd)
 		return ;
 	flag_to_expand(smp, cmmd, &check, exp);
-	// dprintf(2, "-------------------------------------------\n");
-	// ft_print_arr(cmmd);
-	// dprintf(2, "-------------------------------------------\n");
-	// return;
 	if (!dup_wild(cmmd, tree->list->top, &check))
 		return ;
 	if (!execute_cmd_child(check, &cmmd))
@@ -240,7 +148,6 @@ void	ft_execute_cmd(t_node_arbre *tree, t_env **env, t_env **exp)
 	backslach_filler(cmmd);
 	if (array_checker(cmmd))
 		cmmd = array_structer(cmmd);
-	// array_checker(cmmd);
 	if (is_builtin(cmmd[0]))
 	{
 		ft_builtin(cmmd, env, exp);

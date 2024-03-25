@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 05:41:40 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/25 15:01:48 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/25 17:59:42 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,9 +119,8 @@ int	open_infile(struct s_nnode *wnt, int *sd, int *i, t_env *env)
 		wnt->value = ft_expand(env, wnt->value);
 		if (!wnt->value)
 		{
-			ft_printf("minishell: ", backup);
+			(1) && (ft_printf("minishell: ", backup), ft_status(1, 1));
 			ft_printf(": ", "ambiguous redirect\n");
-			ft_status(1, 1);
 			return (0);
 		}
 	}
@@ -134,13 +133,7 @@ int	open_infile(struct s_nnode *wnt, int *sd, int *i, t_env *env)
 	}
 	sd[*i] = open(wnt->value, O_RDONLY);
 	if (sd[*i] == -1)
-	{
-		ft_printf("minishell: ", wnt->value);
-		ft_printf(": ", strerror(errno));
-		ft_printf("\n", NULL);
-		ft_status(1, 1);
-		return (0);
-	}
+		return (ft_m_error(wnt->value), 0);
 	(*i)++;
 	return (1);
 }

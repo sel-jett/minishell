@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 08:37:52 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/24 15:22:00 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/25 15:55:38 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,9 @@ char	*ft_strjoin2(char *s1, char *s2)
 	size = ft_strlen_b(s1) + ft_strlen_b(s2);
 	if (!size)
 		return (0);
-	str = malloc(size + 1);
+	str = my_malloc((size + 1), 1);
+	if (!str)
+		return (NULL);
 	i = 0;
 	size = 0;
 	while (s1 && s1[i])

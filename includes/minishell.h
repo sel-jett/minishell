@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:48:58 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/25 05:06:32 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/25 18:19:55 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,12 +90,22 @@ int				add_one(t_list	*list, int *i, int mode);
 int				add_list_redir(t_node *tmp);
 int				plant_6(t_node *top, t_node_arbre **racine);
 ///////////////////////// EXECUTION //////////////////////////
+
+
+void			ft_m_error(char *str);
+int				open_outfile(struct s_nnode *wnt, int *fd, int *j, t_env *env);
+int				open_appendfile(struct s_nnode *wnt, int *ad, int *k, t_env *env);
 char			*ft_wild_joiner(char **ptr3);
 char			*wild_sorting(char *str);
 char			*ft_str_joiner(char **env_var,
 					char **path, char **cmmd, int *i);
 void			igno_sig(void);
 void			def_sig(void);
+char			*return_only_wild(DIR *dir, struct dirent *dp, char *sdk);
+void			flag_to_expand(t_node *smp, char **cmmd, int *check, t_env **exp);
+int				execute_cmd_child(int check, char ***cmmd);
+void			array_structer_2(char **str);
+char			*dup_wild(char **cmmd, t_node *smp, int *check);
 char			**checkerr(char *str, int *len);
 char			**ft_spliter(char **str, char	**str_r);
 char			**array_dupper(char **str);
@@ -136,6 +146,11 @@ int				only_wild(char *str);
 int				is_alpha_4(char c);
 char			*ft_execute_wild(char *str);
 ///////////////////////// BUILTINS //////////////////////////
+
+int				ft_isdigit(char c);
+void			erorr_builtins(char *cmd);
+int				ft_atoi(const char *str);
+void			exit_print(char *str);
 int				first_key_checker(char *cmmd);
 int				contain_wild(char *str);
 int				global_checker(char *str);
@@ -188,6 +203,7 @@ int				cd_home(const char *path);
 void			cd_application(t_env **cenv, t_env **exp,
 					char *b, const char **path);
 ////////////////////////////////////// EXPAND //////////////////
+
 char			*ft_strjoin_char(char *s1, char s2);
 void			ct_exp(int *i, int *k, char *cmd);
 int				count_expand(char *cmd);

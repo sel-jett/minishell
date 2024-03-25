@@ -6,30 +6,11 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 21:26:25 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/25 12:53:51 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/25 18:20:11 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-char	*return_only_wild(DIR *dir, struct dirent *dp, char *sdk)
-{
-	dp = readdir(dir);
-	while (dp)
-	{
-		if ((dp->d_name)[0] != '.')
-		{
-			sdk = ft_strjoin(sdk, dp->d_name);
-			if (!sdk)
-				return (closedir(dir), NULL);
-			sdk = ft_strjoin(sdk, " ");
-			if (!sdk)
-				return (closedir(dir), NULL);
-		}
-		dp = readdir(dir);
-	}
-	return (closedir(dir), wild_sorting(sdk));
-}
 
 char	*return_wild_at_end(DIR *dir, struct dirent *dp, char *sdk, char *str)
 {
@@ -127,7 +108,6 @@ char	*ft_execute_wild(char *str)
 	else if (ft_strlen_wild_first(str))
 		return (return_wild_at_first(dir, dp, sdk, str));
 	else
-
 		return (return_wild_at_none(dir, dp, sdk));
 	closedir(dir);
 	return (NULL);

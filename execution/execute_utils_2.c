@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_utils_2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:06:52 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/23 04:11:04 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/25 17:30:22 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ char	**array_dupper(char **str)
 			return (NULL);
 		i++;
 	}
-	str_r = malloc(sizeof(char *) * (len + 1));
+	str_r = my_malloc((sizeof(char *) * (len + 1)), 1);
 	if (!str_r)
 		return (NULL);
 	return (ft_spliter(str, str_r));
@@ -79,7 +79,9 @@ char	**array_dupper(char **str)
 
 void	backslach_filler(char **str)
 {
-	int i = 0;
+	int	i;
+
+	i = 0;
 	while (str[i])
 	{
 		if (ft_strcmp(str[i], "\v"))

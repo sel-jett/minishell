@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 20:53:26 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/22 20:53:44 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/25 17:38:32 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,19 @@ int	contain_wild(char *str)
 		i++;
 	}
 	return (0);
+}
+
+void	array_structer_2(char **str)
+{
+	int	i;
+	int	n;
+
+	i = 0;
+	while (str && str[i] && str[i][0])
+	{
+		n = ft_strlen(str[i]) - 1;
+		if (str[i] && str[i][n] && str[i][n] == '\\')
+			str[i][n] = '\0';
+		i++;
+	}
 }
