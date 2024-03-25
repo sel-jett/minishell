@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_out.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 22:12:12 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/23 05:46:13 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/25 15:12:23 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,6 +155,8 @@ void	ft_execute_redir_out(t_node_arbre *tree, t_env	*env, t_env *exp)
 	if (!files_opener(tree, file, env))
 	{
 		ft_status(1, 1);
+		close(orig_stdout);
+		close(orig_stdin);
 		return ;
 	}
 	files_dupper(file->fd, file->sd, file->ad, cnt);
@@ -164,4 +166,6 @@ void	ft_execute_redir_out(t_node_arbre *tree, t_env	*env, t_env *exp)
 	ft_execute_redir(tree, &env, &exp);
 	dup2(orig_stdout, 1);
 	dup2(orig_stdin, 0);
+	close(orig_stdout);
+	close(orig_stdin);
 }
