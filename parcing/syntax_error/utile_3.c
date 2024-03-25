@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 21:22:32 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/24 12:26:31 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/24 16:17:52 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,25 @@ static int	oxe1(t_node	*node, t_node *tmp1, t_nnode *redir_node)
 	if (node && node->prev)
 	{
 		tmp1 = node->prev;
-		while (tmp1->prev && (tmp1->prev->mode != TOKEN_AND
+		// exit(0);
+		// printf("%p\n",&tmp1);
+		// printf("%p\n",&tmp1->prev);
+		// printf("++++++++++++++\n");
+		// printf("++++++++++%d\n",node->prev->mode);
+		// 	printf("+++++++++++++\n");
+		// printf("%p\n",&);
+		// printf("%p\n",&);
+		// if (tmp1->prev->mode != TOKEN_AND)
+		// 	exit(2);
+			
+			// printf("################################");
+		while (tmp1 && tmp1->prev && (tmp1->prev->mode != TOKEN_AND
 				&& tmp1->prev->mode != TOKEN_OR
 				&& tmp1->prev->mode != TOKEN_PIPE && tmp1->prev->mode != TOKEN_PARENTHESE))
+		{
+			// exit(1);
 			tmp1 = tmp1->prev;
+		}
 		while (tmp1 && !is_redir(tmp1))
 		{
 			if (tmp1->mode != TOKEN_SPACE)

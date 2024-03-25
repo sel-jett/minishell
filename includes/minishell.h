@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:48:58 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/24 10:19:41 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/24 14:44:50 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int				oxe5(t_node *tmp);
 int				check_exp(t_node *tmp);
 int				check_apres_parentheses(t_node *node);
 int				check_enter_parentheses(t_node *node);
-bool			open_herdoc(t_nnode *node, char **file, t_env *exp, int *n);
+bool			open_herdoc(t_node *node, char **file, t_env *exp, int *n);
 bool			ft_strcmp(char *s1, char *s2);
 int				ft_strlen(char *str);
 char			**array_dupper(char **str);

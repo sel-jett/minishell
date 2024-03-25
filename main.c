@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 07:12:48 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/24 13:12:58 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/24 16:20:35 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	handler_signel(int signal, siginfo_t *siginfo, void *vd)
 			ft_status(1, 1);
 			printf("\n");
 			rl_on_new_line();
-			// rl_replace_line("", 0);
+			rl_replace_line("", 0);
 			rl_redisplay();
 		}
 		else
@@ -50,7 +50,7 @@ int main(int ac, char **av, char **envp)
 	int					n;
 
 	list = NULL;
-	// rl_catch_signals = 0;
+	rl_catch_signals = 0;
 	nlist = NULL;
 	sa.sa_flags = SA_SIGINFO;
 	sa.sa_sigaction = handler_signel;
@@ -80,6 +80,8 @@ int main(int ac, char **av, char **envp)
 		{
 			if (x == 0)
 				list->str = readline("minishell > ");
+			// printf("[%s]\n",list->str);
+			// index = 1;
 			if (!list->str)
 			{
 				printf("exit\n");
@@ -101,6 +103,18 @@ int main(int ac, char **av, char **envp)
 				if (!index)
 					if (!plant_4(list, exp, &n))
 						index = 1;
+				if (!index){
+				t_node *i_node = list->top;
+				while (i_node)
+				{
+					if (is_redir(i_node))
+					{
+						if (!add_list_redir(i_node))
+							return (index = 1, 0);	
+					}
+					i_node = i_node->next;
+				}
+				}
 				if (n == 1)
 					index = 1;
 				if (!index)

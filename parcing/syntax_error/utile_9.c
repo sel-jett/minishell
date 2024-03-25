@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 08:49:28 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/24 05:43:04 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/24 15:31:24 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,18 @@
 int	open_herdoc_0(t_node *tmp, t_env *exp, int	*n)
 {
 	char		*file;
-	t_nnode		*i_node;
 
-	(1) && (file = 0, i_node = 0);
+	(1) && (file = 0);
 	if (tmp->mode == TOKEN_HEREDOC)
-		tmp->mode = TOKEN_REDIR_IN;
-	i_node = tmp->list_redir->top;
-	while (i_node)
 	{
-		if (i_node->mode == TOKEN_HEREDOC)
-		{
-			if (!open_herdoc(i_node, &file, exp, n))
-				return (0);
-			if (i_node->next)
-				i_node->next->value = file;
-			i_node->value = "<";
-			i_node->mode = TOKEN_REDIR_IN;
-		}
-		i_node = i_node->next;
+		if (!open_herdoc(tmp, &file, exp, n))
+			return (0);
+		if (tmp && tmp->next && is_text(tmp->next))
+			tmp->next->value = file;
+		else if(tmp && tmp->next && tmp->next->next && is_text(tmp->next->next))
+			tmp->next->next->value = file;
+		tmp->value = "<";
+		tmp->mode = TOKEN_REDIR_IN;
 	}
 	return (1);
 }
