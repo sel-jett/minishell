@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 22:05:40 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/25 01:12:52 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/25 13:25:44 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 
 int	cd_error(const char *path)
 {
-	if (chdir(path) != 0 && ft_strncmp_one((char *)path, ".."))
+	int	i;
+
+	i = chdir(path);
+	if (i != 0 && ft_strncmp_one((char *)path, ".."))
 	{
 		ft_fpintf("mminishell: cd: ");
 		ft_fpintf(path);
@@ -22,6 +25,11 @@ int	cd_error(const char *path)
 		perror("");
 		ft_status(1, 1);
 		return (1);
+	}
+	else if (i == 0)
+	{
+		ft_status(0, 1);
+		return (0);
 	}
 	return (0);
 }

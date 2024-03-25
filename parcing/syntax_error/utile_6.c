@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 03:19:27 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/25 00:50:00 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/25 04:49:24 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static bool	is_text2(t_node *tmp)
 void	ft_count(t_node *node, int *len, int *index)
 {
 	int	i;
+
 	while (node && is_text2(node))
 	{
 		if (node->mode != TOKEN_EXPR)
@@ -79,7 +80,8 @@ int	read_line_herdoc(int fd, t_node *node, t_env *exp, int *n)
 	{
 		if (node && node->next && is_text(node->next))
 			i_node = node->next;
-		else if(node && node->next && node->next->next && is_text(node->next->next))
+		else if (node && node->next && node->next->next
+			&& is_text(node->next->next))
 			i_node = node->next->next;
 		if (!i_node)
 			break ;

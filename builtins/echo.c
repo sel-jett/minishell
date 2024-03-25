@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 07:39:43 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/22 07:47:11 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/25 13:19:45 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,15 @@ static	int	echo_check(const char **path)
 			while (path[i][j] && path[i][j] > 32)
 			{
 				if (path[i][j] != 'n')
-					return (0);
+				{
+					if (i > 0)
+						(1) && (j = -1);
+					break;
+				}
 				j++;
 			}
+			if (j == -1)
+				break ;
 			i++;
 		}
 	}

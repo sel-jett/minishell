@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 07:26:29 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/25 01:28:08 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/25 13:42:58 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,10 @@ int	check_first(char *cmd, t_env *env)
 	(1) && (i = 0, check2 = 0);
 	if (tmp[i] != '_' && !is_alpha(tmp[i]))
 	{
-		if (!tmp[0])
+		if (!tmp[0] && get_value(cmd))
 			printf("minishell: export: `=%s':", get_value(cmd));
+		else if (!tmp[0] && !get_value(cmd))
+			printf("minishell: export: `':");
 		else if (value_key(env, cmd))
 			printf("minishell: export: `%s':",
 				ft_strjoin(value_key(env, cmd), get_value(cmd)));

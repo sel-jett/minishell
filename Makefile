@@ -9,7 +9,7 @@ SRCS = ./parcing/allocation_free/creation1.c ./parcing/allocation_free/my_malloc
 	   ./execution/and.c ./execution/redir_out_utils.c ./execution/redir_out_utils_2.c \
 	   ./execution/redir_out.c ./parcing/syntax_error/utile_5.c ./parcing/syntax_error/utile_8.c \
 	   ./builtins/env_parser_utils.c ./builtins/env_utils.c ./builtins/cd.c ./builtins/echo.c ./builtins/export_checker.c \
-	   ./builtins/env_parser.c ./parcing/syntax_error/utile_9.c\
+	   ./builtins/env_parser.c ./parcing/syntax_error/utile_9.c ./parcing/syntax_error/utile_11.c\
 	   ./builtins/export.c ./builtins/ft_split.c ./builtins/ft_strlcpy.c ./parcing/syntax_error/utile_7.c \
 	   ./builtins/pwd.c ./builtins/unset.c ./builtins/utils.c ./builtins/ft_sort_list.c \
 	   ./expanding/expand_utils.c ./expanding/expand.c ./expanding/ft_itoa.c ./execution/utils_3.c ./execution/utils.c \
@@ -22,7 +22,7 @@ OBJS    = $(SRCS:.c=.o)
 #
 READLINE_LIB = $(shell brew --prefix readline)/lib
 READLINE_INC = $(shell brew --prefix readline)/include
-#
+
 CFLAGS 	=   -Wall -Wextra -Werror -fsanitize=address -g
 RM 		= @rm -f
 all : $(NAME) clean

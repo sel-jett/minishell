@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 08:49:28 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/24 15:31:24 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/25 04:50:03 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ int	open_herdoc_0(t_node *tmp, t_env *exp, int	*n)
 			return (0);
 		if (tmp && tmp->next && is_text(tmp->next))
 			tmp->next->value = file;
-		else if(tmp && tmp->next && tmp->next->next && is_text(tmp->next->next))
+		else if (tmp && tmp->next && tmp->next->next
+			&& is_text(tmp->next->next))
 			tmp->next->next->value = file;
 		tmp->value = "<";
 		tmp->mode = TOKEN_REDIR_IN;

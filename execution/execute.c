@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 12:09:39 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/25 01:24:26 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/25 13:38:37 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,10 +188,29 @@ char	**array_structer(char **str)
 		}
 		i++;
 	}
-	// exit(0);
 	str = joyner(str);
-	// ft_print_arr(str);
 	return (str);
+}
+
+int	array_checker(char **str)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (str[i])
+	{
+		j = 0;
+		while (str[i][j])
+		{
+			if (str[i][j] == '\v' || str[i][j] == '\\' || str[i][j] == -32)
+				return (1);
+			j++;
+		}
+		i++;
+	}
+	return (0);
 }
 
 void	ft_execute_cmd(t_node_arbre *tree, t_env **env, t_env **exp)
@@ -215,7 +234,13 @@ void	ft_execute_cmd(t_node_arbre *tree, t_env **env, t_env **exp)
 	if (!execute_cmd_child(check, &cmmd))
 		return ;
 	backslach_filler(cmmd);
-	cmmd = array_structer(cmmd);
+	if (array_checker(cmmd))
+		cmmd = array_structer(cmmd);
+	// array_checker(cmmd);
+	// dprintf(2, "-------------------------------------------\n");
+	// ft_print_arr(cmmd);
+	// dprintf(2, "-------------------------------------------\n");
+	// return;
 	if (is_builtin(cmmd[0]))
 	{
 		ft_builtin(cmmd, env, exp);
