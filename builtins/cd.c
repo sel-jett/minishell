@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 23:18:52 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/25 01:06:31 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/25 01:41:10 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,9 +96,15 @@ void	cd(const char **path, t_env **cenv, t_env **exp)
 	char	*b;
 
 	b = my_malloc(PATH_MAX + 1, 1);
-	if (!path[0] || !ft_strncmp((char *)path[0], "~") || \
+	if (!path[0] || !path[0][0] || !ft_strncmp((char *)path[0], "~") || \
 		!ft_strncmp((char *)path[0], "--"))
 	{
+		if ((!path[0] || !path[0][0]) && (!value_key(*cenv, "HOME") || \
+		!(value_key(*cenv, "HOME"))[0]))
+		{
+			ft_status(0, 0);
+			return ;
+		}
 		path[0] = value_key(*cenv, "HOME");
 		if (!path[0])
 		{

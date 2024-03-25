@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 05:52:54 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/24 13:05:06 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/25 01:05:49 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int	plant_6(t_node *top, t_node_arbre **racine)
 
 int	oxe5(t_node *tmp)
 {
-	if (tmp && (tmp->mode == TOKEN_PARENTHESE || is_text(tmp) || tmp->mode
+	if (tmp && (is_text(tmp) || tmp->mode
 			== TOKEN_SPACE || is_redir(tmp)))
 		return (1);
 	return (0);

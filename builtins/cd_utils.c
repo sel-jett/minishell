@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 22:05:40 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/22 07:46:47 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/25 01:12:52 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	cd_error(const char *path)
 {
 	if (chdir(path) != 0 && ft_strncmp_one((char *)path, ".."))
 	{
-		ft_fpintf("mminishell: cd");
+		ft_fpintf("mminishell: cd: ");
 		ft_fpintf(path);
 		ft_fpintf(": ");
 		perror("");
