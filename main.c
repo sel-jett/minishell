@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 07:12:48 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/25 01:04:07 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/25 01:49:24 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ int main(int ac, char **av, char **envp)
 				printf("exit\n");
 				exit(0);
 			}
+			printf("[%s]\n",list->str);
 			if (is_empty(list->str))
 				index = 1;
 			if (!index)

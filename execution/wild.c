@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wild.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 21:26:25 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/24 07:12:15 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/25 01:56:33 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ char	*ft_execute_wild(char *str)
 	else if (ft_strlen_wild_first(str))
 		return (return_wild_at_first(dir, dp, sdk, str));
 	else
+	
 		return (return_wild_at_none(dir, dp, sdk));
 	closedir(dir);
 	return (NULL);

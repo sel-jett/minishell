@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wild_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 19:58:34 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/24 07:12:33 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/25 01:58:33 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,14 @@ int	length(char *s, char *str)
 
 	j = 0;
 	i = 0;
+	if (!str || !s)
+		return (0);
 	while (str[i] && str[i] == '*')
 		i++;
-	len = strlen(str + i);
-	while (strlen(s + j) != len)
+	if (!(str + i))
+		return (0);
+	len = (unsigned long)ft_strlen_b(str + i);
+	while ((s + j) && (unsigned long)ft_strlen_b(s + j) != len)
 		j++;
 	return (j);
 }
@@ -33,6 +37,8 @@ int	only_wild(char *str)
 	int	i;
 
 	i = 0;
+	if (!str)
+		return (0);
 	while (str[i])
 	{
 		if (str[i] != '*')
