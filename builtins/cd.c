@@ -6,18 +6,18 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 23:18:52 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/24 13:10:31 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/24 22:46:13 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-char	*cd_init(t_env **cenv, t_env **exp)
+char	*cd_init(t_env **cenv, t_env **exp, char *pwd)
 {
-	char	*pwd;
+	// char	*pwd;
 	char	*temp_old;
 
-	pwd = getcwd(0, 0);
+	// pwd = getcwd(0, 0);
 	if (!pwd)
 	{
 		ft_printf("minishell: cd: PWD not set\n", NULL);
@@ -29,7 +29,7 @@ char	*cd_init(t_env **cenv, t_env **exp)
 	ft_list_remove_if(exp, "PWD", ft_strncmp_one);
 	ft_list_remove_if(cenv, "OLDPWD", ft_strncmp_one);
 	ft_list_remove_if(exp, "OLDPWD", ft_strncmp_one);
-	return (ft_strjoin("OLD", ft_strdup(pwd)));
+	return (ft_strjoin("OLDPWD=", ft_strdup(pwd)));
 }
 
 void	cd_setter(char *temp, t_env **cenv, t_env **exp, t_env *tmp)
@@ -51,27 +51,46 @@ void	cd_applier(t_env **cenv, t_env **exp, char *b, const char **path)
 	t_env	*tmp;
 
 	temp = NULL;
-	temp_old = cd_init(cenv, exp);
+
+	temp_old = cd_init(cenv, exp, b);
 	if (!temp_old)
 		return ;
-	tmp = env_new(temp_old, *cenv);
-	if (!tmp)
-		return ;
-	ft_lstadd_back(cenv, tmp);
-	tmp = env_new(temp_old, *cenv);
-	if (!tmp)
-		return ;
-	ft_lstadd_back(exp, tmp);
+	// printf("temp_old: %s\n", temp_old);
+	if (!getcwd(b, PATH_MAX))
+	{
+		cd_second();
+		// temp_old = ft_strjoin(temp_old, (char *)path[0]);
+		tmp = env_new(temp_old, *cenv);
+		if (!tmp)
+			return ;
+		ft_lstadd_back(cenv, tmp);
+		tmp = env_new(temp_old, *exp);
+		if (!tmp)
+			return ;
+		ft_lstadd_back(exp, tmp);
 	temp = path_getter(temp, temp_old, b, path);
+
+	}
+	else
+	{
+		tmp = env_new(temp_old, *cenv);
+		if (!tmp)
+			return ;
+		ft_lstadd_back(cenv, tmp);
+		tmp = env_new(temp_old, *exp);
+		if (!tmp)
+			return ;
+		ft_lstadd_back(exp, tmp);
+	temp = path_getter(temp, temp_old, b, path);
+	}
 	cd_setter(temp, cenv, exp, tmp);
 }
 
 void	cd_application(t_env **cenv, t_env **exp, char *b, const char **path)
 {
+	getcwd(b, PATH_MAX);
 	if (cd_error(path[0]))
 		return ;
-	else if (!getcwd(b, PATH_MAX))
-		cd_second();
 	cd_applier(cenv, exp, b, path);
 }
 

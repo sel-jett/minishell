@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 20:33:43 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/23 23:30:05 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/24 20:16:54 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ char	**arr_filler(t_node	*tmp, char **arr, int i)
 	int		check;
 
 	check = 0;
-	if (ft_strcmp(tmp->value, "export"))
+	if (tmp->value && ft_strcmp(tmp->value, "export"))
 		check = 1;
 	while (tmp)
 	{
-		if (!(tmp->value)[0] && i > 0 && tmp->flag_space == 0)
+		if (tmp->value && !(tmp->value)[0] && i > 0 && tmp->flag_space == 0)
 		{
 			tmp = tmp->next;
 			if (!tmp)
@@ -43,19 +43,22 @@ char	**arr_filler(t_node	*tmp, char **arr, int i)
 				tmp->flag_space = 1;
 			}
 		}
-		if (!tmp->flag_space)
+		if (tmp->value && !tmp->flag_space)
 		{
 			arr[i] = ft_strjoin(arr[i], tmp->value);
 			if (!arr[i])
 				return (NULL);
 		}
-		else if (tmp->flag_space == 1)
+		else if (tmp->value && tmp->flag_space == 1)
 		{
-			(1) && (i++, arr[i] = ft_strjoin(arr[i], tmp->value), 0);
+			if (arr[i])
+				(1) && (i++, arr[i] = ft_strjoin(arr[i], tmp->value), 0);
+			else
+				arr[i] = ft_strjoin(arr[i], tmp->value);
 			if (!arr[i])
 				return (NULL);
 		}
 		tmp = tmp->next;
 	}
-	return (++i, arr[i] = NULL, arr);
+	return (i++, arr[i] = NULL, arr);
 }

@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 23:06:50 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/24 05:54:22 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/24 14:32:50 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	ft_list_remove_if(t_env **begin_list, void *data_ref, int (*cmp)())
 	if (begin_list == NULL || *begin_list == NULL)
 		return ;
 	cur = *begin_list;
-	if (cmp(cur->key, data_ref) == 0)
+	if (cur->key && cmp(cur->key, data_ref) == 0)
 	{
 		*begin_list = cur->next;
 		ft_list_remove_if(begin_list, data_ref, cmp);

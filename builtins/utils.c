@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 08:37:52 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/22 07:49:58 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/24 15:22:00 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ char	*ft_strdup(char *s)
 	char	*str;
 
 	i = 0;
+	if (!s)
+		return (NULL);
 	str = my_malloc(ft_strlen_b(s) + 1, 1);
 	while (s[i])
 	{

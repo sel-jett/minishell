@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 22:43:32 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/24 13:38:11 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/24 22:30:07 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,7 +152,7 @@ void	ft_builtin(char **cmd, t_env **cenv, t_env **exp)
 	else if (!ft_strncmp(cmd[0], "export"))
 		ft_export((cmd + 1), cenv, exp);
 	else if (!ft_strncmp(cmd[0], "unset"))
-		ft_unset((cmd + 1), &cenv, &exp);
+		ft_unset((cmd + 1), cenv, exp);
 	else
 		erorr_builtins(cmd[0]);
 }

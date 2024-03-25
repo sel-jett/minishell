@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 23:55:37 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/24 09:47:54 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/24 22:24:25 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ char	*find_pwd(t_env *cenv)
 		return (NULL);
 	str = ft_strjoin(cenv->key, "=");
 	str = ft_strjoin(str, cenv->value);
+	if (!str)
+		return (getcwd(0, 0));
 	return (str);
 }
 
@@ -82,8 +84,14 @@ int	ft_strncmp_two(char *tmp, char *pwd)
 
 char	*pwd_joiner(char *temp_old, char *temp, char *path)
 {
-	temp = ft_strjoin("PWD", (temp_old + 6));
-	temp = ft_strjoin(temp, "/");
-	temp = ft_strjoin(temp, (char *)path);
+	if (temp_old)
+		temp = ft_strjoin("PWD", (temp_old + 6));
+	if (temp)
+	{
+		temp = ft_strjoin(temp, "/");
+		temp = ft_strjoin(temp, (char *)path);
+	}
+	else
+		return (NULL);
 	return (temp);
 }
