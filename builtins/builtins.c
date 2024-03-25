@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 22:43:32 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/25 04:58:07 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/25 12:51:17 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ void	ft_exit(char **str)
 
 	i = 0;
 	j = 0;
-	if (str || str[i])
+	if (!str || !str[i])
 	{
 		ft_printf("exit\n", NULL);
 		exit(ft_status(0, 0));
@@ -148,7 +148,8 @@ void	ft_exit(char **str)
 	 	(1) && (exit_print(str[0]), ft_status(255, 1), exit(255), 0);
 	else if (str)
 	{
-		ft_printf("exit\n", NULL);
+		ft_printf("exit2\n", NULL);
+		dprintf(2, "exit: %d\n", (ft_atoi(str[0]) % 256));
 		ft_status(ft_atoi(str[0]) % 256, 1);
 		exit(ft_atoi(str[0]) % 256);
 	}

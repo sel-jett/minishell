@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:03:47 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/25 05:12:36 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/25 12:37:32 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,12 @@ char	*ft_handler(char **cmmd, char **path)
 		}
 		i++;
 	}
-	ft_printf("minishell: ", cmmd[0]);
-	ft_printf(": command not found\n", NULL);
-	ft_status(127, 1);
+	if (cmmd[0][0] != '/')
+	{
+		ft_printf("minishell: ", cmmd[0]);
+		ft_printf(": command not found\n", NULL);
+		ft_status(127, 1);
+	}
 	return (NULL);
 }
 
@@ -92,11 +95,8 @@ void	ft_execute_child(char **envp, char **cmmd, char **path)
 
 	if (!envp || !envp[0])
 		return ;
-	if (cmmd[0][0] != '/')
-		env_var = ft_handler(cmmd, path);
-	else
-		env_var = cmmd[0];
-	if (env_var)
+	env_var = ft_handler(cmmd, path);
+	if (env_var || cmmd[0][0] == '/')
 	{
 		x = 1;
 		pid = fork();
@@ -106,7 +106,12 @@ void	ft_execute_child(char **envp, char **cmmd, char **path)
 			return ;
 		}
 		else if (!pid)
-			(1) && (def_sig(), ft_execve(env_var, envp, cmmd), exit(1), 0);
+		{
+			if (cmmd[0][0] == '/')
+				(1) && (def_sig(), ft_execve(cmmd[0], envp, cmmd), exit(1), 0);
+			else
+				(1) && (def_sig(), ft_execve(env_var, envp, cmmd), exit(1), 0);
+		}
 		waitpid(pid, &status, 0);
 		ft_status((status % 255), 1);
 	}

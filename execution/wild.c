@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wild.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 21:26:25 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/25 01:56:33 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/25 12:53:51 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,23 @@ char	*return_wild_at_none(DIR *dir, struct dirent *dp, char *sdk)
 	return (closedir(dir), wild_sorting(sdk));
 }
 
+int	ft_middle_wild(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (str)
+	{
+		while (str[i])
+		{
+			if (str[i] == '*')
+				return (i);
+			i++;
+		}
+	}
+	return (0);
+}
+
 char	*ft_execute_wild(char *str)
 {
 	DIR				*dir;
@@ -95,6 +112,8 @@ char	*ft_execute_wild(char *str)
 	int				len;
 	char			*sdk;
 
+	if (!str || ft_middle_wild(str))
+		return (str);
 	(1) && (sdk = "", dir = opendir("."), dp = NULL);
 	if (ft_strncmp(str, ".") == 0 || only_wild(str))
 		return (return_only_wild(dir, dp, sdk));
@@ -108,7 +127,7 @@ char	*ft_execute_wild(char *str)
 	else if (ft_strlen_wild_first(str))
 		return (return_wild_at_first(dir, dp, sdk, str));
 	else
-	
+
 		return (return_wild_at_none(dir, dp, sdk));
 	closedir(dir);
 	return (NULL);
