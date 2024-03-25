@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 07:03:43 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/24 09:35:54 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/24 14:23:14 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	ft_env_export(t_env *env)
 		tmp2 = tmp;
 		while (tmp2->next)
 		{
-			if (ft_strncmp_lfassi(tmp2->key, tmp2->next->key) > 0)
+			if (tmp2->key && tmp2->next->key && ft_strncmp_lfassi(tmp2->key, tmp2->next->key) > 0)
 			{
 				key = tmp2->next->key;
 				value = tmp2->next->value;
@@ -78,7 +78,8 @@ void	ft_env_export(t_env *env)
 	tmp = env;
 	while (tmp)
 	{
-		printf("declare -x ");
+		if (tmp->key || tmp->value)
+			printf("declare -x ");
 		if (tmp->key)
 		{
 			printf("%s", tmp->key);

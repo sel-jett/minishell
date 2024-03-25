@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 22:27:43 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/24 02:29:56 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/24 14:19:58 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,29 +50,32 @@ int	is_alpha_2(char *c)
 // 	return **node;
 // }
 
-t_env **fun(t_env ***node, char *key)
+t_env **fun(t_env **node, char *key)
 {
-	if (ft_strcmp((**node)->key, key))
+	if (*node == NULL)
+		return (NULL);
+
+	if ((*node)->key && ft_strcmp((*node)->key, key))
 	{
-		if (**node == NULL)
+		if (*node == NULL)
 			return (NULL);
-		(**node)->key = NULL;
-		(**node)->value = NULL;
-		return (&(**node)->next);
+		(*node)->key = NULL;
+		(*node)->value = NULL;
+		return (&(*node)->next);
 	}
-	t_env **tmp1 = *node;
-	while ((*tmp1)->next != NULL)
+	t_env *tmp1 = *node;
+	while ((tmp1)->next != NULL)
 	{
-		if (ft_strcmp((*tmp1)->next->key, key)) {
-			(*tmp1)->next = (*tmp1)->next->next;
-			return (*node);
+		if (ft_strcmp((tmp1)->next->key, key)) {
+			(tmp1)->next = (tmp1)->next->next;
+			return (node);
 		}
-		*tmp1 = (*tmp1)->next;
+		tmp1 = tmp1->next;
 	}
-	return (*node);
+	return (node);
 }
 
-void	ft_unset(char **cmd, t_env ***cnev, t_env ***exp)
+void	ft_unset(char **cmd, t_env **cnev, t_env **exp)
 {
 	char	**dptr;
 	int		i;
@@ -97,8 +100,8 @@ void	ft_unset(char **cmd, t_env ***cnev, t_env ***exp)
 			}
 			if (!check)
 			{
-				*cnev = fun(cnev, dptr[j]);
-				*exp = fun(exp, dptr[j]);
+				cnev = fun(cnev, dptr[j]);
+				exp = fun(exp, dptr[j]);
 				ft_status(0, 1);
 			}
 			j++;

@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:03:47 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/24 10:13:24 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/24 14:32:05 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ char	*get_path(t_env *env)
 {
 	while (env)
 	{
-		if (!ft_strncmp_one(env->key, "PATH"))
+		if (env->key && !ft_strncmp_one(env->key, "PATH"))
 			return (env->value);
 		env = env->next;
 	}

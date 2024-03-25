@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:48:58 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/24 14:44:50 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/25 00:11:01 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,7 +165,7 @@ char			*ft_strjoin(char *s1, char *s2);
 char			*ft_strjoin2(char *s1, char *s2);
 void			echo(const char **path, int mode);
 int				ft_strncmp_lfassi(char *s1, char *s2);
-void			ft_unset(char **cmd, t_env ***cnev, t_env ***exp);
+void			ft_unset(char **cmd, t_env **cnev, t_env **exp);
 void			ft_export(char **cmd, t_env **cnev, t_env **exp);
 void			cd(const char **path, t_env **cenv, t_env **exp);
 void			ft_lstadd_back(t_env **lst, t_env *neww);
