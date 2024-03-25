@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:48:58 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/25 01:09:35 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/25 05:06:32 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,11 @@
 # include <readline/history.h>
 # include <stdbool.h>
 
+void			read_parse(int *index, t_list *list, t_env *exp, int *n);
+void			ctrld(char *str, int *index);
+void			add_redir_parse(t_list *list,
+					int *index, int n, t_list **nlist);
+void			handel_signel_(struct sigaction sa);
 int				open_tty(int *n);
 void			handler(int signal);
 int				open_herdoc_0(t_node *tmp, t_env *exp, int *n);
@@ -67,7 +72,6 @@ int				check_syntax_3(t_node *tmp);
 int				check_syntax_4(t_node *tmp);
 t_node_arbre	*add_commade(t_node	*tmp);
 int				add_list_redir(t_node *node);
-void			print_tree(t_node_arbre *root);
 t_arbre			*c_arbre(void);
 t_node_arbre	*c_node_arbre(t_node *node);
 t_list			*c_list(void);
@@ -175,7 +179,8 @@ void			ft_print_arr(char **arr);
 void			ft_builtin(char **cmd, t_env **cenv, t_env **exp);
 void			ft_sort_list(t_env **env);
 int				ft_strncmp(char *s1, char *s2);
-char	*path_getter(char	*temp, t_env *cenv, int i, const char **path);
+char			*path_getter(char	*temp, t_env *cenv,
+					int i, const char **path);
 int				cd_error(const char *path);
 void			cd_second(void);
 int				cd_old(const char *path);

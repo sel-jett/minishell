@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 21:32:37 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/24 15:38:01 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/25 04:46:10 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	check_syntax_4(t_node *tmp)
 
 int	check_syntax_1(t_node *tmp, t_env *exp, int *n)
 {
-	int index;
+	int	index;
 
 	index = 0;
 	if (tmp && tmp->next)
@@ -63,7 +63,8 @@ int	check_syntax_1(t_node *tmp, t_env *exp, int *n)
 	if (index == 0)
 		return (0);
 	if (!open_herdoc_0(tmp, exp, n))
-		return (0);	return (1);
+		return (0);
+	return (1);
 }
 
 int	check_syntax_3(t_node *tmp)

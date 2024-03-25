@@ -1,230 +1,27 @@
-3: echo with tabs rather than spaces
-
-bash-3.2$ //
-bash: //: is a directory
--------------->
-
-exit status
-<------------------------------------------------------------->
-
-bash-3.2$ cat << $HOME
-> "$HOME"
-> dd
-> $HOME
-"/Users/sel-jett"
-dd
-bash-3.2$ cat << "$HOME"
-> "$HOME"
-> $HOME
-"$HOME"
-bash-3.2$ cat << $HOME
-> '$HOME'
-> $HOME
-'/Users/sel-jett'
-
-bash-3.2$ cat << "'$HOME'"
-> dd
-> d
-> d
-> d
->
-> $HOME
-> '$HOME'
-dd
-d
-d
-d
-minishell > export *O
-minishell > minishell > export *M
-zsh: segmentation fault  ./minishell
-zsh: segmentation fault  ./minishelldeclare -x SECURITYSESSIONID="186a8"
-declare -x MallocNanoZone="0"
-declare -x COMMAND_MODE="unix2003"
-declare -x PATH="/Users/sel-jett/.docker/bin:/Users/sel-jett/.local/bin/:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Library/Apple/usr/bin:/Users/sel-jett/.docker/bin:/Users/sel-jett/.local/bin/"
-declare -x HOME="/Users/sel-jett"
-declare -x SHELL="/bin/zsh"
-declare -x LaunchInstanceID="58BE09F2-1AE9-455A-9A6B-F65A0B78FA5D"
-declare -x __CF_USER_TEXT_ENCODING="0x19385:0x0:0x0"
-declare -x XPC_SERVICE_NAME="0"
-declare -x SSH_AUTH_SOCK="/private/tmp/com.apple.launchd.B0bdAJOxlP/Listeners"
-declare -x XPC_FLAGS="0x0"
-declare -x LOGNAME="sel-jett"
-declare -x TMPDIR="/var/folders/zz/zyxvpxvq6csfxvn_n000clhm0034w5/T/"
-declare -x ORIGINAL_XDG_CURRENT_DESKTOP="undefined"
-declare -x SHLVL="1"
-declare -x PWD="/Users/sel-jett/Desktop/minishell"
-declare -x TERM_PROGRAM="vscode"
-declare -x TERM_PROGRAM_VERSION="1.83.1"
-declare -x LANG="en_US.UTF-8"
-declare -x COLORTERM="truecolor"
-declare -x GIT_ASKPASS="/Applications/Visual Studio Code.app/Contents/Resources/app/extensions/git/dist/askpass.sh"
-declare -x VSCODE_GIT_ASKPASS_NODE="/Applications/Visual Studio Code.app/Contents/Frameworks/Code Helper (Plugin).app/Contents/MacOS/Code Helper (Plugin)"
-declare -x VSCODE_GIT_ASKPASS_EXTRA_ARGS="--ms-enable-electron-run-as-node"
-declare -x VSCODE_GIT_ASKPASS_MAIN="/Applications/Visual Studio Code.app/Contents/Resources/app/extensions/git/dist/askpass-main.js"
-declare -x VSCODE_GIT_IPC_HANDLE="/var/folders/zz/zyxvpxvq6csfxvn_n000clhm0034w5/T/vscode-git-4b3985d26b.sock"
-declare -x VSCODE_INJECTION="1"
-declare -x ZDOTDIR="/Users/sel-jett"
-declare -x USER_ZDOTDIR="/Users/sel-jett"
-declare -x TERM="xterm-256color"
-declare -x _="/Users/sel-jett/Desktop/minishell/./minishell"
-declare -x OLDPWD
-
-unset doesnt work
- export | grep SECURITYSESSIONID
-declare -x SECURITYSESSIONID="186a8
-
-<<<<<<< HEAD
-=======
-
-
-<-----aujourd'hui-->
-bash-3.2$ echo $!
-minishell > echo $!
-$!
-
-handel in herdoc ctrl + c/
->>>>>>> 929d532e2f9b08ad903d61346867c98a2c5b0f68
-
-s | fhjfgf
-bash: fhjfgf: command not found
-
-<< l ()
-> l
-bash: syntax error near unexpected token `('
-
-
-
-
-exit 3243259034
-env -i
-
-
-"export "
-
-./minishell < /dev/urandom
-exit
-minishell > ./minishell < /dev/urandom
-minishell: xTQjt: command not found
-minishell: r: command not found
-minishell: ɉ: command not found
-minishell: 3: command not found
-minishell: %: command not found
-minishell:syntax error near unexpected token -1
-minishell: S: command not found
-minishell:syntax error near unexpected token -1
-minishell:syntax error near unexpected token 4
-minishell: _/R4Ԑ: command not found
-minishell:syntax error near unexpected token -1
-minishell: s: command not found
-AddressSanitizer:DEADLYSIGNAL
-=================================================================
-==85896==ERROR: AddressSanitizer: SEGV on unknown address 0x000000000018 (pc 0x000101302ca8 bp 0x7ffeee908200 sp 0x7ffeee908130 T0)
-==85896==The signal is caused by a READ memory access.
-==85896==Hint: address points to the zero page.
-    #0 0x101302ca8 in parse_cmd+0xa8 (minishell:x86_64+0x10000bca8)
-    #1 0x10131ad47 in parse_redir+0x17 (minishell:x86_64+0x100023d47)
-    #2 0x10131e034 in parse_pipe+0x14 (minishell:x86_64+0x100027034)
-    #3 0x10131e277 in parse_and_or+0x17 (minishell:x86_64+0x100027277)
-    #4 0x10131e721 in plant_6+0x111 (minishell:x86_64+0x100027721)
-    #5 0x1012fc9b0 in main+0xdf0 (minishell:x86_64+0x1000059b0)
-    #6 0x7fff701c7cc8 in start+0x0 (libdyld.dylib:x86_64+0x1acc8)
-
-==85896==Register values:
-rax = 0x0000000000000018  rbx = 0x00007ffeee9084c0  rcx = 0x0000000000000018  rdx = 0x0000100000000003
-rdi = 0x00007ffeee908400  rsi = 0x0000100000000000  rbp = 0x00007ffeee908200  rsp = 0x00007ffeee908130
- r8 = 0x6867bdd71b3200df   r9 = 0x0000000000000000  r10 = 0xffffffffffffffff  r11 = 0x00000fffffffffff
-r12 = 0x0000000000000000  r13 = 0x0000000000000000  r14 = 0x00001fffddd210bf  r15 = 0x0000000000000000
-AddressSanitizer can not provide additional info.
-SUMMARY: AddressSanitizer: SEGV (minishell:x86_64+0x10000bca8) in parse_cmd+0xa8
-==85896==ABORTING
-
-./minishell < /dev/urandom
-AddressSanitizer:DEADLYSIGNAL
-=================================================================
-==85973==ERROR: AddressSanitizer: SEGV on unknown address 0x000000000018 (pc 0x000108522ca8 bp 0x7ffee76e8200 sp 0x7ffee76e8130 T0)
-==85973==The signal is caused by a READ memory access.
-==85973==Hint: address points to the zero page.
-    #0 0x108522ca8 in parse_cmd+0xa8 (minishell:x86_64+0x10000bca8)
-    #1 0x10853ad47 in parse_redir+0x17 (minishell:x86_64+0x100023d47)
-    #2 0x10853e034 in parse_pipe+0x14 (minishell:x86_64+0x100027034)
-    #3 0x10853e277 in parse_and_or+0x17 (minishell:x86_64+0x100027277)
-    #4 0x10853e721 in plant_6+0x111 (minishell:x86_64+0x100027721)
-    #5 0x10851c9b0 in main+0xdf0 (minishell:x86_64+0x1000059b0)
-    #6 0x7fff701c7cc8 in start+0x0 (libdyld.dylib:x86_64+0x1acc8)
-
-==85973==Register values:
-rax = 0x0000000000000018  rbx = 0x00007ffee76e84c0  rcx = 0x0000000000000018  rdx = 0x0000100000000003
-rdi = 0x00007ffee76e8400  rsi = 0x0000100000000000  rbp = 0x00007ffee76e8200  rsp = 0x00007ffee76e8130
- r8 = 0x899da131875f0093   r9 = 0x0000000000000000  r10 = 0xffffffffffffffff  r11 = 0x00000fffffffffff
-r12 = 0x0000000000000000  r13 = 0x0000000000000000  r14 = 0x00001fffdcedd0bf  r15 = 0x0000000000000000
-AddressSanitizer can not provide additional info.
-SUMMARY: AddressSanitizer: SEGV (minishell:x86_64+0x10000bca8) in parse_cmd+0xa8
-==85973==ABORTING
-
-./minishell < /dev/urandom
-AddressSanitizer:DEADLYSIGNAL
-=================================================================
-==86138==ERROR: AddressSanitizer: SEGV on unknown address 0x000000000018 (pc 0x00010e90bca8 bp 0x7ffee12ff200 sp 0x7ffee12ff130 T0)
-==86138==The signal is caused by a READ memory access.
-==86138==Hint: address points to the zero page.
-^[[A    #0 0x10e90bca8 in parse_cmd+0xa8 (minishell:x86_64+0x10000bca8)
-    #1 0x10e923d47 in parse_redir+0x17 (minishell:x86_64+0x100023d47)
-    #2 0x10e927034 in parse_pipe+0x14 (minishell:x86_64+0x100027034)
-    #3 0x10e927277 in parse_and_or+0x17 (minishell:x86_64+0x100027277)
-    #4 0x10e927721 in plant_6+0x111 (minishell:x86_64+0x100027721)
-    #5 0x10e9059b0 in main+0xdf0 (minishell:x86_64+0x1000059b0)
-    #6 0x7fff701c7cc8 in start+0x0 (libdyld.dylib:x86_64+0x1acc8)
-
-==86138==Register values:
-rax = 0x0000000000000018  rbx = 0x00007ffee12ff4c0  rcx = 0x0000000000000018  rdx = 0x0000100000000003
-rdi = 0x00007ffee12ff400  rsi = 0x0000100000000000  rbp = 0x00007ffee12ff200  rsp = 0x00007ffee12ff130
- r8 = 0x5f6324fb9d2300d0   r9 = 0x0000000000000000  r10 = 0xffffffffffffffff  r11 = 0x00000fffffffffff
-r12 = 0x0000000000000000  r13 = 0x0000000000000000  r14 = 0x00001fffdc25febf  r15 = 0x0000000000000000
-AddressSanitizer can not provide additional info.
-SUMMARY: AddressSanitizer: SEGV (minishell:x86_64+0x10000bca8) in parse_cmd+0xa8
-==86138==ABORTING
-
-
-
-./minishell < /dev/urandom
-minishell: : command not found
-minishell: Kd: command not found
-minishell:: command not found
-minishell: שcWY: command not found
-minishell: WJ: command not found
-minishell: O: command not found
-AddressSanitizer:DEADLYSIGNAL
-=================================================================
-==86283==ERROR: AddressSanitizer: SEGV on unknown address 0x000000000018 (pc 0x00010e6dcca8 bp 0x7ffee152e200 sp 0x7ffee152e130 T0)
-==86283==The signal is caused by a READ memory access.
-==86283==Hint: address points to the zero page.
-^[[A
-    #0 0x10e6dcca8 in parse_cmd+0xa8 (minishell:x86_64+0x10000bca8)
-    #1 0x10e6f4d47 in parse_redir+0x17 (minishell:x86_64+0x100023d47)
-    #2 0x10e6f8034 in parse_pipe+0x14 (minishell:x86_64+0x100027034)
-    #3 0x10e6f8277 in parse_and_or+0x17 (minishell:x86_64+0x100027277)
-    #4 0x10e6f8721 in plant_6+0x111 (minishell:x86_64+0x100027721)
-    #5 0x10e6d69b0 in main+0xdf0 (minishell:x86_64+0x1000059b0)
-    #6 0x7fff701c7cc8 in start+0x0 (libdyld.dylib:x86_64+0x1acc8)
-
-==86283==Register values:
-rax = 0x0000000000000018  rbx = 0x00007ffee152e4c0  rcx = 0x0000000000000018  rdx = 0x0000100000000003
-rdi = 0x00007ffee152e400  rsi = 0x0000100000000000  rbp = 0x00007ffee152e200  rsp = 0x00007ffee152e130
- r8 = 0xfc25966283e30014   r9 = 0x0000000000000000  r10 = 0xffffffffffffffff  r11 = 0x00000fffffffffff
-r12 = 0x0000000000000000  r13 = 0x0000000000000000  r14 = 0x00001fffdc2a5cbf  r15 = 0x0000000000000000
-AddressSanitizer can not provide additional info.
-SUMMARY: AddressSanitizer: SEGV (minishell:x86_64+0x10000bca8) in parse_cmd+0xa8
-==86283==ABORTING
-minishell > ./minishell < /dev/urandom
-minishell: }=: command not found
-minishell: : command not found
-minishell: : command not found
-minishell: }uUg3: command not found
-minishell: eK: command not found
-minishell: hv: command not found
-minishell:syntax error near unexpected token -2
-minishell:syntax error near unexpected token 8
-minishell: B: command not found
-minishell: a: command not found
-minishell: h: command not found
-exit
+minishell > mkdir -p a/b/c/d/e/f
+[mkdir -p a/b/c/d/e/f]
+minishell > cd a/b/c/d/e/f/
+[cd a/b/c/d/e/f/]
+minishell > env
+[env]
+PATH=/Users/sel-jett/.docker/bin:/usr/gnu/bin:/usr/local/bin:/bin:/usr/bin:.
+SHLVL=1
+_=/usr/bin/env
+OLDPWD=/Users/amel-has/Desktop/xx
+PWD=/Users/amel-has/Desktop/xx/a/b/c/d/e/f
+minishell > unset OLDPWD
+[unset OLDPWD]
+minishell > unset PWD
+[unset PWD]
+minishell > cd -        
+[cd -]
+minishell: cd: OLDPWD not set
+minishell > rm -rf ../../../../../../a/ 
+[rm -rf ../../../../../../a/ ]
+minishell > pwd
+[pwd]
+(null)
+---------->
+echo "> >> < * ? [ ] | ; [ ] || && ( ) & # $  <<"
+echo "$?$USER"
+echo " $?"
