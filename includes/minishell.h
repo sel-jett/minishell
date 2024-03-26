@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:48:58 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/26 05:44:18 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/26 08:27:23 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,11 @@ int				plant_6(t_node *top, t_node_arbre **racine);
 ///////////////////////// EXECUTION //////////////////////////
 
 void			ft_m_error(char *str);
+int				ft_strlen_bi(char **str);
+char			**ft_func_string(char **str, int i);
+char			**array_structer(char **str);
+int				array_checker(char **str);
+int				ft_strlen_tri(char **str);
 char			*ft_func(char *str);
 int				open_outfile(struct s_nnode *wnt, int *fd, int *j, t_env *env);
 int				open_appendfile(struct s_nnode *wnt,

@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 06:25:44 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/25 20:32:19 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/26 08:13:14 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,4 +137,14 @@ typedef struct s_arbre
 {
 	t_node_arbre	*racine;
 }	t_arbre;
+
+typedef struct s_split
+{
+	int		i;
+	int		j;
+	int		k;
+	int		check;
+	t_node	*smp;
+}	t_split;
+
 #endif

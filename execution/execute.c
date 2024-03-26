@@ -6,115 +6,16 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 12:09:39 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/26 06:49:01 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/26 08:26:18 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	ft_strlen_bi(char **str)
+char	**array_31(char **str)
 {
-	int	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
-char	**ft_func_string(char **str, int i)
-{
-	char	**tmp;
-	int		len;
+	int		i;
 	int		j;
-
-	len = ft_strlen_bi(str);
-	tmp = my_malloc((len * 8), 1);
-	if (!tmp)
-		return (NULL);
-	len = 0;
-	j = 0;
-	while (str[len])
-	{
-		if (i == len)
-		{
-			len += 1;
-			continue ;
-		}
-		tmp[j] = str[len];
-		len++;
-		j++;
-	}
-	tmp[j] = NULL;
-	return (tmp);
-}
-
-char	**array_structer(char **str)
-{
-	int	tab[2];
-
-	(1) && (tab[0] = 0, tab[1] = 0);
-	while (str && str[tab[0]] && str[tab[0]][0])
-	{
-		while (str[tab[0]][tab[1]])
-		{
-			if (str[tab[0]][0] == '\\')
-			{
-				if (str[tab[0] + 1])
-				{
-					(1) && (str = ft_func_string(str, tab[0]), tab[0] = 0);
-					continue ;
-				}
-				else
-				{
-					str[tab[0]] = NULL;
-					break ;
-				}
-			}
-			tab[1]++;
-		}
-		(1) && (tab[1] = 0, tab[0]++);
-	}
-	return (str = joyner(str), str);
-}
-
-int	array_checker(char **str)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (str[i])
-	{
-		j = 0;
-		while (str[i][j])
-		{
-			if (str[i][j] == '\v' || str[i][j] == '\\' || str[i][j] == -32)
-				return (1);
-			j++;
-		}
-		i++;
-	}
-	return (0);
-}
-
-int	ft_strlen_tri(char **str)
-{
-	int	i;
-
-	i = 0;
-	if (!str)
-		return (0);
-	while (str[i])
-		i++;
-	return (i);
-}
-
-char **array_31(char **str)
-{
-	int	i;
-	int	j;
 	char	**tmp;
 
 	i = 0;
@@ -123,8 +24,7 @@ char **array_31(char **str)
 		return (NULL);
 	while (str[i])
 	{
-		tmp[i] = NULL;
-		j = 0;
+		(1) && (tmp[i] = NULL, j = 0);
 		while (str[i][j])
 		{
 			if (str[i][j] == -31)
@@ -138,11 +38,10 @@ char **array_31(char **str)
 		tmp[i] = ft_strjoin_char(tmp[i], '\0');
 		i++;
 	}
-	tmp[i] = NULL;
-	return (tmp);
+	return (tmp[i] = NULL, tmp);
 }
 
-void c(char **str, int *len)
+void	c(char **str, int *len)
 {
 	int		i;
 	int		j;
@@ -151,14 +50,15 @@ void c(char **str, int *len)
 	i = 0;
 	while (str[i])
 	{
-		if (ft_strlen_b(str[i]) != 0 && str[i][ft_strlen_b(str[i]) - 1] && str[i][ft_strlen_b(str[i]) - 1] == -31)
+		if (ft_strlen_b(str[i]) != 0 && str[i][ft_strlen_b(str[i]) - 1] && \
+			str[i][ft_strlen_b(str[i]) - 1] == -31)
 		{
 			j = 0;
-			s =  ft_split(str[i], ' ');
+			s = ft_split(str[i], ' ');
 			while (s[j])
 			{
-				 (*len)++;
-				 j++;
+				(*len)++;
+				j++;
 			}
 		}
 		(*len)++;
@@ -166,7 +66,7 @@ void c(char **str, int *len)
 	}
 }
 
-char **ft_31_spliter(char **str, int i, int j, int k)
+char	**ft_31_spliter(char **str, int i, int j, int k)
 {
 	int		len;
 	char	**s;
@@ -181,11 +81,11 @@ char **ft_31_spliter(char **str, int i, int j, int k)
 		if (ft_strlen_b(str[i]) != 0 && str[i][ft_strlen_b(str[i]) - 1] == -31)
 		{
 			j = 0;
-			s =  ft_split(str[i], ' ');
+			s = ft_split(str[i], ' ');
 			while (s[j])
 			{
-				 str_r[k] = ft_strdup(s[j]);
-				 (1) && (j++, k++);
+				str_r[k] = ft_strdup(s[j]);
+				(1) && (j++, k++);
 			}
 		}
 		else
@@ -195,9 +95,11 @@ char **ft_31_spliter(char **str, int i, int j, int k)
 	return (str_r[k] = NULL, str_r);
 }
 
-void change(char **str)
+void	change(char **str)
 {
-	int i = 0;
+	int	i;
+
+	i = 0;
 	while (str[i])
 	{
 		if (str[i][ft_strlen(str[i]) - 1] == -31)
@@ -208,26 +110,20 @@ void change(char **str)
 
 void	ft_execute_cmd(t_node_arbre *tree, t_env **env, t_env **exp)
 {
-	char			**cmmd;
-	char			**path;
-	t_node			*tmp;
-	t_node			*smp;
-	int				check;
-	int	i, j ,k;
+	char	**cmmd;
+	char	**path;
+	t_node	*tmp;
+	t_split	s;
 
-	(1) && (i = 0, j = 0, k = 0);
-	(1) && (tmp = tree->list->top, smp = tree->list->top, check = 0);
-	path = ft_split(get_path(*env), ':');
+	(1) && (s.i = 0, s.j = 0, s.k = 0, path = ft_split(get_path(*env), ':'));
+	(1) && (tmp = tree->list->top, s.smp = tree->list->top, s.check = 0);
 	cmmd = linkedlist_to_arr(tmp, *exp);
-	// ft_print_arr(cmmd);
-	// return ;
 	if (!cmmd)
 		return ;
-	// ft_print_arr(cmmd);
-	flag_to_expand(smp, cmmd, &check, exp);
-	if (!dup_wild(cmmd, tree->list->top, &check))
+	flag_to_expand(s.smp, cmmd, &s.check, exp);
+	if (!dup_wild(cmmd, tree->list->top, &s.check))
 		return ;
-	if (!execute_cmd_child(check, &cmmd))
+	if (!execute_cmd_child(s.check, &cmmd))
 		return ;
 	backslach_filler(cmmd);
 	if (array_checker(cmmd))
@@ -237,6 +133,6 @@ void	ft_execute_cmd(t_node_arbre *tree, t_env **env, t_env **exp)
 		ft_builtin(cmmd, env, exp);
 		return ;
 	}
-	// ft_print_arr(array_31(f(cmmd, i, j, k)));
-	ft_execute_child(env_to_arr(*env), array_31(ft_31_spliter(cmmd, i, j, k)), path);
+	ft_execute_child(env_to_arr(*env), \
+		array_31(ft_31_spliter(cmmd, s.i, s.j, s.k)), path);
 }

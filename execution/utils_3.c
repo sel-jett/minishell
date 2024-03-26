@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 20:33:43 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/26 04:35:41 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/26 08:05:45 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	ft_execve(char *env_var, char **env, char **cmmd)
 		exit(126);
 	}
 }
-
 
 char	*arr_value(t_node *tmp, char **str, int *i)
 {
@@ -40,53 +39,56 @@ char	*arr_value(t_node *tmp, char **str, int *i)
 	return (str[*i]);
 }
 
+char	*arr_insertion(t_node *tmp, int *i, char **a, t_env *exp)
+{
+	if (tmp->value && !(tmp->value)[0] && tmp->flag_space == 0 && !a[*i])
+		return (a[*i] = ft_strdup(""), a[*i]);
+	else if (tmp->value && !(tmp->value)[0] && tmp->flag_space == 1)
+	{
+		if (a[*i])
+			(*i)++;
+		return (a[*i] = ft_strdup(""), a[*i]);
+	}
+	else if (tmp->value && (tmp->value)[0] && tmp->flag_space == 1 && \
+		tmp->flag_expend == 1)
+	{
+		(*i)++;
+		a[*i] = ft_strjoin(a[*i], ft_expand(exp, tmp->value));
+		return (a[*i]);
+	}
+	else if (tmp->value && (tmp->value)[0] && tmp->flag_space == 1 && \
+		tmp->flag_expend == 2)
+	{
+		(*i)++;
+		a[*i] = ft_strjoin(a[*i], ft_expand(exp, tmp->value));
+		a[*i] = ft_strjoin_char(a[*i], -31);
+		return (a[*i]);
+	}
+	return (NULL);
+}
+
 char	**arr_filler(t_node	*tmp, char **a, int i, t_env *exp)
 {
-	int		check;
-	t_node	*tmp2;
+	char	*str;
 
-	check = 0;
-	tmp2 = tmp;
-	if (tmp->value && ft_strcmp(tmp->value, "export"))
-		check = 1;
-	(void)exp;
 	while (tmp)
 	{
-		if (tmp->value && !(tmp->value)[0] && tmp->flag_space == 0 && !a[i])
-			a[i] = ft_strdup("");
-		else if (tmp->value && !(tmp->value)[0] && tmp->flag_space == 1)
-		{
-			if (a[i])
-				i++;
-			a[i] = ft_strdup("");
-		}
-		else if (tmp->value && (tmp->value)[0] && tmp->flag_space == 1 && tmp->flag_expend == 1)
-		{
-			i++;
-			a[i] = ft_strjoin(a[i], ft_expand(exp, tmp->value));
-		}
-		else if (tmp->value && (tmp->value)[0] && tmp->flag_space == 1 &&  tmp->flag_expend == 2 )
-		{
-			i++;
-			a[i] = ft_strjoin(a[i], ft_expand(exp, tmp->value));
-			a[i] = ft_strjoin_char(a[i], -31);
-		}
-		else if (tmp->value && (tmp->value)[0] && tmp->flag_space == 0 && tmp->flag_expend == 2)
+		str = arr_insertion(tmp, &i, a, exp);
+		if (str)
+			a[i] = str;
+		else if (tmp->value && (tmp->value)[0] && tmp->flag_space == 0 && \
+			tmp->flag_expend == 2)
 		{
 			a[i] = ft_strjoin(a[i], ft_expand(exp, tmp->value));
 			a[i] = ft_strjoin_char(a[i], -31);
 		}
-		else if (tmp->value && (tmp->value)[0] && tmp->flag_space == 0 && tmp->flag_expend == 1)
-		{
+		else if (tmp->value && (tmp->value)[0] && tmp->flag_space == 0 && \
+			tmp->flag_expend == 1)
 			a[i] = ft_strjoin(a[i], ft_expand(exp, tmp->value));
-		}
 		else if (tmp->value && (tmp->value)[0] && tmp->flag_space == 0)
 			a[i] = ft_strjoin(a[i], tmp->value);
 		else if (tmp->value && (tmp->value)[0] && tmp->flag_space == 1)
-		{
-			i++;
-			a[i] = ft_strjoin(a[i], tmp->value);
-		}
+			(1) && (i++, a[i] = ft_strjoin(a[i], tmp->value));
 		tmp = tmp->next;
 	}
 	return (i++, a[i] = NULL, a);
