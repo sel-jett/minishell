@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 12:09:39 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/26 08:41:03 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/26 10:35:06 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,14 +82,14 @@ char	**ft_31_s(char **str, int i, int j, int k)
 		{
 			j = 0;
 			s = ft_split(str[i], ' ');
-			while (s[j])
+			while (s && s[j])
 			{
 				str_r[k] = ft_strdup(s[j]);
 				(1) && (j++, k++);
 			}
 		}
 		else
-			str_r[k++] = strdup(str[i]);
+			str_r[k++] = ft_strdup(str[i]);
 		i++;
 	}
 	return (str_r[k] = NULL, str_r);

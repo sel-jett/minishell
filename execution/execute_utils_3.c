@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_utils_3.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 17:23:45 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/26 04:39:18 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/26 10:34:40 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@ char	*dup_wild(char **cmmd, t_node *smp, int *check)
 	{
 		if (contain_wild(cmmd[i]))
 		{
-			wild = ft_execute_wild(cmmd[i]);
+			if (smp->flag_wilc == 1)
+				wild = ft_execute_wild(cmmd[i]);
+			else
+				wild = ft_strdup(cmmd[i]);
 			cmmd[i] = ft_strdup(wild);
 			if (!cmmd[i])
 				return (NULL);
