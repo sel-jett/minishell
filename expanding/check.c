@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 21:01:23 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/25 21:10:12 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/26 10:10:45 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,30 @@ char	*expander(char *new_cmd, char *cmd, t_env *exp)
 			return (NULL);
 	}
 	return (new_cmd);
+}
+
+void	env_init(t_var *var, char **envp)
+{
+	char	*str;
+
+	(1) && (var->env = ft_env_parser(envp), var->exp = ft_env_parser(envp));
+	if (!var->env)
+	{
+		str = ft_strjoin(PATH_1, PATH_2);
+		if (!str)
+		{
+			var->index = 1;
+			return ;
+		}
+		ft_lstadd_back(&var->env, env_new(str, var->env));
+		ft_lstadd_back(&var->env, env_new("SHLVL=1", var->env));
+		ft_lstadd_back(&var->env, env_new("_=/usr/bin/env", var->env));
+		ft_lstadd_back(&var->env, env_new(ft_strjoin("PWD=",
+					getcwd(0, 0)), var->env));
+		ft_lstadd_back(&var->exp, env_new(str, var->exp));
+		ft_lstadd_back(&var->exp, env_new("SHLVL=1", var->exp));
+		ft_lstadd_back(&var->exp, env_new(ft_strjoin("PWD=", getcwd(0, 0)), \
+		var->exp));
+	}
+	ft_lstadd_back(&var->exp, env_new("OLDPWD", var->exp));
 }
