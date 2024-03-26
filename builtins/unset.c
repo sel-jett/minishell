@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 22:27:43 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/26 06:23:22 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/26 08:56:55 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,28 +79,27 @@ int	ft_unset_write(char *str)
 void	ft_unset(char **cmd, t_env **cnev, t_env **exp)
 {
 	int		i;
-	int		check;
+	t_split	s;
 	char	**tmp;
-	int		j, k, l;
 
-	(1) && (j = 0, k = 0, l = 0);
-	i = 0;
-	check = 0;
-	tmp = array_31(ft_31_spliter(cmd, j, k, l));
+	(1) && (s.j = 0, s.k = 0, s.i = 0);
+	(1) && (i = 0, s.check = 0);
+	tmp = array_31(ft_31_s(cmd, s.j, s.k, s.i));
 	while (tmp[i])
 	{
-			if (check == 1 || !is_alpha_2(tmp[i]))
-			{
-				if (cmd[i] && ft_strlen_b(cmd[i]) > 0 && cmd[i][ft_strlen_b(cmd[i]) - 1] != -31)
-					check = ft_unset_write(tmp[i]);
-			}
-			if (!check)
-			{
-				cnev = fun(cnev, tmp[i]);
-				exp = fun(exp, tmp[i]);
-				ft_status(0, 1);
-			}
-			check = 0;
+		if (s.check == 1 || !is_alpha_2(tmp[i]))
+		{
+			if (cmd[i] && ft_strlen_b(cmd[i]) > 0 && \
+				cmd[i][ft_strlen_b(cmd[i]) - 1] != -31)
+				s.check = ft_unset_write(tmp[i]);
+		}
+		if (!s.check)
+		{
+			cnev = fun(cnev, tmp[i]);
+			exp = fun(exp, tmp[i]);
+			ft_status(0, 1);
+		}
+		s.check = 0;
 		i++;
 	}
 }

@@ -6,13 +6,13 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 22:05:40 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/25 13:25:44 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/26 08:47:13 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	cd_error(const char *path)
+int	cd_error(char *path)
 {
 	int	i;
 
@@ -42,7 +42,7 @@ void	cd_second(void)
 	ft_status(1, 1);
 }
 
-int	cd_old(const char *path)
+int	cd_old(char *path)
 {
 	int	i;
 	int	check;
@@ -69,7 +69,7 @@ int	cd_old(const char *path)
 	return (1);
 }
 
-int	cd_home(const char *path)
+int	cd_home(char *path)
 {
 	int	i;
 	int	check;

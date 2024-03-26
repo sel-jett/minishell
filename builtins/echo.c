@@ -6,14 +6,14 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 07:39:43 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/25 21:35:57 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/26 08:46:35 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // #include "builtins.h"
 #include "../includes/minishell.h"
 
-int	echo_loop(int i, int *j, const char **path)
+int	echo_loop(int i, int *j, char **path)
 {
 	while (path[i][*j] && path[i][*j] > 32)
 	{
@@ -28,7 +28,7 @@ int	echo_loop(int i, int *j, const char **path)
 	return (1);
 }
 
-static	int	echo_check(const char **path)
+static	int	echo_check(char **path)
 {
 	int	i;
 	int	j;
@@ -55,7 +55,7 @@ static	int	echo_check(const char **path)
 	return (0);
 }
 
-void	echo_n(int check, const char **path)
+void	echo_n(int check, char **path)
 {
 	path = path + check;
 	while (*path)
@@ -67,7 +67,7 @@ void	echo_n(int check, const char **path)
 	}
 }
 
-void	echo(const char **path, int mode)
+void	echo(char **path, int mode)
 {
 	int	check;
 

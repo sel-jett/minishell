@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 23:18:52 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/26 06:36:43 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/26 08:56:25 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	cd_setter(char *temp, t_env **cenv, t_env **exp, t_env *tmp)
 	ft_lstadd_back(exp, env_new(temp, *exp));
 }
 
-void	cd_applier(t_env **cenv, t_env **exp, char *b, const char **path)
+void	cd_applier(t_env **cenv, t_env **exp, char *b, char **path)
 {
 	char	*temp;
 	char	*temp_old;
@@ -51,7 +51,7 @@ void	cd_applier(t_env **cenv, t_env **exp, char *b, const char **path)
 	cd_setter(temp, cenv, exp, tmp);
 }
 
-void	cd_application(t_env **cenv, t_env **exp, char *b, const char **path)
+void	cd_application(t_env **cenv, t_env **exp, char *b, char **path)
 {
 	getcwd(b, PATH_MAX);
 	if (cd_error(path[0]))
@@ -59,14 +59,8 @@ void	cd_application(t_env **cenv, t_env **exp, char *b, const char **path)
 	cd_applier(cenv, exp, b, path);
 }
 
-int	cd_home_check(const char **path, t_env *cenv)
+int	cd_home_check(char **path, t_env *cenv)
 {
-	// if ((!path || !path[0] || !path[0][0]) && (!value_key(cenv, "HOME") || \
-	// 	!(value_key(cenv, "HOME"))[0]))
-	// {
-	// 	ft_status(0, 0);
-	// 	return (0);
-	// }
 	if (path)
 		path[0] = value_key(cenv, "HOME");
 	if (!path[0])
@@ -78,12 +72,13 @@ int	cd_home_check(const char **path, t_env *cenv)
 	return (1);
 }
 
-void	cd(const char **path, t_env **cenv, t_env **exp)
+void	cd(char **path, t_env **cenv, t_env **exp)
 {
 	char	*b;
 
 	b = my_malloc(PATH_MAX + 1, 1);
-	if (!path || !path[0] || !path[0][0] || !ft_strncmp((char *)path[0], "~") || \
+	if (!path || !path[0] || !path[0][0] || \
+		!ft_strncmp((char *)path[0], "~") || \
 		!ft_strncmp((char *)path[0], "--"))
 	{
 		if (!cd_home_check(path, *cenv))
