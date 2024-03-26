@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:48:58 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/26 09:34:15 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/26 09:54:28 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <stdbool.h>
+
+# define PATH_1 "PATH=/usr/bin:/bin:/usr/sbin:"
+# define PATH_2 "/sbin:/usr/local/bin:/usr/local/sbin"
 
 int				g_x;
 void			create_tree(t_var *var);

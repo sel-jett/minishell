@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 07:12:48 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/26 09:35:26 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/26 09:54:31 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void exec_execute(t_var var)
 	sigaction(SIGINT, &var.sa, NULL);
 	sigaction(SIGQUIT, &var.sa, NULL);
 	g_x = 0;
-	free(var.list->str);	
+	free(var.list->str);
 }
 
 void init_var(t_var *var)
@@ -52,24 +52,39 @@ void init_var(t_var *var)
 	var->nlist = NULL;
 }
 
+void	env_init(t_var *var, char **envp)
+{
+	char	*str;
+
+	(1) && (var->env = ft_env_parser(envp), var->exp = ft_env_parser(envp));
+	if (!var->env)
+	{
+		str = ft_strjoin(PATH_1, PATH_2);
+		if (!str)
+		{
+			var->index = 1;
+			return ;
+		}
+		ft_lstadd_back(&var->env, env_new(str, var->env));
+		ft_lstadd_back(&var->env, env_new("SHLVL=1", var->env));
+		ft_lstadd_back(&var->env, env_new("_=/usr/bin/env", var->env));
+		ft_lstadd_back(&var->env, env_new(ft_strjoin("PWD=", getcwd(0, 0)), \
+		 var->env));
+		ft_lstadd_back(&var->exp, env_new(str, var->exp));
+		ft_lstadd_back(&var->exp, env_new("SHLVL=1", var->exp));
+		ft_lstadd_back(&var->exp, env_new(ft_strjoin("PWD=", getcwd(0, 0)), \
+		var->exp));
+	}
+	ft_lstadd_back(&var->exp, env_new("OLDPWD", var->exp));
+}
+
 int	main(int ac, char **av, char **envp)
 {
 	t_var var;
 
 	init_var(&var);
 	handel_signel_(var.sa);
-	(1) && (var.env = ft_env_parser(envp), var.exp = ft_env_parser(envp));
-	if (!var.env)
-	{
-		ft_lstadd_back(&var.env, env_new("PATH=/Users/sel-jett/.docker/bin:/usr/gnu/bin:/usr/local/bin:/bin:/usr/bin:.", var.env));
-		ft_lstadd_back(&var.env, env_new("SHLVL=1", var.env));
-		ft_lstadd_back(&var.env, env_new("_=/usr/bin/env", var.env));
-		ft_lstadd_back(&var.env, env_new(ft_strjoin("PWD=", getcwd(0, 0)), var.env));
-		ft_lstadd_back(&var.exp, env_new("PATH=/Users/sel-jett/.docker/bin:/usr/gnu/bin:/usr/local/bin:/bin:/usr/bin:.", var.exp));
-		ft_lstadd_back(&var.exp, env_new("SHLVL=1", var.exp));
-		ft_lstadd_back(&var.exp, env_new(ft_strjoin("PWD=", getcwd(0, 0)), var.exp));
-	}
-	ft_lstadd_back(&var.exp, env_new("OLDPWD", var.exp));
+	env_init(&var, envp);
 	(1) && ((void)ac, (void)av, 0);
 	while (1)
 	{
