@@ -17,15 +17,13 @@ SRCS = ./parcing/allocation_free/creation1.c ./parcing/allocation_free/my_malloc
 	   ./builtins/env.c ./builtins/cd_utils.c ./builtins/builtins_utils.c ./builtins/builtins_utils_1.c ./builtins/builtins.c ./parcing/syntax_error/utile_10.c \
 
 OBJS    = $(SRCS:.c=.o)
-# READLINE_LIB = $(shell brew --prefix readline)/lib
-# READLINE_INC = $(shell brew --prefix readline)/include
-#
+
 READLINE_LIB = $(shell brew --prefix readline)/lib
 READLINE_INC = $(shell brew --prefix readline)/include
 
-CFLAGS 	=   -Wall -Wextra -Werror -fsanitize=address -g
+CFLAGS 	=   -Wall -Wextra -Werror
 RM 		= @rm -f
-all : $(NAME) clean
+all : $(NAME)
 
 $(NAME):$(OBJS)
 	@echo "Linking $(NAME)"

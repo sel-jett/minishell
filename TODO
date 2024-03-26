@@ -1,7 +1,0 @@
-minishell > ./jhs
-minishell: ./jhs: command not found
-minishell: ./jhs: Bad address
------>
-bash-3.2$ ls "*"
-ls: *: No such file or directory
-bash-3.2$ 
