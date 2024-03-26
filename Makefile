@@ -10,7 +10,7 @@ SRCS = ./parcing/allocation_free/creation1.c ./parcing/allocation_free/my_malloc
 	   ./execution/redir_out.c ./parcing/syntax_error/utile_5.c ./parcing/syntax_error/utile_8.c \
 	   ./builtins/env_parser_utils.c ./builtins/env_utils.c ./builtins/cd.c ./builtins/echo.c ./builtins/export_checker.c \
 	   ./builtins/env_parser.c ./parcing/syntax_error/utile_9.c ./parcing/syntax_error/utile_11.c\
-	   ./builtins/export.c ./builtins/ft_split.c ./builtins/ft_strlcpy.c ./parcing/syntax_error/utile_7.c \
+	    ./builtins/export.c ./builtins/ft_split.c ./builtins/ft_strlcpy.c ./parcing/syntax_error/utile_7.c \
 	   ./builtins/pwd.c ./builtins/unset.c ./builtins/utils.c \
 	   ./expanding/expand_utils.c ./expanding/check.c ./expanding/expand.c ./expanding/ft_itoa.c ./execution/utils_3.c ./execution/utils_4.c ./execution/utils.c \
 	   ./execution/wild_utils.c ./execution/wildcard.c ./execution/wild.c \

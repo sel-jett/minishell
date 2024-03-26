@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 07:03:43 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/25 20:16:42 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/25 23:29:58 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ void	ft_export(char **cmd, t_env **cnev, t_env **exp)
 	int		i;
 	char	*tmp;
 
+	dprintf(1,"[%s]\n",cmd[0]);
 	i = 0;
 	tmp = NULL;
 	if (!cmd || !cmd[0])

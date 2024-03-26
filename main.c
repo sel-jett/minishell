@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 07:12:48 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/25 18:16:57 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/26 01:26:12 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,18 @@ void	handler_signel(int signal, siginfo_t *siginfo, void *vd)
 	}
 }
 
+void	v()
+{
+	int fd = open("main.c", O_RDWR);
+	printf("fd -> %d\n", fd);
+	close(fd);
+}
+
 int	main(int ac, char **av, char **envp)
 {
 	t_var var;
 
+	atexit(v);
 	(1) && (var.sa.sa_flags = SA_SIGINFO, var.list = NULL);
 	(1) && (var.sa.sa_sigaction = handler_signel, var.nlist = NULL);
 	handel_signel_(var.sa);
