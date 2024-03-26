@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:06:52 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/25 20:06:59 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/25 22:20:18 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char	**checkerr(char *str, int *len)
 	int		i;
 
 	i = 0;
-	str_r = ft_split(str, ' ');
+	str_r = ft_split(str, -32);
 	if (!str_r)
 		return (NULL);
 	while (str_r[i])
@@ -63,7 +63,7 @@ char	**ft_spliter(char **str, char	**str_r)
 	while (str[i])
 	{
 		j = 0;
-		s = ft_split(str[i], ' ');
+		s = ft_split(str[i], -32);
 		if (!s)
 			return (NULL);
 		while (s[j])

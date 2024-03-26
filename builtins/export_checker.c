@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 07:26:29 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/25 20:34:47 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/25 22:09:53 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	valid_identifier(char *tmp, int i, int check2)
 	i++;
 	while (tmp[i] && tmp[i] != '=')
 	{
-		if (tmp[i] != '_' && !is_alpha(tmp[i]) && !is_num(tmp[i]))
+		if (tmp[i] != '_' && !is_alpha(tmp[i]) && !is_num(tmp[i]) && tmp[i] != '$')
 			check2++;
 		if (tmp[i + 1] && tmp[i + 1] == '=' && tmp[i] == '+')
 			check2--;
@@ -47,6 +47,7 @@ int	check_first(char *cmd, t_env *env)
 {
 	t_variable	v;
 
+	// dprintf(2, "cmd = %s\n", cmd);
 	if (!get_key(cmd) || ft_strncmp_one("$", get_key(cmd)) == 0)
 	{
 		dprintf(2, "minishell: export: `%s': not a valid identifier\n", cmd);

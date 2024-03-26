@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:48:58 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/25 21:11:14 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/26 01:02:49 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,9 +141,9 @@ void			backslach_filler(char **str);
 void			ft_execve(char *env_var, char **env, char **cmmd);
 char			**env_to_arr(t_env *env);
 void			ft_print_arr(char **arr);
-char			**arr_filler(t_node	*tmp, char **arr, int i);
+char			**arr_filler(t_node	*tmp, char **arr, int i, t_env *exp);
 int				liked_size(t_node *tree);
-char			**linkedlist_to_arr(t_node *tree);
+char			**linkedlist_to_arr(t_node *tree, t_env *exp);
 char			*get_path(t_env *env);
 char			**redirlist_to_arr(t_nlist *list_redir);
 int				length(char *s, char *str);

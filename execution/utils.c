@@ -6,13 +6,13 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:07:13 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/25 18:37:53 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/26 01:00:36 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-char	**linkedlist_to_arr(t_node *tree)
+char	**linkedlist_to_arr(t_node *tree, t_env *exp)
 {
 	char	**arr;
 	int		i;
@@ -31,7 +31,7 @@ char	**linkedlist_to_arr(t_node *tree)
 		i--;
 	}
 	i = 0;
-	return (arr_filler(tmp, arr, i));
+	return (arr_filler(tmp, arr, i, exp));
 }
 
 static int	liked_size_redir(t_nlist *tree)

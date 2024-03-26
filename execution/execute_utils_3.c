@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 17:23:45 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/25 17:37:38 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/26 00:53:23 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ int	execute_cmd_child(int check, char ***cmmd)
 	if (check)
 	{
 		*cmmd = array_dupper(*cmmd);
+		// ft_print_arr(*cmmd);
 		if (!*cmmd)
 			return (0);
 		*cmmd = joyner(*cmmd);

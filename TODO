@@ -16,10 +16,10 @@ minishell > unset OLDPWD
 [unset OLDPWD]
 minishell > unset PWD
 [unset PWD]
-minishell > cd -        
+minishell > cd -
 [cd -]
 minishell: cd: OLDPWD not set
-minishell > rm -rf ../../../../../../a/ 
+minishell > rm -rf ../../../../../../a/
 [rm -rf ../../../../../../a/ ]
 minishell > pwd
 [pwd]
@@ -31,7 +31,9 @@ echo " $?"
 //=------------------>
 minishell > ls >"./outfiles/outfile"x
 minishell > ls >"./outfiles/outfile"l
-minishell > 
+minishell >
 <-------------------------->
 unset HOME && cd
-cd ~ / change repo vers first 
+cd ~ / change repo vers first
+exit
+bash: exit: 897946413145641564168458461231512515151351: numeric argument required

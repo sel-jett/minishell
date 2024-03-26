@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 22:27:43 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/25 20:45:53 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/25 22:39:53 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ int	is_alpha_2(char *c)
 	int	i;
 
 	i = 0;
+	if (!*c)
+		return (0);
 	while (c[i])
 	{
 		if (!((c[i] >= 'a' && c[i] <= 'z') || (c[i] >= 'A' && c[i] <= 'Z') \
@@ -76,29 +78,22 @@ int	ft_unset_write(char *str)
 
 void	ft_unset(char **cmd, t_env **cnev, t_env **exp)
 {
-	char	**dptr;
 	int		i;
-	int		j;
 	int		check;
 
 	i = 0;
 	check = 0;
 	while (cmd[i])
 	{
-		dptr = ft_split(cmd[i], ' ');
-		j = 0;
-		while (dptr[j])
-		{
-			if (check == 1 || !is_alpha_2(dptr[j]))
-				check = ft_unset_write(dptr[j]);
+			if (check == 1 || !is_alpha_2(cmd[i]))
+				check = ft_unset_write(cmd[i]);
 			if (!check)
 			{
-				cnev = fun(cnev, dptr[j]);
-				exp = fun(exp, dptr[j]);
+				cnev = fun(cnev, cmd[i]);
+				exp = fun(exp, cmd[i]);
 				ft_status(0, 1);
 			}
-			j++;
-		}
+			check = 0;
 		i++;
 	}
 }
