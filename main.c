@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 07:12:48 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/26 09:54:31 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/26 10:11:22 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ void	handler_signel(int signal, siginfo_t *siginfo, void *vd)
 		}
 	}
 }
-void exec_execute(t_var var)
+
+void	exec_execute(t_var var)
 {
 	execute(var.arbre->racine, var.env, var.exp);
 	sigaction(SIGINT, &var.sa, NULL);
@@ -42,7 +43,7 @@ void exec_execute(t_var var)
 	free(var.list->str);
 }
 
-void init_var(t_var *var)
+void	init_var(t_var *var)
 {
 	var->sa.sa_flags = SA_SIGINFO;
 	var->list = NULL;
@@ -52,35 +53,23 @@ void init_var(t_var *var)
 	var->nlist = NULL;
 }
 
-void	env_init(t_var *var, char **envp)
+void	funs(t_var *var)
 {
-	char	*str;
-
-	(1) && (var->env = ft_env_parser(envp), var->exp = ft_env_parser(envp));
-	if (!var->env)
+	add_history(var->list->str);
+	read_parse(&var->index, var->list, var->exp, &var->n);
+	add_redir_parse(var->list, &var->index, var->n, &var->nlist);
+	(g_x == 10) && (g_x = 0);
+	create_tree(var);
+	if (!var->index)
 	{
-		str = ft_strjoin(PATH_1, PATH_2);
-		if (!str)
-		{
-			var->index = 1;
-			return ;
-		}
-		ft_lstadd_back(&var->env, env_new(str, var->env));
-		ft_lstadd_back(&var->env, env_new("SHLVL=1", var->env));
-		ft_lstadd_back(&var->env, env_new("_=/usr/bin/env", var->env));
-		ft_lstadd_back(&var->env, env_new(ft_strjoin("PWD=", getcwd(0, 0)), \
-		 var->env));
-		ft_lstadd_back(&var->exp, env_new(str, var->exp));
-		ft_lstadd_back(&var->exp, env_new("SHLVL=1", var->exp));
-		ft_lstadd_back(&var->exp, env_new(ft_strjoin("PWD=", getcwd(0, 0)), \
-		var->exp));
+		if (!plant_6(var->nlist->top, &var->arbre->racine))
+			(1 == 1) && (printf("ERROR7\n"), var->index = 1);
 	}
-	ft_lstadd_back(&var->exp, env_new("OLDPWD", var->exp));
 }
 
 int	main(int ac, char **av, char **envp)
 {
-	t_var var;
+	t_var	var;
 
 	init_var(&var);
 	handel_signel_(var.sa);
@@ -93,20 +82,11 @@ int	main(int ac, char **av, char **envp)
 			(1) && (printf("ERROR CREAT LISTE\n") && (var.index = 1));
 		if (!var.index)
 		{
-			(1) && (var.list->str = 0, var.list->str = readline("minishell > "));
+			(1) && (var.list->str = 0, var.list->str = readline("minishell> "));
 			ctrld(var.list->str, &var.index);
 			if (!var.index)
 			{
-				add_history(var.list->str);
-				read_parse(&var.index, var.list, var.exp, &var.n);
-				add_redir_parse(var.list, &var.index, var.n, &var.nlist);
-				(g_x == 10) && (g_x = 0);
-				create_tree(&var);
-				if (!var.index)
-				{
-					if (!plant_6(var.nlist->top, &var.arbre->racine))
-						(1 == 1) && (printf("ERROR7\n"), var.index = 1);
-				}
+				funs(&var);
 				if (!var.index)
 					exec_execute(var);
 			}

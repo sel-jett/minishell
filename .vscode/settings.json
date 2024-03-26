@@ -4,6 +4,7 @@
         "sstream": "c",
         "__locale": "c",
         "cstring": "c",
-        "minishell.h": "c"
+        "minishell.h": "c",
+        "algorithm": "c"
     }
 }
