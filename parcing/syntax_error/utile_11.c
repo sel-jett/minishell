@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 04:53:11 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/25 18:11:05 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/26 09:33:30 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,14 @@ void	i_node_make(t_node *node, t_node **i_node)
 	else if (node && node->next && node->next->next
 		&& is_text(node->next->next))
 		*i_node = node->next->next;
+}
+
+void	create_tree(t_var *var)
+{
+	if (!var->index)
+	{
+		var->arbre = c_arbre();
+		if (!var->arbre)
+			var->index = 1;
+	}
 }

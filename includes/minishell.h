@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:48:58 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/26 08:27:23 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/26 09:30:45 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # include <stdbool.h>
 
 int				g_x;
+void			create_tree(t_var *var);
 bool			is_text2(t_node *tmp);
 void			ft_count(t_node *node, int *len, int *index);
 void			i_node_make(t_node *node, t_node **i_node);
