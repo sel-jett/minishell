@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 12:09:39 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/26 10:35:06 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/26 21:35:59 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void	change(char **str)
 	while (str[i])
 	{
 		if (str[i][ft_strlen(str[i]) - 1] == -31)
-			str[i][strlen(str[i]) - 1] = '\0';
+			str[i][ft_strlen(str[i]) - 1] = '\0';
 		i++;
 	}
 }

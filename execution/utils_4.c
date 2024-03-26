@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_4.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 18:17:09 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/25 22:23:28 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/26 20:09:41 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,18 +39,6 @@ char	**env_to_arr(t_env *env)
 	}
 	arr[i] = NULL;
 	return (arr);
-}
-
-void	ft_print_arr(char **arr)
-{
-	int	i;
-
-	i = 0;
-	while (arr[i])
-	{
-		dprintf(2, "\"%s\"\n", arr[i]);
-		i++;
-	}
 }
 
 int	liked_size(t_node *tree)
