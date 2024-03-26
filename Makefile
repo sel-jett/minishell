@@ -35,7 +35,10 @@ $(NAME):$(OBJS)
 
 clean:
 	$(RM) $(OBJS)
-fclean : clean
+
+fclean: clean
 	$(RM) $(NAME)
-re:fclean all
+
+re: fclean all
+
 .PHONY: clean
