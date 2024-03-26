@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 22:04:03 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/25 21:02:37 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/26 07:00:26 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,6 @@ int	is_alpha_3(char c)
 
 void	ft_env(t_env *tmp)
 {
-	if (!get_path(tmp))
-	{
-		ft_printf("minishell: env", NULL);
-		ft_printf(": command not found\n", NULL);
-		ft_status(127, 1);
-		return ;
-	}
 	while (tmp)
 	{
 		if (tmp->key)

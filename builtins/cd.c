@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 23:18:52 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/25 20:52:23 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/26 06:36:43 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,14 @@ void	cd_application(t_env **cenv, t_env **exp, char *b, const char **path)
 
 int	cd_home_check(const char **path, t_env *cenv)
 {
-	if ((!path[0] || !path[0][0]) && (!value_key(cenv, "HOME") || \
-		!(value_key(cenv, "HOME"))[0]))
-	{
-		ft_status(0, 0);
-		return (0);
-	}
-	path[0] = value_key(cenv, "HOME");
+	// if ((!path || !path[0] || !path[0][0]) && (!value_key(cenv, "HOME") || \
+	// 	!(value_key(cenv, "HOME"))[0]))
+	// {
+	// 	ft_status(0, 0);
+	// 	return (0);
+	// }
+	if (path)
+		path[0] = value_key(cenv, "HOME");
 	if (!path[0])
 	{
 		ft_printf("minishell: cd: HOME not set\n", NULL);
@@ -82,7 +83,7 @@ void	cd(const char **path, t_env **cenv, t_env **exp)
 	char	*b;
 
 	b = my_malloc(PATH_MAX + 1, 1);
-	if (!path[0] || !path[0][0] || !ft_strncmp((char *)path[0], "~") || \
+	if (!path || !path[0] || !path[0][0] || !ft_strncmp((char *)path[0], "~") || \
 		!ft_strncmp((char *)path[0], "--"))
 	{
 		if (!cd_home_check(path, *cenv))

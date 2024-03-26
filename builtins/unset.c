@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 22:27:43 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/26 05:37:26 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/26 06:23:22 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,10 @@ void	ft_unset(char **cmd, t_env **cnev, t_env **exp)
 	while (tmp[i])
 	{
 			if (check == 1 || !is_alpha_2(tmp[i]))
-				check = ft_unset_write(tmp[i]);
+			{
+				if (cmd[i] && ft_strlen_b(cmd[i]) > 0 && cmd[i][ft_strlen_b(cmd[i]) - 1] != -31)
+					check = ft_unset_write(tmp[i]);
+			}
 			if (!check)
 			{
 				cnev = fun(cnev, tmp[i]);
