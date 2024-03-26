@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 18:17:09 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/25 18:20:20 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/25 22:23:28 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ char	*return_only_wild(DIR *dir, struct dirent *dp, char *sdk)
 			sdk = ft_strjoin(sdk, dp->d_name);
 			if (!sdk)
 				return (closedir(dir), NULL);
-			sdk = ft_strjoin(sdk, " ");
+			sdk = ft_strjoin_char(sdk, -32);
 			if (!sdk)
 				return (closedir(dir), NULL);
 		}
