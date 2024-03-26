@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 07:03:43 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/26 04:36:20 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/26 07:31:37 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ void	ft_export(char **cmd, t_env **cnev, t_env **exp)
 			continue ;
 		}
 		tmp = ft_expand(*exp, get_key(cmd[i]));
-		(!tmp[0] && cmd[i][0] != '$') && (tmp = get_key(cmd[i]), 0);
+		(!tmp && cmd[i][0] != '$') && (tmp = get_key(cmd[i]), 0);
 		if (equal_check(cmd[i]) != 0 && equal_check(cmd[i]) != -10)
 			ft_export_remove(exp, cnev, tmp);
 		else if (equal_check(cmd[i]) != -10)

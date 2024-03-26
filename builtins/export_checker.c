@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_checker.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 07:26:29 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/25 22:09:53 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/26 07:27:59 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	is_num(int c)
 int	valid_identifier(char *tmp, int i, int check2)
 {
 	i++;
-	while (tmp[i] && tmp[i] != '=')
+	while (tmp && tmp[i] && tmp[i] != '=')
 	{
 		if (tmp[i] != '_' && !is_alpha(tmp[i]) && !is_num(tmp[i]) && tmp[i] != '$')
 			check2++;
@@ -33,7 +33,7 @@ int	valid_identifier(char *tmp, int i, int check2)
 			check2--;
 		i++;
 	}
-	if (check2)
+	if (tmp && check2)
 	{
 		printf("minishell: export: `%s':", tmp);
 		printf(" not a valid identifier\n");
@@ -47,7 +47,6 @@ int	check_first(char *cmd, t_env *env)
 {
 	t_variable	v;
 
-	// dprintf(2, "cmd = %s\n", cmd);
 	if (!get_key(cmd) || ft_strncmp_one("$", get_key(cmd)) == 0)
 	{
 		dprintf(2, "minishell: export: `%s': not a valid identifier\n", cmd);
@@ -57,7 +56,7 @@ int	check_first(char *cmd, t_env *env)
 	if ((!v.tmp || !v.tmp[0]) && cmd[0] != '$')
 		v.tmp = cmd;
 	(1) && (v.i = 0, v.check2 = 0);
-	if (v.tmp[v.i] != '_' && !is_alpha(v.tmp[v.i]))
+	if (v.tmp && v.tmp[v.i] != '_' && !is_alpha(v.tmp[v.i]))
 	{
 		if (!v.tmp[0] && get_value(cmd))
 			printf("minishell: export: `=%s':", get_value(cmd));

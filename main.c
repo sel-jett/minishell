@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 07:12:48 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/26 05:00:21 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/26 08:13:45 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int	main(int ac, char **av, char **envp)
 			var.list->str = 0;
 			var.list->str = readline("minishell > ");
 			ctrld(var.list->str, &var.index);
+			printf("[%s]\n",var.list->str);
 			if (!var.index)
 			{
 				add_history(var.list->str);
