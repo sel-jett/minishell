@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 22:43:32 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/26 03:08:41 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/26 05:38:22 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,14 @@ int	ft_exit_arg(char *str, char c)
 		return (0);
 	}
 	return (1);
+}
+
+void	ft_exit_num(char *str)
+{
+	ft_printf("minishell: exit: ", str);
+	ft_printf(": numeric argument required\n", NULL);
+	ft_status(255, 1);
+	exit(255);
 }
 
 void	ft_exit_loop(char **str, int *i, int *j)
@@ -68,34 +76,38 @@ void	ft_exit(char **str)
 	{
 		ft_printf("exit\n", NULL);
 		ft_status(ft_atoi(str[0]) % 256, 1);
-		exit(ft_atoi(str[0]) % 256);
+		if (ft_atoi(str[0]) < 0)
+			ft_exit_num(str[0]);
+		else
+			exit(ft_atoi(str[0]) % 256);
 	}
 }
 
 void	ft_builtin(char **cmd, t_env **cenv, t_env **exp)
 {
 	t_env	*tmp;
+	int i, j, k;
 
+	(1) && (i = 0, j = 0, k = 0);
 	tmp = *cenv;
-	// ft_print_arr(cmd);
-	if (!ft_strncmp(cmd[0], "cd"))
-		cd((const char **)(cmd + 1), cenv, exp);
-	else if (!ft_strncmp(cmd[0], "echo"))
-		(1) && (echo((const char **)(cmd + 1), 0), ft_status(0, 1), 0);
-	else if (!ft_strncmp(cmd[0], "exit"))
-		ft_exit((cmd + 1));
-	else if (!ft_strncmp(cmd[0], "env"))
+	if (!ft_strncmp((array_31(ft_31_spliter(cmd, i, j, k)))[0], "cd"))
+		cd((const char **)array_31(ft_31_spliter(cmd + 1, i, j, k)), cenv, exp);
+	else if (!ft_strncmp(array_31(ft_31_spliter(cmd, i, j, k))[0], "echo"))
+		(1) && (echo((const char **)array_31(ft_31_spliter(cmd + 1, i, j, k)), 0), ft_status(0, 1), 0);
+	else if (!ft_strncmp(array_31(ft_31_spliter(cmd, i, j, k))[0], "exit"))
+		ft_exit(array_31(ft_31_spliter(cmd + 1, i, j, k)));
+	else if (!ft_strncmp(array_31(ft_31_spliter(cmd, i, j, k))[0], "env"))
 		ft_env(*cenv);
-	else if (!ft_strncmp(cmd[0], "pwd"))
+	else if (!ft_strncmp(array_31(ft_31_spliter(cmd, i, j, k))[0], "pwd"))
 	{
 		(getcwd(0, 0)) && (printf("%s\n", getcwd(0, 0)));
 		(!getcwd(0, 0)) && (printf("%s\n", value_key(*cenv, "PWD")));
 		ft_status(0, 1);
 	}
-	else if (!ft_strncmp(cmd[0], "export"))
-		ft_export((cmd + 1), cenv, exp);
-	else if (!ft_strncmp(cmd[0], "unset"))
-		ft_unset((cmd + 1), cenv, exp);
+	else if (!ft_strncmp(array_31(ft_31_spliter(cmd, i, j, k))[0], "export"))
+		ft_export(array_31(cmd + 1), cenv, exp);
+	else if (!ft_strncmp(array_31(ft_31_spliter(cmd, i, j, k))[0], "unset"))
+		ft_unset(array_31(ft_31_spliter(cmd + 1, i, j, k)), cenv, exp);
 	else
-		erorr_builtins(cmd[0]);
+		erorr_builtins(array_31(ft_31_spliter(cmd, i, j, k))[0]);
 }
