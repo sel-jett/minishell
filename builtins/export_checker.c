@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 07:26:29 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/26 08:37:19 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/26 10:06:35 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,12 @@ int	check_first(char *cmd, t_env *env)
 
 	if (!get_key(cmd) || ft_strncmp_one("$", get_key(cmd)) == 0)
 	{
-		dprintf(2, "minishell: export: `%s': not a valid identifier\n", cmd);
-		return (ft_status(1, 1), 0);
+		write(2, "minishell: export: `", 20);
+		(1) && (write(2, cmd, ft_strlen(cmd)), write(2, "': not a", 8));
+		return (write(2, " valid identifier\n", 18), ft_status(1, 1), 0);
 	}
 	v.tmp = ft_expand(env, get_key(cmd));
-	if ((!v.tmp || !v.tmp[0]) && cmd[0] != '$')
-		v.tmp = cmd;
+	((!v.tmp || !v.tmp[0]) && cmd[0] != '$') && (v.tmp = cmd);
 	(1) && (v.i = 0, v.check2 = 0);
 	if (v.tmp && v.tmp[v.i] != '_' && !is_alpha(v.tmp[v.i]))
 	{
