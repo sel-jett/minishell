@@ -6,13 +6,13 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 16:01:57 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/25 16:38:14 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/26 08:47:26 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-char	*path_getter(char	*temp, t_env *cenv, int i, const char **path)
+char	*path_getter(char	*temp, t_env *cenv, int i, char **path)
 {
 	if (i == 1)
 	{

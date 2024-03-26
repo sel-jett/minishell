@@ -6,7 +6,7 @@
 /*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 03:48:58 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/26 09:30:45 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/26 09:34:15 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,7 @@ char			**arr_filler(t_node	*tmp, char **arr, int i, t_env *exp);
 int				liked_size(t_node *tree);
 char			**linkedlist_to_arr(t_node *tree, t_env *exp);
 char			**array_31(char **str);
-char			**ft_31_spliter(char **str, int i, int j, int k);
+char			**ft_31_s(char **str, int i, int j, int k);
 char			*get_path(t_env *env);
 char			**redirlist_to_arr(t_nlist *list_redir);
 int				length(char *s, char *str);
@@ -163,9 +163,12 @@ char			*ft_execute_wild(char *str);
 ///////////////////////// BUILTINS //////////////////////////
 
 int				is_alpha(int c);
+void			ft_exit_required(char *str);
 int				is_num(int c);
 int				ft_isdigit(char c);
 void			erorr_builtins(char *cmd);
+void			ft_print_env_export(t_env *tmp);
+void			ft_env_export(t_env *env, char *key, int i);
 int				ft_atoi(const char *str);
 int				check_key(char *key);
 void			exit_print(char *str);
@@ -201,11 +204,11 @@ char			*ft_strdup(char *s);
 void			ft_fpintf(const char *msg);
 char			*ft_strjoin(char *s1, char *s2);
 char			*ft_strjoin2(char *s1, char *s2);
-void			echo(const char **path, int mode);
+void			echo(char **path, int mode);
 int				ft_cmp(char *s1, char *s2);
 void			ft_unset(char **cmd, t_env **cnev, t_env **exp);
 void			ft_export(char **cmd, t_env **cnev, t_env **exp);
-void			cd(const char **path, t_env **cenv, t_env **exp);
+void			cd(char **path, t_env **cenv, t_env **exp);
 void			ft_lstadd_back(t_env **lst, t_env *neww);
 int				ft_strlen_b(const char *str);
 void			ft_env(t_env *tmp);
@@ -214,13 +217,13 @@ void			ft_builtin(char **cmd, t_env **cenv, t_env **exp);
 void			ft_sort_list(t_env **env);
 int				ft_strncmp(char *s1, char *s2);
 char			*path_getter(char	*temp, t_env *cenv,
-					int i, const char **path);
-int				cd_error(const char *path);
+					int i, char **path);
+int				cd_error(char *path);
 void			cd_second(void);
-int				cd_old(const char *path);
-int				cd_home(const char *path);
+int				cd_old(char *path);
+int				cd_home(char *path);
 void			cd_application(t_env **cenv, t_env **exp,
-					char *b, const char **path);
+					char *b, char **path);
 ////////////////////////////////////// EXPAND //////////////////
 
 char			*expander(char *new_cmd, char *cmd, t_env *exp);

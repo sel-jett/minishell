@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_checker.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 07:26:29 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/26 07:27:59 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/26 08:37:19 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int	valid_identifier(char *tmp, int i, int check2)
 	i++;
 	while (tmp && tmp[i] && tmp[i] != '=')
 	{
-		if (tmp[i] != '_' && !is_alpha(tmp[i]) && !is_num(tmp[i]) && tmp[i] != '$')
+		if (tmp[i] != '_' && !is_alpha(tmp[i]) && \
+			!is_num(tmp[i]) && tmp[i] != '$')
 			check2++;
 		if (tmp[i + 1] && tmp[i + 1] == '=' && tmp[i] == '+')
 			check2--;

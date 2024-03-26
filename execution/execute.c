@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 12:09:39 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/26 08:26:18 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/26 08:41:03 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	c(char **str, int *len)
 	}
 }
 
-char	**ft_31_spliter(char **str, int i, int j, int k)
+char	**ft_31_s(char **str, int i, int j, int k)
 {
 	int		len;
 	char	**s;
@@ -134,5 +134,5 @@ void	ft_execute_cmd(t_node_arbre *tree, t_env **env, t_env **exp)
 		return ;
 	}
 	ft_execute_child(env_to_arr(*env), \
-		array_31(ft_31_spliter(cmmd, s.i, s.j, s.k)), path);
+		array_31(ft_31_s(cmmd, s.i, s.j, s.k)), path);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 07:03:43 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/26 07:31:37 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/26 08:59:31 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,63 +32,6 @@ static	int	equal_check(char *cmd)
 	return (check);
 }
 
-int	ft_cmp(char *s1, char *s2)
-{
-	int	i;
-
-	i = 0;
-	while (s1[i] && s2[i] && s1[i] == s2[i])
-		i++;
-	return (s1[i] - s2[i]);
-}
-
-void	ft_print_env_export(t_env *tmp)
-{
-	while (tmp)
-	{
-		if (tmp->key || tmp->value)
-			printf("declare -x ");
-		if (tmp->key)
-		{
-			printf("%s", tmp->key);
-			if (tmp->value)
-				printf("=\"%s\"\n", tmp->value);
-			else
-				printf("\n");
-		}
-		else if (tmp->value)
-			printf("=\"%s\"\n", tmp->value);
-		tmp = tmp->next;
-	}
-}
-
-void	ft_env_export(t_env *env, char *key, int i)
-{
-	t_env	*tmp;
-	t_env	*tmp2;
-	t_env	*tmp3;
-	char	*value;
-
-	(1) && (tmp = env, tmp3 = env);
-	while (tmp)
-	{
-		(1) && (i = 0, tmp2 = tmp);
-		while (tmp2->next)
-		{
-			if (tmp2->key && tmp2->next->key && ft_cmp(tmp2->key, tmp2->next->key) > 0)
-			{
-				(1) && (key = tmp2->next->key, value = tmp2->next->value);
-				(1) && (i = 1, tmp2->next->key = tmp2->key);
-				tmp2->next->value = tmp2->value;
-				(1) && (tmp2->key = key, tmp2->value = value, tmp = tmp3);
-			}
-			tmp2 = tmp2->next;
-		}
-		(i == 0) && (tmp = tmp->next, 0);
-	}
-	ft_print_env_export(env);
-}
-
 void	export_value(char **cmd, t_env **cnev, t_env **exp, int i)
 {
 	if (get_value(cmd[i]))
@@ -106,7 +49,7 @@ int	value_export(t_env **exp, char **cmd, char *tmp, int *i)
 		ft_lstadd_back(exp, env_new(cmd[*i], *exp));
 		ft_status(0, 1);
 		(*i)++;
-		return (1) ;
+		return (1);
 	}
 	return (0);
 }
