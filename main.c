@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 07:12:48 by amel-has          #+#    #+#             */
-/*   Updated: 2024/03/26 21:42:32 by amel-has         ###   ########.fr       */
+/*   Updated: 2024/03/26 21:51:09 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	main(int ac, char **av, char **envp)
 	{
 		(1) && (var.n = 0, var.index = 0, var.list = c_list());
 		if (!var.list)
-			(1) && (printf("ERROR CREAT LISTE\n"), exit(0), 0);
+			(1) && (printf("ERROR CREATING\n"), my_malloc(0, 2), exit(1), 0);
 		if (!var.index)
 		{
 			(1) && (var.list->str = 0, var.list->str = readline("minishell> "));
