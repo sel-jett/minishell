@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 21:59:00 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/25 21:09:57 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/26 11:28:13 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,26 @@ char	*itoa_status(char *new_cmd)
 
 char	*itoa_joiner_status(char *new_cmd, char *cmd)
 {
+	int		i;
+
+	i = 0;
 	new_cmd = ft_itoa(ft_status(0, 0));
+	cmd = ft_strjoin(new_cmd, cmd + 2);
 	if (!new_cmd)
 		return (NULL);
-	return (ft_strjoin(new_cmd, cmd + 2));
+	while (cmd[i] && cmd[i] != '$')
+		i++;
+	if (cmd[i] && cmd[i] == '$')
+	{
+		i++;
+		if (cmd[i] && cmd[i] == '?')
+		{
+			cmd[i - 1] = '\0';
+			cmd[i] = '\0';
+			cmd = ft_strjoin(cmd, ft_itoa(ft_status(0, 0)));
+		}
+	}
+	return (cmd);
 }
 
 int	alpha_checker(char *cmd)
