@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:03:47 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/26 01:51:23 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/26 04:49:23 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char	*ft_handler(char **cmmd, char **path)
 		else if (!access(env_var, F_OK))
 		{
 			(1) && (ft_printf("minishell: ", cmmd[0]), ft_status(126, 1));
-			ft_printf(": Permission denied\n", NULL);
+			ft_printf(": Permidssion denied\n", NULL);
 			return (NULL);
 		}
 		i++;

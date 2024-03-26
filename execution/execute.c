@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amel-has <amel-has@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 12:09:39 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/26 03:31:20 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/26 06:07:58 by amel-has         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,8 @@ int	ft_strlen_tri(char **str)
 	int	i;
 
 	i = 0;
+	if (!str)
+		return (0);
 	while (str[i])
 		i++;
 	return (i);
@@ -113,17 +115,16 @@ char **array_31(char **str)
 {
 	int	i;
 	int	j;
-	int	len;
 	char	**tmp;
 
 	i = 0;
-	j = 0;
-	tmp = my_malloc((ft_strlen_tri(str) * 8), 1);
+	tmp = my_malloc(((ft_strlen_tri(str) + 1) * 8), 1);
+	if (!tmp)
+		return (NULL);
 	while (str[i])
 	{
 		tmp[i] = NULL;
 		j = 0;
-		len = 0;
 		while (str[i][j])
 		{
 			if (str[i][j] == -31)
@@ -138,53 +139,8 @@ char **array_31(char **str)
 		i++;
 	}
 	tmp[i] = NULL;
-	// ft_print_arr(tmp);
 	return (tmp);
 }
-
-// static int	count_words(char const *str, char c)
-// {
-// 	int	index;
-// 	int	count;
-// 	int	i;
-
-// 	count = 0;
-// 	index = 0;
-// 	i = 0;
-// 	while (str[i])
-// 	{
-// 		if (str[i] == c)
-// 			index = 0;
-// 		else if (index == 0)
-// 		{
-// 			count++;
-// 			index = 1;
-// 		}
-// 		i++;
-// 	}
-// 	return (count);
-// }
-
-// static char	*get_word(const char *s, char c)
-// {
-// 	char	*word;
-// 	size_t	len;
-// 	size_t	i;
-
-// 	i = -1;
-// 	len = 0;
-// 	while (s[len] && s[len] != c)
-// 		len++;
-// 	word = (char *)malloc(len + 1);
-// 	if (!word)
-// 		return (0);
-// 	while ((++i) < len)
-// 		word[i] = s[i];
-// 	word[len] = '\0';
-// 	return (word);
-// }
-
-
 
 void c(char **str, int *len)
 {
@@ -195,7 +151,7 @@ void c(char **str, int *len)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i][ft_strlen_b(str[i]) - 1] == -31)
+		if (ft_strlen_b(str[i]) != 0 && str[i][ft_strlen_b(str[i]) - 1] && str[i][ft_strlen_b(str[i]) - 1] == -31)
 		{
 			j = 0;
 			s =  ft_split(str[i], ' ');
@@ -210,7 +166,7 @@ void c(char **str, int *len)
 	}
 }
 
-char **f(char **str, int i, int j, int k)
+char **ft_31_spliter(char **str, int i, int j, int k)
 {
 	int		len;
 	char	**s;
@@ -222,7 +178,7 @@ char **f(char **str, int i, int j, int k)
 		return (0);
 	while (str[i])
 	{
-		if (str[i][ft_strlen_b(str[i]) - 1] == -31)
+		if (ft_strlen_b(str[i]) != 0 && str[i][ft_strlen_b(str[i]) - 1] == -31)
 		{
 			j = 0;
 			s =  ft_split(str[i], ' ');
@@ -278,9 +234,9 @@ void	ft_execute_cmd(t_node_arbre *tree, t_env **env, t_env **exp)
 		cmmd = array_structer(cmmd);
 	if (is_builtin(cmmd[0]))
 	{
-		ft_builtin(array_31(cmmd), env, exp);
+		ft_builtin(cmmd, env, exp);
 		return ;
 	}
 	// ft_print_arr(array_31(f(cmmd, i, j, k)));
-	ft_execute_child(env_to_arr(*env), array_31(f(cmmd, i, j, k)), path);
+	ft_execute_child(env_to_arr(*env), array_31(ft_31_spliter(cmmd, i, j, k)), path);
 }

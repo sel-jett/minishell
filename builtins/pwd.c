@@ -6,7 +6,7 @@
 /*   By: sel-jett <sel-jett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 23:55:37 by sel-jett          #+#    #+#             */
-/*   Updated: 2024/03/25 21:02:55 by sel-jett         ###   ########.fr       */
+/*   Updated: 2024/03/26 04:39:57 by sel-jett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ int	ft_strncmp_two(char *tmp, char *pwd)
 
 char	*pwd_joiner(char *temp_old, char *temp, char *path)
 {
+	
 	if (temp_old)
 		temp = ft_strjoin("PWD", (temp_old + 6));
 	if (temp)
